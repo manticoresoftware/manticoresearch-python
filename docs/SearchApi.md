@@ -93,7 +93,7 @@ No authorization required
 
 Performs a search
 
-Performs a search. 
+
 Expects an object with mandatory properties:
 * the index name
 * the match query object
