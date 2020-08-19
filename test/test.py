@@ -1,11 +1,11 @@
 import sys
-import openapi_client
+import manticoresearch
 import unittest
 import importlib
 import inspect
 from parametrized_test_case import ParametrizedTestCase
 
-configuration = openapi_client.Configuration(
+configuration = manticoresearch.Configuration(
     host = "http://manticoresearch-manticore:9308"
 )
 

@@ -14,18 +14,18 @@
 from __future__ import absolute_import
 from pprint import pprint
 import unittest
-import openapi_client
-from openapi_client.api.search_api import SearchApi  # noqa: E501
-from openapi_client.rest import ApiException
+import manticoresearch
+from manticoresearch.api.search_api import SearchApi  # noqa: E501
+from manticoresearch.rest import ApiException
 from parametrized_test_case import ParametrizedTestCase
 
 class TestSearchApi(ParametrizedTestCase):
     """SearchApi unit test stubs"""
 
     def setUp(self):
-        client = openapi_client.ApiClient(self.settings['configuration'])
-        self.api = openapi_client.SearchApi(client)  # noqa: E501
-        self.index_api = openapi_client.IndexApi(client)  # noqa: E501
+        client = manticoresearch.ApiClient(self.settings['configuration'])
+        self.api = manticoresearch.SearchApi(client)  # noqa: E501
+        self.index_api = manticoresearch.IndexApi(client)  # noqa: E501
 
     def tearDown(self):
         pass
