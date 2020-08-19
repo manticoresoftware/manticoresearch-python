@@ -1,4 +1,4 @@
-# openapi-client
+# manticoresearch
 Please note that this client is experimental.
 For full documentation of the API methods consult https://manual.manticoresearch.com/.
 
@@ -26,7 +26,7 @@ pip install git+https://github.com/manticoresoftware/manticoresearch-python.git
 
 Then import the package:
 ```python
-import openapi_client
+import manticoresearch
 ```
 
 ### Setuptools
@@ -40,7 +40,7 @@ python setup.py install --user
 
 Then import the package:
 ```python
-import openapi_client
+import manticoresearch
 ```
 
 ## Getting Started
@@ -51,22 +51,22 @@ Please follow the [installation procedure](#installation--usage) and then run th
 from __future__ import print_function
 
 import time
-import openapi_client
-from openapi_client.rest import ApiException
+import manticoresearch
+from manticoresearch.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://127.0.0.1:9308
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = manticoresearch.Configuration(
     host = "http://127.0.0.1:9308"
 )
 
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with manticoresearch.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IndexApi(api_client)
+    api_instance = manticoresearch.IndexApi(api_client)
     body = 'body_example' # str | 
 
     try:

@@ -18,8 +18,8 @@ import re  # noqa: F401
 # python 2 and python 3 compatibility library
 import six
 
-from openapi_client.api_client import ApiClient
-from openapi_client.exceptions import (  # noqa: F401
+from manticoresearch.api_client import ApiClient
+from manticoresearch.exceptions import (  # noqa: F401
     ApiTypeError,
     ApiValueError
 )

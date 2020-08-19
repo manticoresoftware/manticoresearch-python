@@ -1,4 +1,4 @@
-# openapi_client.SearchApi
+# manticoresearch.SearchApi
 
 All URIs are relative to *http://127.0.0.1:9308*
 
@@ -35,20 +35,20 @@ Responds with an object with matched stored queries:
 ```python
 from __future__ import print_function
 import time
-import openapi_client
-from openapi_client.rest import ApiException
+import manticoresearch
+from manticoresearch.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to http://127.0.0.1:9308
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = manticoresearch.Configuration(
     host = "http://127.0.0.1:9308"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient() as api_client:
+with manticoresearch.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.SearchApi(api_client)
+    api_instance = manticoresearch.SearchApi(api_client)
     index = 'index_example' # str | Name of the percolate index
 percolate_request = {"query":{"percolate":{"document":{"title":"some text to match"}}}} # PercolateRequest | 
 
@@ -122,21 +122,21 @@ For more information about the match query syntax, additional paramaters that ca
 ```python
 from __future__ import print_function
 import time
-import openapi_client
-from openapi_client.rest import ApiException
+import manticoresearch
+from manticoresearch.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to http://127.0.0.1:9308
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = manticoresearch.Configuration(
     host = "http://127.0.0.1:9308"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient() as api_client:
+with manticoresearch.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.SearchApi(api_client)
-    search_request = openapi_client.SearchRequest() # SearchRequest | 
+    api_instance = manticoresearch.SearchApi(api_client)
+    search_request = manticoresearch.SearchRequest() # SearchRequest | 
 
     try:
         # Performs a search

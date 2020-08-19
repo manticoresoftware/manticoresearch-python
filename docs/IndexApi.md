@@ -1,4 +1,4 @@
-# openapi_client.IndexApi
+# manticoresearch.IndexApi
 
 All URIs are relative to *http://127.0.0.1:9308*
 
@@ -43,20 +43,20 @@ The method expects a raw string as the batch in NDJSON.
 ```python
 from __future__ import print_function
 import time
-import openapi_client
-from openapi_client.rest import ApiException
+import manticoresearch
+from manticoresearch.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to http://127.0.0.1:9308
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = manticoresearch.Configuration(
     host = "http://127.0.0.1:9308"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient() as api_client:
+with manticoresearch.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IndexApi(api_client)
+    api_instance = manticoresearch.IndexApi(api_client)
     body = 'body_example' # str | 
 
     try:
@@ -126,20 +126,20 @@ Responds with an object telling how many documents got deleted:
 ```python
 from __future__ import print_function
 import time
-import openapi_client
-from openapi_client.rest import ApiException
+import manticoresearch
+from manticoresearch.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to http://127.0.0.1:9308
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = manticoresearch.Configuration(
     host = "http://127.0.0.1:9308"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient() as api_client:
+with manticoresearch.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IndexApi(api_client)
+    api_instance = manticoresearch.IndexApi(api_client)
     delete_document_request = {"index":"test","query":{"match":{"title":"apple"}}} # DeleteDocumentRequest | 
 
     try:
@@ -207,20 +207,20 @@ It responds with an object in format:
 ```python
 from __future__ import print_function
 import time
-import openapi_client
-from openapi_client.rest import ApiException
+import manticoresearch
+from manticoresearch.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to http://127.0.0.1:9308
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = manticoresearch.Configuration(
     host = "http://127.0.0.1:9308"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient() as api_client:
+with manticoresearch.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IndexApi(api_client)
+    api_instance = manticoresearch.IndexApi(api_client)
     insert_document_request = {"index":"test","id":1,"doc":{"title":"sample title","gid":10}} # InsertDocumentRequest | 
 
     try:
@@ -276,20 +276,20 @@ Responds with an object in format: <br/>
 ```python
 from __future__ import print_function
 import time
-import openapi_client
-from openapi_client.rest import ApiException
+import manticoresearch
+from manticoresearch.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to http://127.0.0.1:9308
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = manticoresearch.Configuration(
     host = "http://127.0.0.1:9308"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient() as api_client:
+with manticoresearch.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IndexApi(api_client)
+    api_instance = manticoresearch.IndexApi(api_client)
     insert_document_request = {"index":"test","id":1,"doc":{"title":"updated title","gid":15}} # InsertDocumentRequest | 
 
     try:
@@ -358,20 +358,20 @@ Responds with an object that tells how many documents where updated in format:
 ```python
 from __future__ import print_function
 import time
-import openapi_client
-from openapi_client.rest import ApiException
+import manticoresearch
+from manticoresearch.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to http://127.0.0.1:9308
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = manticoresearch.Configuration(
     host = "http://127.0.0.1:9308"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient() as api_client:
+with manticoresearch.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IndexApi(api_client)
+    api_instance = manticoresearch.IndexApi(api_client)
     update_document_request = {"index":"test","doc":{"gid":20},"query":{"equals":{"cat_id":2}}} # UpdateDocumentRequest | 
 
     try:

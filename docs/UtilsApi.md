@@ -1,4 +1,4 @@
-# openapi_client.UtilsApi
+# manticoresearch.UtilsApi
 
 All URIs are relative to *http://127.0.0.1:9308*
 
@@ -24,20 +24,20 @@ The response object depends on the query executed. In select mode the response h
 ```python
 from __future__ import print_function
 import time
-import openapi_client
-from openapi_client.rest import ApiException
+import manticoresearch
+from manticoresearch.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to http://127.0.0.1:9308
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = manticoresearch.Configuration(
     host = "http://127.0.0.1:9308"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient() as api_client:
+with manticoresearch.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UtilsApi(api_client)
+    api_instance = manticoresearch.UtilsApi(api_client)
     body = ["mode=raw&query=SHOW TABLES"] # str | Expects is a query parameters string that can be in two modes:    * Select only query as `query=SELECT * FROM myindex`. The query string MUST be URL encoded    * any type of query in format `mode=raw&query=SHOW TABLES`. The string must be as is (no URL encoding) and `mode` must be first. 
 
     try:

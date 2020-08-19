@@ -21,7 +21,7 @@ import urllib3
 
 import six
 from six.moves import http_client as httplib
-from openapi_client.exceptions import ApiValueError
+from manticoresearch.exceptions import ApiValueError
 
 
 JSON_SCHEMA_VALIDATION_KEYWORDS = {
@@ -133,7 +133,7 @@ class Configuration(object):
         self.logger = {}
         """Logging Settings
         """
-        self.logger["package_logger"] = logging.getLogger("openapi_client")
+        self.logger["package_logger"] = logging.getLogger("manticoresearch")
         self.logger["urllib3_logger"] = logging.getLogger("urllib3")
         self.logger_format = '%(asctime)s %(levelname)s %(message)s'
         """Log format
