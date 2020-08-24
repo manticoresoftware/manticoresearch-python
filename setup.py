@@ -11,7 +11,7 @@ from setuptools import setup, find_packages
 from os import path
 
 NAME = "manticoresearch"
-VERSION = "1.0.0"
+VERSION = "1.0.2"
 # To install the library, run the following
 #
 # python setup.py install
@@ -21,7 +21,7 @@ VERSION = "1.0.0"
 
 REQUIRES = ["urllib3 >= 1.15", "six >= 1.10", "certifi", "python-dateutil"]
 long_description = ""
-with open(path.join(path.dirname(__file__), "README.md"), encoding="utf8") as f:
+with open(path.join(path.dirname(__file__), "README.md")) as f:
     for line in f:
       if '## Documentation for API Endpoints' in line:
         break
