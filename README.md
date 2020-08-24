@@ -15,7 +15,6 @@ Install the `manticoresearch` package with [pip](http://pypi.python.org)
 ```sh
 pip install manticoresearch
 ```
-(you may need to run `pip` with root permission: `sudo pip install git+https://github.com/manticoresoftware/manticoresearch-python.git`)
 
 Then import the package:
 ```python
