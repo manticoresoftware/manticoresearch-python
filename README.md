@@ -58,15 +58,15 @@ configuration = manticoresearch.Configuration(
 # Enter a context with an instance of the API client
 with manticoresearch.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = manticoresearch.IndexApi(api_client)
-    body = 'body_example' # str | 
+    api_instance = manticoresearch.SearchApi(api_client)
+    body = {"index":"test","query":{"match":{"content":"sample"}}}
 
     try:
-        # Bulk index operations
-        api_response = api_instance.bulk(body)
+        # Performs a search
+        api_response = api_instance.search(body)
         pprint(api_response)
     except ApiException as e:
-        print("Exception when calling IndexApi->bulk: %s\n" % e)
+        print("Exception when calling SearchApi->search: %s\n" % e)
     
 ```
 
