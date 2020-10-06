@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **offset** | **int** |  | [optional] 
 **max_matches** | **int** |  | [optional] 
 **sort** | **list[object]** |  | [optional] 
+**aggs** | **list[object]** |  | [optional] 
 **script_fields** | **object** |  | [optional] 
 **highlight** | **object** |  | [optional] 
 **source** | **list[str]** |  | [optional] 

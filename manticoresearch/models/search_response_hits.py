@@ -31,15 +31,17 @@ class SearchResponseHits(object):
     """
     openapi_types = {
         'total': 'int',
-        'hits': 'list[object]'
+        'hits': 'list[object]',
+        'aggregations': 'list[object]'
     }
 
     attribute_map = {
         'total': 'total',
-        'hits': 'hits'
+        'hits': 'hits',
+        'aggregations': 'aggregations'
     }
 
-    def __init__(self, total=None, hits=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, total=None, hits=None, aggregations=None, local_vars_configuration=None):  # noqa: E501
         """SearchResponseHits - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
@@ -47,12 +49,15 @@ class SearchResponseHits(object):
 
         self._total = None
         self._hits = None
+        self._aggregations = None
         self.discriminator = None
 
         if total is not None:
             self.total = total
         if hits is not None:
             self.hits = hits
+        if aggregations is not None:
+            self.aggregations = aggregations
 
     @property
     def total(self):
@@ -95,6 +100,27 @@ class SearchResponseHits(object):
         """
 
         self._hits = hits
+
+    @property
+    def aggregations(self):
+        """Gets the aggregations of this SearchResponseHits.  # noqa: E501
+
+
+        :return: The aggregations of this SearchResponseHits.  # noqa: E501
+        :rtype: list[object]
+        """
+        return self._aggregations
+
+    @aggregations.setter
+    def aggregations(self, aggregations):
+        """Sets the aggregations of this SearchResponseHits.
+
+
+        :param aggregations: The aggregations of this SearchResponseHits.  # noqa: E501
+        :type aggregations: list[object]
+        """
+
+        self._aggregations = aggregations
 
     def to_dict(self):
         """Returns the model properties as a dict"""

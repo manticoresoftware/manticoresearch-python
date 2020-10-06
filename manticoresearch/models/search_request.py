@@ -36,6 +36,7 @@ class SearchRequest(object):
         'offset': 'int',
         'max_matches': 'int',
         'sort': 'list[object]',
+        'aggs': 'list[object]',
         'script_fields': 'object',
         'highlight': 'object',
         'source': 'list[str]',
@@ -49,13 +50,14 @@ class SearchRequest(object):
         'offset': 'offset',
         'max_matches': 'max_matches',
         'sort': 'sort',
+        'aggs': 'aggs',
         'script_fields': 'script_fields',
         'highlight': 'highlight',
         'source': '_source',
         'profile': 'profile'
     }
 
-    def __init__(self, index=None, query=None, limit=None, offset=None, max_matches=None, sort=None, script_fields=None, highlight=None, source=None, profile=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, index=None, query=None, limit=None, offset=None, max_matches=None, sort=None, aggs=None, script_fields=None, highlight=None, source=None, profile=None, local_vars_configuration=None):  # noqa: E501
         """SearchRequest - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
@@ -67,6 +69,7 @@ class SearchRequest(object):
         self._offset = None
         self._max_matches = None
         self._sort = None
+        self._aggs = None
         self._script_fields = None
         self._highlight = None
         self._source = None
@@ -83,6 +86,8 @@ class SearchRequest(object):
             self.max_matches = max_matches
         if sort is not None:
             self.sort = sort
+        if aggs is not None:
+            self.aggs = aggs
         if script_fields is not None:
             self.script_fields = script_fields
         if highlight is not None:
@@ -221,6 +226,27 @@ class SearchRequest(object):
         """
 
         self._sort = sort
+
+    @property
+    def aggs(self):
+        """Gets the aggs of this SearchRequest.  # noqa: E501
+
+
+        :return: The aggs of this SearchRequest.  # noqa: E501
+        :rtype: list[object]
+        """
+        return self._aggs
+
+    @aggs.setter
+    def aggs(self, aggs):
+        """Sets the aggs of this SearchRequest.
+
+
+        :param aggs: The aggs of this SearchRequest.  # noqa: E501
+        :type aggs: list[object]
+        """
+
+        self._aggs = aggs
 
     @property
     def script_fields(self):
