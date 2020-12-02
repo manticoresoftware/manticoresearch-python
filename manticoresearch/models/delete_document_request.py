@@ -31,28 +31,33 @@ class DeleteDocumentRequest(object):
     """
     openapi_types = {
         'index': 'str',
+        'cluster': 'str',
         'id': 'int',
         'query': 'object'
     }
 
     attribute_map = {
         'index': 'index',
+        'cluster': 'cluster',
         'id': 'id',
         'query': 'query'
     }
 
-    def __init__(self, index=None, id=None, query=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, index=None, cluster=None, id=None, query=None, local_vars_configuration=None):  # noqa: E501
         """DeleteDocumentRequest - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
         self.local_vars_configuration = local_vars_configuration
 
         self._index = None
+        self._cluster = None
         self._id = None
         self._query = None
         self.discriminator = None
 
         self.index = index
+        if cluster is not None:
+            self.cluster = cluster
         if id is not None:
             self.id = id
         if query is not None:
@@ -82,6 +87,29 @@ class DeleteDocumentRequest(object):
             raise ValueError("Invalid value for `index`, must not be `None`")  # noqa: E501
 
         self._index = index
+
+    @property
+    def cluster(self):
+        """Gets the cluster of this DeleteDocumentRequest.  # noqa: E501
+
+        cluster name  # noqa: E501
+
+        :return: The cluster of this DeleteDocumentRequest.  # noqa: E501
+        :rtype: str
+        """
+        return self._cluster
+
+    @cluster.setter
+    def cluster(self, cluster):
+        """Sets the cluster of this DeleteDocumentRequest.
+
+        cluster name  # noqa: E501
+
+        :param cluster: The cluster of this DeleteDocumentRequest.  # noqa: E501
+        :type cluster: str
+        """
+
+        self._cluster = cluster
 
     @property
     def id(self):

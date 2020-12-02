@@ -5,6 +5,7 @@ Payload for delete request. Documents can be deleted either one by one by specif
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **index** | **str** | Index name | 
+**cluster** | **str** | cluster name | [optional] 
 **id** | **int** | Document ID | [optional] 
 **query** | **object** | Query tree object | [optional] 
 

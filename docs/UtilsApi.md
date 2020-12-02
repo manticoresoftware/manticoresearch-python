@@ -13,7 +13,7 @@ Method | HTTP request | Description
 Perform SQL requests
 
 Run a query in SQL format.
-Expects is a query parameters string that can be in two modes:
+Expects a query parameters string that can be in two modes:
 * Select only query as `query=SELECT * FROM myindex`. The query string MUST be URL encoded
 * any type of query in format `mode=raw&query=SHOW TABLES`. The string must be as is (no URL encoding) and `mode` must be first.
 The response object depends on the query executed. In select mode the response has same format as `/search` operation.

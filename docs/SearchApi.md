@@ -16,7 +16,7 @@ Perform reverse search on a percolate index
 Performs a percolate search. 
 This method must be used only on percolate indexes.
 
-Expects two paramenters: the index name and an object with array of documents to be tested.
+Expects two parameters: the index name and an object with array of documents to be tested.
 An example of the documents object:
 
   ```

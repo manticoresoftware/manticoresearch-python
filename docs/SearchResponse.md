@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **took** | **int** |  | [optional] 
 **timed_out** | **bool** |  | [optional] 
+**aggregations** | **dict(str, object)** |  | [optional] 
 **hits** | [**SearchResponseHits**](SearchResponseHits.md) |  | [optional] 
 **profile** | **object** |  | [optional] 
 

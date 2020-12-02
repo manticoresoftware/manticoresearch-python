@@ -14,6 +14,7 @@
 from __future__ import absolute_import
 from pprint import pprint
 import unittest
+import json
 import manticoresearch
 from manticoresearch.api.index_api import IndexApi  # noqa: E501
 from manticoresearch.rest import ApiException
@@ -29,7 +30,14 @@ class TestIndexApi(ParametrizedTestCase):
         pass
 
     def test_bulk(self):
-        self.assertTrue(True)
+        docs = [ \
+            {"insert":{"index":"test","id":100,"doc":{"content":"one content added by bulk","name":"bulk doc 1","cat":"20"}}}, \
+            {"insert":{"index":"test","id":101,"doc":{"content":"another content added by bulk","name":"bulk doc 2","cat":"20"}}} \
+        ]
+        
+        api_resp =  self.api.bulk('\n'.join(map(json.dumps,docs)))
+        api_resp = self.api.bulk(bulk_data)
+        self.assertEqual(api_resp.error,'None')
         
     def test_delete(self):
         """Test case for delete

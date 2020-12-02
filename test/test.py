@@ -6,12 +6,12 @@ import inspect
 from parametrized_test_case import ParametrizedTestCase
 
 configuration = manticoresearch.Configuration(
-    host = "http://manticoresearch-manticore:9308"
+    host = "http://127.0.0.1:6368"
 )
 
 print
 suite = unittest.TestSuite()
-for module_name in ['test_index_api', 'test_search_api']:
+for module_name in ['test_manual']:
     test = importlib.import_module(module_name)
     for name, obj in inspect.getmembers(test):
         if inspect.isclass(obj) and obj.__name__ != 'ParametrizedTestCase':

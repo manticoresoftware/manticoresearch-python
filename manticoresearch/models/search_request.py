@@ -36,8 +36,8 @@ class SearchRequest(object):
         'offset': 'int',
         'max_matches': 'int',
         'sort': 'list[object]',
-        'aggs': 'list[object]',
-        'script_fields': 'object',
+        'aggs': 'dict(str, object)',
+        'expressions': 'object',
         'highlight': 'object',
         'source': 'list[str]',
         'profile': 'bool'
@@ -51,13 +51,13 @@ class SearchRequest(object):
         'max_matches': 'max_matches',
         'sort': 'sort',
         'aggs': 'aggs',
-        'script_fields': 'script_fields',
+        'expressions': 'expressions',
         'highlight': 'highlight',
         'source': '_source',
         'profile': 'profile'
     }
 
-    def __init__(self, index=None, query=None, limit=None, offset=None, max_matches=None, sort=None, aggs=None, script_fields=None, highlight=None, source=None, profile=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, index=None, query=None, limit=None, offset=None, max_matches=None, sort=None, aggs=None, expressions=None, highlight=None, source=None, profile=None, local_vars_configuration=None):  # noqa: E501
         """SearchRequest - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
@@ -70,7 +70,7 @@ class SearchRequest(object):
         self._max_matches = None
         self._sort = None
         self._aggs = None
-        self._script_fields = None
+        self._expressions = None
         self._highlight = None
         self._source = None
         self._profile = None
@@ -88,8 +88,8 @@ class SearchRequest(object):
             self.sort = sort
         if aggs is not None:
             self.aggs = aggs
-        if script_fields is not None:
-            self.script_fields = script_fields
+        if expressions is not None:
+            self.expressions = expressions
         if highlight is not None:
             self.highlight = highlight
         if source is not None:
@@ -233,7 +233,7 @@ class SearchRequest(object):
 
 
         :return: The aggs of this SearchRequest.  # noqa: E501
-        :rtype: list[object]
+        :rtype: dict(str, object)
         """
         return self._aggs
 
@@ -243,31 +243,31 @@ class SearchRequest(object):
 
 
         :param aggs: The aggs of this SearchRequest.  # noqa: E501
-        :type aggs: list[object]
+        :type aggs: dict(str, object)
         """
 
         self._aggs = aggs
 
     @property
-    def script_fields(self):
-        """Gets the script_fields of this SearchRequest.  # noqa: E501
+    def expressions(self):
+        """Gets the expressions of this SearchRequest.  # noqa: E501
 
 
-        :return: The script_fields of this SearchRequest.  # noqa: E501
+        :return: The expressions of this SearchRequest.  # noqa: E501
         :rtype: object
         """
-        return self._script_fields
+        return self._expressions
 
-    @script_fields.setter
-    def script_fields(self, script_fields):
-        """Sets the script_fields of this SearchRequest.
+    @expressions.setter
+    def expressions(self, expressions):
+        """Sets the expressions of this SearchRequest.
 
 
-        :param script_fields: The script_fields of this SearchRequest.  # noqa: E501
-        :type script_fields: object
+        :param expressions: The expressions of this SearchRequest.  # noqa: E501
+        :type expressions: object
         """
 
-        self._script_fields = script_fields
+        self._expressions = expressions
 
     @property
     def highlight(self):

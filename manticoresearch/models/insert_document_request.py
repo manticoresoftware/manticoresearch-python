@@ -31,28 +31,33 @@ class InsertDocumentRequest(object):
     """
     openapi_types = {
         'index': 'str',
+        'cluster': 'str',
         'id': 'int',
         'doc': 'dict(str, object)'
     }
 
     attribute_map = {
         'index': 'index',
+        'cluster': 'cluster',
         'id': 'id',
         'doc': 'doc'
     }
 
-    def __init__(self, index=None, id=None, doc=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, index=None, cluster=None, id=None, doc=None, local_vars_configuration=None):  # noqa: E501
         """InsertDocumentRequest - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
         self.local_vars_configuration = local_vars_configuration
 
         self._index = None
+        self._cluster = None
         self._id = None
         self._doc = None
         self.discriminator = None
 
         self.index = index
+        if cluster is not None:
+            self.cluster = cluster
         if id is not None:
             self.id = id
         self.doc = doc
@@ -81,6 +86,29 @@ class InsertDocumentRequest(object):
             raise ValueError("Invalid value for `index`, must not be `None`")  # noqa: E501
 
         self._index = index
+
+    @property
+    def cluster(self):
+        """Gets the cluster of this InsertDocumentRequest.  # noqa: E501
+
+        cluster name  # noqa: E501
+
+        :return: The cluster of this InsertDocumentRequest.  # noqa: E501
+        :rtype: str
+        """
+        return self._cluster
+
+    @cluster.setter
+    def cluster(self, cluster):
+        """Sets the cluster of this InsertDocumentRequest.
+
+        cluster name  # noqa: E501
+
+        :param cluster: The cluster of this InsertDocumentRequest.  # noqa: E501
+        :type cluster: str
+        """
+
+        self._cluster = cluster
 
     @property
     def id(self):

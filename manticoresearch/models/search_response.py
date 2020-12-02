@@ -32,6 +32,7 @@ class SearchResponse(object):
     openapi_types = {
         'took': 'int',
         'timed_out': 'bool',
+        'aggregations': 'dict(str, object)',
         'hits': 'SearchResponseHits',
         'profile': 'object'
     }
@@ -39,11 +40,12 @@ class SearchResponse(object):
     attribute_map = {
         'took': 'took',
         'timed_out': 'timed_out',
+        'aggregations': 'aggregations',
         'hits': 'hits',
         'profile': 'profile'
     }
 
-    def __init__(self, took=None, timed_out=None, hits=None, profile=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, took=None, timed_out=None, aggregations=None, hits=None, profile=None, local_vars_configuration=None):  # noqa: E501
         """SearchResponse - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
@@ -51,6 +53,7 @@ class SearchResponse(object):
 
         self._took = None
         self._timed_out = None
+        self._aggregations = None
         self._hits = None
         self._profile = None
         self.discriminator = None
@@ -59,6 +62,8 @@ class SearchResponse(object):
             self.took = took
         if timed_out is not None:
             self.timed_out = timed_out
+        if aggregations is not None:
+            self.aggregations = aggregations
         if hits is not None:
             self.hits = hits
         if profile is not None:
@@ -105,6 +110,27 @@ class SearchResponse(object):
         """
 
         self._timed_out = timed_out
+
+    @property
+    def aggregations(self):
+        """Gets the aggregations of this SearchResponse.  # noqa: E501
+
+
+        :return: The aggregations of this SearchResponse.  # noqa: E501
+        :rtype: dict(str, object)
+        """
+        return self._aggregations
+
+    @aggregations.setter
+    def aggregations(self, aggregations):
+        """Sets the aggregations of this SearchResponse.
+
+
+        :param aggregations: The aggregations of this SearchResponse.  # noqa: E501
+        :type aggregations: dict(str, object)
+        """
+
+        self._aggregations = aggregations
 
     @property
     def hits(self):

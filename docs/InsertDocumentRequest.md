@@ -5,6 +5,7 @@ Object with document data.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **index** | **str** | Name of the index | 
+**cluster** | **str** | cluster name | [optional] 
 **id** | **int** | Document ID.  | [optional] 
 **doc** | **dict(str, object)** | Object with document data  | 
 

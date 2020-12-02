@@ -30,34 +30,55 @@ class SearchResponseHits(object):
                             and the value is json key in definition.
     """
     openapi_types = {
+        'max_score': 'int',
         'total': 'int',
-        'hits': 'list[object]',
-        'aggregations': 'list[object]'
+        'hits': 'list[object]'
     }
 
     attribute_map = {
+        'max_score': 'max_score',
         'total': 'total',
-        'hits': 'hits',
-        'aggregations': 'aggregations'
+        'hits': 'hits'
     }
 
-    def __init__(self, total=None, hits=None, aggregations=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, max_score=None, total=None, hits=None, local_vars_configuration=None):  # noqa: E501
         """SearchResponseHits - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
         self.local_vars_configuration = local_vars_configuration
 
+        self._max_score = None
         self._total = None
         self._hits = None
-        self._aggregations = None
         self.discriminator = None
 
+        if max_score is not None:
+            self.max_score = max_score
         if total is not None:
             self.total = total
         if hits is not None:
             self.hits = hits
-        if aggregations is not None:
-            self.aggregations = aggregations
+
+    @property
+    def max_score(self):
+        """Gets the max_score of this SearchResponseHits.  # noqa: E501
+
+
+        :return: The max_score of this SearchResponseHits.  # noqa: E501
+        :rtype: int
+        """
+        return self._max_score
+
+    @max_score.setter
+    def max_score(self, max_score):
+        """Sets the max_score of this SearchResponseHits.
+
+
+        :param max_score: The max_score of this SearchResponseHits.  # noqa: E501
+        :type max_score: int
+        """
+
+        self._max_score = max_score
 
     @property
     def total(self):
@@ -100,27 +121,6 @@ class SearchResponseHits(object):
         """
 
         self._hits = hits
-
-    @property
-    def aggregations(self):
-        """Gets the aggregations of this SearchResponseHits.  # noqa: E501
-
-
-        :return: The aggregations of this SearchResponseHits.  # noqa: E501
-        :rtype: list[object]
-        """
-        return self._aggregations
-
-    @aggregations.setter
-    def aggregations(self, aggregations):
-        """Sets the aggregations of this SearchResponseHits.
-
-
-        :param aggregations: The aggregations of this SearchResponseHits.  # noqa: E501
-        :type aggregations: list[object]
-        """
-
-        self._aggregations = aggregations
 
     def to_dict(self):
         """Returns the model properties as a dict"""
