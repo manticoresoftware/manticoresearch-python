@@ -177,27 +177,28 @@ class TestManualApi(ParametrizedTestCase):
         
         # example create percolate request
         
-        utilsApi.sql('mode=raw&query=create table products(title text, color string) type=\'pq\'')
-        res = indexApi.insert({"index" : "products", "doc" : {"query" : "@title bag" }})
-        pprint(res)
-        res = indexApi.insert({"index" : "products",  "doc" : {"query" : "@title shoes", "filters": "color='red'" }})
-        pprint(res)
-        res = indexApi.insert({"index" : "products",  "doc" : {"query" : "@title shoes","filters": "color in ('blue', 'green')" }})
-        pprint(res)
+        #utilsApi.sql('mode=raw&query=create table products(title text, color string) type=\'pq\'')
+        #res = indexApi.insert({"index" : "products", "doc" : {"query" : "@title bag" }})
+        #pprint(res)
+        #res = indexApi.insert({"index" : "products",  "doc" : {"query" : "@title shoes", "filters": "color='red'" }})
+        #pprint(res)
+        #res = indexApi.insert({"index" : "products",  "doc" : {"query" : "@title shoes","filters": "color in ('blue', 'green')" }})
+        #pprint(res)
         
         #
         
-        res = searchApi.percolate('products',{"query":{"percolate":{"document":{"title":"What a nice bag"}}}})
-        pprint(res)
-        res = searchApi.percolate('products',{"query":{"percolate":{"documents":[{"title":"nice pair of shoes","color":"blue"},{"title":"beautiful bag"}]}}})
-        pprint(res)        
-        res = searchApi.search({"index":"products","query":{"match_all":{}}})
-        pprint(res)        
-        utilsApi.sql('mode=raw&query=DROP TABLE products')
+        #res = searchApi.percolate('products',{"query":{"percolate":{"document":{"title":"What a nice bag"}}}})
+        #pprint(res)
+        #res = searchApi.percolate('products',{"query":{"percolate":{"documents":[{"title":"nice pair of shoes","color":"blue"},{"title":"beautiful bag"}]}}})
+        #pprint(res)        
+        #res = searchApi.search({"index":"products","query":{"match_all":{}}})
+        #pprint(res)        
+        #utilsApi.sql('mode=raw&query=DROP TABLE products')
         
         
-        res =  searchApi.search({"index":"books","query":{"match":{"*":"try"}},"highlight":{}})
-        pprint(res)
+        #res =  searchApi.search({"index":"books","query":{"match":{"*":"try"}},"highlight":{}})
+        #pprint(res)
+        
         
 if __name__ == '__main__':
     unittest.main()
