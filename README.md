@@ -1,5 +1,5 @@
 # manticoresearch
-Experimental low-level client for Manticore Search.
+Low-level client for Manticore Search.
 
 
 ## Requirements.
@@ -58,15 +58,15 @@ configuration = manticoresearch.Configuration(
 # Enter a context with an instance of the API client
 with manticoresearch.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = manticoresearch.SearchApi(api_client)
-    body = {"index":"test","query":{"match":{"content":"sample"}}}
+    api_instance = manticoresearch.IndexApi(api_client)
+    body = "body_example" # str | 
 
     try:
-        # Performs a search
-        api_response = api_instance.search(body)
+        # Bulk index operations
+        api_response = api_instance.bulk(body)
         pprint(api_response)
     except ApiException as e:
-        print("Exception when calling SearchApi->search: %s\n" % e)
+        print("Exception when calling IndexApi->bulk: %s\n" % e)
     
 ```
 
@@ -104,6 +104,7 @@ Class | Method | HTTP request | Description
  - [SearchRequest](docs/SearchRequest.md)
  - [SearchResponse](docs/SearchResponse.md)
  - [SearchResponseHits](docs/SearchResponseHits.md)
+ - [SqlResponse](docs/SqlResponse.md)
  - [SuccessResponse](docs/SuccessResponse.md)
  - [UpdateDocumentRequest](docs/UpdateDocumentRequest.md)
  - [UpdateResponse](docs/UpdateResponse.md)
@@ -121,6 +122,8 @@ Manticore Search 3.x.
 
 ## Author
 
+info@manticoresearch.com
+info@manticoresearch.com
 info@manticoresearch.com
 
 
