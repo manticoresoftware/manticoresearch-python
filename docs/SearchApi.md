@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **percolate**
-> SearchResponse percolate(index, percolate_request)
+> SearchResponse percolate(indexpercolate_request)
 
 Perform reverse search on a percolate index
 
@@ -46,15 +46,17 @@ configuration = manticoresearch.Configuration(
 
 
 # Enter a context with an instance of the API client
-with manticoresearch.ApiClient() as api_client:
+with manticoresearch.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = manticoresearch.SearchApi(api_client)
-    index = 'index_example' # str | Name of the percolate index
-percolate_request = {"query":{"percolate":{"document":{"title":"some text to match"}}}} # PercolateRequest | 
+    index = "index_example" # str | Name of the percolate index
+percolate_request = PercolateRequest(
+        query={},
+    ) # PercolateRequest | 
 
     try:
         # Perform reverse search on a percolate index
-        api_response = api_instance.percolate(index, percolate_request)
+        api_response = api_instance.percolate(indexpercolate_request)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling SearchApi->percolate: %s\n" % e)
@@ -133,10 +135,26 @@ configuration = manticoresearch.Configuration(
 
 
 # Enter a context with an instance of the API client
-with manticoresearch.ApiClient() as api_client:
+with manticoresearch.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = manticoresearch.SearchApi(api_client)
-    search_request = manticoresearch.SearchRequest() # SearchRequest | 
+    search_request = SearchRequest(
+        index="test",
+        query={},
+        limit=1,
+        offset=1,
+        max_matches=1,
+        sort=[
+            {},
+        ],
+        aggs={},
+        expressions={},
+        highlight={},
+        source=[
+            "source_example",
+        ],
+        profile=True,
+    ) # SearchRequest | 
 
     try:
         # Performs a search
