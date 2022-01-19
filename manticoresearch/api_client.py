@@ -1,9 +1,10 @@
 # coding: utf-8
-"""
-    Manticore Search Client
+# Manticore Search Client
+# Copyright (c) 2020-2021, Manticore Software LTD (https://manticoresearch.com)
+# 
+# All rights reserved
+#
 
-    Contact: info@manticoresearch.com
-"""
 
 from __future__ import absolute_import
 
@@ -22,7 +23,7 @@ import six
 from six.moves.urllib.parse import quote
 
 from manticoresearch.configuration import Configuration
-import manticoresearch.models
+import manticoresearch.model
 from manticoresearch import rest
 from manticoresearch.exceptions import ApiValueError, ApiException
 
@@ -291,8 +292,11 @@ class ApiClient(object):
             return None
 
         if type(klass) == str:
-            if klass.startswith('list['):
-                sub_kls = re.match(r'list\[(.*)\]', klass).group(1)
+            if klass.startswith('{str:'):
+                klass = 'object'
+
+            if klass.startswith('list[') or klass.startswith('['):
+                sub_kls = re.match(r'(|list)\[(.*)\]', klass).group(2)
                 return [self.__deserialize(sub_data, sub_kls)
                         for sub_data in data]
 
@@ -305,7 +309,7 @@ class ApiClient(object):
             if klass in self.NATIVE_TYPES_MAPPING:
                 klass = self.NATIVE_TYPES_MAPPING[klass]
             else:
-                klass = getattr(manticoresearch.models, klass)
+                klass = getattr(manticoresearch.model, klass)
 
         if klass in self.PRIMITIVE_TYPES:
             return self.__deserialize_primitive(data, klass)
@@ -686,3 +690,4 @@ class ApiClient(object):
             if klass_name:
                 instance = self.__deserialize(data, klass_name)
         return instance
+

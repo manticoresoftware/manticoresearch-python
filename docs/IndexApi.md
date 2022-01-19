@@ -54,10 +54,10 @@ configuration = manticoresearch.Configuration(
 
 
 # Enter a context with an instance of the API client
-with manticoresearch.ApiClient() as api_client:
+with manticoresearch.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = manticoresearch.IndexApi(api_client)
-    body = 'body_example' # str | 
+    body = "body_example" # str | 
 
     try:
         # Bulk index operations
@@ -137,10 +137,15 @@ configuration = manticoresearch.Configuration(
 
 
 # Enter a context with an instance of the API client
-with manticoresearch.ApiClient() as api_client:
+with manticoresearch.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = manticoresearch.IndexApi(api_client)
-    delete_document_request = {"index":"test","query":{"match":{"title":"apple"}}} # DeleteDocumentRequest | 
+    delete_document_request = DeleteDocumentRequest(
+        index="index_example",
+        cluster="cluster_example",
+        id=1,
+        query={},
+    ) # DeleteDocumentRequest | 
 
     try:
         # Delete a document in an index
@@ -218,10 +223,15 @@ configuration = manticoresearch.Configuration(
 
 
 # Enter a context with an instance of the API client
-with manticoresearch.ApiClient() as api_client:
+with manticoresearch.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = manticoresearch.IndexApi(api_client)
-    insert_document_request = {"index":"test","id":1,"doc":{"title":"sample title","gid":10}} # InsertDocumentRequest | 
+    insert_document_request = InsertDocumentRequest(
+        index="index_example",
+        cluster="cluster_example",
+        id=1,
+        doc={},
+    ) # InsertDocumentRequest | 
 
     try:
         # Create a new document in an index
@@ -287,10 +297,15 @@ configuration = manticoresearch.Configuration(
 
 
 # Enter a context with an instance of the API client
-with manticoresearch.ApiClient() as api_client:
+with manticoresearch.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = manticoresearch.IndexApi(api_client)
-    insert_document_request = {"index":"test","id":1,"doc":{"title":"updated title","gid":15}} # InsertDocumentRequest | 
+    insert_document_request = InsertDocumentRequest(
+        index="index_example",
+        cluster="cluster_example",
+        id=1,
+        doc={},
+    ) # InsertDocumentRequest | 
 
     try:
         # Replace new document in an index
@@ -369,10 +384,15 @@ configuration = manticoresearch.Configuration(
 
 
 # Enter a context with an instance of the API client
-with manticoresearch.ApiClient() as api_client:
+with manticoresearch.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = manticoresearch.IndexApi(api_client)
-    update_document_request = {"index":"test","doc":{"gid":20},"query":{"equals":{"cat_id":2}}} # UpdateDocumentRequest | 
+    update_document_request = UpdateDocumentRequest(
+        index="index_example",
+        doc={},
+        id=1,
+        query={},
+    ) # UpdateDocumentRequest | 
 
     try:
         # Update a document in an index

@@ -1,10 +1,11 @@
 # coding: utf-8
 
-"""
-    Manticore Search Client
+# Manticore Search Client
+# Copyright (c) 2020-2021, Manticore Software LTD (https://manticoresearch.com)
+# 
+# All rights reserved
+#
 
-    Contact: info@manticoresearch.com
-"""
 
 
 import pprint
@@ -33,7 +34,7 @@ class DeleteDocumentRequest(object):
         'index': 'str',
         'cluster': 'str',
         'id': 'int',
-        'query': 'object'
+        'query': '{str: (bool, date, datetime, dict, float, int, list, str, none_type)}'
     }
 
     attribute_map = {
@@ -141,7 +142,7 @@ class DeleteDocumentRequest(object):
         Query tree object  # noqa: E501
 
         :return: The query of this DeleteDocumentRequest.  # noqa: E501
-        :rtype: object
+        :rtype: {str: (bool, date, datetime, dict, float, int, list, str, none_type)}
         """
         return self._query
 
@@ -152,7 +153,7 @@ class DeleteDocumentRequest(object):
         Query tree object  # noqa: E501
 
         :param query: The query of this DeleteDocumentRequest.  # noqa: E501
-        :type query: object
+        :type query: {str: (bool, date, datetime, dict, float, int, list, str, none_type)}
         """
 
         self._query = query

@@ -1,10 +1,11 @@
 # coding: utf-8
 
-"""
-    Manticore Search Client
+# Manticore Search Client
+# Copyright (c) 2020-2021, Manticore Software LTD (https://manticoresearch.com)
+# 
+# All rights reserved
+#
 
-    Contact: info@manticoresearch.com
-"""
 
 
 from __future__ import absolute_import

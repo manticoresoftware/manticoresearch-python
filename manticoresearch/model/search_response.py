@@ -1,10 +1,11 @@
 # coding: utf-8
 
-"""
-    Manticore Search Client
+# Manticore Search Client
+# Copyright (c) 2020-2021, Manticore Software LTD (https://manticoresearch.com)
+# 
+# All rights reserved
+#
 
-    Contact: info@manticoresearch.com
-"""
 
 
 import pprint
@@ -32,9 +33,10 @@ class SearchResponse(object):
     openapi_types = {
         'took': 'int',
         'timed_out': 'bool',
-        'aggregations': 'dict(str, object)',
+        'aggregations': '{str: (bool, date, datetime, dict, float, int, list, str, none_type)}',
         'hits': 'SearchResponseHits',
-        'profile': 'object'
+        'profile': '{str: (bool, date, datetime, dict, float, int, list, str, none_type)}',
+        'warning': '{str: (bool, date, datetime, dict, float, int, list, str, none_type)}'
     }
 
     attribute_map = {
@@ -42,10 +44,11 @@ class SearchResponse(object):
         'timed_out': 'timed_out',
         'aggregations': 'aggregations',
         'hits': 'hits',
-        'profile': 'profile'
+        'profile': 'profile',
+        'warning': 'warning'
     }
 
-    def __init__(self, took=None, timed_out=None, aggregations=None, hits=None, profile=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, took=None, timed_out=None, aggregations=None, hits=None, profile=None, warning=None, local_vars_configuration=None):  # noqa: E501
         """SearchResponse - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
@@ -56,6 +59,7 @@ class SearchResponse(object):
         self._aggregations = None
         self._hits = None
         self._profile = None
+        self._warning = None
         self.discriminator = None
 
         if took is not None:
@@ -68,6 +72,8 @@ class SearchResponse(object):
             self.hits = hits
         if profile is not None:
             self.profile = profile
+        if warning is not None:
+            self.warning = warning
 
     @property
     def took(self):
@@ -117,7 +123,7 @@ class SearchResponse(object):
 
 
         :return: The aggregations of this SearchResponse.  # noqa: E501
-        :rtype: dict(str, object)
+        :rtype: {str: (bool, date, datetime, dict, float, int, list, str, none_type)}
         """
         return self._aggregations
 
@@ -127,7 +133,7 @@ class SearchResponse(object):
 
 
         :param aggregations: The aggregations of this SearchResponse.  # noqa: E501
-        :type aggregations: dict(str, object)
+        :type aggregations: {str: (bool, date, datetime, dict, float, int, list, str, none_type)}
         """
 
         self._aggregations = aggregations
@@ -159,7 +165,7 @@ class SearchResponse(object):
 
 
         :return: The profile of this SearchResponse.  # noqa: E501
-        :rtype: object
+        :rtype: {str: (bool, date, datetime, dict, float, int, list, str, none_type)}
         """
         return self._profile
 
@@ -169,10 +175,31 @@ class SearchResponse(object):
 
 
         :param profile: The profile of this SearchResponse.  # noqa: E501
-        :type profile: object
+        :type profile: {str: (bool, date, datetime, dict, float, int, list, str, none_type)}
         """
 
         self._profile = profile
+
+    @property
+    def warning(self):
+        """Gets the warning of this SearchResponse.  # noqa: E501
+
+
+        :return: The warning of this SearchResponse.  # noqa: E501
+        :rtype: {str: (bool, date, datetime, dict, float, int, list, str, none_type)}
+        """
+        return self._warning
+
+    @warning.setter
+    def warning(self, warning):
+        """Sets the warning of this SearchResponse.
+
+
+        :param warning: The warning of this SearchResponse.  # noqa: E501
+        :type warning: {str: (bool, date, datetime, dict, float, int, list, str, none_type)}
+        """
+
+        self._warning = warning
 
     def to_dict(self):
         """Returns the model properties as a dict"""

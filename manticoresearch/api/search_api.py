@@ -1,10 +1,11 @@
 # coding: utf-8
 
-"""
-    Manticore Search Client
+# Manticore Search Client
+# Copyright (c) 2020-2021, Manticore Software LTD (https://manticoresearch.com)
+# 
+# All rights reserved
+#
 
-    Contact: info@manticoresearch.com
-"""
 
 
 from __future__ import absolute_import
@@ -13,6 +14,7 @@ import re  # noqa: F401
 
 # python 2 and python 3 compatibility library
 import six
+from six.moves.urllib.parse import quote
 
 from manticoresearch.api_client import ApiClient
 from manticoresearch.exceptions import (  # noqa: F401
@@ -105,7 +107,7 @@ class SearchApi(object):
         local_var_params = locals()
 
         all_params = [
-            'index',
+            'index', 
             'percolate_request'
         ]
         all_params.extend(
@@ -117,7 +119,6 @@ class SearchApi(object):
                 '_request_auth'
             ]
         )
-
         for key, val in six.iteritems(local_var_params['kwargs']):
             if key not in all_params:
                 raise ApiTypeError(
@@ -258,7 +259,6 @@ class SearchApi(object):
                 '_request_auth'
             ]
         )
-
         for key, val in six.iteritems(local_var_params['kwargs']):
             if key not in all_params:
                 raise ApiTypeError(

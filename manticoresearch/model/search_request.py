@@ -1,10 +1,11 @@
 # coding: utf-8
 
-"""
-    Manticore Search Client
+# Manticore Search Client
+# Copyright (c) 2020-2021, Manticore Software LTD (https://manticoresearch.com)
+# 
+# All rights reserved
+#
 
-    Contact: info@manticoresearch.com
-"""
 
 
 import pprint
@@ -31,15 +32,15 @@ class SearchRequest(object):
     """
     openapi_types = {
         'index': 'str',
-        'query': 'dict(str, object)',
+        'query': '{str: (bool, date, datetime, dict, float, int, list, str, none_type)}',
         'limit': 'int',
         'offset': 'int',
         'max_matches': 'int',
-        'sort': 'list[object]',
-        'aggs': 'dict(str, object)',
-        'expressions': 'object',
-        'highlight': 'object',
-        'source': 'list[str]',
+        'sort': '[{str: (bool, date, datetime, dict, float, int, list, str, none_type)}]',
+        'aggs': '{str: (bool, date, datetime, dict, float, int, list, str, none_type)}',
+        'expressions': '{str: (bool, date, datetime, dict, float, int, list, str, none_type)}',
+        'highlight': '{str: (bool, date, datetime, dict, float, int, list, str, none_type)}',
+        'source': '[str]',
         'profile': 'bool'
     }
 
@@ -126,7 +127,7 @@ class SearchRequest(object):
 
 
         :return: The query of this SearchRequest.  # noqa: E501
-        :rtype: dict(str, object)
+        :rtype: {str: (bool, date, datetime, dict, float, int, list, str, none_type)}
         """
         return self._query
 
@@ -136,7 +137,7 @@ class SearchRequest(object):
 
 
         :param query: The query of this SearchRequest.  # noqa: E501
-        :type query: dict(str, object)
+        :type query: {str: (bool, date, datetime, dict, float, int, list, str, none_type)}
         """
         if self.local_vars_configuration.client_side_validation and query is None:  # noqa: E501
             raise ValueError("Invalid value for `query`, must not be `None`")  # noqa: E501
@@ -212,7 +213,7 @@ class SearchRequest(object):
 
 
         :return: The sort of this SearchRequest.  # noqa: E501
-        :rtype: list[object]
+        :rtype: [{str: (bool, date, datetime, dict, float, int, list, str, none_type)}]
         """
         return self._sort
 
@@ -222,7 +223,7 @@ class SearchRequest(object):
 
 
         :param sort: The sort of this SearchRequest.  # noqa: E501
-        :type sort: list[object]
+        :type sort: [{str: (bool, date, datetime, dict, float, int, list, str, none_type)}]
         """
 
         self._sort = sort
@@ -233,7 +234,7 @@ class SearchRequest(object):
 
 
         :return: The aggs of this SearchRequest.  # noqa: E501
-        :rtype: dict(str, object)
+        :rtype: {str: (bool, date, datetime, dict, float, int, list, str, none_type)}
         """
         return self._aggs
 
@@ -243,7 +244,7 @@ class SearchRequest(object):
 
 
         :param aggs: The aggs of this SearchRequest.  # noqa: E501
-        :type aggs: dict(str, object)
+        :type aggs: {str: (bool, date, datetime, dict, float, int, list, str, none_type)}
         """
 
         self._aggs = aggs
@@ -254,7 +255,7 @@ class SearchRequest(object):
 
 
         :return: The expressions of this SearchRequest.  # noqa: E501
-        :rtype: object
+        :rtype: {str: (bool, date, datetime, dict, float, int, list, str, none_type)}
         """
         return self._expressions
 
@@ -264,7 +265,7 @@ class SearchRequest(object):
 
 
         :param expressions: The expressions of this SearchRequest.  # noqa: E501
-        :type expressions: object
+        :type expressions: {str: (bool, date, datetime, dict, float, int, list, str, none_type)}
         """
 
         self._expressions = expressions
@@ -275,7 +276,7 @@ class SearchRequest(object):
 
 
         :return: The highlight of this SearchRequest.  # noqa: E501
-        :rtype: object
+        :rtype: {str: (bool, date, datetime, dict, float, int, list, str, none_type)}
         """
         return self._highlight
 
@@ -285,7 +286,7 @@ class SearchRequest(object):
 
 
         :param highlight: The highlight of this SearchRequest.  # noqa: E501
-        :type highlight: object
+        :type highlight: {str: (bool, date, datetime, dict, float, int, list, str, none_type)}
         """
 
         self._highlight = highlight
@@ -296,7 +297,7 @@ class SearchRequest(object):
 
 
         :return: The source of this SearchRequest.  # noqa: E501
-        :rtype: list[str]
+        :rtype: [str]
         """
         return self._source
 
@@ -306,7 +307,7 @@ class SearchRequest(object):
 
 
         :param source: The source of this SearchRequest.  # noqa: E501
-        :type source: list[str]
+        :type source: [str]
         """
 
         self._source = source

@@ -1,4 +1,9 @@
 # coding: utf-8
+# Manticore Search Client
+# Copyright (c) 2020-2021, Manticore Software LTD (https://manticoresearch.com)
+#
+# All rights reserved
+
 from __future__ import absolute_import
 from pprint import pprint
 import unittest
@@ -11,7 +16,11 @@ from parametrized_test_case import ParametrizedTestCase
 class TestManualApi(ParametrizedTestCase):
 
     def setUp(self):
-        self.client = manticoresearch.ApiClient(self.settings['configuration'])
+        configuration = manticoresearch.Configuration(
+            host = "http://127.0.0.1:9308"
+        )
+
+        self.client = manticoresearch.ApiClient(configuration)
         
     def tearDown(self):
         pass

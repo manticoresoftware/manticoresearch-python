@@ -1,10 +1,11 @@
 # coding: utf-8
 
-"""
-    Manticore Search Client
+# Manticore Search Client
+# Copyright (c) 2020-2021, Manticore Software LTD (https://manticoresearch.com)
+# 
+# All rights reserved
+#
 
-    Contact: info@manticoresearch.com
-"""
 
 
 import pprint
@@ -32,7 +33,7 @@ class SearchResponseHits(object):
     openapi_types = {
         'max_score': 'int',
         'total': 'int',
-        'hits': 'list[object]'
+        'hits': '[{str: (bool, date, datetime, dict, float, int, list, str, none_type)}]'
     }
 
     attribute_map = {
@@ -107,7 +108,7 @@ class SearchResponseHits(object):
 
 
         :return: The hits of this SearchResponseHits.  # noqa: E501
-        :rtype: list[object]
+        :rtype: [{str: (bool, date, datetime, dict, float, int, list, str, none_type)}]
         """
         return self._hits
 
@@ -117,7 +118,7 @@ class SearchResponseHits(object):
 
 
         :param hits: The hits of this SearchResponseHits.  # noqa: E501
-        :type hits: list[object]
+        :type hits: [{str: (bool, date, datetime, dict, float, int, list, str, none_type)}]
         """
 
         self._hits = hits

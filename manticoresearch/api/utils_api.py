@@ -1,10 +1,11 @@
 # coding: utf-8
 
-"""
-    Manticore Search Client
+# Manticore Search Client
+# Copyright (c) 2020-2021, Manticore Software LTD (https://manticoresearch.com)
+# 
+# All rights reserved
+#
 
-    Contact: info@manticoresearch.com
-"""
 
 
 from __future__ import absolute_import
@@ -13,6 +14,7 @@ import re  # noqa: F401
 
 # python 2 and python 3 compatibility library
 import six
+from six.moves.urllib.parse import quote
 
 from manticoresearch.api_client import ApiClient
 from manticoresearch.exceptions import (  # noqa: F401
@@ -58,7 +60,7 @@ class UtilsApi(object):
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: dict(str, object)
+        :rtype: SqlResponse
         """
         kwargs['_return_http_data_only'] = True
         return self.sql_with_http_info(body, **kwargs)  # noqa: E501
@@ -95,7 +97,7 @@ class UtilsApi(object):
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(dict(str, object), status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(SqlResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
@@ -112,7 +114,6 @@ class UtilsApi(object):
                 '_request_auth'
             ]
         )
-
         for key, val in six.iteritems(local_var_params['kwargs']):
             if key not in all_params:
                 raise ApiTypeError(
@@ -159,7 +160,7 @@ class UtilsApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='dict(str, object)',  # noqa: E501
+            response_type='SqlResponse',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501

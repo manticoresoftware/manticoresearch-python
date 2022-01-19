@@ -1,3 +1,8 @@
+# Manticore Search Client
+# Copyright (c) 2020-2021, Manticore Software LTD (https://manticoresearch.com)
+#
+# All rights reserved
+ 
 import unittest
 
 class ParametrizedTestCase(unittest.TestCase):

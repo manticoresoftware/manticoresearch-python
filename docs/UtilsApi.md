@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **sql**
-> dict(str, object) sql(body)
+> SqlResponse sql(body)
 
 Perform SQL requests
 
@@ -35,10 +35,10 @@ configuration = manticoresearch.Configuration(
 
 
 # Enter a context with an instance of the API client
-with manticoresearch.ApiClient() as api_client:
+with manticoresearch.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = manticoresearch.UtilsApi(api_client)
-    body = ["mode=raw&query=SHOW TABLES"] # str | Expects is a query parameters string that can be in two modes:    * Select only query as `query=SELECT * FROM myindex`. The query string MUST be URL encoded    * any type of query in format `mode=raw&query=SHOW TABLES`. The string must be as is (no URL encoding) and `mode` must be first. 
+    body = "["mode=raw&query=SHOW TABLES"]" # str | Expects is a query parameters string that can be in two modes:    * Select only query as `query=SELECT * FROM myindex`. The query string MUST be URL encoded    * any type of query in format `mode=raw&query=SHOW TABLES`. The string must be as is (no URL encoding) and `mode` must be first. 
 
     try:
         # Perform SQL requests
@@ -56,7 +56,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**dict(str, object)**
+[**SqlResponse**](SqlResponse.md)
 
 ### Authorization
 
