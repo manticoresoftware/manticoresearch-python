@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **sql**
-> SqlResponse sql(body)
+> SqlResponse sql(bodyraw_response=raw_response)
 
 Perform SQL requests
 
@@ -39,10 +39,11 @@ with manticoresearch.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = manticoresearch.UtilsApi(api_client)
     body = "["mode=raw&query=SHOW TABLES"]" # str | Expects is a query parameters string that can be in two modes:    * Select only query as `query=SELECT * FROM myindex`. The query string MUST be URL encoded    * any type of query in format `mode=raw&query=SHOW TABLES`. The string must be as is (no URL encoding) and `mode` must be first. 
+raw_response = False # bool |  (optional) (default to False)
 
     try:
         # Perform SQL requests
-        api_response = api_instance.sql(body)
+        api_response = api_instance.sql(bodyraw_response=raw_response)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling UtilsApi->sql: %s\n" % e)
@@ -53,6 +54,7 @@ with manticoresearch.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | **str**| Expects is a query parameters string that can be in two modes:    * Select only query as &#x60;query&#x3D;SELECT * FROM myindex&#x60;. The query string MUST be URL encoded    * any type of query in format &#x60;mode&#x3D;raw&amp;query&#x3D;SHOW TABLES&#x60;. The string must be as is (no URL encoding) and &#x60;mode&#x60; must be first.  | 
+ **raw_response** | **bool**|  | [optional] [default to False]
 
 ### Return type
 

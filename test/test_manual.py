@@ -12,6 +12,8 @@ import manticoresearch
 from manticoresearch.api.index_api import IndexApi  # noqa: E501
 from manticoresearch.rest import ApiException
 from parametrized_test_case import ParametrizedTestCase
+from urllib.parse import quote
+import sys
 
 class TestManualApi(ParametrizedTestCase):
 
@@ -22,17 +24,19 @@ class TestManualApi(ParametrizedTestCase):
         pass
         
     def test_manual(self):
-    
         client = self.client
         indexApi = manticoresearch.IndexApi(client)
         utilsApi = manticoresearch.UtilsApi(client)
         searchApi = manticoresearch.SearchApi(client)
-        utilsApi.sql('mode=raw&query=SHOW THREADS')
-        utilsApi.sql('mode=raw&query=DROP TABLE IF EXISTS products')
+        utilsApi.sql('SHOW THREADS')
+        utilsApi.sql('DROP TABLE IF EXISTS products')
         # example create_example request
-        res = utilsApi.sql('mode=raw&query=CREATE TABLE IF NOT EXISTS products (title text, price float, sizes multi, meta json, coeff float, tags1 multi, tags2 multi)')
+        res = utilsApi.sql('CREATE TABLE IF NOT EXISTS products (title text, price float, sizes multi, meta json, coeff float, tags1 multi, tags2 multi)')
         pprint(res)
-        res = utilsApi.sql('mode=raw&query=TRUNCATE TABLE products')
+        # example not raw_response request
+        res = utilsApi.sql('SELECT * FROM products', raw_response=False)
+        pprint(res)
+        res = utilsApi.sql('TRUNCATE TABLE products')
         # example create_example response
         #
         #
@@ -53,6 +57,7 @@ class TestManualApi(ParametrizedTestCase):
             {"insert": {"index" : "products", "id" : 4, "doc" : {"title" : "microfiber sheet set", "price" : 19.99}}}, \
             {"insert": {"index" : "products", "id" : 5, "doc" : {"title" : "CPet Hair Remover Glove", "price" : 7.99}}}
         ]
+        print('\n'.join(map(json.dumps,docs)))
         api_resp = indexApi.bulk('\n'.join(map(json.dumps,docs)))
         # example MVA_insert request
         indexApi = api = manticoresearch.IndexApi(client)
@@ -141,17 +146,17 @@ class TestManualApi(ParametrizedTestCase):
         pprint(api_resp)      
 
         # example truncate request
-        res = utilsApi.sql('mode=raw&query=TRUNCATE TABLE products')
+        res = utilsApi.sql('TRUNCATE TABLE products')
         pprint(res)
         
         #
         
-        res = utilsApi.sql('mode=raw&query=SHOW TABLES LIKE \'pro%\'')
+        res = utilsApi.sql('SHOW TABLES LIKE \'pro%\'')
         pprint(res)
         
         #
-        res = utilsApi.sql('mode=raw&query=drop table forum')
-        utilsApi.sql('mode=raw&query=create table forum(title text, content text, author_id int, forum_id int, post_date timestamp) min_infix_len=\'3\'')
+        res = utilsApi.sql('drop table forum')
+        utilsApi.sql('create table forum(title text, content text, author_id int, forum_id int, post_date timestamp) min_infix_len=\'3\'')
         # example filtered query request
         res = searchApi.search({"index":"forum","query":{"match_all":{},"bool":{"must":[{"equals":{"author_id":123}},{"in":{"forum_id":[1,3,7]}}]}},"sort":[{"post_date":"desc"}]})
         pprint(res)
@@ -166,23 +171,23 @@ class TestManualApi(ParametrizedTestCase):
         pprint(res)
         
         #
-        utilsApi.sql('mode=raw&query=DROP TABLE products')
-        res = utilsApi.sql('mode=raw&query=CREATE TABLE IF NOT EXISTS products (title text,product_codes multi)')
+        utilsApi.sql('DROP TABLE products')
+        res = utilsApi.sql('CREATE TABLE IF NOT EXISTS products (title text,product_codes multi)')
         
         res = indexApi.insert({"index":"products","id":1,"doc":{"title":"first","product_codes":[4,2,1,3]}})
         pprint(res)
         res = searchApi.search({"index":"products","query":{"match_all":{}}})
         pprint(res)
-        utilsApi.sql('mode=raw&query=DROP TABLE products')
+        utilsApi.sql('DROP TABLE products')
         
         #
         
-        res =  utilsApi.sql('mode=raw&query=SHOW AGENT STATUS')
+        res =  utilsApi.sql('SHOW AGENT STATUS')
         pprint(res)
         
         # example create percolate request
         
-        #utilsApi.sql('mode=raw&query=create table products(title text, color string) type=\'pq\'')
+        #utilsApi.sql('create table products(title text, color string) type=\'pq\'')
         #res = indexApi.insert({"index" : "products", "doc" : {"query" : "@title bag" }})
         #pprint(res)
         #res = indexApi.insert({"index" : "products",  "doc" : {"query" : "@title shoes", "filters": "color='red'" }})
@@ -198,7 +203,7 @@ class TestManualApi(ParametrizedTestCase):
         #pprint(res)        
         #res = searchApi.search({"index":"products","query":{"match_all":{}}})
         #pprint(res)        
-        #utilsApi.sql('mode=raw&query=DROP TABLE products')
+        #utilsApi.sql('DROP TABLE products')
         
         
         #res =  searchApi.search({"index":"books","query":{"match":{"*":"try"}},"highlight":{}})

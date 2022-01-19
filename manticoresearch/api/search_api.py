@@ -149,9 +149,16 @@ class SearchApi(object):
         form_params = []
         local_var_files = {}
 
+        is_sql_func = False
         body_params = None
         if 'percolate_request' in local_var_params:
-            body_params = local_var_params['percolate_request']
+            if is_sql_func:
+                if  'raw_response' in local_var_params and not local_var_params['raw_response']:
+                    body_params = 'query=' + quote( str( local_var_params['percolate_request'] ) ) 
+                elif not 'raw_response' in local_var_params or local_var_params['raw_response']:
+                    body_params = 'mode=raw&query=' + str( local_var_params['percolate_request'] )
+            else:
+                body_params = local_var_params['percolate_request']
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['application/json'])  # noqa: E501
@@ -283,9 +290,16 @@ class SearchApi(object):
         form_params = []
         local_var_files = {}
 
+        is_sql_func = False
         body_params = None
         if 'search_request' in local_var_params:
-            body_params = local_var_params['search_request']
+            if is_sql_func:
+                if  'raw_response' in local_var_params and not local_var_params['raw_response']:
+                    body_params = 'query=' + quote( str( local_var_params['search_request'] ) ) 
+                elif not 'raw_response' in local_var_params or local_var_params['raw_response']:
+                    body_params = 'mode=raw&query=' + str( local_var_params['search_request'] )
+            else:
+                body_params = local_var_params['search_request']
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['application/json'])  # noqa: E501

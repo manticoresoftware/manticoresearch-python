@@ -47,6 +47,8 @@ class UtilsApi(object):
 
         :param body: Expects is a query parameters string that can be in two modes:    * Select only query as `query=SELECT * FROM myindex`. The query string MUST be URL encoded    * any type of query in format `mode=raw&query=SHOW TABLES`. The string must be as is (no URL encoding) and `mode` must be first.  (required)
         :type body: str
+        :param raw_response:
+        :type raw_response: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
@@ -77,6 +79,8 @@ class UtilsApi(object):
 
         :param body: Expects is a query parameters string that can be in two modes:    * Select only query as `query=SELECT * FROM myindex`. The query string MUST be URL encoded    * any type of query in format `mode=raw&query=SHOW TABLES`. The string must be as is (no URL encoding) and `mode` must be first.  (required)
         :type body: str
+        :param raw_response:
+        :type raw_response: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
@@ -103,7 +107,8 @@ class UtilsApi(object):
         local_var_params = locals()
 
         all_params = [
-            'body'
+            'body', 
+            'raw_response'
         ]
         all_params.extend(
             [
@@ -132,15 +137,24 @@ class UtilsApi(object):
         path_params = {}
 
         query_params = []
+        if 'raw_response' in local_var_params and local_var_params['raw_response'] is not None:  # noqa: E501
+            query_params.append(('raw_response', local_var_params['raw_response']))  # noqa: E501
 
         header_params = {}
 
         form_params = []
         local_var_files = {}
 
+        is_sql_func = True      
         body_params = None
         if 'body' in local_var_params:
-            body_params = local_var_params['body']
+            if is_sql_func:
+                if  'raw_response' in local_var_params and not local_var_params['raw_response']:
+                    body_params = 'query=' + quote( str( local_var_params['body'] ) ) 
+                elif not 'raw_response' in local_var_params or local_var_params['raw_response']:
+                    body_params = 'mode=raw&query=' + str( local_var_params['body'] )
+            else:
+                body_params = local_var_params['body']
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['application/json'])  # noqa: E501
