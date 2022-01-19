@@ -16,11 +16,7 @@ from parametrized_test_case import ParametrizedTestCase
 class TestManualApi(ParametrizedTestCase):
 
     def setUp(self):
-        configuration = manticoresearch.Configuration(
-            host = "http://127.0.0.1:9308"
-        )
-
-        self.client = manticoresearch.ApiClient(configuration)
+        self.client = manticoresearch.ApiClient(self.settings['configuration'])
         
     def tearDown(self):
         pass
