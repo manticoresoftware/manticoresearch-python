@@ -138,16 +138,10 @@ class IndexApi(object):
         form_params = []
         local_var_files = {}
 
-        is_sql_func = False
         body_params = None
         if 'body' in local_var_params:
-            if is_sql_func:
-                if  'raw_response' in local_var_params and not local_var_params['raw_response']:
-                    body_params = 'query=' + quote( str( local_var_params['body'] ) ) 
-                elif not 'raw_response' in local_var_params or local_var_params['raw_response']:
-                    body_params = 'mode=raw&query=' + str( local_var_params['body'] )
-            else:
-                body_params = local_var_params['body']
+            body_params = local_var_params['body']
+
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['application/json'])  # noqa: E501
@@ -279,16 +273,10 @@ class IndexApi(object):
         form_params = []
         local_var_files = {}
 
-        is_sql_func = False
         body_params = None
         if 'delete_document_request' in local_var_params:
-            if is_sql_func:
-                if  'raw_response' in local_var_params and not local_var_params['raw_response']:
-                    body_params = 'query=' + quote( str( local_var_params['delete_document_request'] ) ) 
-                elif not 'raw_response' in local_var_params or local_var_params['raw_response']:
-                    body_params = 'mode=raw&query=' + str( local_var_params['delete_document_request'] )
-            else:
-                body_params = local_var_params['delete_document_request']
+            body_params = local_var_params['delete_document_request']
+
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['application/json'])  # noqa: E501
@@ -420,16 +408,10 @@ class IndexApi(object):
         form_params = []
         local_var_files = {}
 
-        is_sql_func = False
         body_params = None
         if 'insert_document_request' in local_var_params:
-            if is_sql_func:
-                if  'raw_response' in local_var_params and not local_var_params['raw_response']:
-                    body_params = 'query=' + quote( str( local_var_params['insert_document_request'] ) ) 
-                elif not 'raw_response' in local_var_params or local_var_params['raw_response']:
-                    body_params = 'mode=raw&query=' + str( local_var_params['insert_document_request'] )
-            else:
-                body_params = local_var_params['insert_document_request']
+            body_params = local_var_params['insert_document_request']
+
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['application/json'])  # noqa: E501
@@ -561,16 +543,10 @@ class IndexApi(object):
         form_params = []
         local_var_files = {}
 
-        is_sql_func = False
         body_params = None
         if 'insert_document_request' in local_var_params:
-            if is_sql_func:
-                if  'raw_response' in local_var_params and not local_var_params['raw_response']:
-                    body_params = 'query=' + quote( str( local_var_params['insert_document_request'] ) ) 
-                elif not 'raw_response' in local_var_params or local_var_params['raw_response']:
-                    body_params = 'mode=raw&query=' + str( local_var_params['insert_document_request'] )
-            else:
-                body_params = local_var_params['insert_document_request']
+            body_params = local_var_params['insert_document_request']
+
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['application/json'])  # noqa: E501
@@ -702,16 +678,10 @@ class IndexApi(object):
         form_params = []
         local_var_files = {}
 
-        is_sql_func = False
         body_params = None
         if 'update_document_request' in local_var_params:
-            if is_sql_func:
-                if  'raw_response' in local_var_params and not local_var_params['raw_response']:
-                    body_params = 'query=' + quote( str( local_var_params['update_document_request'] ) ) 
-                elif not 'raw_response' in local_var_params or local_var_params['raw_response']:
-                    body_params = 'mode=raw&query=' + str( local_var_params['update_document_request'] )
-            else:
-                body_params = local_var_params['update_document_request']
+            body_params = local_var_params['update_document_request']
+
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['application/json'])  # noqa: E501

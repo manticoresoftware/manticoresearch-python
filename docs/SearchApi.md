@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **percolate**
-> SearchResponse percolate(indexpercolate_request)
+> SearchResponse percolate(index,percolate_request)
 
 Perform reverse search on a percolate index
 
@@ -56,7 +56,7 @@ percolate_request = PercolateRequest(
 
     try:
         # Perform reverse search on a percolate index
-        api_response = api_instance.percolate(indexpercolate_request)
+        api_response = api_instance.percolate(index,percolate_request)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling SearchApi->percolate: %s\n" % e)
@@ -116,7 +116,7 @@ It responds with an object with:
   {'took':10,'timed_out':false,'hits':{'total':2,'hits':[{'_id':'1','_score':1,'_source':{'gid':11}},{'_id':'2','_score':1,'_source':{'gid':12}}]}}
   ```
 
-For more information about the match query syntax, additional paramaters that can be set to the input and response, please check: https://docs.manticoresearch.com/latest/html/http_reference/json_search.html.
+For more information about the match query syntax, additional paramaters that can be set to the input and response, please check: https://manual.manticoresearch.com/Searching/Full_text_matching/Basic_usage#HTTP.
 
 
 ### Example

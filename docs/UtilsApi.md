@@ -8,14 +8,15 @@ Method | HTTP request | Description
 
 
 # **sql**
-> SqlResponse sql(bodyraw_response=raw_response)
+> SqlResponse sql(body,raw_response=True)
 
 Perform SQL requests
 
 Run a query in SQL format.
-Expects a query parameters string that can be in two modes:
-* Select only query as `query=SELECT * FROM myindex`. The query string MUST be URL encoded
-* any type of query in format `mode=raw&query=SHOW TABLES`. The string must be as is (no URL encoding) and `mode` must be first.
+Expects a query string passed through `body` parameter and optional `raw_response` parameter that defines a format of response.
+`raw_response` can be set to `False` for Select queries only, e.g., `SELECT * FROM myindex`
+The query string must be URL encoded if `raw_response` parameter is set to False
+The query string must be as is (no URL encoding) if `raw_response` parameter is set to True or omitted.
 The response object depends on the query executed. In select mode the response has same format as `/search` operation.
 
 
@@ -38,12 +39,12 @@ configuration = manticoresearch.Configuration(
 with manticoresearch.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = manticoresearch.UtilsApi(api_client)
-    body = "["mode=raw&query=SHOW TABLES"]" # str | Expects is a query parameters string that can be in two modes:    * Select only query as `query=SELECT * FROM myindex`. The query string MUST be URL encoded    * any type of query in format `mode=raw&query=SHOW TABLES`. The string must be as is (no URL encoding) and `mode` must be first. 
-raw_response = False # bool |  (optional) (default to False)
+    body = "["SHOW TABLES"]" # str | A query parameter string. The query string must be URL encoded if `raw_response` parameter is set to False The query string must be as is (no URL encoding) if `raw_response` parameter is set to True or omitted. 
+raw_response = True # bool | Optional parameter, defines a format of response. Can be set to `False` for Select only queries and set to `True` or omitted for any type of queries:  (optional) (default to True)
 
     try:
         # Perform SQL requests
-        api_response = api_instance.sql(bodyraw_response=raw_response)
+        api_response = api_instance.sql(body,raw_response=True)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling UtilsApi->sql: %s\n" % e)
@@ -53,8 +54,8 @@ raw_response = False # bool |  (optional) (default to False)
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **str**| Expects is a query parameters string that can be in two modes:    * Select only query as &#x60;query&#x3D;SELECT * FROM myindex&#x60;. The query string MUST be URL encoded    * any type of query in format &#x60;mode&#x3D;raw&amp;query&#x3D;SHOW TABLES&#x60;. The string must be as is (no URL encoding) and &#x60;mode&#x60; must be first.  | 
- **raw_response** | **bool**|  | [optional] [default to False]
+ **body** | **str**| A query parameter string. The query string must be URL encoded if &#x60;raw_response&#x60; parameter is set to False The query string must be as is (no URL encoding) if &#x60;raw_response&#x60; parameter is set to True or omitted.  | 
+ **raw_response** | **bool**| Optional parameter, defines a format of response. Can be set to &#x60;False&#x60; for Select only queries and set to &#x60;True&#x60; or omitted for any type of queries:  | [optional] [default to True]
 
 ### Return type
 

@@ -38,16 +38,16 @@ class UtilsApi(object):
     def sql(self, body, **kwargs):  # noqa: E501
         """Perform SQL requests  # noqa: E501
 
-        Run a query in SQL format. Expects a query parameters string that can be in two modes: * Select only query as `query=SELECT * FROM myindex`. The query string MUST be URL encoded * any type of query in format `mode=raw&query=SHOW TABLES`. The string must be as is (no URL encoding) and `mode` must be first. The response object depends on the query executed. In select mode the response has same format as `/search` operation.   # noqa: E501
+        Run a query in SQL format. Expects a query string passed through `body` parameter and optional `raw_response` parameter that defines a format of response. `raw_response` can be set to `False` for Select queries only, e.g., `SELECT * FROM myindex` The query string must be URL encoded if `raw_response` parameter is set to False The query string must be as is (no URL encoding) if `raw_response` parameter is set to True or omitted. The response object depends on the query executed. In select mode the response has same format as `/search` operation.   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
         >>> thread = api.sql(body, async_req=True)
         >>> result = thread.get()
 
-        :param body: Expects is a query parameters string that can be in two modes:    * Select only query as `query=SELECT * FROM myindex`. The query string MUST be URL encoded    * any type of query in format `mode=raw&query=SHOW TABLES`. The string must be as is (no URL encoding) and `mode` must be first.  (required)
+        :param body: A query parameter string. The query string must be URL encoded if `raw_response` parameter is set to False The query string must be as is (no URL encoding) if `raw_response` parameter is set to True or omitted.  (required)
         :type body: str
-        :param raw_response:
+        :param raw_response: Optional parameter, defines a format of response. Can be set to `False` for Select only queries and set to `True` or omitted for any type of queries: 
         :type raw_response: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -70,16 +70,16 @@ class UtilsApi(object):
     def sql_with_http_info(self, body, **kwargs):  # noqa: E501
         """Perform SQL requests  # noqa: E501
 
-        Run a query in SQL format. Expects a query parameters string that can be in two modes: * Select only query as `query=SELECT * FROM myindex`. The query string MUST be URL encoded * any type of query in format `mode=raw&query=SHOW TABLES`. The string must be as is (no URL encoding) and `mode` must be first. The response object depends on the query executed. In select mode the response has same format as `/search` operation.   # noqa: E501
+        Run a query in SQL format. Expects a query string passed through `body` parameter and optional `raw_response` parameter that defines a format of response. `raw_response` can be set to `False` for Select queries only, e.g., `SELECT * FROM myindex` The query string must be URL encoded if `raw_response` parameter is set to False The query string must be as is (no URL encoding) if `raw_response` parameter is set to True or omitted. The response object depends on the query executed. In select mode the response has same format as `/search` operation.   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
         >>> thread = api.sql_with_http_info(body, async_req=True)
         >>> result = thread.get()
 
-        :param body: Expects is a query parameters string that can be in two modes:    * Select only query as `query=SELECT * FROM myindex`. The query string MUST be URL encoded    * any type of query in format `mode=raw&query=SHOW TABLES`. The string must be as is (no URL encoding) and `mode` must be first.  (required)
+        :param body: A query parameter string. The query string must be URL encoded if `raw_response` parameter is set to False The query string must be as is (no URL encoding) if `raw_response` parameter is set to True or omitted.  (required)
         :type body: str
-        :param raw_response:
+        :param raw_response: Optional parameter, defines a format of response. Can be set to `False` for Select only queries and set to `True` or omitted for any type of queries: 
         :type raw_response: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -145,16 +145,13 @@ class UtilsApi(object):
         form_params = []
         local_var_files = {}
 
-        is_sql_func = True      
         body_params = None
         if 'body' in local_var_params:
-            if is_sql_func:
-                if  'raw_response' in local_var_params and not local_var_params['raw_response']:
-                    body_params = 'query=' + quote( str( local_var_params['body'] ) ) 
-                elif not 'raw_response' in local_var_params or local_var_params['raw_response']:
-                    body_params = 'mode=raw&query=' + str( local_var_params['body'] )
-            else:
-                body_params = local_var_params['body']
+          if  'raw_response' in local_var_params and not local_var_params['raw_response']:
+              body_params = 'query=' + quote( str( local_var_params['body'] ) ) 
+          else:
+              body_params = 'mode=raw&query=' + str( local_var_params['body'] )
+
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['application/json'])  # noqa: E501
