@@ -6,7 +6,7 @@ Low-level client for Manticore Search.
 
 Python 2.7 and 3.4+.
 
-Minimum Manticore Search version is 2.5.1 with HTTP protocol enabled.
+Minimum Manticore Search version is > 4.0.2 with HTTP protocol enabled.
 
 ## Installation & Usage
 ### pip install

@@ -36,6 +36,8 @@ class TestManualApi(ParametrizedTestCase):
         # example not raw_response request
         res = utilsApi.sql('SELECT * FROM products', raw_response=False)
         pprint(res)
+        res = utilsApi.sql('SELECT * FROM products', raw_response=True)
+        pprint(res)
         res = utilsApi.sql('TRUNCATE TABLE products')
         # example create_example response
         #

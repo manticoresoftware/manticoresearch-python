@@ -15,8 +15,7 @@ Perform SQL requests
 Run a query in SQL format.
 Expects a query string passed through `body` parameter and optional `raw_response` parameter that defines a format of response.
 `raw_response` can be set to `False` for Select queries only, e.g., `SELECT * FROM myindex`
-The query string must be URL encoded if `raw_response` parameter is set to False
-The query string must be as is (no URL encoding) if `raw_response` parameter is set to True or omitted.
+The query string must stay as it is, no URL encoding is needed.
 The response object depends on the query executed. In select mode the response has same format as `/search` operation.
 
 
@@ -39,7 +38,7 @@ configuration = manticoresearch.Configuration(
 with manticoresearch.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = manticoresearch.UtilsApi(api_client)
-    body = "["SHOW TABLES"]" # str | A query parameter string. The query string must be URL encoded if `raw_response` parameter is set to False The query string must be as is (no URL encoding) if `raw_response` parameter is set to True or omitted. 
+    body = "["SHOW TABLES"]" # str | A query parameter string. 
 raw_response = True # bool | Optional parameter, defines a format of response. Can be set to `False` for Select only queries and set to `True` or omitted for any type of queries:  (optional) (default to True)
 
     try:
@@ -54,7 +53,7 @@ raw_response = True # bool | Optional parameter, defines a format of response. C
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **str**| A query parameter string. The query string must be URL encoded if &#x60;raw_response&#x60; parameter is set to False The query string must be as is (no URL encoding) if &#x60;raw_response&#x60; parameter is set to True or omitted.  | 
+ **body** | **str**| A query parameter string.  | 
  **raw_response** | **bool**| Optional parameter, defines a format of response. Can be set to &#x60;False&#x60; for Select only queries and set to &#x60;True&#x60; or omitted for any type of queries:  | [optional] [default to True]
 
 ### Return type

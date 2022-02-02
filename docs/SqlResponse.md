@@ -1,6 +1,6 @@
 # SqlResponse
 
-Response from sql depends on the query executed.
+List containing Response object from sql that depends on the query executed as its item.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

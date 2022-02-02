@@ -164,7 +164,7 @@ class SearchApi(object):
         # Authentication setting
         auth_settings = []  # noqa: E501
 
-        return self.api_client.call_api(
+        res = self.api_client.call_api(
             '/json/pq/{index}/search', 'POST',
             path_params,
             query_params,
@@ -180,6 +180,8 @@ class SearchApi(object):
             _request_timeout=local_var_params.get('_request_timeout'),
             collection_formats=collection_formats,
             _request_auth=local_var_params.get('_request_auth'))
+        return res
+         
 
     def search(self, search_request, **kwargs):  # noqa: E501
         """Performs a search  # noqa: E501
@@ -299,7 +301,7 @@ class SearchApi(object):
         # Authentication setting
         auth_settings = []  # noqa: E501
 
-        return self.api_client.call_api(
+        res = self.api_client.call_api(
             '/json/search', 'POST',
             path_params,
             query_params,
@@ -315,3 +317,5 @@ class SearchApi(object):
             _request_timeout=local_var_params.get('_request_timeout'),
             collection_formats=collection_formats,
             _request_auth=local_var_params.get('_request_auth'))
+        return res
+         

@@ -153,7 +153,7 @@ class IndexApi(object):
         # Authentication setting
         auth_settings = []  # noqa: E501
 
-        return self.api_client.call_api(
+        res = self.api_client.call_api(
             '/json/bulk', 'POST',
             path_params,
             query_params,
@@ -169,6 +169,8 @@ class IndexApi(object):
             _request_timeout=local_var_params.get('_request_timeout'),
             collection_formats=collection_formats,
             _request_auth=local_var_params.get('_request_auth'))
+        return res
+         
 
     def delete(self, delete_document_request, **kwargs):  # noqa: E501
         """Delete a document in an index  # noqa: E501
@@ -288,7 +290,7 @@ class IndexApi(object):
         # Authentication setting
         auth_settings = []  # noqa: E501
 
-        return self.api_client.call_api(
+        res = self.api_client.call_api(
             '/json/delete', 'POST',
             path_params,
             query_params,
@@ -304,6 +306,8 @@ class IndexApi(object):
             _request_timeout=local_var_params.get('_request_timeout'),
             collection_formats=collection_formats,
             _request_auth=local_var_params.get('_request_auth'))
+        return res
+         
 
     def insert(self, insert_document_request, **kwargs):  # noqa: E501
         """Create a new document in an index  # noqa: E501
@@ -423,7 +427,7 @@ class IndexApi(object):
         # Authentication setting
         auth_settings = []  # noqa: E501
 
-        return self.api_client.call_api(
+        res = self.api_client.call_api(
             '/json/insert', 'POST',
             path_params,
             query_params,
@@ -439,6 +443,8 @@ class IndexApi(object):
             _request_timeout=local_var_params.get('_request_timeout'),
             collection_formats=collection_formats,
             _request_auth=local_var_params.get('_request_auth'))
+        return res
+         
 
     def replace(self, insert_document_request, **kwargs):  # noqa: E501
         """Replace new document in an index  # noqa: E501
@@ -558,7 +564,7 @@ class IndexApi(object):
         # Authentication setting
         auth_settings = []  # noqa: E501
 
-        return self.api_client.call_api(
+        res = self.api_client.call_api(
             '/json/replace', 'POST',
             path_params,
             query_params,
@@ -574,6 +580,8 @@ class IndexApi(object):
             _request_timeout=local_var_params.get('_request_timeout'),
             collection_formats=collection_formats,
             _request_auth=local_var_params.get('_request_auth'))
+        return res
+         
 
     def update(self, update_document_request, **kwargs):  # noqa: E501
         """Update a document in an index  # noqa: E501
@@ -693,7 +701,7 @@ class IndexApi(object):
         # Authentication setting
         auth_settings = []  # noqa: E501
 
-        return self.api_client.call_api(
+        res = self.api_client.call_api(
             '/json/update', 'POST',
             path_params,
             query_params,
@@ -709,3 +717,5 @@ class IndexApi(object):
             _request_timeout=local_var_params.get('_request_timeout'),
             collection_formats=collection_formats,
             _request_auth=local_var_params.get('_request_auth'))
+        return res
+         
