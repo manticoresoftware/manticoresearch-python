@@ -119,7 +119,6 @@ Manticore Search 4.x.
 
 
 
-
 ## Author
 
 info@manticoresearch.com
