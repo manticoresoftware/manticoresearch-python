@@ -114,7 +114,7 @@ Class | Method | HTTP request | Description
 
  All endpoints do not require authorization.
 
-Manticore Search  4.x.
+Manticore Search 4.x.
 
 
 
