@@ -5,14 +5,14 @@ Payload for search operation
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **index** | **str** |  | 
-**query** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}** |  | 
+**query** | **[{str: (bool, date, datetime, dict, float, int, list, str, none_type)}]** |  | 
 **limit** | **int** |  | [optional] 
 **offset** | **int** |  | [optional] 
 **max_matches** | **int** |  | [optional] 
 **sort** | **[{str: (bool, date, datetime, dict, float, int, list, str, none_type)}]** |  | [optional] 
 **aggs** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}** |  | [optional] 
-**expressions** | [**{str: (bool, date, datetime, dict, float, int, list, str, none_type)}**](.md) |  | [optional] 
-**highlight** | [**{str: (bool, date, datetime, dict, float, int, list, str, none_type)}**](.md) |  | [optional] 
+**expressions** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}** |  | [optional] 
+**highlight** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}** |  | [optional] 
 **source** | **[str]** |  | [optional] 
 **profile** | **bool** |  | [optional] 
 

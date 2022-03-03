@@ -140,13 +140,11 @@ with manticoresearch.ApiClient(configuration) as api_client:
     api_instance = manticoresearch.SearchApi(api_client)
     search_request = SearchRequest(
         index="test",
-        query={},
+        query={"match_all":{}},
         limit=1,
         offset=1,
         max_matches=1,
-        sort=[
-            {},
-        ],
+        sort=[{"test":"asc"},"id"],
         aggs={},
         expressions={},
         highlight={},

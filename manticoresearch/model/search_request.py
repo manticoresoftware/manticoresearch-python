@@ -32,7 +32,7 @@ class SearchRequest(object):
     """
     openapi_types = {
         'index': 'str',
-        'query': '{str: (bool, date, datetime, dict, float, int, list, str, none_type)}',
+        'query': '[{str: (bool, date, datetime, dict, float, int, list, str, none_type)}]',
         'limit': 'int',
         'offset': 'int',
         'max_matches': 'int',
@@ -127,7 +127,7 @@ class SearchRequest(object):
 
 
         :return: The query of this SearchRequest.  # noqa: E501
-        :rtype: {str: (bool, date, datetime, dict, float, int, list, str, none_type)}
+        :rtype: [{str: (bool, date, datetime, dict, float, int, list, str, none_type)}]
         """
         return self._query
 
@@ -137,7 +137,7 @@ class SearchRequest(object):
 
 
         :param query: The query of this SearchRequest.  # noqa: E501
-        :type query: {str: (bool, date, datetime, dict, float, int, list, str, none_type)}
+        :type query: [{str: (bool, date, datetime, dict, float, int, list, str, none_type)}]
         """
         if self.local_vars_configuration.client_side_validation and query is None:  # noqa: E501
             raise ValueError("Invalid value for `query`, must not be `None`")  # noqa: E501
