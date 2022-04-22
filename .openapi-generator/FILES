@@ -10,6 +10,7 @@ docs/ErrorResponse.md
 docs/IndexApi.md
 docs/InsertDocumentRequest.md
 docs/PercolateRequest.md
+docs/PercolateRequestQuery.md
 docs/SearchApi.md
 docs/SearchRequest.md
 docs/SearchResponse.md
@@ -36,6 +37,7 @@ manticoresearch/model/delete_response.py
 manticoresearch/model/error_response.py
 manticoresearch/model/insert_document_request.py
 manticoresearch/model/percolate_request.py
+manticoresearch/model/percolate_request_query.py
 manticoresearch/model/search_request.py
 manticoresearch/model/search_response.py
 manticoresearch/model/search_response_hits.py
@@ -58,6 +60,7 @@ test/test_error_response.py
 test/test_index_api.py
 test/test_insert_document_request.py
 test/test_percolate_request.py
+test/test_percolate_request_query.py
 test/test_search_api.py
 test/test_search_request.py
 test/test_search_response.py

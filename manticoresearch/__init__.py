@@ -15,7 +15,7 @@
 
 from __future__ import absolute_import
 
-__version__ = "2.0.0"
+__version__ = "2.1.0"
 
 # import apis into sdk package
 from manticoresearch.api.index_api import IndexApi
@@ -38,6 +38,7 @@ from manticoresearch.model.delete_response import DeleteResponse
 from manticoresearch.model.error_response import ErrorResponse
 from manticoresearch.model.insert_document_request import InsertDocumentRequest
 from manticoresearch.model.percolate_request import PercolateRequest
+from manticoresearch.model.percolate_request_query import PercolateRequestQuery
 from manticoresearch.model.search_request import SearchRequest
 from manticoresearch.model.search_response import SearchResponse
 from manticoresearch.model.search_response_hits import SearchResponseHits

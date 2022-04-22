@@ -57,7 +57,7 @@ configuration = manticoresearch.Configuration(
 with manticoresearch.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = manticoresearch.IndexApi(api_client)
-    body = '{"insert": {"index": "test", "id": 1, "doc": {"title": "Title 1"}}},\n{"insert": {"index": "test", "id": 2, "doc": {"title": "Title 2"}}}' # str | 
+    body = "["'{\"insert\": {\"index\": \"test\", \"id\": 1, \"doc\": {\"title\": \"Title 1\"}}},\\n{\"insert\": {\"index\": \"test\", \"id\": 2, \"doc\": {\"title\": \"Title 2\"}}}'"]" # str | 
 
     try:
         # Bulk index operations

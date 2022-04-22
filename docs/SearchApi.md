@@ -51,7 +51,7 @@ with manticoresearch.ApiClient(configuration) as api_client:
     api_instance = manticoresearch.SearchApi(api_client)
     index = "index_example" # str | Name of the percolate index
 percolate_request = PercolateRequest(
-        query={},
+        query=PercolateRequestQuery(),
     ) # PercolateRequest | 
 
     try:
@@ -140,7 +140,7 @@ with manticoresearch.ApiClient(configuration) as api_client:
     api_instance = manticoresearch.SearchApi(api_client)
     search_request = SearchRequest(
         index="test",
-        query={"match_all":{}},
+        query={},
         limit=1,
         offset=1,
         max_matches=1,
@@ -151,6 +151,7 @@ with manticoresearch.ApiClient(configuration) as api_client:
         source=[
             "source_example",
         ],
+        options={},
         profile=True,
     ) # SearchRequest | 
 

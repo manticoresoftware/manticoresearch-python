@@ -5,7 +5,7 @@ Payload for search operation
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **index** | **str** |  | 
-**query** | **[{str: (bool, date, datetime, dict, float, int, list, str, none_type)}]** |  | 
+**query** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}** |  | 
 **limit** | **int** |  | [optional] 
 **offset** | **int** |  | [optional] 
 **max_matches** | **int** |  | [optional] 
@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **expressions** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}** |  | [optional] 
 **highlight** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}** |  | [optional] 
 **source** | **[str]** |  | [optional] 
+**options** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}** |  | [optional] 
 **profile** | **bool** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

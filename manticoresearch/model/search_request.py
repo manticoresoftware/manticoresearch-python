@@ -32,7 +32,7 @@ class SearchRequest(object):
     """
     openapi_types = {
         'index': 'str',
-        'query': '[{str: (bool, date, datetime, dict, float, int, list, str, none_type)}]',
+        'query': '{str: (bool, date, datetime, dict, float, int, list, str, none_type)}',
         'limit': 'int',
         'offset': 'int',
         'max_matches': 'int',
@@ -41,6 +41,7 @@ class SearchRequest(object):
         'expressions': '{str: (bool, date, datetime, dict, float, int, list, str, none_type)}',
         'highlight': '{str: (bool, date, datetime, dict, float, int, list, str, none_type)}',
         'source': '[str]',
+        'options': '{str: (bool, date, datetime, dict, float, int, list, str, none_type)}',
         'profile': 'bool'
     }
 
@@ -55,10 +56,11 @@ class SearchRequest(object):
         'expressions': 'expressions',
         'highlight': 'highlight',
         'source': '_source',
+        'options': 'options',
         'profile': 'profile'
     }
 
-    def __init__(self, index=None, query=None, limit=None, offset=None, max_matches=None, sort=None, aggs=None, expressions=None, highlight=None, source=None, profile=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, index=None, query=None, limit=None, offset=None, max_matches=None, sort=None, aggs=None, expressions=None, highlight=None, source=None, options=None, profile=None, local_vars_configuration=None):  # noqa: E501
         """SearchRequest - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
@@ -74,6 +76,7 @@ class SearchRequest(object):
         self._expressions = None
         self._highlight = None
         self._source = None
+        self._options = None
         self._profile = None
         self.discriminator = None
 
@@ -95,6 +98,8 @@ class SearchRequest(object):
             self.highlight = highlight
         if source is not None:
             self.source = source
+        if options is not None:
+            self.options = options
         if profile is not None:
             self.profile = profile
 
@@ -127,7 +132,7 @@ class SearchRequest(object):
 
 
         :return: The query of this SearchRequest.  # noqa: E501
-        :rtype: [{str: (bool, date, datetime, dict, float, int, list, str, none_type)}]
+        :rtype: {str: (bool, date, datetime, dict, float, int, list, str, none_type)}
         """
         return self._query
 
@@ -137,7 +142,7 @@ class SearchRequest(object):
 
 
         :param query: The query of this SearchRequest.  # noqa: E501
-        :type query: [{str: (bool, date, datetime, dict, float, int, list, str, none_type)}]
+        :type query: {str: (bool, date, datetime, dict, float, int, list, str, none_type)}
         """
         if self.local_vars_configuration.client_side_validation and query is None:  # noqa: E501
             raise ValueError("Invalid value for `query`, must not be `None`")  # noqa: E501
@@ -311,6 +316,27 @@ class SearchRequest(object):
         """
 
         self._source = source
+
+    @property
+    def options(self):
+        """Gets the options of this SearchRequest.  # noqa: E501
+
+
+        :return: The options of this SearchRequest.  # noqa: E501
+        :rtype: {str: (bool, date, datetime, dict, float, int, list, str, none_type)}
+        """
+        return self._options
+
+    @options.setter
+    def options(self, options):
+        """Sets the options of this SearchRequest.
+
+
+        :param options: The options of this SearchRequest.  # noqa: E501
+        :type options: {str: (bool, date, datetime, dict, float, int, list, str, none_type)}
+        """
+
+        self._options = options
 
     @property
     def profile(self):

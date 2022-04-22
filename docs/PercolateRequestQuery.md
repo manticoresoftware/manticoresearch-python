@@ -1,11 +1,9 @@
-# SearchResponseHits
+# PercolateRequestQuery
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**max_score** | **int** |  | [optional] 
-**total** | **int** |  | [optional] 
-**hits** | **[{str: (bool, date, datetime, dict, float, int, list, str, none_type)}]** |  | [optional] 
+**percolate** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

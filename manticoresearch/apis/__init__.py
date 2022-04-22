@@ -6,7 +6,7 @@
 # raise a `RecursionError`.
 # In order to avoid this, import only the API that you directly need like:
 #
-#   from .api.index_api import IndexApi
+#   from manticoresearch.api.index_api import IndexApi
 #
 # or import this package, but before doing it, use:
 #

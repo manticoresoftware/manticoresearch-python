@@ -44,7 +44,7 @@ class TestManualApi(ParametrizedTestCase):
         #
         #
         print(res)
-        self.assertEqual(res['error'],'')
+        self.assertEqual(res[0]['error'],'')
         indexApi = api = manticoresearch.IndexApi(client)
         # example insert request
         indexApi.insert({"index" : "products", "id" : 1, "doc" : {"title" : "Crossbody Bag with Tassel", "price" : 19.85}})
@@ -157,7 +157,7 @@ class TestManualApi(ParametrizedTestCase):
         pprint(res)
         
         #
-        res = utilsApi.sql('drop table forum')
+        res = utilsApi.sql('drop table id exists forum')
         utilsApi.sql('create table forum(title text, content text, author_id int, forum_id int, post_date timestamp) min_infix_len=\'3\'')
         # example filtered query request
         res = searchApi.search({"index":"forum","query":{"match_all":{},"bool":{"must":[{"equals":{"author_id":123}},{"in":{"forum_id":[1,3,7]}}]}},"sort":[{"post_date":"desc"}]})
@@ -178,7 +178,10 @@ class TestManualApi(ParametrizedTestCase):
         
         res = indexApi.insert({"index":"products","id":1,"doc":{"title":"first","product_codes":[4,2,1,3]}})
         pprint(res)
+        res = indexApi.insert({"index":"products","id":2,"doc":{"title":"second","product_codes":[5,6,8,7]}})
         res = searchApi.search({"index":"products","query":{"match_all":{}}})
+        pprint(res)
+        res = searchApi.search({"index":"products","query":{"match_all":{}}, "options":{"max_matches":1}})
         pprint(res)
         utilsApi.sql('DROP TABLE products')
         

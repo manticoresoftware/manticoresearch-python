@@ -2,6 +2,8 @@
 Low-level client for Manticore Search.
 
 
+❗ WARNING: this is a development version of the client. The latest release's readme is https://github.com/manticoresoftware/manticoresearch-python/tree/1.0.6
+
 ## Requirements.
 
 Python 2.7 and 3.4+.
@@ -60,7 +62,7 @@ configuration = manticoresearch.Configuration(
 with manticoresearch.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = manticoresearch.IndexApi(api_client)
-    body = '{"insert": {"index": "test", "id": 1, "doc": {"title": "Title 1"}}},\n{"insert": {"index": "test", "id": 2, "doc": {"title": "Title 2"}}}' # str | 
+    body = "["'{\"insert\": {\"index\": \"test\", \"id\": 1, \"doc\": {\"title\": \"Title 1\"}}},\\n{\"insert\": {\"index\": \"test\", \"id\": 2, \"doc\": {\"title\": \"Title 2\"}}}'"]" # str | 
 
     try:
         # Bulk index operations
@@ -102,6 +104,7 @@ Class | Method | HTTP request | Description
  - [ErrorResponse](docs/ErrorResponse.md)
  - [InsertDocumentRequest](docs/InsertDocumentRequest.md)
  - [PercolateRequest](docs/PercolateRequest.md)
+ - [PercolateRequestQuery](docs/PercolateRequestQuery.md)
  - [SearchRequest](docs/SearchRequest.md)
  - [SearchResponse](docs/SearchResponse.md)
  - [SearchResponseHits](docs/SearchResponseHits.md)
