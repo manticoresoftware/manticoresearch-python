@@ -33,16 +33,18 @@ class SearchResponseHits(object):
     openapi_types = {
         'max_score': 'int',
         'total': 'int',
+        'total_relation': 'str',
         'hits': '[{str: (bool, date, datetime, dict, float, int, list, str, none_type)}]'
     }
 
     attribute_map = {
         'max_score': 'max_score',
         'total': 'total',
+        'total_relation': 'total_relation',
         'hits': 'hits'
     }
 
-    def __init__(self, max_score=None, total=None, hits=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, max_score=None, total=None, total_relation=None, hits=None, local_vars_configuration=None):  # noqa: E501
         """SearchResponseHits - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
@@ -50,6 +52,7 @@ class SearchResponseHits(object):
 
         self._max_score = None
         self._total = None
+        self._total_relation = None
         self._hits = None
         self.discriminator = None
 
@@ -57,6 +60,8 @@ class SearchResponseHits(object):
             self.max_score = max_score
         if total is not None:
             self.total = total
+        if total_relation is not None:
+            self.total_relation = total_relation
         if hits is not None:
             self.hits = hits
 
@@ -101,6 +106,27 @@ class SearchResponseHits(object):
         """
 
         self._total = total
+
+    @property
+    def total_relation(self):
+        """Gets the total_relation of this SearchResponseHits.  # noqa: E501
+
+
+        :return: The total_relation of this SearchResponseHits.  # noqa: E501
+        :rtype: str
+        """
+        return self._total_relation
+
+    @total_relation.setter
+    def total_relation(self, total_relation):
+        """Sets the total_relation of this SearchResponseHits.
+
+
+        :param total_relation: The total_relation of this SearchResponseHits.  # noqa: E501
+        :type total_relation: str
+        """
+
+        self._total_relation = total_relation
 
     @property
     def hits(self):
