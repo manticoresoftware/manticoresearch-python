@@ -125,10 +125,6 @@ Class | Method | HTTP request | Description
 
  All endpoints do not require authorization.
 
-Manticore Search 4.x.
-
-
-
 ## Author
 
 info@manticoresearch.com
