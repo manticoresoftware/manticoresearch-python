@@ -38,7 +38,7 @@ configuration = manticoresearch.Configuration(
 with manticoresearch.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = manticoresearch.UtilsApi(api_client)
-    body = "["SHOW TABLES"]" # str | A query parameter string. 
+    body = "SHOW TABLES" # str | A query parameter string. 
 raw_response = True # bool | Optional parameter, defines a format of response. Can be set to `False` for Select only queries and set to `True` or omitted for any type of queries:  (optional) (default to True)
 
     try:
