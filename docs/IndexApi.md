@@ -127,6 +127,7 @@ Responds with an object telling how many documents got deleted:
 from __future__ import print_function
 import time
 import manticoresearch
+from manticoresearch.model import DeleteDocumentRequest
 from manticoresearch.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to http://127.0.0.1:9308
@@ -213,6 +214,7 @@ It responds with an object in format:
 from __future__ import print_function
 import time
 import manticoresearch
+from manticoresearch.model import InsertDocumentRequest
 from manticoresearch.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to http://127.0.0.1:9308
@@ -287,6 +289,7 @@ Responds with an object in format: <br/>
 from __future__ import print_function
 import time
 import manticoresearch
+from manticoresearch.model import InsertDocumentRequest
 from manticoresearch.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to http://127.0.0.1:9308
@@ -374,6 +377,7 @@ Responds with an object that tells how many documents where updated in format:
 from __future__ import print_function
 import time
 import manticoresearch
+from manticoresearch.model import UpdateDocumentRequest
 from manticoresearch.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to http://127.0.0.1:9308
