@@ -41,11 +41,12 @@ The method expects a raw string as the batch in NDJSON.
 ### Example
 
 ```python
-from __future__ import print_function
-import time
 import manticoresearch
-from manticoresearch.rest import ApiException
+from manticoresearch.api import index_api
+from manticoresearch.model.bulk_response import BulkResponse
+from manticoresearch.model.error_response import ErrorResponse
 from pprint import pprint
+
 # Defining the host is optional and defaults to http://127.0.0.1:9308
 # See configuration.py for a list of all supported configuration parameters.
 configuration = manticoresearch.Configuration(
@@ -56,17 +57,17 @@ configuration = manticoresearch.Configuration(
 # Enter a context with an instance of the API client
 with manticoresearch.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = manticoresearch.IndexApi(api_client)
+    api_instance = index_api.IndexApi(api_client)
     body = "["'{\"insert\": {\"index\": \"test\", \"id\": 1, \"doc\": {\"title\": \"Title 1\"}}},\\n{\"insert\": {\"index\": \"test\", \"id\": 2, \"doc\": {\"title\": \"Title 2\"}}}'"]" # str | 
 
+    # example passing only required values which don't have defaults set
     try:
         # Bulk index operations
         api_response = api_instance.bulk(body)
         pprint(api_response)
-    except ApiException as e:
+    except manticoresearch.ApiException as e:
         print("Exception when calling IndexApi->bulk: %s\n" % e)
 ```
-
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -124,11 +125,13 @@ Responds with an object telling how many documents got deleted:
 ### Example
 
 ```python
-from __future__ import print_function
-import time
 import manticoresearch
-from manticoresearch.rest import ApiException
+from manticoresearch.api import index_api
+from manticoresearch.model.delete_response import DeleteResponse
+from manticoresearch.model.error_response import ErrorResponse
+from manticoresearch.model.delete_document_request import DeleteDocumentRequest
 from pprint import pprint
+
 # Defining the host is optional and defaults to http://127.0.0.1:9308
 # See configuration.py for a list of all supported configuration parameters.
 configuration = manticoresearch.Configuration(
@@ -139,7 +142,7 @@ configuration = manticoresearch.Configuration(
 # Enter a context with an instance of the API client
 with manticoresearch.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = manticoresearch.IndexApi(api_client)
+    api_instance = index_api.IndexApi(api_client)
     delete_document_request = DeleteDocumentRequest(
         index="index_example",
         cluster="cluster_example",
@@ -147,14 +150,14 @@ with manticoresearch.ApiClient(configuration) as api_client:
         query={},
     ) # DeleteDocumentRequest | 
 
+    # example passing only required values which don't have defaults set
     try:
         # Delete a document in an index
         api_response = api_instance.delete(delete_document_request)
         pprint(api_response)
-    except ApiException as e:
+    except manticoresearch.ApiException as e:
         print("Exception when calling IndexApi->delete: %s\n" % e)
 ```
-
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -210,11 +213,13 @@ It responds with an object in format:
 ### Example
 
 ```python
-from __future__ import print_function
-import time
 import manticoresearch
-from manticoresearch.rest import ApiException
+from manticoresearch.api import index_api
+from manticoresearch.model.insert_document_request import InsertDocumentRequest
+from manticoresearch.model.error_response import ErrorResponse
+from manticoresearch.model.success_response import SuccessResponse
 from pprint import pprint
+
 # Defining the host is optional and defaults to http://127.0.0.1:9308
 # See configuration.py for a list of all supported configuration parameters.
 configuration = manticoresearch.Configuration(
@@ -225,7 +230,7 @@ configuration = manticoresearch.Configuration(
 # Enter a context with an instance of the API client
 with manticoresearch.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = manticoresearch.IndexApi(api_client)
+    api_instance = index_api.IndexApi(api_client)
     insert_document_request = InsertDocumentRequest(
         index="index_example",
         cluster="cluster_example",
@@ -233,14 +238,14 @@ with manticoresearch.ApiClient(configuration) as api_client:
         doc={},
     ) # InsertDocumentRequest | 
 
+    # example passing only required values which don't have defaults set
     try:
         # Create a new document in an index
         api_response = api_instance.insert(insert_document_request)
         pprint(api_response)
-    except ApiException as e:
+    except manticoresearch.ApiException as e:
         print("Exception when calling IndexApi->insert: %s\n" % e)
 ```
-
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -284,11 +289,13 @@ Responds with an object in format: <br/>
 ### Example
 
 ```python
-from __future__ import print_function
-import time
 import manticoresearch
-from manticoresearch.rest import ApiException
+from manticoresearch.api import index_api
+from manticoresearch.model.insert_document_request import InsertDocumentRequest
+from manticoresearch.model.error_response import ErrorResponse
+from manticoresearch.model.success_response import SuccessResponse
 from pprint import pprint
+
 # Defining the host is optional and defaults to http://127.0.0.1:9308
 # See configuration.py for a list of all supported configuration parameters.
 configuration = manticoresearch.Configuration(
@@ -299,7 +306,7 @@ configuration = manticoresearch.Configuration(
 # Enter a context with an instance of the API client
 with manticoresearch.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = manticoresearch.IndexApi(api_client)
+    api_instance = index_api.IndexApi(api_client)
     insert_document_request = InsertDocumentRequest(
         index="index_example",
         cluster="cluster_example",
@@ -307,14 +314,14 @@ with manticoresearch.ApiClient(configuration) as api_client:
         doc={},
     ) # InsertDocumentRequest | 
 
+    # example passing only required values which don't have defaults set
     try:
         # Replace new document in an index
         api_response = api_instance.replace(insert_document_request)
         pprint(api_response)
-    except ApiException as e:
+    except manticoresearch.ApiException as e:
         print("Exception when calling IndexApi->replace: %s\n" % e)
 ```
-
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -371,11 +378,13 @@ Responds with an object that tells how many documents where updated in format:
 ### Example
 
 ```python
-from __future__ import print_function
-import time
 import manticoresearch
-from manticoresearch.rest import ApiException
+from manticoresearch.api import index_api
+from manticoresearch.model.error_response import ErrorResponse
+from manticoresearch.model.update_response import UpdateResponse
+from manticoresearch.model.update_document_request import UpdateDocumentRequest
 from pprint import pprint
+
 # Defining the host is optional and defaults to http://127.0.0.1:9308
 # See configuration.py for a list of all supported configuration parameters.
 configuration = manticoresearch.Configuration(
@@ -386,7 +395,7 @@ configuration = manticoresearch.Configuration(
 # Enter a context with an instance of the API client
 with manticoresearch.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = manticoresearch.IndexApi(api_client)
+    api_instance = index_api.IndexApi(api_client)
     update_document_request = UpdateDocumentRequest(
         index="index_example",
         doc={},
@@ -394,14 +403,14 @@ with manticoresearch.ApiClient(configuration) as api_client:
         query={},
     ) # UpdateDocumentRequest | 
 
+    # example passing only required values which don't have defaults set
     try:
         # Update a document in an index
         api_response = api_instance.update(update_document_request)
         pprint(api_response)
-    except ApiException as e:
+    except manticoresearch.ApiException as e:
         print("Exception when calling IndexApi->update: %s\n" % e)
 ```
-
 ### Parameters
 
 Name | Type | Description  | Notes

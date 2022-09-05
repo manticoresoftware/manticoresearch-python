@@ -33,11 +33,13 @@ Responds with an object with matched stored queries:
 ### Example
 
 ```python
-from __future__ import print_function
-import time
 import manticoresearch
-from manticoresearch.rest import ApiException
+from manticoresearch.api import search_api
+from manticoresearch.model.error_response import ErrorResponse
+from manticoresearch.model.search_response import SearchResponse
+from manticoresearch.model.percolate_request import PercolateRequest
 from pprint import pprint
+
 # Defining the host is optional and defaults to http://127.0.0.1:9308
 # See configuration.py for a list of all supported configuration parameters.
 configuration = manticoresearch.Configuration(
@@ -48,20 +50,20 @@ configuration = manticoresearch.Configuration(
 # Enter a context with an instance of the API client
 with manticoresearch.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = manticoresearch.SearchApi(api_client)
+    api_instance = search_api.SearchApi(api_client)
     index = "index_example" # str | Name of the percolate index
-percolate_request = PercolateRequest(
+    percolate_request = PercolateRequest(
         query=PercolateRequestQuery(),
     ) # PercolateRequest | 
 
+    # example passing only required values which don't have defaults set
     try:
         # Perform reverse search on a percolate index
-        api_response = api_instance.percolate(index,percolate_request)
+        api_response = api_instance.percolate(index, percolate_request)
         pprint(api_response)
-    except ApiException as e:
+    except manticoresearch.ApiException as e:
         print("Exception when calling SearchApi->percolate: %s\n" % e)
 ```
-
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -122,11 +124,13 @@ For more information about the match query syntax, additional paramaters that ca
 ### Example
 
 ```python
-from __future__ import print_function
-import time
 import manticoresearch
-from manticoresearch.rest import ApiException
+from manticoresearch.api import search_api
+from manticoresearch.model.search_request import SearchRequest
+from manticoresearch.model.error_response import ErrorResponse
+from manticoresearch.model.search_response import SearchResponse
 from pprint import pprint
+
 # Defining the host is optional and defaults to http://127.0.0.1:9308
 # See configuration.py for a list of all supported configuration parameters.
 configuration = manticoresearch.Configuration(
@@ -137,7 +141,7 @@ configuration = manticoresearch.Configuration(
 # Enter a context with an instance of the API client
 with manticoresearch.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = manticoresearch.SearchApi(api_client)
+    api_instance = search_api.SearchApi(api_client)
     search_request = SearchRequest(
         index="test",
         query={},
@@ -155,14 +159,14 @@ with manticoresearch.ApiClient(configuration) as api_client:
         profile=True,
     ) # SearchRequest | 
 
+    # example passing only required values which don't have defaults set
     try:
         # Performs a search
         api_response = api_instance.search(search_request)
         pprint(api_response)
-    except ApiException as e:
+    except manticoresearch.ApiException as e:
         print("Exception when calling SearchApi->search: %s\n" % e)
 ```
-
 ### Parameters
 
 Name | Type | Description  | Notes

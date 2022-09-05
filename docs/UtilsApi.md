@@ -22,11 +22,12 @@ The response object depends on the query executed. In select mode the response h
 ### Example
 
 ```python
-from __future__ import print_function
-import time
 import manticoresearch
-from manticoresearch.rest import ApiException
+from manticoresearch.api import utils_api
+from manticoresearch.model.error_response import ErrorResponse
+from manticoresearch.model.sql_response import SqlResponse
 from pprint import pprint
+
 # Defining the host is optional and defaults to http://127.0.0.1:9308
 # See configuration.py for a list of all supported configuration parameters.
 configuration = manticoresearch.Configuration(
@@ -37,18 +38,27 @@ configuration = manticoresearch.Configuration(
 # Enter a context with an instance of the API client
 with manticoresearch.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = manticoresearch.UtilsApi(api_client)
+    api_instance = utils_api.UtilsApi(api_client)
     body = "SHOW TABLES" # str | A query parameter string. 
-raw_response = True # bool | Optional parameter, defines a format of response. Can be set to `False` for Select only queries and set to `True` or omitted for any type of queries:  (optional) (default to True)
+    raw_response = True # bool | Optional parameter, defines a format of response. Can be set to `False` for Select only queries and set to `True` or omitted for any type of queries:  (optional) if omitted the server will use the default value of True
 
+    # example passing only required values which don't have defaults set
     try:
         # Perform SQL requests
-        api_response = api_instance.sql(body,raw_response=True)
+        api_response = api_instance.sql(body)
         pprint(api_response)
-    except ApiException as e:
+    except manticoresearch.ApiException as e:
+        print("Exception when calling UtilsApi->sql: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Perform SQL requests
+        api_response = api_instance.sql(body, raw_response=raw_response)
+        pprint(api_response)
+    except manticoresearch.ApiException as e:
         print("Exception when calling UtilsApi->sql: %s\n" % e)
 ```
-
 ### Parameters
 
 Name | Type | Description  | Notes
