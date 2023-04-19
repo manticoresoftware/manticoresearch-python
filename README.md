@@ -2,7 +2,7 @@
 Low-level client for Manticore Search.
 
 
-❗ WARNING: this is a development version of the client. The latest release's readme is https://github.com/manticoresoftware/manticoresearch-python/tree/2.2.0
+❗ WARNING: this is a development version of the client. The latest release's readme is https://github.com/manticoresoftware/manticoresearch-python/tree/2.3.0
 
 ## Requirements.
 
@@ -105,16 +105,45 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [Aggregation](docs/Aggregation.md)
+ - [AttrFilter](docs/AttrFilter.md)
+ - [BoolFilter](docs/BoolFilter.md)
  - [BulkResponse](docs/BulkResponse.md)
  - [DeleteDocumentRequest](docs/DeleteDocumentRequest.md)
  - [DeleteResponse](docs/DeleteResponse.md)
+ - [EqualsFilter](docs/EqualsFilter.md)
  - [ErrorResponse](docs/ErrorResponse.md)
+ - [Facet](docs/Facet.md)
+ - [FilterBoolean](docs/FilterBoolean.md)
+ - [FilterNumber](docs/FilterNumber.md)
+ - [FilterString](docs/FilterString.md)
+ - [FulltextFilter](docs/FulltextFilter.md)
+ - [GeoDistanceFilter](docs/GeoDistanceFilter.md)
+ - [GeoDistanceFilterLocationAnchor](docs/GeoDistanceFilterLocationAnchor.md)
+ - [Highlight](docs/Highlight.md)
+ - [HighlightField](docs/HighlightField.md)
+ - [InFilter](docs/InFilter.md)
  - [InsertDocumentRequest](docs/InsertDocumentRequest.md)
+ - [MatchFilter](docs/MatchFilter.md)
+ - [MatchOp](docs/MatchOp.md)
+ - [MatchOpFilter](docs/MatchOpFilter.md)
+ - [MatchPhraseFilter](docs/MatchPhraseFilter.md)
+ - [NotFilterBoolean](docs/NotFilterBoolean.md)
+ - [NotFilterNumber](docs/NotFilterNumber.md)
+ - [NotFilterString](docs/NotFilterString.md)
+ - [Option](docs/Option.md)
  - [PercolateRequest](docs/PercolateRequest.md)
  - [PercolateRequestQuery](docs/PercolateRequestQuery.md)
+ - [QueryFilter](docs/QueryFilter.md)
+ - [RangeFilter](docs/RangeFilter.md)
  - [SearchRequest](docs/SearchRequest.md)
  - [SearchResponse](docs/SearchResponse.md)
  - [SearchResponseHits](docs/SearchResponseHits.md)
+ - [SortMVA](docs/SortMVA.md)
+ - [SortMultiple](docs/SortMultiple.md)
+ - [SortOrder](docs/SortOrder.md)
+ - [SourceByRules](docs/SourceByRules.md)
+ - [SourceMultiple](docs/SourceMultiple.md)
  - [SqlResponse](docs/SqlResponse.md)
  - [SuccessResponse](docs/SuccessResponse.md)
  - [UpdateDocumentRequest](docs/UpdateDocumentRequest.md)
