@@ -10,6 +10,7 @@ import unittest
 import json
 import manticoresearch
 from manticoresearch.api.index_api import IndexApi  # noqa: E501
+from manticoresearch.model import *
 from manticoresearch.rest import ApiException
 from parametrized_test_case import ParametrizedTestCase
 from urllib.parse import quote
@@ -28,6 +29,107 @@ class TestManualApi(ParametrizedTestCase):
         indexApi = manticoresearch.IndexApi(client)
         utilsApi = manticoresearch.UtilsApi(client)
         searchApi = manticoresearch.SearchApi(client)
+        
+        utilsApi.sql('DROP TABLE IF EXISTS movies')
+        res = utilsApi.sql('CREATE TABLE IF NOT EXISTS movies (title text, plot text, year integer, rating float, code multi)')
+        
+        docs = [ \
+            {"insert": {"index" : "movies", "id" : 1, "doc" : {"title" : "Star Trek 2: Nemesis", "plot": "The Enterprise is diverted to the Romulan homeworld Romulus, supposedly because they want to negotiate a peace treaty. Captain Picard and his crew discover a serious threat to the Federation once Praetor Shinzon plans to attack Earth.", "year": 2002, "rating": 6.4, "code": [1,2,3]}}}, \
+            {"insert": {"index" : "movies", "id" : 2, "doc" : {"title" : "Star Trek 1: Nemesis", "plot": "The Enterprise is diverted to the Romulan homeworld Romulus, supposedly because they want to negotiate a peace treaty. Captain Picard and his crew discover a serious threat to the Federation once Praetor Shinzon plans to attack Earth.", "year": 2001, "rating": 6.5, "code": [1,12,3]}}},
+            {"insert": {"index" : "movies", "id" : 3, "doc" : {"title" : "Star Trek 3: Nemesis", "plot": "The Enterprise is diverted to the Romulan homeworld Romulus, supposedly because they want to negotiate a peace treaty. Captain Picard and his crew discover a serious threat to the Federation once Praetor Shinzon plans to attack Earth.", "year": 2003, "rating": 6.6, "code": [11,2,3]}}}, \
+            {"insert": {"index" : "movies", "id" : 4, "doc" : {"title" : "Star Trek 4: Nemesis", "plot": "The Enterprise is diverted to the Romulan homeworld Romulus, supposedly because they want to negotiate a peace treaty. Captain Picard and his crew discover a serious threat to the Federation once Praetor Shinzon plans to attack Earth.", "year": 2003, "rating": 6.5, "code": [1,2,4]}}},
+        ]
+        indexApi.bulk('\n'.join(map(json.dumps,docs)))
+        
+        search_request = SearchRequest(
+            index="movies",
+            query={"match_all": {}}
+        ) 
+        
+        res = searchApi.search(search_request)
+        pprint(res)
+        
+        search_request.index = 'movies'
+        search_request.limit = 10
+        search_request.track_scores = True
+        search_request.options = {'cutoff': 5}
+        search_request.options['ranker'] = 'bm25'
+        search_request.source = 'title'
+        
+        
+        search_request.source = SourceByRules()
+        search_request.source.includes = ['title', 'year']
+        search_request.source.excludes = ['code']
+        #
+        search_request.sort = ['year']
+        sort2 = manticoresearch.model.SortOrder('rating', 'asc')
+        sort3 = manticoresearch.model.SortMVA('code', 'desc', 'max')
+        search_request.sort += [sort2,sort3]
+        #
+        expr = {'expr': 'min(year,2900)'}
+        search_request.expressions = [expr]
+        search_request.expressions += [ {'expr2': 'max(year,2100)'} ]
+        search_request.source.includes += ['expr2']
+        #
+        agg1 = Aggregation('agg1', 'year', 10)
+        search_request.aggs = [agg1]
+        search_request.aggs += [ Aggregation('agg2', 'rating') ]
+        #
+        highlight = manticoresearch.model.Highlight()
+        highlight.fieldnames = ['title']
+        highlight.post_tags = '</post_tag>'
+        highlight.encoder = 'default'
+        highlight.snippet_boundary = 'sentence'
+        search_request.highlight = highlight 
+        #
+        highlightField = HighlightField('title')
+        highlightField2 = HighlightField('plot', 5, 10)
+        highlight.fields = [highlightField, highlightField2]
+        search_request.highlight = highlight
+        #
+        search_request.fulltext_filter = QueryFilter('Star Trek 2')
+        search_request.fulltext_filter = MatchFilter('Nemesis', 'title')
+        search_request.fulltext_filter = MatchPhraseFilter('Star Trek 2', 'title')
+        search_request.fulltext_filter = MatchOpFilter('Enterprise test', 'title,plot', 'or') 
+        #
+        search_request.attr_filter = EqualsFilter('year', 2001)
+        #
+        inFilter = InFilter('year', [2001, 2002])
+        inFilter.values += [10,11]
+        search_request.attr_filter = inFilter
+        #
+        rangeFilter = RangeFilter('year', lte = 2002)
+        rangeFilter.gte = 1000
+        search_request.attr_filter = rangeFilter
+        
+        rangeFilter.gt = 999
+        rangeFilter.lt = 2002
+        search_request.attr_filter = rangeFilter
+        #
+        # geoFilter = GeoDistanceFilter(location_anchor={'lat':10,'lon':20}, location_source='field1,field2')
+        # geoFilter.location_source='field3,field4'
+        # geoFilter.distance_type='adaptive'
+        # geoFilter.distance='100 km'
+        # search_request.attr_filter = geoFilter
+        #
+        boolFilter = BoolFilter()
+        boolFilter.must = [ EqualsFilter('year', 2001) ]
+        boolFilter.must += [ RangeFilter('rating', lte = 20) ]
+        search_request.attr_filter = boolFilter
+        #
+        boolFilter.must_not = [ EqualsFilter('year', 2001) ]
+        #
+        
+        fulltext_filter = MatchFilter('Star', 'title')
+        nestedBoolFilter = BoolFilter()
+        nestedBoolFilter.should = [EqualsFilter('rating', 6.5), fulltext_filter]
+        boolFilter.must = [nestedBoolFilter]
+        #
+        search_request.attr_filter = boolFilter
+    
+        res = searchApi.search(search_request)
+        pprint(res)
+        
         utilsApi.sql('SHOW THREADS')
         utilsApi.sql('DROP TABLE IF EXISTS products')
         # example create_example request
@@ -157,7 +259,7 @@ class TestManualApi(ParametrizedTestCase):
         pprint(res)
         
         #
-        res = utilsApi.sql('drop table id exists forum')
+        res = utilsApi.sql('drop table if exists forum')
         utilsApi.sql('create table forum(title text, content text, author_id int, forum_id int, post_date timestamp) min_infix_len=\'3\'')
         # example filtered query request
         res = searchApi.search({"index":"forum","query":{"match_all":{},"bool":{"must":[{"equals":{"author_id":123}},{"in":{"forum_id":[1,3,7]}}]}},"sort":[{"post_date":"desc"}]})

@@ -39,8 +39,9 @@ configuration = manticoresearch.Configuration(
 with manticoresearch.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = utils_api.UtilsApi(api_client)
-    body = "SHOW TABLES" # str | A query parameter string. 
-    raw_response = True # bool | Optional parameter, defines a format of response. Can be set to `False` for Select only queries and set to `True` or omitted for any type of queries:  (optional) if omitted the server will use the default value of True
+
+    body = "SHOW TABLES" # str  |( A query parameter string.   
+    raw_response = True # bool  | Optional parameter, defines a format of response. Can be set to `False` for Select only queries and set to `True` or omitted for any type of queries:  (optional) if omitted the server will use the default value of True 
 
     # example passing only required values which don't have defaults set
     try:
@@ -58,7 +59,11 @@ with manticoresearch.ApiClient(configuration) as api_client:
         pprint(api_response)
     except manticoresearch.ApiException as e:
         print("Exception when calling UtilsApi->sql: %s\n" % e)
+
+
 ```
+
+
 ### Parameters
 
 Name | Type | Description  | Notes
