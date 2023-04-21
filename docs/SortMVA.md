@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **order** | **str** |  | 
 **mode** | **str** |  | 
 
-[[Using in search requests]](SearchApi.md#SortMVA)
+[[Using in search requests]](SearchRequest.md#SortMVA)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

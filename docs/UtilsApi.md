@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**sql**](UtilsApi.md#sql) | **POST** /sql | Perform SQL requests
 
 
-# **sql**
+## **sql**
 > SqlResponse sql(body,raw_response=True)
 
 Perform SQL requests
@@ -62,7 +62,6 @@ with manticoresearch.ApiClient(configuration) as api_client:
 
 
 ```
-
 
 ### Parameters
 

@@ -154,7 +154,7 @@ class IndexApi(object):
         auth_settings = []  # noqa: E501
 
         res = self.api_client.call_api(
-            '/json/bulk', 'POST',
+            '/bulk', 'POST',
             path_params,
             query_params,
             header_params,
@@ -291,7 +291,7 @@ class IndexApi(object):
         auth_settings = []  # noqa: E501
 
         res = self.api_client.call_api(
-            '/json/delete', 'POST',
+            '/delete', 'POST',
             path_params,
             query_params,
             header_params,
@@ -428,7 +428,7 @@ class IndexApi(object):
         auth_settings = []  # noqa: E501
 
         res = self.api_client.call_api(
-            '/json/insert', 'POST',
+            '/insert', 'POST',
             path_params,
             query_params,
             header_params,
@@ -565,7 +565,7 @@ class IndexApi(object):
         auth_settings = []  # noqa: E501
 
         res = self.api_client.call_api(
-            '/json/replace', 'POST',
+            '/replace', 'POST',
             path_params,
             query_params,
             header_params,
@@ -702,7 +702,7 @@ class IndexApi(object):
         auth_settings = []  # noqa: E501
 
         res = self.api_client.call_api(
-            '/json/update', 'POST',
+            '/update', 'POST',
             path_params,
             query_params,
             header_params,

@@ -165,7 +165,7 @@ class SearchApi(object):
         auth_settings = []  # noqa: E501
 
         res = self.api_client.call_api(
-            '/json/pq/{index}/search', 'POST',
+            '/pq/{index}/search', 'POST',
             path_params,
             query_params,
             header_params,
@@ -186,7 +186,7 @@ class SearchApi(object):
     def search(self, search_request, **kwargs):  # noqa: E501
         """Performs a search  # noqa: E501
 
-         Expects an object with mandatory properties: * the index name * the match query object Example :    ```   {     'index':'movies',     'query':     {       'bool':       {         'must':[{'query_string':' movie'}]       }     },     'script_fields':     {       'myexpr':       {         'script':{'inline':'IF(rating>8,1,0)'       }     },     'sort':     [       {'myexpr':'desc'},       {'_score':'desc'}     ],     'profile':true   }   ```  It responds with an object with: - an array with hits (matched documents) found - if the query is timed out - time of execution - if profiling is enabled, an additional array with profiling information attached     ```   {     'took':10,     'timed_out':false,     'hits':     {       'total':2,       'hits':       [         {'_id':'1','_score':1,'_source':{'gid':11}},         {'_id':'2','_score':1,'_source':{'gid':12}}       ]     }   }   ```  Alternatively, you can use auxiliary query objects to build your search queries as it's shown in the example below. For more information about the match query syntax and additional parameters that can be added to  request and response, please check: https://manual.manticoresearch.com/Searching/Full_text_matching/Basic_usage#HTTP.   # noqa: E501
+         Expects an object with mandatory properties: * the index name * the match query object Example :    ```   {     'index':'movies',     'query':     {       'bool':       {         'must':[{'query_string':' movie'}]       }     },     'script_fields':     {       'myexpr':       {         'script':{'inline':'IF(rating>8,1,0)'       }     },     'sort':     [       {'myexpr':'desc'},       {'_score':'desc'}     ],     'profile':true   }   ```  Alternatively, you can use auxiliary objects to build your search query. For details, see the documentation on [**SearchRequest**](SearchRequest.md)  It responds with an object with: - an array with hits (matched documents) found - if the query is timed out - time of execution - if profiling is enabled, an additional array with profiling information attached     ```   {     'took':10,     'timed_out':false,     'hits':     {       'total':2,       'hits':       [         {'_id':'1','_score':1,'_source':{'gid':11}},         {'_id':'2','_score':1,'_source':{'gid':12}}       ]     }   }   ```  For more information about the match query syntax and additional parameters that can be added to request and response, please check: https://manual.manticoresearch.com/Searching/Full_text_matching/Basic_usage#HTTP-JSON.   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -216,7 +216,7 @@ class SearchApi(object):
     def search_with_http_info(self, search_request, **kwargs):  # noqa: E501
         """Performs a search  # noqa: E501
 
-         Expects an object with mandatory properties: * the index name * the match query object Example :    ```   {     'index':'movies',     'query':     {       'bool':       {         'must':[{'query_string':' movie'}]       }     },     'script_fields':     {       'myexpr':       {         'script':{'inline':'IF(rating>8,1,0)'       }     },     'sort':     [       {'myexpr':'desc'},       {'_score':'desc'}     ],     'profile':true   }   ```  It responds with an object with: - an array with hits (matched documents) found - if the query is timed out - time of execution - if profiling is enabled, an additional array with profiling information attached     ```   {     'took':10,     'timed_out':false,     'hits':     {       'total':2,       'hits':       [         {'_id':'1','_score':1,'_source':{'gid':11}},         {'_id':'2','_score':1,'_source':{'gid':12}}       ]     }   }   ```  Alternatively, you can use auxiliary query objects to build your search queries as it's shown in the example below. For more information about the match query syntax and additional parameters that can be added to  request and response, please check: https://manual.manticoresearch.com/Searching/Full_text_matching/Basic_usage#HTTP.   # noqa: E501
+         Expects an object with mandatory properties: * the index name * the match query object Example :    ```   {     'index':'movies',     'query':     {       'bool':       {         'must':[{'query_string':' movie'}]       }     },     'script_fields':     {       'myexpr':       {         'script':{'inline':'IF(rating>8,1,0)'       }     },     'sort':     [       {'myexpr':'desc'},       {'_score':'desc'}     ],     'profile':true   }   ```  Alternatively, you can use auxiliary objects to build your search query. For details, see the documentation on [**SearchRequest**](SearchRequest.md)  It responds with an object with: - an array with hits (matched documents) found - if the query is timed out - time of execution - if profiling is enabled, an additional array with profiling information attached     ```   {     'took':10,     'timed_out':false,     'hits':     {       'total':2,       'hits':       [         {'_id':'1','_score':1,'_source':{'gid':11}},         {'_id':'2','_score':1,'_source':{'gid':12}}       ]     }   }   ```  For more information about the match query syntax and additional parameters that can be added to request and response, please check: https://manual.manticoresearch.com/Searching/Full_text_matching/Basic_usage#HTTP-JSON.   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -305,7 +305,7 @@ class SearchApi(object):
         auth_settings = []  # noqa: E501
 
         res = self.api_client.call_api(
-            '/json/search', 'POST',
+            '/search', 'POST',
             path_params,
             query_params,
             header_params,

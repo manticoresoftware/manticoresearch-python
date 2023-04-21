@@ -4,14 +4,14 @@ All URIs are relative to *http://127.0.0.1:9308*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**bulk**](IndexApi.md#bulk) | **POST** /json/bulk | Bulk index operations
-[**delete**](IndexApi.md#delete) | **POST** /json/delete | Delete a document in an index
-[**insert**](IndexApi.md#insert) | **POST** /json/insert | Create a new document in an index
-[**replace**](IndexApi.md#replace) | **POST** /json/replace | Replace new document in an index
-[**update**](IndexApi.md#update) | **POST** /json/update | Update a document in an index
+[**bulk**](IndexApi.md#bulk) | **POST** /bulk | Bulk index operations
+[**delete**](IndexApi.md#delete) | **POST** /delete | Delete a document in an index
+[**insert**](IndexApi.md#insert) | **POST** /insert | Create a new document in an index
+[**replace**](IndexApi.md#replace) | **POST** /replace | Replace new document in an index
+[**update**](IndexApi.md#update) | **POST** /update | Update a document in an index
 
 
-# **bulk**
+## **bulk**
 > BulkResponse bulk(body)
 
 Bulk index operations
@@ -83,7 +83,6 @@ with manticoresearch.ApiClient(configuration) as api_client:
 
 ```
 
-
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -111,7 +110,7 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **delete**
+## **delete**
 > DeleteResponse delete(delete_document_request)
 
 Delete a document in an index
@@ -190,7 +189,6 @@ with manticoresearch.ApiClient(configuration) as api_client:
 
 ```
 
-
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -218,7 +216,7 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **insert**
+## **insert**
 > SuccessResponse insert(insert_document_request)
 
 Create a new document in an index
@@ -312,7 +310,6 @@ with manticoresearch.ApiClient(configuration) as api_client:
 
 ```
 
-
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -340,7 +337,7 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **replace**
+## **replace**
 > SuccessResponse replace(insert_document_request)
 
 Replace new document in an index
@@ -393,7 +390,6 @@ with manticoresearch.ApiClient(configuration) as api_client:
 
 ```
 
-
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -421,7 +417,7 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **update**
+## **update**
 > UpdateResponse update(update_document_request)
 
 Update a document in an index
@@ -499,7 +495,6 @@ with manticoresearch.ApiClient(configuration) as api_client:
 
 
 ```
-
 
 ### Parameters
 

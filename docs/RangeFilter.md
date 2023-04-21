@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **lt** | **float** |  | [optional] 
 **gt** | **float** |  | [optional] 
 
-[[Using in search requests]](SearchApi.md#RangeFilter)
+[[Using in search requests]](SearchRequest.md#RangeFilter)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
