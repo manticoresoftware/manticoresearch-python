@@ -79,12 +79,12 @@ with manticoresearch.ApiClient(configuration) as api_client:
     # Create an instance of the Search API class
     api_instance = manticoresearch.SearchApi(api_client)
 
-	# Create SearchRequest
+    # Create SearchRequest
     search_request = SearchRequest()
     search_request.index='test'
     search_request.fullltext_filter=QueryFilter('Title 1') 
     
-    # example passing only required values which don't have defaults set
+    # The example passes only required values which don't have defaults set
     try:
         # Perform a search
         api_response = api_instance.search(search_request)
