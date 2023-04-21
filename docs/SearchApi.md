@@ -19,45 +19,18 @@ The method expects an object with the following mandatory properties:
         
 * the match query object
 
-Here is an example search request:
-  ```
-  {
-    'index':'movies',
-    'query':
-    {
-      'bool':
-      {
-        'must':[{'query_string':' movie'}]
-      }
-    },
-    'script_fields':
-    {
-      'myexpr':
-      {
-        'script':{'inline':'IF(rating>8,1,0)'
-      }
-    },
-    'sort':
-    [
-      {'myexpr':'desc'},
-      {'_score':'desc'}
-    ],
-    'profile':true
-  }
-  ```
-
-Alternatively, you can use auxiliary objects to build your search query. For details, see the documentation on [**SearchRequest**](SearchRequest.md)
+For details, see the documentation on [**SearchRequest**](SearchRequest.md)
 
 The method returns an object with the following properties:
         
-- took: the time taken to execute the search query.
-- timed_out: a boolean indicating whether the query timed out.
 - hits: an object with the following properties:
-  - total: the total number of hits found.
   - hits: an array of hit objects, where each hit object represents a matched document. Each hit object has the following properties:
     - _id: the ID of the matched document.
     - _score: the score of the matched document.
     - _source: the source data of the matched document.
+  - total: the total number of hits found.
+- timed_out: a boolean indicating whether the query timed out.
+- took: the time taken to execute the search query.
 
 In addition, if profiling is enabled, the response will include an additional array with profiling information attached.
 
@@ -165,20 +138,20 @@ This method must be used only on percolate indexes.
 Expects two parameters: the index name and an object with an array of documents to search with.
 Here is an example of the document object:
 
-  ```
+```
+{
+  "query":
   {
-    "query":
+    "percolate":
     {
-      "percolate":
+      "document":
       {
-        "document":
-        {
-          "content":"sample content"
-        }
+        "content":"sample content"
       }
     }
   }
-  ```
+}
+```
 
 Responds with an object with matched stored queries: 
 
