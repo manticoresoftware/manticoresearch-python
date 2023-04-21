@@ -104,12 +104,12 @@ with manticoresearch.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = search_api.SearchApi(api_client)
 
+	# Create SearchRequest
     search_request = SearchRequest()
     search_request.index='test'
     search_request.fullltext_filter=QueryFilter('find smth') 
     
-    # or create SearchRequest in alternative way
-    
+    # or create SearchRequest in an alternative way
     search_request = SearchRequest(
         index='test',
         query={'query_string': 'find smth'},

@@ -64,7 +64,7 @@ configuration = manticoresearch.Configuration(
 
 # Enter a context with an instance of the API client
 with manticoresearch.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
+    # Create an instance of the IndexApi API class
     api_instance = manticoresearch.IndexApi(api_client)
     body = "["'{\"insert\": {\"index\": \"test\", \"id\": 1, \"doc\": {\"title\": \"Title 1\"}}},\\n{\"insert\": {\"index\": \"test\", \"id\": 2, \"doc\": {\"title\": \"Title 2\"}}}'"]" # str | 
 
@@ -75,6 +75,22 @@ with manticoresearch.ApiClient(configuration) as api_client:
     except ApiException as e:
         print("Exception when calling IndexApi->bulk: %s\n" % e)
     
+    
+    # Create an instance of the Search API class
+    api_instance = manticoresearch.SearchApi(api_client)
+
+	# Create SearchRequest
+    search_request = SearchRequest()
+    search_request.index='test'
+    search_request.fullltext_filter=QueryFilter('Title 1') 
+    
+    # example passing only required values which don't have defaults set
+    try:
+        # Perform a search
+        api_response = api_instance.search(search_request)
+        pprint(api_response)
+    except manticoresearch.ApiException as e:
+        print("Exception when calling SearchApi->search: %s\n" % e)
 ```
 
 # Documentation
