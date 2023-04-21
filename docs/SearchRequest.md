@@ -76,6 +76,7 @@ Name | Type | Description | Notes
     
     api_response = api_instance.search(search_req)
     pprint(api_response)
+```
 
 ### Sort
 ```python
@@ -89,9 +90,11 @@ Name | Type | Description | Notes
 ```
 
 ### SortOrder
-### SortMVA
 
 [[SortOrder - input parameters]](SortOrder.md)
+
+### SortMVA
+
 [[SortMVA - input parameters]](SortMVA.md)
 
 [[Docs on sorting in Manticore Search Manual]](https://manual.manticoresearch.com/Searching/Sorting_and_ranking#HTTP)
@@ -190,7 +193,7 @@ Name | Type | Description | Notes
 
 [[QueryFilter - input parameters]](QueryFilter.md)
 ```python    
-	#Using a QueryFilter object
+    #Using a QueryFilter object
     search_req.fulltext_filter = manticoresearch.model.QueryFilter('test')
     
     api_response = api_instance.search(search_req)
@@ -227,7 +230,7 @@ Name | Type | Description | Notes
 
 [[MatchOpFilter - input parameters]](MatchOpFilter.md)
 ```python    
-	#Using a MatchOpFilter object
+    #Using a MatchOpFilter object
     search_req.fulltext_filter = manticoresearch.model.MatchOpFilter('test1 test2', 'title', 'and')
     
     api_response = api_instance.search(search_req)

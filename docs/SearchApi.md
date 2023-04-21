@@ -4,22 +4,22 @@ All URIs are relative to *http://127.0.0.1:9308*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**search**](SearchApi.md#search) | **POST** /search | Performs search
-[**percolate**](SearchApi.md#percolate) | **POST** /pq/{index}/search | Perform reverse search on a percolate index
+[**search**](SearchApi.md#search) | **POST** /search | Performs a search on an index.
+[**percolate**](SearchApi.md#percolate) | **POST** /pq/{index}/search | Perform a reverse search on a percolate index
 
 
 ## **search**
 > SearchResponse search(search_request)
 
-Performs search
+Performs a search on an index. 
 
-
-Expects an object with mandatory properties:
-* the index name
+The method expects an object with the following mandatory properties:
+        
+* the name of the index to search
+        
 * the match query object
 
-Example:
-
+Here is an example search request:
   ```
   {
     'index':'movies',
@@ -48,13 +48,20 @@ Example:
 
 Alternatively, you can use auxiliary objects to build your search query. For details, see the documentation on [**SearchRequest**](SearchRequest.md)
 
-It responds with an object with:
-- an array with hits (matched documents) found
-- if the query is timed out
-- time of execution
-- if profiling is enabled, an additional array with profiling information attached
+The method returns an object with the following properties:
+        
+- took: the time taken to execute the search query.
+- timed_out: a boolean indicating whether the query timed out.
+- hits: an object with the following properties:
+  - total: the total number of hits found.
+  - hits: an array of hit objects, where each hit object represents a matched document. Each hit object has the following properties:
+    - _id: the ID of the matched document.
+    - _score: the score of the matched document.
+    - _source: the source data of the matched document.
 
+In addition, if profiling is enabled, the response will include an additional array with profiling information attached.
 
+Here is an example search response:
   ```
   {
     'took':10,
@@ -150,13 +157,13 @@ No authorization required
 ## **percolate**
 > SearchResponse percolate(index,percolate_request)
 
-Perform reverse search on a percolate index
+Perform a reverse search on a percolate index
 
 Performs a percolate search. 
 This method must be used only on percolate indexes.
 
-Expects two parameters: the index name and an object with array of documents to be tested.
-An example of the documents object:
+Expects two parameters: the index name and an object with an array of documents to search with.
+Here is an example of the document object:
 
   ```
   {

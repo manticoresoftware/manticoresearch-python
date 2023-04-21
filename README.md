@@ -1,13 +1,11 @@
 # manticoresearch
-Low-level client for Manticore Search.
+Сlient for Manticore Search.
 
 
 
 ## Requirements.
 
-Python 2.7 and 3.4+.
-
-Minimum Manticore Search version is > 2.5.1 with HTTP protocol enabled.
+Minimum Manticore Search version is >= 2.5.1 with HTTP protocol enabled.
 
 | Manticore Search  | manticoresearch-python   |     Python    |
 | ----------------- | ------------------------ | ------------- |
@@ -82,7 +80,7 @@ with manticoresearch.ApiClient(configuration) as api_client:
 # Documentation
 
 
-Full documentation is available in  [docs](https://github.com/manticoresoftware/manticoresearch-python/tree/master/docs) folder.
+Full documentation on the API Endpoints and Models used is available in  [docs](https://github.com/manticoresoftware/manticoresearch-python/tree/master/docs) folder as listed below.
 
 Manticore Search server documentation: https://manual.manticoresearch.com.
 
@@ -98,7 +96,7 @@ Class | Method | HTTP request | Description
 *IndexApi* | [**replace**](docs/IndexApi.md#replace) | **POST** /replace | Replace new document in an index
 *IndexApi* | [**update**](docs/IndexApi.md#update) | **POST** /update | Update a document in an index
 *SearchApi* | [**percolate**](docs/SearchApi.md#percolate) | **POST** /pq/{index}/search | Perform reverse search on a percolate index
-*SearchApi* | [**search**](docs/SearchApi.md#search) | **POST** /search | Performs a search
+*SearchApi* | [**search**](docs/SearchApi.md#search) | **POST** /search | Performs a search on an index
 *UtilsApi* | [**sql**](docs/UtilsApi.md#sql) | **POST** /sql | Perform SQL requests
 
 
