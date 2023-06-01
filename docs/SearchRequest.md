@@ -12,7 +12,6 @@ Name | Type | Description | Notes
 **offset** | **int** |  | [optional] 
 **max_matches** | **int** |  | [optional] 
 **sort** | **[{str: (bool, date, datetime, dict, float, int, list, str, none_type)}]** |  | [optional] 
-**sort_old** | **[{str: (bool, date, datetime, dict, float, int, list, str, none_type)}]** |  | [optional] 
 **aggs** | [**[Aggregation]**](Aggregation.md) |  | [optional] 
 **expressions** | **[{str: (bool, date, datetime, dict, float, int, list, str, none_type)}]** |  | [optional] 
 **highlight** | [**Highlight**](Highlight.md) |  | [optional] 

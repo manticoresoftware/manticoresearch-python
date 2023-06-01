@@ -30,8 +30,8 @@ class GeoDistanceFilterLocationAnchor(object):
                             and the value is json key in definition.
     """
     openapi_types = {
-        'lat': 'int',
-        'lon': 'int'
+        'lat': 'float',
+        'lon': 'float'
     }
 
     attribute_map = {
@@ -61,7 +61,7 @@ class GeoDistanceFilterLocationAnchor(object):
         Geo latitude of pin point in degrees  # noqa: E501
 
         :return: The lat of this GeoDistanceFilterLocationAnchor.  # noqa: E501
-        :rtype: int
+        :rtype: float
         """
         return self._lat
     @lat.setter
@@ -71,7 +71,7 @@ class GeoDistanceFilterLocationAnchor(object):
         Geo latitude of pin point in degrees  # noqa: E501
 
         :param lat: The lat of this GeoDistanceFilterLocationAnchor.  # noqa: E501
-        :type lat: int
+        :type lat: float
         """
 
         self._lat = lat
@@ -84,7 +84,7 @@ class GeoDistanceFilterLocationAnchor(object):
         Geo longitude pf pin point in degrees  # noqa: E501
 
         :return: The lon of this GeoDistanceFilterLocationAnchor.  # noqa: E501
-        :rtype: int
+        :rtype: float
         """
         return self._lon
     @lon.setter
@@ -94,7 +94,7 @@ class GeoDistanceFilterLocationAnchor(object):
         Geo longitude pf pin point in degrees  # noqa: E501
 
         :param lon: The lon of this GeoDistanceFilterLocationAnchor.  # noqa: E501
-        :type lon: int
+        :type lon: float
         """
 
         self._lon = lon

@@ -13,12 +13,10 @@ Method | HTTP request | Description
 
 Performs a search on an index. 
 
-The method expects an object with the following mandatory properties:
+The method expects a SearchRequest object with the following mandatory properties:
         
-* the name of the index to search
+* the name of the index to search | string
         
-* the match query object
-
 For details, see the documentation on [**SearchRequest**](SearchRequest.md)
 
 The method returns an object with the following properties:
@@ -80,13 +78,15 @@ with manticoresearch.ApiClient(configuration) as api_client:
 	# Create SearchRequest
     search_request = SearchRequest()
     search_request.index='test'
-    search_request.fullltext_filter=QueryFilter('find smth') 
+    search_request.fulltext_filter=QueryFilter('find smth') 
     
-    # or create SearchRequest in an alternative way
+    # or create SearchRequest in an alternative way as in the previous versions of the client. It uses a single complex JSON object for a query field 
     search_request = SearchRequest(
         index='test',
         query={'query_string': 'find smth'},
-    )  
+    )
+    
+    # Both ways of creating SearchRequest are interchangeable and produce the same result  
 
     # example passing only required values which don't have defaults set
     try:
@@ -119,10 +119,10 @@ No authorization required
  - **Accept**: application/json
 
 ### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Ok |  -  |
-**0** | error |  -  |
+| Status code | Description |
+|-------------|-------------|
+**200** | Success, query processed |
+**500** | Server error |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -130,13 +130,12 @@ No authorization required
 ## **percolate**
 > SearchResponse percolate(index,percolate_request)
 
-Perform a reverse search on a percolate index
+Perform a reverse search on a percolate index. [[More info on percolate indexes in Manticore Search Manual]](https://manual.manticoresearch.com/Creating_a_table/Local_tables/Percolate_table#Percolate-table)
 
-Performs a percolate search. 
 This method must be used only on percolate indexes.
 
-Expects two parameters: the index name and an object with an array of documents to search with.
-Here is an example of the document object:
+Expects two parameters: the index name and an object with a document or an array of documents to search by.
+Here is an example of the object with a single document:
 
 ```
 {
@@ -195,6 +194,26 @@ Responds with an object with matched stored queries:
   }
   ```
 
+And here is an example of the object with multiple documents:
+
+```
+{
+  "query":
+  {
+    "percolate":
+    {
+      "documents": [
+        {
+          "content":"sample content"
+        },
+        {
+          "content":"another sample content"
+        }
+      ]
+    }
+  }
+}
+```
 
 ### Example
 
@@ -204,6 +223,7 @@ from manticoresearch.api import search_api
 from manticoresearch.model.error_response import ErrorResponse
 from manticoresearch.model.search_response import SearchResponse
 from manticoresearch.model.percolate_request import PercolateRequest
+from manticoresearch.model.percolate_request_query import PercolateRequestQuery
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://127.0.0.1:9308
@@ -218,9 +238,18 @@ with manticoresearch.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = search_api.SearchApi(api_client)
 
-    index = "index_example" # str  |( Name of the percolate index  
+    index = "index_example" # str  | Name of the percolate index
+    percolate_query = { 
+        "query": { 
+            "percolate": { 
+                "document":  {  
+                    "content":"sample content" 
+                } 
+            } 
+        } 
+    }
     percolate_request = PercolateRequest(
-        query=PercolateRequestQuery(),
+        query=PercolateRequestQuery(percolate_query),
     ) # PercolateRequest  
 
     # example passing only required values which don't have defaults set
@@ -230,7 +259,6 @@ with manticoresearch.ApiClient(configuration) as api_client:
         pprint(api_response)
     except manticoresearch.ApiException as e:
         print("Exception when calling SearchApi->percolate: %s\n" % e)
-
 
 ```
 
@@ -255,10 +283,10 @@ No authorization required
  - **Accept**: application/json
 
 ### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | items found |  -  |
-**0** | error |  -  |
+| Status code | Description |
+|-------------|-------------|
+**200** | Success, query processed |
+**500** | Server error |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

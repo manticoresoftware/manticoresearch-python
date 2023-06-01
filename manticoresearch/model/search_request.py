@@ -38,7 +38,6 @@ class SearchRequest(object):
         'offset': 'int',
         'max_matches': 'int',
         'sort': '[{str: (bool, date, datetime, dict, float, int, list, str, none_type)}]',
-        'sort_old': '[{str: (bool, date, datetime, dict, float, int, list, str, none_type)}]',
         'aggs': '[Aggregation]',
         'expressions': '[{str: (bool, date, datetime, dict, float, int, list, str, none_type)}]',
         'highlight': 'Highlight',
@@ -57,7 +56,6 @@ class SearchRequest(object):
         'offset': 'offset',
         'max_matches': 'max_matches',
         'sort': 'sort',
-        'sort_old': 'sort_old',
         'aggs': 'aggs',
         'expressions': 'expressions',
         'highlight': 'highlight',
@@ -67,7 +65,7 @@ class SearchRequest(object):
         'track_scores': 'track_scores'
     }
 
-    def __init__(self, index="", query=None, fulltext_filter=None, attr_filter=None, limit=None, offset=None, max_matches=None, sort=None, sort_old=None, aggs=None, expressions=None, highlight=None, source=None, options=None, profile=None, track_scores=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, index="", query=None, fulltext_filter=None, attr_filter=None, limit=None, offset=None, max_matches=None, sort=None, aggs=None, expressions=None, highlight=None, source=None, options=None, profile=None, track_scores=None, local_vars_configuration=None):  # noqa: E501
         """SearchRequest - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
@@ -81,7 +79,6 @@ class SearchRequest(object):
         self._offset = None
         self._max_matches = None
         self._sort = None
-        self._sort_old = None
         self._aggs = None
         self._expressions = None
         self._highlight = None
@@ -106,8 +103,6 @@ class SearchRequest(object):
             self.max_matches = max_matches
         if sort is not None:
             self.sort = sort
-        if sort_old is not None:
-            self.sort_old = sort_old
         if aggs is not None:
             self.aggs = aggs
         if expressions is not None:
@@ -295,27 +290,6 @@ class SearchRequest(object):
         """
 
         self._sort = sort
-        
-
-    @property
-    def sort_old(self):
-        """Gets the sort_old of this SearchRequest.  # noqa: E501
-
-
-        :return: The sort_old of this SearchRequest.  # noqa: E501
-        :rtype: [{str: (bool, date, datetime, dict, float, int, list, str, none_type)}]
-        """
-        return self._sort_old
-    @sort_old.setter
-    def sort_old(self, sort_old):
-        """Sets the sort_old of this SearchRequest.
-
-
-        :param sort_old: The sort_old of this SearchRequest.  # noqa: E501
-        :type sort_old: [{str: (bool, date, datetime, dict, float, int, list, str, none_type)}]
-        """
-
-        self._sort_old = sort_old
         
 
     @property

@@ -47,88 +47,134 @@ class TestManualApi(ParametrizedTestCase):
         ) 
         
         res = searchApi.search(search_request)
-        pprint(res)
-        
+
         search_request.index = 'movies'
         search_request.limit = 10
         search_request.track_scores = True
         search_request.options = {'cutoff': 5}
         search_request.options['ranker'] = 'bm25'
         search_request.source = 'title'
-        
+
+        res = searchApi.search(search_request)
         
         search_request.source = SourceByRules()
         search_request.source.includes = ['title', 'year']
         search_request.source.excludes = ['code']
-        #
+
+        res = searchApi.search(search_request)
+
         search_request.sort = ['year']
         sort2 = manticoresearch.model.SortOrder('rating', 'asc')
         sort3 = manticoresearch.model.SortMVA('code', 'desc', 'max')
         search_request.sort += [sort2,sort3]
-        #
+        
+        res = searchApi.search(search_request)
+
         expr = {'expr': 'min(year,2900)'}
         search_request.expressions = [expr]
         search_request.expressions += [ {'expr2': 'max(year,2100)'} ]
         search_request.source.includes += ['expr2']
-        #
+        
+        res = searchApi.search(search_request)
+
         agg1 = Aggregation('agg1', 'year', 10)
         search_request.aggs = [agg1]
         search_request.aggs += [ Aggregation('agg2', 'rating') ]
-        #
+        
+        res = searchApi.search(search_request)
+
         highlight = manticoresearch.model.Highlight()
         highlight.fieldnames = ['title']
         highlight.post_tags = '</post_tag>'
         highlight.encoder = 'default'
         highlight.snippet_boundary = 'sentence'
         search_request.highlight = highlight 
-        #
+        
+        res = searchApi.search(search_request)
+
         highlightField = HighlightField('title')
         highlightField2 = HighlightField('plot', 5, 10)
         highlight.fields = [highlightField, highlightField2]
         search_request.highlight = highlight
-        #
+        
+        res = searchApi.search(search_request)
+
+        highlight.highlight_query = {"match" : {"*": "Star"} };
+        search_request.highlight = highlight
+
+        res = searchApi.search(search_request)
+
         search_request.fulltext_filter = QueryFilter('Star Trek 2')
+
+        res = searchApi.search(search_request)        
+
         search_request.fulltext_filter = MatchFilter('Nemesis', 'title')
+
+        res = searchApi.search(search_request)
+
         search_request.fulltext_filter = MatchPhraseFilter('Star Trek 2', 'title')
+
+        res = searchApi.search(search_request)
+
         search_request.fulltext_filter = MatchOpFilter('Enterprise test', 'title,plot', 'or') 
-        #
+        
+        res = searchApi.search(search_request)
+
         search_request.attr_filter = EqualsFilter('year', 2001)
-        #
+        
+        res = searchApi.search(search_request)
+
         inFilter = InFilter('year', [2001, 2002])
         inFilter.values += [10,11]
         search_request.attr_filter = inFilter
-        #
+        
+        res = searchApi.search(search_request)
+
         rangeFilter = RangeFilter('year', lte = 2002)
         rangeFilter.gte = 1000
         search_request.attr_filter = rangeFilter
+
+        res = searchApi.search(search_request)
         
-        rangeFilter.gt = 999
+        rangeFilter = RangeFilter('rating')
+        rangeFilter.gt = 2000.5
         rangeFilter.lt = 2002
         search_request.attr_filter = rangeFilter
-        #
-        # geoFilter = GeoDistanceFilter(location_anchor={'lat':10,'lon':20}, location_source='field1,field2')
-        # geoFilter.location_source='field3,field4'
-        # geoFilter.distance_type='adaptive'
-        # geoFilter.distance='100 km'
-        # search_request.attr_filter = geoFilter
-        #
+
+        res = searchApi.search(search_request)
+
+        geoFilter = GeoDistanceFilter(location_anchor={'lat':10,'lon':20.5}, location_source='year,rating')
+        geoFilter.location_source='year,rating'
+        geoFilter.distance_type='adaptive'
+        geoFilter.distance='100 km'
+        search_request.attr_filter = geoFilter
+        
+        res = searchApi.search(search_request)
+
         boolFilter = BoolFilter()
         boolFilter.must = [ EqualsFilter('year', 2001) ]
         boolFilter.must += [ RangeFilter('rating', lte = 20) ]
         search_request.attr_filter = boolFilter
-        #
+        
+        res = searchApi.search(search_request)
+
         boolFilter.must_not = [ EqualsFilter('year', 2001) ]
-        #
+        
+        res = searchApi.search(search_request)
         
         fulltext_filter = MatchFilter('Star', 'title')
         nestedBoolFilter = BoolFilter()
         nestedBoolFilter.should = [EqualsFilter('rating', 6.5), fulltext_filter]
         boolFilter.must = [nestedBoolFilter]
-        #
+        
+        res = searchApi.search(search_request)
+
         search_request.attr_filter = boolFilter
     
         res = searchApi.search(search_request)
         pprint(res)
+
+        pprint("Search tests finished")
         
         utilsApi.sql('SHOW THREADS')
         utilsApi.sql('DROP TABLE IF EXISTS products')
@@ -316,6 +362,7 @@ class TestManualApi(ParametrizedTestCase):
         #res =  searchApi.search({"index":"books","query":{"match":{"*":"try"}},"highlight":{}})
         #pprint(res)
         
+        pprint("Tests finished")
         
 if __name__ == '__main__':
     unittest.main()
