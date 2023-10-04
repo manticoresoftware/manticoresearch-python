@@ -1,8 +1,8 @@
 # Manticore Python client
 
-Officail client for Manticore Search.
+Сlient for Manticore Search.
 
-❗ WARNING: this is a development version of the client. The latest release's readme is https://github.com/manticoresoftware/manticoresearch-python/tree/3.3.0
+
 
 ## Requirements.
 
@@ -10,6 +10,7 @@ Minimum Manticore Search version is >= 2.5.1 with HTTP protocol enabled.
 
 | Manticore Search  | manticoresearch-python   |     Python    |
 | ----------------- | ------------------------ | ------------- |
+| >= 6.2.0          | 3.3.1                    | >= 3.4        |
 | >= 4.2.1          | 2.0.x                    | >= 3.4        |
 | >= 4.0.2  < 4.2.1 | 1.0.6                    | >= 3.4        |
 | >= 2.5.1  < 4.0.2 | 1.0.5                    | >= 2.7        |

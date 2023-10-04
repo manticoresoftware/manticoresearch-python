@@ -15,7 +15,7 @@
 
 from __future__ import absolute_import
 
-__version__ = "3.3.0"
+__version__ = "3.3.1"
 
 # import apis into sdk package
 from manticoresearch.api.index_api import IndexApi
