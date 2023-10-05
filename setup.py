@@ -12,7 +12,7 @@ from setuptools import setup, find_packages
 from os import path
 
 NAME = "manticoresearch"
-VERSION = "3.3.0"
+VERSION = "3.3.1"
 # To install the library, run the following
 #
 # python setup.py install

@@ -31,26 +31,31 @@ class BulkResponse(object):
     """
     openapi_types = {
         'items': '{str: (bool, date, datetime, dict, float, int, list, str, none_type)}',
-        'error': 'bool'
+        'errors': 'bool',
+        'error': 'str'
     }
 
     attribute_map = {
         'items': 'items',
+        'errors': 'errors',
         'error': 'error'
     }
 
-    def __init__(self, items=None, error=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, items=None, errors=None, error=None, local_vars_configuration=None):  # noqa: E501
         """BulkResponse - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
         self.local_vars_configuration = local_vars_configuration
 
         self._items = None
+        self._errors = None
         self._error = None
         self.discriminator = None
 
         if items is not None:
             self.items = items
+        if errors is not None:
+            self.errors = errors
         if error is not None:
             self.error = error
 
@@ -76,12 +81,33 @@ class BulkResponse(object):
         
 
     @property
+    def errors(self):
+        """Gets the errors of this BulkResponse.  # noqa: E501
+
+
+        :return: The errors of this BulkResponse.  # noqa: E501
+        :rtype: bool
+        """
+        return self._errors
+    @errors.setter
+    def errors(self, errors):
+        """Sets the errors of this BulkResponse.
+
+
+        :param errors: The errors of this BulkResponse.  # noqa: E501
+        :type errors: bool
+        """
+
+        self._errors = errors
+        
+
+    @property
     def error(self):
         """Gets the error of this BulkResponse.  # noqa: E501
 
 
         :return: The error of this BulkResponse.  # noqa: E501
-        :rtype: bool
+        :rtype: str
         """
         return self._error
     @error.setter
@@ -90,7 +116,7 @@ class BulkResponse(object):
 
 
         :param error: The error of this BulkResponse.  # noqa: E501
-        :type error: bool
+        :type error: str
         """
 
         self._error = error
