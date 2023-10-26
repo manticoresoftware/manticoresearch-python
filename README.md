@@ -85,7 +85,7 @@ with manticoresearch.ApiClient(configuration) as api_client:
     # Create SearchRequest
     search_request = SearchRequest()
     search_request.index='test'
-    search_request.fullltext_filter=QueryFilter('Title 1') 
+    search_request.fulltext_filter=QueryFilter('Title 1') 
     
     # The example passes only required values which don't have defaults set
     try:
