@@ -1,13 +1,11 @@
-# Aggregation
+# AggregationTerms
 
-Aggregation Alias
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**terms** | [**AggregationTerms**](AggregationTerms.md) |  | [optional] 
-**sort** | [**[{str: (AggregationSortInnerValue,)}]**](AggregationSortInnerValue.md) |  | [optional] 
+**field** | **str** | Attribute Name to Aggregate | [optional] 
+**size** | **int** | Maximum Number of Buckets in the Result | [optional] 
 
-[[Using in search requests]](SearchApi.md#Aggregation)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

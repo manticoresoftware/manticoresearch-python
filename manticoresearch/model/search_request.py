@@ -38,8 +38,8 @@ class SearchRequest(object):
         'offset': 'int',
         'max_matches': 'int',
         'sort': '[{str: (bool, date, datetime, dict, float, int, list, str, none_type)}]',
-        'aggs': '[Aggregation]',
-        'expressions': '[{str: (bool, date, datetime, dict, float, int, list, str, none_type)}]',
+        'aggs': '{str: (Aggregation,)}',
+        'expressions': '{str: (str,)}',
         'highlight': 'Highlight',
         'source': '{str: (bool, date, datetime, dict, float, int, list, str, none_type)}',
         'options': '{str: (bool, date, datetime, dict, float, int, list, str, none_type)}',
@@ -298,7 +298,7 @@ class SearchRequest(object):
 
 
         :return: The aggs of this SearchRequest.  # noqa: E501
-        :rtype: [Aggregation]
+        :rtype: {str: (Aggregation,)}
         """
         return self._aggs
     @aggs.setter
@@ -307,7 +307,7 @@ class SearchRequest(object):
 
 
         :param aggs: The aggs of this SearchRequest.  # noqa: E501
-        :type aggs: [Aggregation]
+        :type aggs: {str: (Aggregation,)}
         """
 
         self._aggs = aggs
@@ -319,7 +319,7 @@ class SearchRequest(object):
 
 
         :return: The expressions of this SearchRequest.  # noqa: E501
-        :rtype: [{str: (bool, date, datetime, dict, float, int, list, str, none_type)}]
+        :rtype: {str: (str,)}
         """
         return self._expressions
     @expressions.setter
@@ -328,7 +328,7 @@ class SearchRequest(object):
 
 
         :param expressions: The expressions of this SearchRequest.  # noqa: E501
-        :type expressions: [{str: (bool, date, datetime, dict, float, int, list, str, none_type)}]
+        :type expressions: {str: (str,)}
         """
 
         self._expressions = expressions
@@ -465,12 +465,10 @@ class SearchRequest(object):
 
         result['_source'] = result['source']
         del result['source']
-        if result['expressions'] is not None:
-        	result['expressions'] = {k:v for i in result['expressions'] for k,v in i.items() }
         if result['aggs'] is not None:
-        	result['aggs'] = {
-        	    i['name']: { 'terms': { 'field': i['field'], 'size': i['size'] } } for i in result['aggs']
-        	}
+        	for k,v in result['aggs'].items():
+        		if v['sort'] is None:
+        			result['aggs'][k]['sort'] = []
         if result['highlight'] is not None:
 	        if result['highlight']['fields'] is None: 	
 	            result['highlight']['fields'] = result['highlight']['fieldnames']

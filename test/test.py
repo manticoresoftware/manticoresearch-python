@@ -11,7 +11,7 @@ import inspect
 from parametrized_test_case import ParametrizedTestCase
 
 configuration = manticoresearch.Configuration(
-    host = "http://manticoresearch-manticore:9308"
+    host = "http://localhost:9408"
 )
 
 print

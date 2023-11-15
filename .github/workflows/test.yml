@@ -1,0 +1,33 @@
+name: Testing
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+    name: Running basic tests
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        python-version: ["3.8", 3.9", "3.10"]
+
+    services:
+      manticoresearch-manticore:
+        image: manticoresearch/manticore:dev
+        ports:
+          - 9408:9308
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    - run: |
+        apt update && apt -y install python3-pip
+        python3 -m pip install -e .
+        python3 test/test.py
+        

@@ -12,8 +12,8 @@ Name | Type | Description | Notes
 **offset** | **int** |  | [optional] 
 **max_matches** | **int** |  | [optional] 
 **sort** | **[{str: (bool, date, datetime, dict, float, int, list, str, none_type)}]** |  | [optional] 
-**aggs** | [**[Aggregation]**](Aggregation.md) |  | [optional] 
-**expressions** | **[{str: (bool, date, datetime, dict, float, int, list, str, none_type)}]** |  | [optional] 
+**aggs** | [**{str: (Aggregation,)}**](Aggregation.md) |  | [optional] 
+**expressions** | **{str: (str,)}** |  | [optional] 
 **highlight** | [**Highlight**](Highlight.md) |  | [optional] 
 **source** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}** |  | [optional] 
 **options** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}** |  | [optional] 
@@ -117,9 +117,8 @@ Name | Type | Description | Notes
     #Setting the `expressions` property:
     search_req = manticoresearch.model.SearchRequest(index='test')
     
-    expr = {'expr': 'min(price,15)'}
-    search_req.expressions = [expr]
-    search_req.expressions += [ {'expr2': 'max(price,15)'} ]
+    search_req.expressions = {'expr': 'min(price,15)'}
+    search_req.expressions['expr2'] = 'max(price,15)'
     
     api_response = api_instance.search(search_req)
     pprint(api_response)
@@ -134,9 +133,12 @@ Name | Type | Description | Notes
     #Setting the `aggs` property with an auxiliary object:
     search_req = manticoresearch.model.SearchRequest(index='test')
     
-    agg1 = manticoresearch.model.Aggregation('agg1', 'body', 10)
-    search_req.aggs = [agg1] + [ manticoresearch.model.Aggregation('agg2', 'price') ]
-    
+    aggTerms1 = AggregationTerms('year', 10)
+    agg1 = Aggregation(aggTerms1)
+    agg2 = Aggregation(AggregationTerms('rating'), ['rating'])
+    search_request.aggs = {'agg1': agg1}
+    search_request.aggs['agg2'] = agg2
+        
     api_response = api_instance.search(search_req)
     pprint(api_response)
 ```

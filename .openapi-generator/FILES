@@ -4,6 +4,8 @@
 .travis.yml
 README.md
 docs/Aggregation.md
+docs/AggregationSortInnerValue.md
+docs/AggregationTerms.md
 docs/AttrFilter.md
 docs/BoolFilter.md
 docs/BulkResponse.md
@@ -61,6 +63,8 @@ manticoresearch/configuration.py
 manticoresearch/exceptions.py
 manticoresearch/model/__init__.py
 manticoresearch/model/aggregation.py
+manticoresearch/model/aggregation_sort_inner_value.py
+manticoresearch/model/aggregation_terms.py
 manticoresearch/model/attr_filter.py
 manticoresearch/model/bool_filter.py
 manticoresearch/model/bulk_response.py
@@ -112,6 +116,8 @@ setup.py
 test-requirements.txt
 test/__init__.py
 test/test_aggregation.py
+test/test_aggregation_sort_inner_value.py
+test/test_aggregation_terms.py
 test/test_attr_filter.py
 test/test_bool_filter.py
 test/test_bulk_response.py

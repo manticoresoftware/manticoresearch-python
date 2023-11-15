@@ -70,18 +70,18 @@ class TestManualApi(ParametrizedTestCase):
         
         res = searchApi.search(search_request)
 
-        expr = {'expr': 'min(year,2900)'}
-        search_request.expressions = [expr]
-        search_request.expressions += [ {'expr2': 'max(year,2100)'} ]
-        search_request.source.includes += ['expr2']
+        search_request.expressions = {'expr': 'min(year,2900)'}
+        search_request.expressions['expr2'] = 'max(year,2100)'
+        search_request.source.includes += ['expr2', 'expr']
         
         res = searchApi.search(search_request)
-
-        agg1 = Aggregation('agg1', 'year', 10)
-        search_request.aggs = [agg1]
-        search_request.aggs += [ Aggregation('agg2', 'rating') ]
+        		
+        aggTerms1 = AggregationTerms('year', 10)
+        agg1 = Aggregation(aggTerms1)
+        agg2 = Aggregation(AggregationTerms('rating'), ['rating'])
+        search_request.aggs = {'agg1': agg1}
+        search_request.aggs['agg2'] = agg2
         
-        res = searchApi.search(search_request)
 
         highlight = manticoresearch.model.Highlight()
         highlight.fieldnames = ['title']

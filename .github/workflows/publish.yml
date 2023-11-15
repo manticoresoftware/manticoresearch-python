@@ -1,0 +1,26 @@
+name: Publishing
+
+on:
+  push:
+    branches-ignore: [ master ]
+
+jobs:
+  publish:
+    name: Publish the client to the public registry
+    runs-on: ubuntu-latest
+    env:
+      NPMRC: ${{ secrets.NPMRC }}
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Python 3.8
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3,8'
+    - run: |
+        echo $PYPIRC > ~/.pypirc
+        python -m pip install --user --upgrade twine
+        python setup.py sdist bdist_wheel
+        python -m twine upload dist/*
+
+

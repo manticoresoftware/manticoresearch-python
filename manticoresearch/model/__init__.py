@@ -16,6 +16,8 @@ from __future__ import absolute_import
 
 # import models into model package
 from manticoresearch.model.aggregation import Aggregation
+from manticoresearch.model.aggregation_sort_inner_value import AggregationSortInnerValue
+from manticoresearch.model.aggregation_terms import AggregationTerms
 from manticoresearch.model.attr_filter import AttrFilter
 from manticoresearch.model.bool_filter import BoolFilter
 from manticoresearch.model.bulk_response import BulkResponse
