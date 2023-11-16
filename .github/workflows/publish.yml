@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PYPIRC: ${{ secrets.PYPIRC }}
-
+      PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
     steps:
     - uses: actions/checkout@v4
     - name: Use Python 3.10
@@ -22,6 +22,6 @@ jobs:
         python -m pip install --user --upgrade wheel
         python -m pip install --user --upgrade twine
         python setup.py sdist bdist_wheel
-        python -m twine upload dist/*
+        python -m twine upload dist/* -u __token__ -p $PYPI_TOKEN
 
 
