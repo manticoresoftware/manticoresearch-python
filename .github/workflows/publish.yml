@@ -9,7 +9,7 @@ jobs:
     name: Publish the client to the public registry
     runs-on: ubuntu-latest
     env:
-      NPMRC: ${{ secrets.NPMRC }}
+      PYPIRC: ${{ secrets.PYPIRC }}
 
     steps:
     - uses: actions/checkout@v4
@@ -19,7 +19,7 @@ jobs:
         python-version: '3.10'
     - run: |
         echo $PYPIRC > ~/.pypirc
-        python -m pip install wheel
+        python -m pip install --user --upgrade wheel
         python -m pip install --user --upgrade twine
         python setup.py sdist bdist_wheel
         python -m twine upload dist/*
