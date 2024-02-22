@@ -2,19 +2,11 @@
 
 Сlient for Manticore Search.
 
-❗ WARNING: this is a development version of the client. The latest release's readme is https://github.com/manticoresoftware/manticoresearch-python/tree/4.0.0
+
 
 ## Requirements.
 
 Minimum Manticore Search version is >= 2.5.1 with HTTP protocol enabled.
-
-| Manticore Search  | manticoresearch-python   |     Python    |
-| ----------------- | ------------------------ | ------------- |
-| >= 6.2.0          | 4.0.0                    | >= 3.4        |
-| >= 6.2.0          | 3.3.1                    | >= 3.4        |
-| >= 4.2.1          | 2.0.x                    | >= 3.4        |
-| >= 4.0.2  < 4.2.1 | 1.0.6                    | >= 3.4        |
-| >= 2.5.1  < 4.0.2 | 1.0.5                    | >= 2.7        |
 
 
 ## Installation & Usage
@@ -85,7 +77,7 @@ with manticoresearch.ApiClient(configuration) as api_client:
     # Create SearchRequest
     search_request = SearchRequest()
     search_request.index='test'
-    search_request.fulltext_filter=QueryFilter('Title 1') 
+    search_request.fullltext_filter=QueryFilter('Title 1') 
     
     # The example passes only required values which don't have defaults set
     try:
@@ -142,6 +134,8 @@ Class | Method | HTTP request | Description
  - [HighlightField](docs/HighlightField.md)
  - [InFilter](docs/InFilter.md)
  - [InsertDocumentRequest](docs/InsertDocumentRequest.md)
+ - [KnnQueryByDocId](docs/KnnQueryByDocId.md)
+ - [KnnQueryByVector](docs/KnnQueryByVector.md)
  - [MatchFilter](docs/MatchFilter.md)
  - [MatchOp](docs/MatchOp.md)
  - [MatchOpFilter](docs/MatchOpFilter.md)
@@ -155,6 +149,7 @@ Class | Method | HTTP request | Description
  - [QueryFilter](docs/QueryFilter.md)
  - [RangeFilter](docs/RangeFilter.md)
  - [SearchRequest](docs/SearchRequest.md)
+ - [SearchRequestKnn](docs/SearchRequestKnn.md)
  - [SearchResponse](docs/SearchResponse.md)
  - [SearchResponseHits](docs/SearchResponseHits.md)
  - [SortMVA](docs/SortMVA.md)

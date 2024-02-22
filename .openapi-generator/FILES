@@ -25,6 +25,8 @@ docs/HighlightField.md
 docs/InFilter.md
 docs/IndexApi.md
 docs/InsertDocumentRequest.md
+docs/KnnQueryByDocId.md
+docs/KnnQueryByVector.md
 docs/MatchFilter.md
 docs/MatchOp.md
 docs/MatchOpFilter.md
@@ -39,6 +41,7 @@ docs/QueryFilter.md
 docs/RangeFilter.md
 docs/SearchApi.md
 docs/SearchRequest.md
+docs/SearchRequestKnn.md
 docs/SearchResponse.md
 docs/SearchResponseHits.md
 docs/SortMVA.md
@@ -83,6 +86,8 @@ manticoresearch/model/highlight.py
 manticoresearch/model/highlight_field.py
 manticoresearch/model/in_filter.py
 manticoresearch/model/insert_document_request.py
+manticoresearch/model/knn_query_by_doc_id.py
+manticoresearch/model/knn_query_by_vector.py
 manticoresearch/model/match_filter.py
 manticoresearch/model/match_op.py
 manticoresearch/model/match_op_filter.py
@@ -96,6 +101,7 @@ manticoresearch/model/percolate_request_query.py
 manticoresearch/model/query_filter.py
 manticoresearch/model/range_filter.py
 manticoresearch/model/search_request.py
+manticoresearch/model/search_request_knn.py
 manticoresearch/model/search_response.py
 manticoresearch/model/search_response_hits.py
 manticoresearch/model/sort_multiple.py
@@ -137,6 +143,8 @@ test/test_highlight_field.py
 test/test_in_filter.py
 test/test_index_api.py
 test/test_insert_document_request.py
+test/test_knn_query_by_doc_id.py
+test/test_knn_query_by_vector.py
 test/test_match_filter.py
 test/test_match_op.py
 test/test_match_op_filter.py
@@ -151,6 +159,7 @@ test/test_query_filter.py
 test/test_range_filter.py
 test/test_search_api.py
 test/test_search_request.py
+test/test_search_request_knn.py
 test/test_search_response.py
 test/test_search_response_hits.py
 test/test_sort_multiple.py

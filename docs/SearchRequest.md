@@ -5,6 +5,7 @@ Request object for search operation
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **index** | **str** |  | [default to ""]
+**knn** | [**SearchRequestKnn**](SearchRequestKnn.md) |  | [optional] 
 **query** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}** |  | [optional] 
 **fulltext_filter** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}** |  | [optional] 
 **attr_filter** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}** |  | [optional] 
@@ -19,6 +20,9 @@ Name | Type | Description | Notes
 **options** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}** |  | [optional] 
 **profile** | **bool** |  | [optional] 
 **track_scores** | **bool** |  | [optional] 
+**query_vector** | **bool, date, datetime, dict, float, int, list, str, none_type** |  | [optional] 
+**doc_id** | **bool, date, datetime, dict, float, int, list, str, none_type** |  | [optional] 
+**k** | **bool, date, datetime, dict, float, int, list, str, none_type** |  | [optional] 
 
 ## Building a search request
 

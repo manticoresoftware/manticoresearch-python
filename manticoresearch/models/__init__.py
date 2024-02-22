@@ -30,6 +30,8 @@ from manticoresearch.model.highlight import Highlight
 from manticoresearch.model.highlight_field import HighlightField
 from manticoresearch.model.in_filter import InFilter
 from manticoresearch.model.insert_document_request import InsertDocumentRequest
+from manticoresearch.model.knn_query_by_doc_id import KnnQueryByDocId
+from manticoresearch.model.knn_query_by_vector import KnnQueryByVector
 from manticoresearch.model.match_filter import MatchFilter
 from manticoresearch.model.match_op import MatchOp
 from manticoresearch.model.match_op_filter import MatchOpFilter
@@ -43,6 +45,7 @@ from manticoresearch.model.percolate_request_query import PercolateRequestQuery
 from manticoresearch.model.query_filter import QueryFilter
 from manticoresearch.model.range_filter import RangeFilter
 from manticoresearch.model.search_request import SearchRequest
+from manticoresearch.model.search_request_knn import SearchRequestKnn
 from manticoresearch.model.search_response import SearchResponse
 from manticoresearch.model.search_response_hits import SearchResponseHits
 from manticoresearch.model.sort_mva import SortMVA

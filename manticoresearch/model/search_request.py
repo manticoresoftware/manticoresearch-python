@@ -31,6 +31,7 @@ class SearchRequest(object):
     """
     openapi_types = {
         'index': 'str',
+        'knn': 'SearchRequestKnn',
         'query': '{str: (bool, date, datetime, dict, float, int, list, str, none_type)}',
         'fulltext_filter': '{str: (bool, date, datetime, dict, float, int, list, str, none_type)}',
         'attr_filter': '{str: (bool, date, datetime, dict, float, int, list, str, none_type)}',
@@ -44,11 +45,15 @@ class SearchRequest(object):
         'source': '{str: (bool, date, datetime, dict, float, int, list, str, none_type)}',
         'options': '{str: (bool, date, datetime, dict, float, int, list, str, none_type)}',
         'profile': 'bool',
-        'track_scores': 'bool'
+        'track_scores': 'bool',
+        'query_vector': 'bool, date, datetime, dict, float, int, list, str, none_type',
+        'doc_id': 'bool, date, datetime, dict, float, int, list, str, none_type',
+        'k': 'bool, date, datetime, dict, float, int, list, str, none_type'
     }
 
     attribute_map = {
         'index': 'index',
+        'knn': 'knn',
         'query': 'query',
         'fulltext_filter': 'fulltext_filter',
         'attr_filter': 'attr_filter',
@@ -62,16 +67,20 @@ class SearchRequest(object):
         'source': 'source',
         'options': 'options',
         'profile': 'profile',
-        'track_scores': 'track_scores'
+        'track_scores': 'track_scores',
+        'query_vector': 'query_vector',
+        'doc_id': 'doc_id',
+        'k': 'k'
     }
 
-    def __init__(self, index="", query=None, fulltext_filter=None, attr_filter=None, limit=None, offset=None, max_matches=None, sort=None, aggs=None, expressions=None, highlight=None, source=None, options=None, profile=None, track_scores=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, index="", knn=None, query=None, fulltext_filter=None, attr_filter=None, limit=None, offset=None, max_matches=None, sort=None, aggs=None, expressions=None, highlight=None, source=None, options=None, profile=None, track_scores=None, query_vector=None, doc_id=None, k=None, local_vars_configuration=None):  # noqa: E501
         """SearchRequest - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
         self.local_vars_configuration = local_vars_configuration
 
         self._index = None
+        self._knn = None
         self._query = None
         self._fulltext_filter = None
         self._attr_filter = None
@@ -86,9 +95,14 @@ class SearchRequest(object):
         self._options = None
         self._profile = None
         self._track_scores = None
+        self._query_vector = None
+        self._doc_id = None
+        self._k = None
         self.discriminator = None
 
         self.index = index
+        if knn is not None:
+            self.knn = knn
         if query is not None:
             self.query = query
         if fulltext_filter is not None:
@@ -117,6 +131,9 @@ class SearchRequest(object):
             self.profile = profile
         if track_scores is not None:
             self.track_scores = track_scores
+        self.query_vector = query_vector
+        self.doc_id = doc_id
+        self.k = k
 
     @property
     def index(self):
@@ -139,6 +156,27 @@ class SearchRequest(object):
             raise ValueError("Invalid value for `index`, must not be `None`")  # noqa: E501
 
         self._index = index
+        
+
+    @property
+    def knn(self):
+        """Gets the knn of this SearchRequest.  # noqa: E501
+
+
+        :return: The knn of this SearchRequest.  # noqa: E501
+        :rtype: SearchRequestKnn
+        """
+        return self._knn
+    @knn.setter
+    def knn(self, knn):
+        """Sets the knn of this SearchRequest.
+
+
+        :param knn: The knn of this SearchRequest.  # noqa: E501
+        :type knn: SearchRequestKnn
+        """
+
+        self._knn = knn
         
 
     @property
@@ -439,6 +477,69 @@ class SearchRequest(object):
         self._track_scores = track_scores
         
 
+    @property
+    def query_vector(self):
+        """Gets the query_vector of this SearchRequest.  # noqa: E501
+
+
+        :return: The query_vector of this SearchRequest.  # noqa: E501
+        :rtype: bool, date, datetime, dict, float, int, list, str, none_type
+        """
+        return self._query_vector
+    @query_vector.setter
+    def query_vector(self, query_vector):
+        """Sets the query_vector of this SearchRequest.
+
+
+        :param query_vector: The query_vector of this SearchRequest.  # noqa: E501
+        :type query_vector: bool, date, datetime, dict, float, int, list, str, none_type
+        """
+
+        self._query_vector = query_vector
+        
+
+    @property
+    def doc_id(self):
+        """Gets the doc_id of this SearchRequest.  # noqa: E501
+
+
+        :return: The doc_id of this SearchRequest.  # noqa: E501
+        :rtype: bool, date, datetime, dict, float, int, list, str, none_type
+        """
+        return self._doc_id
+    @doc_id.setter
+    def doc_id(self, doc_id):
+        """Sets the doc_id of this SearchRequest.
+
+
+        :param doc_id: The doc_id of this SearchRequest.  # noqa: E501
+        :type doc_id: bool, date, datetime, dict, float, int, list, str, none_type
+        """
+
+        self._doc_id = doc_id
+        
+
+    @property
+    def k(self):
+        """Gets the k of this SearchRequest.  # noqa: E501
+
+
+        :return: The k of this SearchRequest.  # noqa: E501
+        :rtype: bool, date, datetime, dict, float, int, list, str, none_type
+        """
+        return self._k
+    @k.setter
+    def k(self, k):
+        """Sets the k of this SearchRequest.
+
+
+        :param k: The k of this SearchRequest.  # noqa: E501
+        :type k: bool, date, datetime, dict, float, int, list, str, none_type
+        """
+
+        self._k = k
+        
+
 
     def to_dict(self):
         """Returns the model properties as a dict"""
@@ -485,6 +586,7 @@ class SearchRequest(object):
             for k,v in result['attr_filter'].items():
                 result['query'][k] = v
             del result['attr_filter']
+
 
         return result
 

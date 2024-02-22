@@ -31,15 +31,16 @@ class TestManualApi(ParametrizedTestCase):
         searchApi = manticoresearch.SearchApi(client)
         
         utilsApi.sql('DROP TABLE IF EXISTS movies')
-        res = utilsApi.sql('CREATE TABLE IF NOT EXISTS movies (title text, plot text, year integer, rating float, code multi)')
+        res = utilsApi.sql("CREATE TABLE IF NOT EXISTS movies (title text, plot text, _year integer, rating float, code multi, type_vector float_vector knn_type='hnsw' knn_dims='3' hnsw_similarity='l2' )")
         
-        docs = [ \
-            {"insert": {"index" : "movies", "id" : 1, "doc" : {"title" : "Star Trek 2: Nemesis", "plot": "The Enterprise is diverted to the Romulan homeworld Romulus, supposedly because they want to negotiate a peace treaty. Captain Picard and his crew discover a serious threat to the Federation once Praetor Shinzon plans to attack Earth.", "year": 2002, "rating": 6.4, "code": [1,2,3]}}}, \
-            {"insert": {"index" : "movies", "id" : 2, "doc" : {"title" : "Star Trek 1: Nemesis", "plot": "The Enterprise is diverted to the Romulan homeworld Romulus, supposedly because they want to negotiate a peace treaty. Captain Picard and his crew discover a serious threat to the Federation once Praetor Shinzon plans to attack Earth.", "year": 2001, "rating": 6.5, "code": [1,12,3]}}},
-            {"insert": {"index" : "movies", "id" : 3, "doc" : {"title" : "Star Trek 3: Nemesis", "plot": "The Enterprise is diverted to the Romulan homeworld Romulus, supposedly because they want to negotiate a peace treaty. Captain Picard and his crew discover a serious threat to the Federation once Praetor Shinzon plans to attack Earth.", "year": 2003, "rating": 6.6, "code": [11,2,3]}}}, \
-            {"insert": {"index" : "movies", "id" : 4, "doc" : {"title" : "Star Trek 4: Nemesis", "plot": "The Enterprise is diverted to the Romulan homeworld Romulus, supposedly because they want to negotiate a peace treaty. Captain Picard and his crew discover a serious threat to the Federation once Praetor Shinzon plans to attack Earth.", "year": 2003, "rating": 6.5, "code": [1,2,4]}}},
+        docs = [
+            {"insert": {"index" : "movies", "id" : 1, "doc" : {"title" : "Star Trek 2: Nemesis", "plot": "The Enterprise is diverted to the Romulan homeworld Romulus, supposedly because they want to negotiate a peace treaty. Captain Picard and his crew discover a serious threat to the Federation once Praetor Shinzon plans to attack Earth.", "_year": 2002, "rating": 6.4, "code": [1,2,3], "type_vector": [0.2, 1.4, -2.3]}}},
+            {"insert": {"index" : "movies", "id" : 2, "doc" : {"title" : "Star Trek 1: Nemesis", "plot": "The Enterprise is diverted to the Romulan homeworld Romulus, supposedly because they want to negotiate a peace treaty. Captain Picard and his crew discover a serious threat to the Federation once Praetor Shinzon plans to attack Earth.", "_year": 2001, "rating": 6.5, "code": [1,12,3], "type_vector": [0.8, 0.4, 1.3]}}},
+            {"insert": {"index" : "movies", "id" : 3, "doc" : {"title" : "Star Trek 3: Nemesis", "plot": "The Enterprise is diverted to the Romulan homeworld Romulus, supposedly because they want to negotiate a peace treaty. Captain Picard and his crew discover a serious threat to the Federation once Praetor Shinzon plans to attack Earth.", "_year": 2003, "rating": 6.6, "code": [11,2,3], "type_vector": [1.5, -1.0, 1.6]}}},
+            {"insert": {"index" : "movies", "id" : 4, "doc" : {"title" : "Star Trek 4: Nemesis", "plot": "The Enterprise is diverted to the Romulan homeworld Romulus, supposedly because they want to negotiate a peace treaty. Captain Picard and his crew discover a serious threat to the Federation once Praetor Shinzon plans to attack Earth.", "_year": 2003, "rating": 6.5, "code": [1,2,4], "type_vector": [0.4, 2.4, 0.9]}}},
         ]
-        indexApi.bulk('\n'.join(map(json.dumps,docs)))
+        indexApi.bulk("\n".join(map(json.dumps,docs)))
+        
         
         search_request = SearchRequest(
             index="movies",
@@ -47,7 +48,7 @@ class TestManualApi(ParametrizedTestCase):
         ) 
         
         res = searchApi.search(search_request)
-
+        
         search_request.index = 'movies'
         search_request.limit = 10
         search_request.track_scores = True
@@ -58,25 +59,25 @@ class TestManualApi(ParametrizedTestCase):
         res = searchApi.search(search_request)
         
         search_request.source = SourceByRules()
-        search_request.source.includes = ['title', 'year']
+        search_request.source.includes = ['title', '_year']
         search_request.source.excludes = ['code']
 
         res = searchApi.search(search_request)
 
-        search_request.sort = ['year']
+        search_request.sort = ['_year']
         sort2 = manticoresearch.model.SortOrder('rating', 'asc')
         sort3 = manticoresearch.model.SortMVA('code', 'desc', 'max')
         search_request.sort += [sort2,sort3]
         
         res = searchApi.search(search_request)
 
-        search_request.expressions = {'expr': 'min(year,2900)'}
-        search_request.expressions['expr2'] = 'max(year,2100)'
+        search_request.expressions = {'expr': 'min(_year,2900)'}
+        search_request.expressions['expr2'] = 'max(_year,2100)'
         search_request.source.includes += ['expr2', 'expr']
         
         res = searchApi.search(search_request)
         		
-        aggTerms1 = AggregationTerms('year', 10)
+        aggTerms1 = AggregationTerms('_year', 10)
         agg1 = Aggregation(aggTerms1)
         agg2 = Aggregation(AggregationTerms('rating'), ['rating'])
         search_request.aggs = {'agg1': agg1}
@@ -120,17 +121,17 @@ class TestManualApi(ParametrizedTestCase):
         
         res = searchApi.search(search_request)
 
-        search_request.attr_filter = EqualsFilter('year', 2001)
+        search_request.attr_filter = EqualsFilter('_year', 2001)
         
         res = searchApi.search(search_request)
 
-        inFilter = InFilter('year', [2001, 2002])
+        inFilter = InFilter('_year', [2001, 2002])
         inFilter.values += [10,11]
         search_request.attr_filter = inFilter
         
         res = searchApi.search(search_request)
 
-        rangeFilter = RangeFilter('year', lte = 2002)
+        rangeFilter = RangeFilter('_year', lte = 2002)
         rangeFilter.gte = 1000
         search_request.attr_filter = rangeFilter
 
@@ -143,8 +144,8 @@ class TestManualApi(ParametrizedTestCase):
 
         res = searchApi.search(search_request)
 
-        geoFilter = GeoDistanceFilter(location_anchor={'lat':10,'lon':20.5}, location_source='year,rating')
-        geoFilter.location_source='year,rating'
+        geoFilter = GeoDistanceFilter(location_anchor={'lat':10,'lon':20.5}, location_source='_year,rating')
+        geoFilter.location_source='_year,rating'
         geoFilter.distance_type='adaptive'
         geoFilter.distance='100 km'
         search_request.attr_filter = geoFilter
@@ -152,13 +153,13 @@ class TestManualApi(ParametrizedTestCase):
         res = searchApi.search(search_request)
 
         boolFilter = BoolFilter()
-        boolFilter.must = [ EqualsFilter('year', 2001) ]
+        boolFilter.must = [ EqualsFilter('_year', 2001) ]
         boolFilter.must += [ RangeFilter('rating', lte = 20) ]
         search_request.attr_filter = boolFilter
         
         res = searchApi.search(search_request)
 
-        boolFilter.must_not = [ EqualsFilter('year', 2001) ]
+        boolFilter.must_not = [ EqualsFilter('_year', 2001) ]
         
         res = searchApi.search(search_request)
         
@@ -174,7 +175,42 @@ class TestManualApi(ParametrizedTestCase):
         res = searchApi.search(search_request)
         pprint(res)
 
-        pprint("Search tests finished")
+        search_request = SearchRequest(
+            index="movies",
+        )
+        search_request.knn = KnnQueryByVector(
+            field="type_vector",
+            query_vector=[1.5, -1.0, 1.6],
+            k=5,
+        )
+        res = searchApi.search(search_request)
+
+        search_request.knn = KnnQueryByDocId(
+            field="type_vector",
+            doc_id=2,
+            k=5,
+        )
+        res = searchApi.search(search_request)
+
+        boolFilter = BoolFilter()
+        boolFilter.must = [ EqualsFilter('id', 3) ]
+        search_request.knn = KnnQueryByVector(
+            field="type_vector",
+            query_vector=[1.5, -1.0, 1.6],
+            k=5,
+            filter=boolFilter,
+        )
+        res = searchApi.search(search_request)
+        
+        search_request.knn = KnnQueryByDocId(
+            field="type_vector",
+            doc_id=2,
+            k=5,
+            filter=boolFilter,
+        )
+        res = searchApi.search(search_request)
+                        
+        print("\nSearch tests finished\n")
         
         utilsApi.sql('SHOW THREADS')
         utilsApi.sql('DROP TABLE IF EXISTS products')
