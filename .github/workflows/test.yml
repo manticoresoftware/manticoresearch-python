@@ -17,7 +17,8 @@ jobs:
     services:
       manticoresearch-manticore:
         image: manticoresearch/manticore:dev
-        options: --user root
+        env:
+          EXTRA: 1
         ports:
           - 9408:9308
 
@@ -28,7 +29,6 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     - run: |
-        docker logs "${{ job.services.manticoresearch-manticore.id }}"
         sudo apt update && sudo apt -y install python3-pip
         python3 -m pip install -e .
         python3 test/test.py
