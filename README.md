@@ -14,7 +14,7 @@ Minimum Manticore Search version is >= 2.5.1 with HTTP protocol enabled.
 Install the `manticoresearch` package with [pip](http://pypi.python.org)
 
 ```sh
-pip install manticoresearch
+pip install manticoresearch-dev
 ```
 
 Then import the package:
