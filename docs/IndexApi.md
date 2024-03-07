@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**insert**](IndexApi.md#insert) | **POST** /insert | Create a new document in an index
 [**replace**](IndexApi.md#replace) | **POST** /replace | Replace new document in an index
 [**update**](IndexApi.md#update) | **POST** /update | Update a document in an index
+[**update_0**](IndexApi.md#update_0) | **POST** /{index}/_update/{id} | Partially replaces a document in an index
 
 
 ## **bulk**
@@ -501,6 +502,87 @@ with manticoresearch.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **update_document_request** | [**UpdateDocumentRequest**](UpdateDocumentRequest.md)|  | 
+
+### Return type
+
+[**UpdateResponse**](UpdateResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | item updated |  -  |
+**0** | error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+## **update_0**
+> UpdateResponse update_0(index,id,replace_document_request)
+
+Partially replaces a document in an index
+
+Partially replaces a document with given id in an index
+Responds with an object of the following format: 
+
+  ```
+  {'_index':'products','updated':1}
+  ```
+
+
+### Example
+
+```python
+import manticoresearch
+from manticoresearch.api import index_api
+from manticoresearch.model.replace_document_request import ReplaceDocumentRequest
+from manticoresearch.model.error_response import ErrorResponse
+from manticoresearch.model.update_response import UpdateResponse
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://127.0.0.1:9308
+# See configuration.py for a list of all supported configuration parameters.
+configuration = manticoresearch.Configuration(
+    host = "http://127.0.0.1:9308"
+)
+
+
+# Enter a context with an instance of the API client
+with manticoresearch.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = index_api.IndexApi(api_client)
+
+    index = "index_example" # str  |( Name of the percolate index  
+    id = 3.14 # float  |( Id of the document to replace  
+    replace_document_request = ReplaceDocumentRequest(
+        doc={},
+    ) # ReplaceDocumentRequest  
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Partially replaces a document in an index
+        api_response = api_instance.update_0(index, id, replace_document_request)
+        pprint(api_response)
+    except manticoresearch.ApiException as e:
+        print("Exception when calling IndexApi->update_0: %s\n" % e)
+
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **index** | **str**| Name of the percolate index | 
+ **id** | **float**| Id of the document to replace | 
+ **replace_document_request** | [**ReplaceDocumentRequest**](ReplaceDocumentRequest.md)|  | 
 
 ### Return type
 
