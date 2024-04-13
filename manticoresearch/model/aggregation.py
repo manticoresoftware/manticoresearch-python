@@ -31,15 +31,17 @@ class Aggregation(object):
     """
     openapi_types = {
         'terms': 'AggregationTerms',
-        'sort': '[{str: (AggregationSortInnerValue,)}]'
+        'sort': '[{str: (AggregationSortInnerValue,)}]',
+        'composite': 'AggregationComposite'
     }
 
     attribute_map = {
         'terms': 'terms',
-        'sort': 'sort'
+        'sort': 'sort',
+        'composite': 'composite'
     }
 
-    def __init__(self, terms=None, sort=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, terms=None, sort=None, composite=None, local_vars_configuration=None):  # noqa: E501
         """Aggregation - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
@@ -47,12 +49,15 @@ class Aggregation(object):
 
         self._terms = None
         self._sort = None
+        self._composite = None
         self.discriminator = None
 
         if terms is not None:
             self.terms = terms
         if sort is not None:
             self.sort = sort
+        if composite is not None:
+            self.composite = composite
 
     @property
     def terms(self):
@@ -94,6 +99,27 @@ class Aggregation(object):
         """
 
         self._sort = sort
+        
+
+    @property
+    def composite(self):
+        """Gets the composite of this Aggregation.  # noqa: E501
+
+
+        :return: The composite of this Aggregation.  # noqa: E501
+        :rtype: AggregationComposite
+        """
+        return self._composite
+    @composite.setter
+    def composite(self, composite):
+        """Sets the composite of this Aggregation.
+
+
+        :param composite: The composite of this Aggregation.  # noqa: E501
+        :type composite: AggregationComposite
+        """
+
+        self._composite = composite
         
 
 

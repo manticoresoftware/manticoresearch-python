@@ -82,7 +82,19 @@ class TestManualApi(ParametrizedTestCase):
         agg2 = Aggregation(AggregationTerms('rating'), ['rating'])
         search_request.aggs = {'agg1': agg1}
         search_request.aggs['agg2'] = agg2
-        
+
+        res = searchApi.search(search_request)
+
+        compAggTerms1 = AggregationCompositeSourcesInnerValueTerms('_year')
+        compAgg1 = AggregationCompositeSourcesInnerValue(compAggTerms1)
+        compAggTerms2 = AggregationCompositeSourcesInnerValueTerms('rating')
+        compAgg2 = AggregationCompositeSourcesInnerValue(compAggTerms2)
+        compSources = [{'comp_agg_1': compAgg1}, {'comp_agg_2': compAgg2}]
+        compAgg = AggregationComposite(size=5, sources=compSources)
+        agg = Aggregation(composite=compAgg)
+        search_request.aggs = {'comp_agg': agg}
+
+        res = searchApi.search(search_request)
 
         highlight = manticoresearch.model.Highlight()
         highlight.fieldnames = ['title']

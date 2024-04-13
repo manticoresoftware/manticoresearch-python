@@ -140,11 +140,28 @@ Name | Type | Description | Notes
     aggTerms1 = AggregationTerms('year', 10)
     agg1 = Aggregation(aggTerms1)
     agg2 = Aggregation(AggregationTerms('rating'), ['rating'])
+    
     search_request.aggs = {'agg1': agg1}
     search_request.aggs['agg2'] = agg2
-        
+    
     api_response = api_instance.search(search_req)
     pprint(api_response)
+    
+    # Composite aggregation
+    compAggTerms1 = AggregationCompositeSourcesInnerValueTerms('year')
+    compAgg1 = AggregationCompositeSourcesInnerValue(compAggTerms1)
+    compAggTerms2 = AggregationCompositeSourcesInnerValueTerms('rating')
+    compAgg2 = AggregationCompositeSourcesInnerValue(compAggTerms2)
+    compSources = [{'comp_agg_1': compAgg1}, {'comp_agg_2': compAgg2}]
+    compAgg = AggregationComposite(size=5, sources=compSources)
+    agg = Aggregation(composite=compAgg)
+    
+    search_request.aggs = {'comp_agg': agg}
+    
+    api_response = api_instance.search(search_req)
+    pprint(api_response)
+    
+    
 ```
 
 ### Highlight
