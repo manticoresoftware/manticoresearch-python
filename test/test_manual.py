@@ -94,6 +94,7 @@ class TestManualApi(ParametrizedTestCase):
         compAgg = AggregationComposite(size=5, sources=compSources)
         agg = Aggregation(composite=compAgg)
         search_request.aggs = {'comp_agg': agg}
+		pprint(search_request.to_dict())
 
         res = searchApi.search(search_request)
         pprint(res)    
