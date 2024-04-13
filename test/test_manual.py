@@ -90,7 +90,7 @@ class TestManualApi(ParametrizedTestCase):
         compAgg1 = AggregationCompositeSourcesInnerValue(compAggTerms1)
         compAggTerms2 = AggregationCompositeSourcesInnerValueTerms('rating')
         compAgg2 = AggregationCompositeSourcesInnerValue(compAggTerms2)
-        compSources = {'comp_agg_1': compAgg1, 'comp_agg_2': compAgg2}
+        compSources = [{'comp_agg_1': compAgg1}, {'comp_agg_2': compAgg2}]
         compAgg = AggregationComposite(size=5, sources=compSources)
         agg = Aggregation(composite=compAgg)
         search_request.aggs = {'comp_agg': agg}
