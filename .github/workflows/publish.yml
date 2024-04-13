@@ -1,0 +1,33 @@
+name: Publishing
+
+on: [push]
+
+jobs:
+  test:
+    uses: ./.github/workflows/test.yml  
+  publish:
+    name: Publish the client to the public registry
+    needs: [test]
+    runs-on: ubuntu-latest
+    env:
+      PYPIRC: ${{ secrets.PYPIRC }}
+      PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Python 3.10
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    - name: Check for dev-version
+      if:  ${{ contains(github.ref, 'master') }}
+      run: |
+        VERSION=`git log -1 --date=format:"%y%m%d%H" --format=%cd|head`
+        echo "version $VERSION"
+        sed -i -E "s/(VERSION = \")([0-9]\.[0-9]\.)(.*)(\")/\1\2$VERSION\4/1" setup.py
+    - name: Publish
+      run: |
+        echo $PYPIRC > ~/.pypirc
+        python -m pip install --user --upgrade wheel
+        python -m pip install --user --upgrade twine
+        python setup.py sdist bdist_wheel
+        python -m twine upload dist/* -u __token__ -p $PYPI_TOKEN
