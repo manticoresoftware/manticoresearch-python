@@ -568,12 +568,10 @@ class SearchRequest(object):
         del result['source']
         if result['aggs'] is not None:
             for k,v in result['aggs'].items():
+                if v['composite'] is not None:
+                    del result['aggs'][k]['terms']
                 if v['sort'] is None:
-                    result['aggs'][k]['sort'] = []
-                if v['terms'] is None:
-                    result['aggs'][k]['terms'] = []
-                if v['composite'] is None:
-                    result['aggs'][k]['composite'] = []
+                    del result['aggs'][k]['sort']
         if result['highlight'] is not None:
 	        if result['highlight']['fields'] is None: 	
 	            result['highlight']['fields'] = result['highlight']['fieldnames']
