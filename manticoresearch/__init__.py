@@ -33,6 +33,9 @@ from manticoresearch.exceptions import ApiAttributeError
 from manticoresearch.exceptions import ApiException
 # import models into sdk package
 from manticoresearch.model.aggregation import Aggregation
+from manticoresearch.model.aggregation_composite import AggregationComposite
+from manticoresearch.model.aggregation_composite_sources_inner_value import AggregationCompositeSourcesInnerValue
+from manticoresearch.model.aggregation_composite_sources_inner_value_terms import AggregationCompositeSourcesInnerValueTerms
 from manticoresearch.model.aggregation_sort_inner_value import AggregationSortInnerValue
 from manticoresearch.model.aggregation_terms import AggregationTerms
 from manticoresearch.model.attr_filter import AttrFilter

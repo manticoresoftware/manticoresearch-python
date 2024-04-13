@@ -1,6 +1,6 @@
 name: Testing
 
-on: [workflow_call]
+on: [push]
 
 jobs:
   test:

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **terms** | [**AggregationTerms**](AggregationTerms.md) |  | [optional] 
 **sort** | [**[{str: (AggregationSortInnerValue,)}]**](AggregationSortInnerValue.md) |  | [optional] 
+**composite** | [**AggregationComposite**](AggregationComposite.md) |  | [optional] 
 
 [[Using in search requests]](SearchApi.md#Aggregation)
 
