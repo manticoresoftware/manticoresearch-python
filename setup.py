@@ -12,7 +12,7 @@ from setuptools import setup, find_packages
 from os import path
 
 NAME = "manticoresearch-devel"
-VERSION = "4.2.1-dev"
+VERSION = "4.3.1-dev"
 # To install the library, run the following
 #
 # python setup.py install

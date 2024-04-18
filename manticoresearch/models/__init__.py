@@ -44,6 +44,7 @@ from manticoresearch.model.percolate_request import PercolateRequest
 from manticoresearch.model.percolate_request_query import PercolateRequestQuery
 from manticoresearch.model.query_filter import QueryFilter
 from manticoresearch.model.range_filter import RangeFilter
+from manticoresearch.model.range_filter_lte import RangeFilterLte
 from manticoresearch.model.replace_document_request import ReplaceDocumentRequest
 from manticoresearch.model.search_request import SearchRequest
 from manticoresearch.model.search_request_knn import SearchRequestKnn

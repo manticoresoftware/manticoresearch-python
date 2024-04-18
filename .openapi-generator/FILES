@@ -4,6 +4,9 @@
 .travis.yml
 README.md
 docs/Aggregation.md
+docs/AggregationComposite.md
+docs/AggregationCompositeSourcesInnerValue.md
+docs/AggregationCompositeSourcesInnerValueTerms.md
 docs/AggregationSortInnerValue.md
 docs/AggregationTerms.md
 docs/AttrFilter.md
@@ -39,6 +42,7 @@ docs/PercolateRequest.md
 docs/PercolateRequestQuery.md
 docs/QueryFilter.md
 docs/RangeFilter.md
+docs/RangeFilterLte.md
 docs/SearchApi.md
 docs/SearchRequest.md
 docs/SearchRequestKnn.md
