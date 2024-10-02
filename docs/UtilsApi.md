@@ -7,25 +7,19 @@ Method | HTTP request | Description
 [**sql**](UtilsApi.md#sql) | **POST** /sql | Perform SQL requests
 
 
-## **sql**
-> SqlResponse sql(body,raw_response=True)
+# **sql**
+> List[object] sql(body, raw_response=raw_response)
 
 Perform SQL requests
 
-Run a query in SQL format.
-Expects a query string passed through `body` parameter and optional `raw_response` parameter that defines a format of response.
-`raw_response` can be set to `False` for Select queries only, e.g., `SELECT * FROM myindex`
-The query string must stay as it is, no URL encoding is needed.
-The response object depends on the query executed. In select mode the response has same format as `/search` operation.
-
+Run a query in SQL format. Expects a query string passed through `body` parameter and optional `raw_response` parameter that defines a format of response. `raw_response` can be set to `False` for Select queries only, e.g., `SELECT * FROM myindex` The query string must stay as it is, no URL encoding is needed. The response object depends on the query executed. In select mode the response has same format as `/search` operation. 
 
 ### Example
 
+
 ```python
 import manticoresearch
-from manticoresearch.api import utils_api
-from manticoresearch.model.error_response import ErrorResponse
-from manticoresearch.model.sql_response import SqlResponse
+from manticoresearch.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://127.0.0.1:9308
@@ -38,32 +32,23 @@ configuration = manticoresearch.Configuration(
 # Enter a context with an instance of the API client
 with manticoresearch.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = utils_api.UtilsApi(api_client)
+    api_instance = manticoresearch.UtilsApi(api_client)
+    body = SHOW TABLES # str | A query parameter string. 
+    raw_response = True # bool | Optional parameter, defines a format of response. Can be set to `False` for Select only queries and set to `True` or omitted for any type of queries:  (optional) (default to True)
 
-    body = "SHOW TABLES" # str  |( A query parameter string.   
-    raw_response = True # bool  | Optional parameter, defines a format of response. Can be set to `False` for Select only queries and set to `True` or omitted for any type of queries:  (optional) if omitted the server will use the default value of True 
-
-    # example passing only required values which don't have defaults set
-    try:
-        # Perform SQL requests
-        api_response = api_instance.sql(body)
-        pprint(api_response)
-    except manticoresearch.ApiException as e:
-        print("Exception when calling UtilsApi->sql: %s\n" % e)
-
-    # example passing only required values which don't have defaults set
-    # and optional values
     try:
         # Perform SQL requests
         api_response = api_instance.sql(body, raw_response=raw_response)
+        print("The response of UtilsApi->sql:\n")
         pprint(api_response)
-    except manticoresearch.ApiException as e:
+    except Exception as e:
         print("Exception when calling UtilsApi->sql: %s\n" % e)
-
-
 ```
 
+
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -72,7 +57,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SqlResponse**](SqlResponse.md)
+**List[object]**
 
 ### Authorization
 
@@ -84,6 +69,7 @@ No authorization required
  - **Accept**: application/json
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | In case of SELECT-only in mode none the response schema is the same as of &#x60;search&#x60;. In case of &#x60;mode&#x3D;raw&#x60; the response depends on the query executed.  |  -  |
