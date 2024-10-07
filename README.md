@@ -69,11 +69,28 @@ with manticoresearch.ApiClient(configuration) as api_client:
     indexApi = manticoresearch.IndexApi(api_client)
     searchApi = manticoresearch.SearchApi(api_client)
 
-    try:    
-        # Perform insert and search operations
+    try:
+    	# Perform insert and search operations
+    	newDoc = {"title" : "Crossbody Bag with Tassel", "price": 19.85}
+        insert_request = InsertDocumentRequest(index="products", doc=newDoc)
+        indexApi.insert(insert_request)
+
+		newDoc = {"title" : "Pet Hair Remover Glove", "price": 7.99}
+        insert_request = InsertDocumentRequest(index="products", doc=newDoc)
+        indexApi.insert(insert_request)
+        
+        query_highlight = Highlight()
+        query_highlight.fields = HighlightFields({"title":{}})
+        search_query = SearchQuery(query_string="@title bag")
+        search_request = SearchRequest(index="products", query=search_query, highlight=query_highlight)
+        search_response = searchApi.search(search_request)    
+        print("The response of SearchApi->search:\n")
+        pprint(search_response)
+
+		# Alternatively, you can pass all request arguments as JSON strings        
         indexApi.insert({"index": "products", "doc" : {"title" : "Crossbody Bag with Tassel", "price" : 19.85}})
         indexApi.insert({"index": "products", "doc" : {"title" : "Pet Hair Remover Glove", "price" : 7.99}})
-        search_response = searchApi.search({"index": "products", "query": {"query_string": "@title bag"}, "highlight":{"fieldnames":["title"]}})
+        search_response = searchApi.search({"index": "products", "query": {"query_string": "@title bag"}, "highlight":{"fields":{"title":{}}}})
         print("The response of SearchApi->search:\n")
         pprint(search_response)
     except ApiException as e:
