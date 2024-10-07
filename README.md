@@ -75,7 +75,7 @@ with manticoresearch.ApiClient(configuration) as api_client:
         insert_request = InsertDocumentRequest(index="products", doc=newDoc)
         indexApi.insert(insert_request)
 
-		newDoc = {"title" : "Pet Hair Remover Glove", "price": 7.99}
+        newDoc = {"title" : "Pet Hair Remover Glove", "price": 7.99}
         insert_request = InsertDocumentRequest(index="products", doc=newDoc)
         indexApi.insert(insert_request)
         
@@ -87,7 +87,7 @@ with manticoresearch.ApiClient(configuration) as api_client:
         print("The response of SearchApi->search:\n")
         pprint(search_response)
 
-		# Alternatively, you can pass all request arguments as JSON strings        
+        # Alternatively, you can pass all request arguments as JSON strings        
         indexApi.insert({"index": "products", "doc" : {"title" : "Crossbody Bag with Tassel", "price" : 19.85}})
         indexApi.insert({"index": "products", "doc" : {"title" : "Pet Hair Remover Glove", "price" : 7.99}})
         search_response = searchApi.search({"index": "products", "query": {"query_string": "@title bag"}, "highlight":{"fields":{"title":{}}}})
