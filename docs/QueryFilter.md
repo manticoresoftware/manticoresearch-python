@@ -5,15 +5,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**equals** | [**EqualsFilterEquals**](EqualsFilterEquals.md) |  | [optional] 
-**var_in** | **Dict[str, List[EqualsFilterEquals]]** |  | [optional] 
-**range** | [**Dict[str, RangeFilterRangeValue]**](RangeFilterRangeValue.md) |  | [optional] 
-**geo_distance** | [**GeoFilterGeoDistance**](GeoFilterGeoDistance.md) |  | [optional] 
-**bool** | [**BoolFilterBool**](BoolFilterBool.md) |  | [optional] 
-**match** | [**MatchFilterMatch**](MatchFilterMatch.md) |  | [optional] 
-**match_all** | **str** |  | [optional] 
-**match_phrase** | **Dict[str, str]** |  | [optional] 
-**query_string** | **str** |  | [optional] 
+**query_string** | **object** |  | [optional] 
+**match** | **object** |  | [optional] 
+**match_phrase** | **object** |  | [optional] 
+**match_all** | **object** |  | [optional] 
+**bool** | [**BoolFilter**](BoolFilter.md) |  | [optional] 
+**equals** | **object** |  | [optional] 
+**var_in** | **object** |  | [optional] 
+**range** | **object** |  | [optional] 
+**geo_distance** | [**GeoDistance**](GeoDistance.md) |  | [optional] 
 
 ## Example
 

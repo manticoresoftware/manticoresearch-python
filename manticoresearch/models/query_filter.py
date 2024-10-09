@@ -14,137 +14,125 @@
 
 
 from __future__ import annotations
-from inspect import getfullargspec
-import json
 import pprint
 import re  # noqa: F401
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
-from typing import Optional
-from manticoresearch.models.attr_filter import AttrFilter
-from manticoresearch.models.fulltext_filter import FulltextFilter
-from typing import Union, Any, List, Set, TYPE_CHECKING, Optional, Dict
-from typing_extensions import Literal, Self
-from pydantic import Field
+import json
 
-QUERYFILTER_ANY_OF_SCHEMAS = ["AttrFilter", "BoolFilter", "FulltextFilter"]
+from pydantic import BaseModel, Field
+from typing import Any, ClassVar, Dict, List, Optional
+from manticoresearch.models.bool_filter import BoolFilter
+from manticoresearch.models.geo_distance import GeoDistance
+from typing import Optional, Set
+from typing_extensions import Self
 
 class QueryFilter(BaseModel):
     """
     QueryFilter
-    """
+    """ # noqa: E501
+    query_string: Optional[Any] = None
+    match: Optional[Any] = None
+    match_phrase: Optional[Any] = None
+    match_all: Optional[Any] = None
+    bool: Optional[BoolFilter] = None
+    equals: Optional[Any] = None
+    var_in: Optional[Dict[str, Any]] = Field(default=None, alias="in")
+    range: Optional[Dict[str, Any]] = None
+    geo_distance: Optional[GeoDistance] = None
+    __properties: ClassVar[List[str]] = ["query_string", "match", "match_phrase", "match_all", "bool", "equals", "in", "range", "geo_distance"]
 
-    # data type: AttrFilter
-    anyof_schema_1_validator: Optional[AttrFilter] = None
-    # data type: BoolFilter
-    anyof_schema_2_validator: Optional[BoolFilter] = None
-    # data type: FulltextFilter
-    anyof_schema_3_validator: Optional[FulltextFilter] = None
-    if TYPE_CHECKING:
-        actual_instance: Optional[Union[AttrFilter, BoolFilter, FulltextFilter]] = None
-    else:
-        actual_instance: Any = None
-    any_of_schemas: Set[str] = { "AttrFilter", "BoolFilter", "FulltextFilter" }
+    #model_config = ConfigDict(
+    #    populate_by_name=True,
+    #    validate_assignment=True,
+    #    protected_namespaces=(),
+    #)
 
-    model_config = {
-        "validate_assignment": True,
-        "protected_namespaces": (),
-    }
-
-    def __init__(self, *args, **kwargs) -> None:
-        if args:
-            if len(args) > 1:
-                raise ValueError("If a position argument is used, only 1 is allowed to set `actual_instance`")
-            if kwargs:
-                raise ValueError("If a position argument is used, keyword arguments cannot be used.")
-            super().__init__(actual_instance=args[0])
-        else:
-            super().__init__(**kwargs)
-
-    @field_validator('actual_instance')
-    def actual_instance_must_validate_anyof(cls, v):
-        instance = QueryFilter.model_construct()
-        error_messages = []
-        # validate data type: AttrFilter
-        if not isinstance(v, AttrFilter):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `AttrFilter`")
-        else:
-            return v
-
-        # validate data type: BoolFilter
-        if not isinstance(v, BoolFilter):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `BoolFilter`")
-        else:
-            return v
-
-        # validate data type: FulltextFilter
-        if not isinstance(v, FulltextFilter):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `FulltextFilter`")
-        else:
-            return v
-
-        if error_messages:
-            # no match
-            raise ValueError("No match found when setting the actual_instance in QueryFilter with anyOf schemas: AttrFilter, BoolFilter, FulltextFilter. Details: " + ", ".join(error_messages))
-        else:
-            return v
-
-    @classmethod
-    def from_dict(cls, obj: Dict[str, Any]) -> Self:
-        return cls.from_json(json.dumps(obj))
-
-    @classmethod
-    def from_json(cls, json_str: str) -> Self:
-        """Returns the object represented by the json string"""
-        instance = cls.model_construct()
-        error_messages = []
-        # anyof_schema_1_validator: Optional[AttrFilter] = None
-        try:
-            instance.actual_instance = AttrFilter.from_json(json_str)
-            return instance
-        except (ValidationError, ValueError) as e:
-             error_messages.append(str(e))
-        # anyof_schema_2_validator: Optional[BoolFilter] = None
-        try:
-            instance.actual_instance = BoolFilter.from_json(json_str)
-            return instance
-        except (ValidationError, ValueError) as e:
-             error_messages.append(str(e))
-        # anyof_schema_3_validator: Optional[FulltextFilter] = None
-        try:
-            instance.actual_instance = FulltextFilter.from_json(json_str)
-            return instance
-        except (ValidationError, ValueError) as e:
-             error_messages.append(str(e))
-
-        if error_messages:
-            # no match
-            raise ValueError("No match found when deserializing the JSON string into QueryFilter with anyOf schemas: AttrFilter, BoolFilter, FulltextFilter. Details: " + ", ".join(error_messages))
-        else:
-            return instance
-
-    def to_json(self) -> str:
-        """Returns the JSON representation of the actual instance"""
-        if self.actual_instance is None:
-            return "null"
-
-        if hasattr(self.actual_instance, "to_json") and callable(self.actual_instance.to_json):
-            return self.actual_instance.to_json()
-        else:
-            return json.dumps(self.actual_instance)
-
-    def to_dict(self) -> Optional[Union[Dict[str, Any], AttrFilter, BoolFilter, FulltextFilter]]:
-        """Returns the dict representation of the actual instance"""
-        if self.actual_instance is None:
-            return None
-
-        if hasattr(self.actual_instance, "to_dict") and callable(self.actual_instance.to_dict):
-            return self.actual_instance.to_dict()
-        else:
-            return self.actual_instance
 
     def to_str(self) -> str:
-        """Returns the string representation of the actual instance"""
-        return pprint.pformat(self.model_dump())
+        """Returns the string representation of the model using alias"""
+        return pprint.pformat(self.model_dump(by_alias=True))
+
+    def to_json(self) -> str:
+        """Returns the JSON representation of the model using alias"""
+        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
+        return json.dumps(self.to_dict())
+
+    @classmethod
+    def from_json(cls, json_str: str) -> Optional[Self]:
+        """Create an instance of QueryFilter from a JSON string"""
+        return cls.from_dict(json.loads(json_str))
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Return the dictionary representation of the model using alias.
+
+        This has the following differences from calling pydantic's
+        `self.model_dump(by_alias=True)`:
+
+        * `None` is only added to the output dict for nullable fields that
+          were set at model initialization. Other fields with value `None`
+          are ignored.
+        """
+        excluded_fields: Set[str] = set([
+        ])
+
+        _dict = self.model_dump(
+            by_alias=True,
+            exclude=excluded_fields,
+            exclude_none=True,
+        )
+        # override the default output from pydantic by calling `to_dict()` of bool
+        if self.bool:
+            _dict['bool'] = self.bool.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of geo_distance
+        if self.geo_distance:
+            _dict['geo_distance'] = self.geo_distance.to_dict()
+        # set to None if query_string (nullable) is None
+        # and model_fields_set contains the field
+        if self.query_string is None and "query_string" in self.model_fields_set:
+            _dict['query_string'] = None
+
+        # set to None if match (nullable) is None
+        # and model_fields_set contains the field
+        if self.match is None and "match" in self.model_fields_set:
+            _dict['match'] = None
+
+        # set to None if match_phrase (nullable) is None
+        # and model_fields_set contains the field
+        if self.match_phrase is None and "match_phrase" in self.model_fields_set:
+            _dict['match_phrase'] = None
+
+        # set to None if match_all (nullable) is None
+        # and model_fields_set contains the field
+        if self.match_all is None and "match_all" in self.model_fields_set:
+            _dict['match_all'] = None
+
+        # set to None if equals (nullable) is None
+        # and model_fields_set contains the field
+        if self.equals is None and "equals" in self.model_fields_set:
+            _dict['equals'] = None
+
+        return _dict
+
+    @classmethod
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
+        """Create an instance of QueryFilter from a dict"""
+        if obj is None:
+            return None
+
+        if not isinstance(obj, dict):
+            return cls.model_validate(obj)
+
+        _obj = cls.model_validate({
+            "query_string": obj.get("query_string"),
+            "match": obj.get("match"),
+            "match_phrase": obj.get("match_phrase"),
+            "match_all": obj.get("match_all"),
+            "bool": BoolFilter.from_dict(obj["bool"]) if obj.get("bool") is not None else None,
+            "equals": obj.get("equals"),
+            "in": obj.get("in"),
+            "range": obj.get("range"),
+            "geo_distance": GeoDistance.from_dict(obj["geo_distance"]) if obj.get("geo_distance") is not None else None
+        })
+        return _obj
 
 from manticoresearch.models.bool_filter import BoolFilter
 # TODO: Rewrite to not use raise_errors

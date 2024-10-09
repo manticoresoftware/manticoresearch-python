@@ -108,7 +108,7 @@ configuration = manticoresearch.Configuration(
 with manticoresearch.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = manticoresearch.SearchApi(api_client)
-    search_request = ["'asas'"] # SearchRequest | 
+    search_request = ["'request=SearchRequest(index=\"test\",query=Query(query_string=\"abc\"))'"] # SearchRequest | 
 
     try:
         # Performs a search on an index

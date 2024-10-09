@@ -18,9 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr, field_validator
+from pydantic import BaseModel, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from manticoresearch.models.highlight_all_of_fields import HighlightAllOfFields
 from manticoresearch.models.query_filter import QueryFilter
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,18 +28,18 @@ class Highlight(BaseModel):
     """
     Highlight
     """ # noqa: E501
-    fragment_size: Optional[StrictInt] = None
-    limit: Optional[StrictInt] = None
-    limit_snippets: Optional[StrictInt] = None
-    limit_words: Optional[StrictInt] = None
-    number_of_fragments: Optional[StrictInt] = None
+    fragment_size: Optional[Any] = None
+    limit: Optional[Any] = None
+    limit_snippets: Optional[Any] = None
+    limit_words: Optional[Any] = None
+    number_of_fragments: Optional[Any] = None
     after_match: Optional[StrictStr] = '</strong>'
     allow_empty: Optional[StrictBool] = None
     around: Optional[StrictInt] = None
     before_match: Optional[StrictStr] = '<strong>'
     emit_zones: Optional[StrictBool] = None
     encoder: Optional[StrictStr] = None
-    fields: Optional[HighlightAllOfFields] = None
+    fields: Optional[Dict[str, Any]] = None
     force_all_words: Optional[StrictBool] = None
     force_snippets: Optional[StrictBool] = None
     highlight_query: Optional[QueryFilter] = None
@@ -94,11 +93,11 @@ class Highlight(BaseModel):
             raise ValueError("must be one of enum values ('asc', 'desc', 'score')")
         return value
 
-    model_config = ConfigDict(
-        populate_by_name=True,
-        validate_assignment=True,
-        protected_namespaces=(),
-    )
+    #model_config = ConfigDict(
+    #    populate_by_name=True,
+    #    validate_assignment=True,
+    #    protected_namespaces=(),
+    #)
 
 
     def to_str(self) -> str:
@@ -133,12 +132,39 @@ class Highlight(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of fields
-        if self.fields:
-            _dict['fields'] = self.fields.to_dict()
         # override the default output from pydantic by calling `to_dict()` of highlight_query
         if self.highlight_query:
             _dict['highlight_query'] = self.highlight_query.to_dict()
+        # set to None if fragment_size (nullable) is None
+        # and model_fields_set contains the field
+        if self.fragment_size is None and "fragment_size" in self.model_fields_set:
+            _dict['fragment_size'] = None
+
+        # set to None if limit (nullable) is None
+        # and model_fields_set contains the field
+        if self.limit is None and "limit" in self.model_fields_set:
+            _dict['limit'] = None
+
+        # set to None if limit_snippets (nullable) is None
+        # and model_fields_set contains the field
+        if self.limit_snippets is None and "limit_snippets" in self.model_fields_set:
+            _dict['limit_snippets'] = None
+
+        # set to None if limit_words (nullable) is None
+        # and model_fields_set contains the field
+        if self.limit_words is None and "limit_words" in self.model_fields_set:
+            _dict['limit_words'] = None
+
+        # set to None if number_of_fragments (nullable) is None
+        # and model_fields_set contains the field
+        if self.number_of_fragments is None and "number_of_fragments" in self.model_fields_set:
+            _dict['number_of_fragments'] = None
+
+        # set to None if fields (nullable) is None
+        # and model_fields_set contains the field
+        if self.fields is None and "fields" in self.model_fields_set:
+            _dict['fields'] = None
+
         # set to None if highlight_query (nullable) is None
         # and model_fields_set contains the field
         if self.highlight_query is None and "highlight_query" in self.model_fields_set:
@@ -167,7 +193,7 @@ class Highlight(BaseModel):
             "before_match": obj.get("before_match") if obj.get("before_match") is not None else '<strong>',
             "emit_zones": obj.get("emit_zones"),
             "encoder": obj.get("encoder"),
-            "fields": HighlightAllOfFields.from_dict(obj["fields"]) if obj.get("fields") is not None else None,
+            "fields": obj.get("fields"),
             "force_all_words": obj.get("force_all_words"),
             "force_snippets": obj.get("force_snippets"),
             "highlight_query": QueryFilter.from_dict(obj["highlight_query"]) if obj.get("highlight_query") is not None else None,

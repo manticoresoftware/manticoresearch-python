@@ -18,28 +18,27 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel
 from typing import Any, ClassVar, Dict, List, Optional
-from manticoresearch.models.aggregation_composite import AggregationComposite
-from manticoresearch.models.aggregation_sort_inner_value import AggregationSortInnerValue
-from manticoresearch.models.aggregation_terms import AggregationTerms
+from manticoresearch.models.agg_composite import AggComposite
+from manticoresearch.models.agg_terms import AggTerms
 from typing import Optional, Set
 from typing_extensions import Self
 
 class Aggregation(BaseModel):
     """
-    Used for grouping search results
+    Aggregation
     """ # noqa: E501
-    terms: Optional[AggregationTerms] = None
-    sort: Optional[List[Dict[str, AggregationSortInnerValue]]] = None
-    composite: Optional[AggregationComposite] = None
+    terms: Optional[AggTerms] = None
+    sort: Optional[List[Any]] = None
+    composite: Optional[AggComposite] = None
     __properties: ClassVar[List[str]] = ["terms", "sort", "composite"]
 
-    model_config = ConfigDict(
-        populate_by_name=True,
-        validate_assignment=True,
-        protected_namespaces=(),
-    )
+    #model_config = ConfigDict(
+    #    populate_by_name=True,
+    #    validate_assignment=True,
+    #    protected_namespaces=(),
+    #)
 
 
     def to_str(self) -> str:
@@ -77,13 +76,6 @@ class Aggregation(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of terms
         if self.terms:
             _dict['terms'] = self.terms.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in sort (list)
-        _items = []
-        if self.sort:
-            for _item_sort in self.sort:
-                if _item_sort:
-                    _items.append(_item_sort.to_dict())
-            _dict['sort'] = _items
         # override the default output from pydantic by calling `to_dict()` of composite
         if self.composite:
             _dict['composite'] = self.composite.to_dict()
@@ -99,9 +91,9 @@ class Aggregation(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "terms": AggregationTerms.from_dict(obj["terms"]) if obj.get("terms") is not None else None,
-            "sort": [Dict[str, AggregationSortInnerValue].from_dict(_item) for _item in obj["sort"]] if obj.get("sort") is not None else None,
-            "composite": AggregationComposite.from_dict(obj["composite"]) if obj.get("composite") is not None else None
+            "terms": AggTerms.from_dict(obj["terms"]) if obj.get("terms") is not None else None,
+            "sort": obj.get("sort"),
+            "composite": AggComposite.from_dict(obj["composite"]) if obj.get("composite") is not None else None
         })
         return _obj
 

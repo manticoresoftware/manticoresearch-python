@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**match** | [**MatchFilterMatch**](MatchFilterMatch.md) |  | [optional] 
-**match_all** | **str** |  | [optional] 
-**match_phrase** | **Dict[str, str]** |  | [optional] 
 **query_string** | **str** |  | [optional] 
+**match** | **object** |  | [optional] 
+**match_phrase** | **object** |  | [optional] 
+**match_all** | **object** |  | [optional] 
 
 ## Example
 

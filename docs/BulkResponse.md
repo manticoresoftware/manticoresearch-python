@@ -6,7 +6,7 @@ Success bulk response
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**items** | **object** |  | [optional] 
+**items** | **List[object]** |  | [optional] 
 **errors** | **bool** |  | [optional] 
 **error** | **str** |  | [optional] 
 

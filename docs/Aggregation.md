@@ -1,14 +1,13 @@
 # Aggregation
 
-Used for grouping search results
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**terms** | [**AggregationTerms**](AggregationTerms.md) |  | [optional] 
-**sort** | **List[Dict[str, AggregationSortInnerValue]]** |  | [optional] 
-**composite** | [**AggregationComposite**](AggregationComposite.md) |  | [optional] 
+**terms** | [**AggTerms**](AggTerms.md) |  | [optional] 
+**sort** | **List[object]** |  | [optional] 
+**composite** | [**AggComposite**](AggComposite.md) |  | [optional] 
 
 ## Example
 

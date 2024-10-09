@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "4.0.0"
+__version__ = "5.0.0"
 
 # import apis into sdk package
 from manticoresearch.api.index_api import IndexApi
@@ -34,61 +34,37 @@ from manticoresearch.exceptions import ApiAttributeError
 from manticoresearch.exceptions import ApiException
 
 # import models into sdk package
+from manticoresearch.models.agg_composite import AggComposite
+from manticoresearch.models.agg_composite_source import AggCompositeSource
+from manticoresearch.models.agg_composite_term import AggCompositeTerm
+from manticoresearch.models.agg_terms import AggTerms
 from manticoresearch.models.aggregation import Aggregation
-from manticoresearch.models.aggregation_composite import AggregationComposite
-from manticoresearch.models.aggregation_composite_sources_inner_value import AggregationCompositeSourcesInnerValue
-from manticoresearch.models.aggregation_composite_sources_inner_value_terms import AggregationCompositeSourcesInnerValueTerms
-from manticoresearch.models.aggregation_sort_inner_value import AggregationSortInnerValue
-from manticoresearch.models.aggregation_terms import AggregationTerms
-from manticoresearch.models.attr_filter import AttrFilter
-from manticoresearch.models.basic_search_request import BasicSearchRequest
 from manticoresearch.models.bool_filter import BoolFilter
-from manticoresearch.models.bool_filter_bool import BoolFilterBool
 from manticoresearch.models.bulk_response import BulkResponse
 from manticoresearch.models.delete_document_request import DeleteDocumentRequest
 from manticoresearch.models.delete_response import DeleteResponse
-from manticoresearch.models.equals_filter import EqualsFilter
-from manticoresearch.models.equals_filter_equals import EqualsFilterEquals
 from manticoresearch.models.error_response import ErrorResponse
-from manticoresearch.models.error_response_error import ErrorResponseError
-from manticoresearch.models.error_response_error_one_of import ErrorResponseErrorOneOf
 from manticoresearch.models.fulltext_filter import FulltextFilter
-from manticoresearch.models.geo_filter import GeoFilter
-from manticoresearch.models.geo_filter_geo_distance import GeoFilterGeoDistance
-from manticoresearch.models.geo_filter_geo_distance_location_anchor import GeoFilterGeoDistanceLocationAnchor
+from manticoresearch.models.geo_distance import GeoDistance
+from manticoresearch.models.geo_distance_location_anchor import GeoDistanceLocationAnchor
 from manticoresearch.models.highlight import Highlight
-from manticoresearch.models.highlight_all_of_fields import HighlightAllOfFields
 from manticoresearch.models.highlight_field_option import HighlightFieldOption
-from manticoresearch.models.in_filter import InFilter
 from manticoresearch.models.insert_document_request import InsertDocumentRequest
-from manticoresearch.models.join_basic_cond import JoinBasicCond
-from manticoresearch.models.join_inner import JoinInner
-from manticoresearch.models.join_inner_on_inner import JoinInnerOnInner
-from manticoresearch.models.join_inner_on_inner_left import JoinInnerOnInnerLeft
-from manticoresearch.models.knn_doc_id_request import KnnDocIdRequest
-from manticoresearch.models.knn_query_vector_request import KnnQueryVectorRequest
-from manticoresearch.models.knn_search_parameters import KnnSearchParameters
-from manticoresearch.models.knn_search_request import KnnSearchRequest
-from manticoresearch.models.knn_search_request_all_of_knn import KnnSearchRequestAllOfKnn
-from manticoresearch.models.match_all_filter import MatchAllFilter
-from manticoresearch.models.match_filter import MatchFilter
-from manticoresearch.models.match_filter_match import MatchFilterMatch
-from manticoresearch.models.match_phrase_filter import MatchPhraseFilter
+from manticoresearch.models.join import Join
+from manticoresearch.models.join_cond import JoinCond
+from manticoresearch.models.join_on import JoinOn
+from manticoresearch.models.knn_query import KnnQuery
 from manticoresearch.models.percolate_request import PercolateRequest
 from manticoresearch.models.percolate_request_query import PercolateRequestQuery
 from manticoresearch.models.query_filter import QueryFilter
-from manticoresearch.models.query_string_filter import QueryStringFilter
-from manticoresearch.models.range_filter import RangeFilter
-from manticoresearch.models.range_filter_range_value import RangeFilterRangeValue
 from manticoresearch.models.replace_document_request import ReplaceDocumentRequest
+from manticoresearch.models.response_error import ResponseError
+from manticoresearch.models.response_error_details import ResponseErrorDetails
+from manticoresearch.models.search_query import SearchQuery
 from manticoresearch.models.search_request import SearchRequest
-from manticoresearch.models.search_request_parameters import SearchRequestParameters
-from manticoresearch.models.search_request_parameters_sort_inner import SearchRequestParametersSortInner
-from manticoresearch.models.search_request_parameters_source import SearchRequestParametersSource
 from manticoresearch.models.search_response import SearchResponse
 from manticoresearch.models.search_response_hits import SearchResponseHits
-from manticoresearch.models.sort_object import SortObject
-from manticoresearch.models.source_by_rules import SourceByRules
+from manticoresearch.models.source_rules import SourceRules
 from manticoresearch.models.success_response import SuccessResponse
 from manticoresearch.models.update_document_request import UpdateDocumentRequest
 from manticoresearch.models.update_response import UpdateResponse

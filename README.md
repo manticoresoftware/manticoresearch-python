@@ -3,7 +3,7 @@
 Сlient for Manticore Search.
 
 
-❗ WARNING: this is a development version of the client. The latest release's readme is https://github.com/manticoresoftware/manticoresearch-python/tree/4.0.0
+❗ WARNING: this is a development version of the client. The latest release's readme is https://github.com/manticoresoftware/manticoresearch-python/tree/5.0.0
 
 ## Requirements.
 
@@ -11,7 +11,7 @@ Minimum Manticore Search version is >= 2.5.1 with HTTP protocol enabled.
 
 | Manticore Search  | manticoresearch-python   |     Python    |
 | ----------------- | ------------------------ | ------------- |
-| >= 6.3.6          | >= 5.0.x                 | >= 3.4        |
+| >= 6.3.7          | >= 5.0.x                 | >= 3.4        |
 | >= 6.2.0          | >= 3.3.1                 | >= 3.4        |
 | >= 4.2.1          | >= 2.0.x                 | >= 3.4        |
 | >= 4.0.2  < 4.2.1 | >= 1.0.6                 | >= 3.4        |
@@ -80,7 +80,7 @@ with manticoresearch.ApiClient(configuration) as api_client:
         indexApi.insert(insert_request)
         
         query_highlight = Highlight()
-        query_highlight.fields = HighlightFields({"title":{}})
+        query_highlight.fields = {"title":{}}
         search_query = SearchQuery(query_string="@title bag")
         search_request = SearchRequest(index="products", query=search_query, highlight=query_highlight)
         search_response = searchApi.search(search_request)    
@@ -116,61 +116,37 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [AggComposite](docs/AggComposite.md)
+ - [AggCompositeSource](docs/AggCompositeSource.md)
+ - [AggCompositeTerm](docs/AggCompositeTerm.md)
+ - [AggTerms](docs/AggTerms.md)
  - [Aggregation](docs/Aggregation.md)
- - [AggregationComposite](docs/AggregationComposite.md)
- - [AggregationCompositeSourcesInnerValue](docs/AggregationCompositeSourcesInnerValue.md)
- - [AggregationCompositeSourcesInnerValueTerms](docs/AggregationCompositeSourcesInnerValueTerms.md)
- - [AggregationSortInnerValue](docs/AggregationSortInnerValue.md)
- - [AggregationTerms](docs/AggregationTerms.md)
- - [AttrFilter](docs/AttrFilter.md)
- - [BasicSearchRequest](docs/BasicSearchRequest.md)
  - [BoolFilter](docs/BoolFilter.md)
- - [BoolFilterBool](docs/BoolFilterBool.md)
  - [BulkResponse](docs/BulkResponse.md)
  - [DeleteDocumentRequest](docs/DeleteDocumentRequest.md)
  - [DeleteResponse](docs/DeleteResponse.md)
- - [EqualsFilter](docs/EqualsFilter.md)
- - [EqualsFilterEquals](docs/EqualsFilterEquals.md)
  - [ErrorResponse](docs/ErrorResponse.md)
- - [ErrorResponseError](docs/ErrorResponseError.md)
- - [ErrorResponseErrorOneOf](docs/ErrorResponseErrorOneOf.md)
  - [FulltextFilter](docs/FulltextFilter.md)
- - [GeoFilter](docs/GeoFilter.md)
- - [GeoFilterGeoDistance](docs/GeoFilterGeoDistance.md)
- - [GeoFilterGeoDistanceLocationAnchor](docs/GeoFilterGeoDistanceLocationAnchor.md)
+ - [GeoDistance](docs/GeoDistance.md)
+ - [GeoDistanceLocationAnchor](docs/GeoDistanceLocationAnchor.md)
  - [Highlight](docs/Highlight.md)
- - [HighlightAllOfFields](docs/HighlightAllOfFields.md)
  - [HighlightFieldOption](docs/HighlightFieldOption.md)
- - [InFilter](docs/InFilter.md)
  - [InsertDocumentRequest](docs/InsertDocumentRequest.md)
- - [JoinBasicCond](docs/JoinBasicCond.md)
- - [JoinInner](docs/JoinInner.md)
- - [JoinInnerOnInner](docs/JoinInnerOnInner.md)
- - [JoinInnerOnInnerLeft](docs/JoinInnerOnInnerLeft.md)
- - [KnnDocIdRequest](docs/KnnDocIdRequest.md)
- - [KnnQueryVectorRequest](docs/KnnQueryVectorRequest.md)
- - [KnnSearchParameters](docs/KnnSearchParameters.md)
- - [KnnSearchRequest](docs/KnnSearchRequest.md)
- - [KnnSearchRequestAllOfKnn](docs/KnnSearchRequestAllOfKnn.md)
- - [MatchAllFilter](docs/MatchAllFilter.md)
- - [MatchFilter](docs/MatchFilter.md)
- - [MatchFilterMatch](docs/MatchFilterMatch.md)
- - [MatchPhraseFilter](docs/MatchPhraseFilter.md)
+ - [Join](docs/Join.md)
+ - [JoinCond](docs/JoinCond.md)
+ - [JoinOn](docs/JoinOn.md)
+ - [KnnQuery](docs/KnnQuery.md)
  - [PercolateRequest](docs/PercolateRequest.md)
  - [PercolateRequestQuery](docs/PercolateRequestQuery.md)
  - [QueryFilter](docs/QueryFilter.md)
- - [QueryStringFilter](docs/QueryStringFilter.md)
- - [RangeFilter](docs/RangeFilter.md)
- - [RangeFilterRangeValue](docs/RangeFilterRangeValue.md)
  - [ReplaceDocumentRequest](docs/ReplaceDocumentRequest.md)
+ - [ResponseError](docs/ResponseError.md)
+ - [ResponseErrorDetails](docs/ResponseErrorDetails.md)
+ - [SearchQuery](docs/SearchQuery.md)
  - [SearchRequest](docs/SearchRequest.md)
- - [SearchRequestParameters](docs/SearchRequestParameters.md)
- - [SearchRequestParametersSortInner](docs/SearchRequestParametersSortInner.md)
- - [SearchRequestParametersSource](docs/SearchRequestParametersSource.md)
  - [SearchResponse](docs/SearchResponse.md)
  - [SearchResponseHits](docs/SearchResponseHits.md)
- - [SortObject](docs/SortObject.md)
- - [SourceByRules](docs/SourceByRules.md)
+ - [SourceRules](docs/SourceRules.md)
  - [SuccessResponse](docs/SuccessResponse.md)
  - [UpdateDocumentRequest](docs/UpdateDocumentRequest.md)
  - [UpdateResponse](docs/UpdateResponse.md)

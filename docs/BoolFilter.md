@@ -5,7 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**bool** | [**BoolFilterBool**](BoolFilterBool.md) |  | [optional] 
+**must** | [**List[QueryFilter]**](QueryFilter.md) |  | [optional] 
+**must_not** | [**List[QueryFilter]**](QueryFilter.md) |  | [optional] 
+**should** | [**List[QueryFilter]**](QueryFilter.md) |  | [optional] 
 
 ## Example
 

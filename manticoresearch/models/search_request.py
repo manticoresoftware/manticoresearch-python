@@ -14,125 +14,141 @@
 
 
 from __future__ import annotations
-import json
 import pprint
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
-from typing import Any, List, Optional
-from manticoresearch.models.basic_search_request import BasicSearchRequest
-from manticoresearch.models.knn_search_request import KnnSearchRequest
-from pydantic import StrictStr, Field
-from typing import Union, List, Set, Optional, Dict
-from typing_extensions import Literal, Self
+import re  # noqa: F401
+import json
 
-SEARCHREQUEST_ONE_OF_SCHEMAS = ["BasicSearchRequest", "KnnSearchRequest"]
+from pydantic import BaseModel, Field, StrictBool, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
+from manticoresearch.models.highlight import Highlight
+from manticoresearch.models.join import Join
+from manticoresearch.models.knn_query import KnnQuery
+from manticoresearch.models.search_query import SearchQuery
+from typing import Optional, Set
+from typing_extensions import Self
 
 class SearchRequest(BaseModel):
     """
-    SearchRequest
-    """
-    # data type: KnnSearchRequest
-    oneof_schema_1_validator: Optional[KnnSearchRequest] = None
-    # data type: BasicSearchRequest
-    oneof_schema_2_validator: Optional[BasicSearchRequest] = None
-    actual_instance: Optional[Union[BasicSearchRequest, KnnSearchRequest]] = None
-    one_of_schemas: Set[str] = { "BasicSearchRequest", "KnnSearchRequest" }
+    Request object for search operation
+    """ # noqa: E501
+    index: StrictStr
+    query: Optional[SearchQuery] = None
+    join: Optional[List[Join]] = None
+    highlight: Optional[Highlight] = None
+    limit: Optional[StrictInt] = None
+    knn: Optional[KnnQuery] = None
+    aggs: Optional[Any] = None
+    expressions: Optional[Any] = None
+    max_matches: Optional[StrictInt] = None
+    offset: Optional[StrictInt] = None
+    options: Optional[Dict[str, Any]] = None
+    profile: Optional[StrictBool] = None
+    sort: Optional[Any] = None
+    source: Optional[Any] = Field(default=None, alias="_source")
+    track_scores: Optional[StrictBool] = None
+    __properties: ClassVar[List[str]] = ["index", "query", "join", "highlight", "limit", "knn", "aggs", "expressions", "max_matches", "offset", "options", "profile", "sort", "_source", "track_scores"]
 
-    model_config = ConfigDict(
-        validate_assignment=True,
-        protected_namespaces=(),
-    )
+    #model_config = ConfigDict(
+    #    populate_by_name=True,
+    #    validate_assignment=True,
+    #    protected_namespaces=(),
+    #)
 
-
-    def __init__(self, *args, **kwargs) -> None:
-        if args:
-            if len(args) > 1:
-                raise ValueError("If a position argument is used, only 1 is allowed to set `actual_instance`")
-            if kwargs:
-                raise ValueError("If a position argument is used, keyword arguments cannot be used.")
-            super().__init__(actual_instance=args[0])
-        else:
-            super().__init__(**kwargs)
-
-    @field_validator('actual_instance')
-    def actual_instance_must_validate_oneof(cls, v):
-        instance = SearchRequest.model_construct()
-        error_messages = []
-        match = 0
-        # validate data type: KnnSearchRequest
-        if not isinstance(v, KnnSearchRequest):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `KnnSearchRequest`")
-        else:
-            match += 1
-        # validate data type: BasicSearchRequest
-        if not isinstance(v, BasicSearchRequest):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `BasicSearchRequest`")
-        else:
-            match += 1
-        if match > 1:
-            # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in SearchRequest with oneOf schemas: BasicSearchRequest, KnnSearchRequest. Details: " + ", ".join(error_messages))
-        elif match == 0:
-            # no match
-            raise ValueError("No match found when setting `actual_instance` in SearchRequest with oneOf schemas: BasicSearchRequest, KnnSearchRequest. Details: " + ", ".join(error_messages))
-        else:
-            return v
-
-    @classmethod
-    def from_dict(cls, obj: Union[str, Dict[str, Any]]) -> Self:
-        return cls.from_json(json.dumps(obj))
-
-    @classmethod
-    def from_json(cls, json_str: str) -> Self:
-        """Returns the object represented by the json string"""
-        instance = cls.model_construct()
-        error_messages = []
-        match = 0
-
-        # deserialize data into KnnSearchRequest
-        try:
-            instance.actual_instance = KnnSearchRequest.from_json(json_str)
-            match += 1
-        except (ValidationError, ValueError) as e:
-            error_messages.append(str(e))
-        # deserialize data into BasicSearchRequest
-        try:
-            instance.actual_instance = BasicSearchRequest.from_json(json_str)
-            match += 1
-        except (ValidationError, ValueError) as e:
-            error_messages.append(str(e))
-
-        if match > 1:
-            # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into SearchRequest with oneOf schemas: BasicSearchRequest, KnnSearchRequest. Details: " + ", ".join(error_messages))
-        elif match == 0:
-            # no match
-            raise ValueError("No match found when deserializing the JSON string into SearchRequest with oneOf schemas: BasicSearchRequest, KnnSearchRequest. Details: " + ", ".join(error_messages))
-        else:
-            return instance
-
-    def to_json(self) -> str:
-        """Returns the JSON representation of the actual instance"""
-        if self.actual_instance is None:
-            return "null"
-
-        if hasattr(self.actual_instance, "to_json") and callable(self.actual_instance.to_json):
-            return self.actual_instance.to_json()
-        else:
-            return json.dumps(self.actual_instance)
-
-    def to_dict(self) -> Optional[Union[Dict[str, Any], BasicSearchRequest, KnnSearchRequest]]:
-        """Returns the dict representation of the actual instance"""
-        if self.actual_instance is None:
-            return None
-
-        if hasattr(self.actual_instance, "to_dict") and callable(self.actual_instance.to_dict):
-            return self.actual_instance.to_dict()
-        else:
-            # primitive type
-            return self.actual_instance
 
     def to_str(self) -> str:
-        """Returns the string representation of the actual instance"""
-        return pprint.pformat(self.model_dump())
+        """Returns the string representation of the model using alias"""
+        return pprint.pformat(self.model_dump(by_alias=True))
+
+    def to_json(self) -> str:
+        """Returns the JSON representation of the model using alias"""
+        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
+        return json.dumps(self.to_dict())
+
+    @classmethod
+    def from_json(cls, json_str: str) -> Optional[Self]:
+        """Create an instance of SearchRequest from a JSON string"""
+        return cls.from_dict(json.loads(json_str))
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Return the dictionary representation of the model using alias.
+
+        This has the following differences from calling pydantic's
+        `self.model_dump(by_alias=True)`:
+
+        * `None` is only added to the output dict for nullable fields that
+          were set at model initialization. Other fields with value `None`
+          are ignored.
+        """
+        excluded_fields: Set[str] = set([
+        ])
+
+        _dict = self.model_dump(
+            by_alias=True,
+            exclude=excluded_fields,
+            exclude_none=True,
+        )
+        # override the default output from pydantic by calling `to_dict()` of query
+        if self.query:
+            _dict['query'] = self.query.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in join (list)
+        _items = []
+        if self.join:
+            for _item_join in self.join:
+                if _item_join:
+                    _items.append(_item_join.to_dict())
+            _dict['join'] = _items
+        # override the default output from pydantic by calling `to_dict()` of highlight
+        if self.highlight:
+            _dict['highlight'] = self.highlight.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of knn
+        if self.knn:
+            _dict['knn'] = self.knn.to_dict()
+        # set to None if aggs (nullable) is None
+        # and model_fields_set contains the field
+        if self.aggs is None and "aggs" in self.model_fields_set:
+            _dict['aggs'] = None
+
+        # set to None if expressions (nullable) is None
+        # and model_fields_set contains the field
+        if self.expressions is None and "expressions" in self.model_fields_set:
+            _dict['expressions'] = None
+
+        # set to None if sort (nullable) is None
+        # and model_fields_set contains the field
+        if self.sort is None and "sort" in self.model_fields_set:
+            _dict['sort'] = None
+
+        # set to None if source (nullable) is None
+        # and model_fields_set contains the field
+        if self.source is None and "source" in self.model_fields_set:
+            _dict['_source'] = None
+
+        return _dict
+
+    @classmethod
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
+        """Create an instance of SearchRequest from a dict"""
+        if obj is None:
+            return None
+
+        if not isinstance(obj, dict):
+            return cls.model_validate(obj)
+
+        _obj = cls.model_validate({
+            "index": obj.get("index"),
+            "query": SearchQuery.from_dict(obj["query"]) if obj.get("query") is not None else None,
+            "join": [Join.from_dict(_item) for _item in obj["join"]] if obj.get("join") is not None else None,
+            "highlight": Highlight.from_dict(obj["highlight"]) if obj.get("highlight") is not None else None,
+            "limit": obj.get("limit"),
+            "knn": KnnQuery.from_dict(obj["knn"]) if obj.get("knn") is not None else None,
+            "max_matches": obj.get("max_matches"),
+            "offset": obj.get("offset"),
+            "options": obj.get("options"),
+            "profile": obj.get("profile"),
+            "sort": obj.get("sort"),
+            "_source": obj.get("_source"),
+            "track_scores": obj.get("track_scores")
+        })
+        return _obj
 
 

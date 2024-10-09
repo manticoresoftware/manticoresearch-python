@@ -1,0 +1,56 @@
+This release includes:
+
+- added support for KNN search 
+
+- added support for search with joined tables
+
+- updated sql request and error response formats to match changes in Manticore
+
+- BREAKING: updated the structure of client classes:
+
+  - added classes:
+    - AggCompositeSource
+    - AggCompositeTerm
+    - HighlightFieldOption
+    - JoinCond
+    - JoinOn
+    - JoinCond
+    - KnnQuery
+    - ResponseErrorDetails
+    - ResponseError
+    - SearchQuery
+    
+  - removed classes:
+    - AggregationCompositeSourcesInnerValue
+    - AggregationCompositeSourcesInnerValueTerms
+    - AggregationSortInnerValue
+    - AttrFilter
+    - EqualsFilter
+    - Facet
+    - FilterBoolean
+    - FilterNumber
+    - FilterString
+    - HighlightField
+    - InFilter
+    - MatchFilter
+    - MatchOpFilter
+    - MatchOp
+    - MatchPhraseFilter
+    - NotFilterBoolean
+    - NotFilterNumber
+    - NotFilterString
+    - Option
+    - RangeFilterLte
+    - RangeFilter
+    - SortMultiple
+    - SortMva
+    - SortOrder
+    - SourceMultiple
+    
+  - renamed classes:
+    - AggregationTerms -> AggTerms
+    - GeoDistanceFilterLocationAnchor -> GeoDistanceLocationAnchor
+    - GeoDistanceFilter -> GeoDistance
+    - SourceByRules -> SourceRules
+
+- updated documentation

@@ -1,25 +1,26 @@
 # SearchRequest
 
+Request object for search operation
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**knn** | [**KnnSearchRequestAllOfKnn**](KnnSearchRequestAllOfKnn.md) |  | 
-**aggs** | [**Aggregation**](Aggregation.md) |  | [optional] 
-**expressions** | **Dict[str, str]** |  | [optional] 
-**join** | [**List[JoinInner]**](JoinInner.md) |  | [optional] 
-**highlight** | [**Highlight**](Highlight.md) |  | [optional] 
 **index** | **str** |  | 
+**query** | [**SearchQuery**](SearchQuery.md) |  | [optional] 
+**join** | [**List[Join]**](Join.md) |  | [optional] 
+**highlight** | [**Highlight**](Highlight.md) |  | [optional] 
 **limit** | **int** |  | [optional] 
+**knn** | [**KnnQuery**](KnnQuery.md) |  | [optional] 
+**aggs** | [**Dict[str, Aggregation]**](Aggregation.md) |  | [optional] 
+**expressions** | **Dict[str, str]** |  | [optional] 
 **max_matches** | **int** |  | [optional] 
 **offset** | **int** |  | [optional] 
 **options** | **object** |  | [optional] 
 **profile** | **bool** |  | [optional] 
-**sort** | [**List[SearchRequestParametersSortInner]**](SearchRequestParametersSortInner.md) |  | [optional] 
-**source** | [**SearchRequestParametersSource**](SearchRequestParametersSource.md) |  | [optional] 
+**sort** | **object** |  | [optional] 
+**source** | **object** |  | [optional] 
 **track_scores** | **bool** |  | [optional] 
-**query** | [**QueryFilter**](QueryFilter.md) |  | 
 
 ## Example
 

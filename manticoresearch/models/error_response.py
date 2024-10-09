@@ -18,9 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt
+from pydantic import BaseModel, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
-from manticoresearch.models.error_response_error import ErrorResponseError
+from manticoresearch.models.response_error import ResponseError
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,15 +28,15 @@ class ErrorResponse(BaseModel):
     """
     Error response
     """ # noqa: E501
-    error: ErrorResponseError
+    error: ResponseError
     status: Optional[StrictInt] = 500
     __properties: ClassVar[List[str]] = ["error", "status"]
 
-    model_config = ConfigDict(
-        populate_by_name=True,
-        validate_assignment=True,
-        protected_namespaces=(),
-    )
+    #model_config = ConfigDict(
+    #    populate_by_name=True,
+    #    validate_assignment=True,
+    #    protected_namespaces=(),
+    #)
 
 
     def to_str(self) -> str:
@@ -86,7 +86,7 @@ class ErrorResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "error": ErrorResponseError.from_dict(obj["error"]) if obj.get("error") is not None else None,
+            "error": ResponseError.from_dict(obj["error"]) if obj.get("error") is not None else None,
             "status": obj.get("status") if obj.get("status") is not None else 500
         })
         return _obj

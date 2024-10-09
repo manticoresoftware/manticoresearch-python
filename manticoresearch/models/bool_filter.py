@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,14 +27,16 @@ class BoolFilter(BaseModel):
     """
     BoolFilter
     """ # noqa: E501
-    bool: Optional[BoolFilterBool] = None
-    __properties: ClassVar[List[str]] = ["bool"]
+    must: Optional[List[QueryFilter]] = None
+    must_not: Optional[List[Optional[QueryFilter]]] = None
+    should: Optional[List[Optional[QueryFilter]]] = None
+    __properties: ClassVar[List[str]] = ["must", "must_not", "should"]
 
-    model_config = ConfigDict(
-        populate_by_name=True,
-        validate_assignment=True,
-        protected_namespaces=(),
-    )
+    #model_config = ConfigDict(
+    #    populate_by_name=True,
+    #    validate_assignment=True,
+    #    protected_namespaces=(),
+    #)
 
 
     def to_str(self) -> str:
@@ -69,9 +71,27 @@ class BoolFilter(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of bool
-        if self.bool:
-            _dict['bool'] = self.bool.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in must (list)
+        _items = []
+        if self.must:
+            for _item_must in self.must:
+                if _item_must:
+                    _items.append(_item_must.to_dict())
+            _dict['must'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in must_not (list)
+        _items = []
+        if self.must_not:
+            for _item_must_not in self.must_not:
+                if _item_must_not:
+                    _items.append(_item_must_not.to_dict())
+            _dict['must_not'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in should (list)
+        _items = []
+        if self.should:
+            for _item_should in self.should:
+                if _item_should:
+                    _items.append(_item_should.to_dict())
+            _dict['should'] = _items
         return _dict
 
     @classmethod
@@ -84,11 +104,13 @@ class BoolFilter(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "bool": BoolFilterBool.from_dict(obj["bool"]) if obj.get("bool") is not None else None
+            "must": [QueryFilter.from_dict(_item) for _item in obj["must"]] if obj.get("must") is not None else None,
+            "must_not": [QueryFilter.from_dict(_item) for _item in obj["must_not"]] if obj.get("must_not") is not None else None,
+            "should": [QueryFilter.from_dict(_item) for _item in obj["should"]] if obj.get("should") is not None else None
         })
         return _obj
 
-from manticoresearch.models.bool_filter_bool import BoolFilterBool
+from manticoresearch.models.query_filter import QueryFilter
 # TODO: Rewrite to not use raise_errors
 BoolFilter.model_rebuild(raise_errors=False)
 

@@ -6,7 +6,7 @@ Error response
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**error** | [**ErrorResponseError**](ErrorResponseError.md) |  | 
+**error** | [**ResponseError**](ResponseError.md) |  | 
 **status** | **int** |  | [optional] [default to 500]
 
 ## Example
