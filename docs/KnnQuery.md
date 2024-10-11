@@ -18,8 +18,6 @@ Name | Type | Description | Notes
 ```python
 from manticoresearch.models.knn_query import KnnQuery
 
-# TODO update the JSON string below
-json = "{}"
 # create an instance of KnnQuery from a JSON string
 knn_query_instance = KnnQuery.from_json(json)
 # print the JSON string representation of the object

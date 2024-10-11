@@ -13,8 +13,6 @@ Name | Type | Description | Notes
 ```python
 from manticoresearch.models.replace_document_request import ReplaceDocumentRequest
 
-# TODO update the JSON string below
-json = "{}"
 # create an instance of ReplaceDocumentRequest from a JSON string
 replace_document_request_instance = ReplaceDocumentRequest.from_json(json)
 # print the JSON string representation of the object

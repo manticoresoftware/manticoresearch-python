@@ -27,8 +27,6 @@ Name | Type | Description | Notes
 ```python
 from manticoresearch.models.search_request import SearchRequest
 
-# TODO update the JSON string below
-json = "{}"
 # create an instance of SearchRequest from a JSON string
 search_request_instance = SearchRequest.from_json(json)
 # print the JSON string representation of the object

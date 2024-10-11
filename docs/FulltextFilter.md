@@ -16,8 +16,6 @@ Name | Type | Description | Notes
 ```python
 from manticoresearch.models.fulltext_filter import FulltextFilter
 
-# TODO update the JSON string below
-json = "{}"
 # create an instance of FulltextFilter from a JSON string
 fulltext_filter_instance = FulltextFilter.from_json(json)
 # print the JSON string representation of the object

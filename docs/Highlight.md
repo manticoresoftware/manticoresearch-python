@@ -34,8 +34,6 @@ Name | Type | Description | Notes
 ```python
 from manticoresearch.models.highlight import Highlight
 
-# TODO update the JSON string below
-json = "{}"
 # create an instance of Highlight from a JSON string
 highlight_instance = Highlight.from_json(json)
 # print the JSON string representation of the object
