@@ -1,13 +1,13 @@
 # ErrorResponse
 
-Error response
+Error response object containing information about the error and a status code
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **error** | [**ResponseError**](ResponseError.md) |  | 
-**status** | **int** |  | [optional] [default to 500]
+**status** | **int** | HTTP status code of the error response | [optional] [default to 500]
 
 ## Example
 

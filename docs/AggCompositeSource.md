@@ -1,5 +1,6 @@
 # AggCompositeSource
 
+Object containing terms used for composite aggregation.
 
 ## Properties
 

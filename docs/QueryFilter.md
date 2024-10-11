@@ -1,18 +1,19 @@
 # QueryFilter
 
+Object used to apply various conditions, such as full-text matching or attribute filtering, to a search query
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**query_string** | **object** |  | [optional] 
-**match** | **object** |  | [optional] 
-**match_phrase** | **object** |  | [optional] 
-**match_all** | **object** |  | [optional] 
+**query_string** | **object** | Filter object defining a query string | [optional] 
+**match** | **object** | Filter object defining a match keyword | [optional] 
+**match_phrase** | **object** | Filter object defining a match phrase | [optional] 
+**match_all** | **object** | Filter object to select all documents | [optional] 
 **bool** | [**BoolFilter**](BoolFilter.md) |  | [optional] 
 **equals** | **object** |  | [optional] 
-**var_in** | **object** |  | [optional] 
-**range** | **object** |  | [optional] 
+**var_in** | **object** | Filter to match a given set of attribute values. | [optional] 
+**range** | **object** | Filter to match a given range of attribute values. | [optional] 
 **geo_distance** | [**GeoDistance**](GeoDistance.md) |  | [optional] 
 
 ## Example

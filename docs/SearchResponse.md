@@ -1,17 +1,17 @@
 # SearchResponse
 
-Response object of a search request
+Response object containing the results of a search request
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**took** | **int** |  | [optional] 
-**timed_out** | **bool** |  | [optional] 
-**aggregations** | **object** |  | [optional] 
+**took** | **int** | Time taken to execute the search | [optional] 
+**timed_out** | **bool** | Indicates whether the search operation timed out | [optional] 
+**aggregations** | **object** | Aggregated search results grouped by the specified criteria | [optional] 
 **hits** | [**SearchResponseHits**](SearchResponseHits.md) |  | [optional] 
-**profile** | **object** |  | [optional] 
-**warning** | **object** |  | [optional] 
+**profile** | **object** | Profile information about the search execution, if profiling is enabled | [optional] 
+**warning** | **object** | Warnings encountered during the search operation | [optional] 
 
 ## Example
 

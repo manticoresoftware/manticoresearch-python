@@ -1,6 +1,6 @@
 # AggComposite
 
-Used for grouping search results by multiple fields
+Object to perform composite aggregation, i.e., grouping search results by multiple fields
 
 ## Properties
 

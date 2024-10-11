@@ -1,15 +1,15 @@
 # UpdateResponse
 
-Success response
+Success response returned after updating one or more documents
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**index** | **str** |  | [optional] 
-**updated** | **int** |  | [optional] 
-**id** | **int** |  | [optional] 
-**result** | **str** |  | [optional] 
+**index** | **str** | Name of the document index | [optional] 
+**updated** | **int** | Number of documents updated | [optional] 
+**id** | **int** | Document ID | [optional] 
+**result** | **str** | Result of the update operation, typically &#39;updated&#39; | [optional] 
 
 ## Example
 

@@ -1,13 +1,13 @@
 # SourceRules
 
-Query fields to be included/excluded to/from response
+Defines which fields to include or exclude in the response for a search query
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**includes** | **object** |  | [optional] 
-**excludes** | **object** |  | [optional] 
+**includes** | **object** | List of fields to include in the response | [optional] 
+**excludes** | **object** | List of fields to exclude from the response | [optional] 
 
 ## Example
 

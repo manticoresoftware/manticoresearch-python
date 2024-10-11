@@ -1,5 +1,6 @@
 # AggCompositeTerm
 
+Object representing a term to be used in composite aggregation.
 
 ## Properties
 

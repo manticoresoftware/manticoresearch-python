@@ -1,5 +1,6 @@
 # AggTerms
 
+Object containing term fields to aggregate on
 
 ## Properties
 

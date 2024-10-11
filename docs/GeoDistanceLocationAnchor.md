@@ -1,12 +1,13 @@
 # GeoDistanceLocationAnchor
 
+Specifies the location of the pin point used for search
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**lat** | **float** |  | [optional] 
-**lon** | **float** |  | [optional] 
+**lat** | **object** | Latitude of the anchor point | [optional] 
+**lon** | **object** | Longitude of the anchor point | [optional] 
 
 ## Example
 

@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **str** |  | 
-**on** | [**List[JoinOn]**](JoinOn.md) |  | 
+**type** | **str** | Type of the join operation | 
+**on** | [**List[JoinOn]**](JoinOn.md) | List of objects defining joined tables | 
 **query** | [**FulltextFilter**](FulltextFilter.md) |  | [optional] 
-**table** | **str** |  | 
+**table** | **str** | Basic table of the join operation | 
 
 ## Example
 

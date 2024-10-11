@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**must** | [**List[QueryFilter]**](QueryFilter.md) |  | [optional] 
-**must_not** | [**List[QueryFilter]**](QueryFilter.md) |  | [optional] 
-**should** | [**List[QueryFilter]**](QueryFilter.md) |  | [optional] 
+**must** | [**List[QueryFilter]**](QueryFilter.md) | Query clauses that must match for the document to be included | [optional] 
+**must_not** | [**List[QueryFilter]**](QueryFilter.md) | Query clauses that must not match for the document to be included | [optional] 
+**should** | [**List[QueryFilter]**](QueryFilter.md) | Query clauses that should be matched, but are not required | [optional] 
 
 ## Example
 

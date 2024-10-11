@@ -1,12 +1,13 @@
 # JoinCond
 
+Object representing the conditions used to perform the join operation
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**field** | **str** |  | 
-**table** | **str** |  | 
+**field** | **str** | Field to join on | 
+**table** | **str** | Joined table | 
 **type** | **object** |  | [optional] 
 
 ## Example

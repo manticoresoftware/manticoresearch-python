@@ -1,15 +1,16 @@
 # HighlightFieldOption
 
+Options for controlling the behavior of highlighting on a per-field basis
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**fragment_size** | **int** |  | [optional] 
-**limit** | **int** |  | [optional] 
-**limit_snippets** | **int** |  | [optional] 
-**limit_words** | **int** |  | [optional] 
-**number_of_fragments** | **int** |  | [optional] 
+**fragment_size** | **int** | Maximum size of the text fragments in highlighted snippets per field | [optional] 
+**limit** | **int** | Maximum size of snippets per field | [optional] 
+**limit_snippets** | **int** | Maximum number of snippets per field | [optional] 
+**limit_words** | **int** | Maximum number of words per field | [optional] 
+**number_of_fragments** | **int** | Total number of highlighted fragments per field | [optional] 
 
 ## Example
 

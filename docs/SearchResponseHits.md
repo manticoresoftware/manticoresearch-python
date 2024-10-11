@@ -1,14 +1,15 @@
 # SearchResponseHits
 
+Object containing the search hits, which represent the documents that matched the query.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**max_score** | **int** |  | [optional] 
-**total** | **int** |  | [optional] 
-**total_relation** | **str** |  | [optional] 
-**hits** | **List[object]** |  | [optional] 
+**max_score** | **int** | Maximum score among the matched documents | [optional] 
+**total** | **int** | Total number of matched documents | [optional] 
+**total_relation** | **str** | Indicates whether the total number of hits is accurate or an estimate | [optional] 
+**hits** | **List[object]** | Array of hit objects, each representing a matched document | [optional] 
 
 ## Example
 

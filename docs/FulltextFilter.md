@@ -1,14 +1,15 @@
 # FulltextFilter
 
+Defines a type of filter for full-text search queries
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**query_string** | **str** |  | [optional] 
-**match** | **object** |  | [optional] 
-**match_phrase** | **object** |  | [optional] 
-**match_all** | **object** |  | [optional] 
+**query_string** | **str** | Filter object defining a query string | [optional] 
+**match** | **object** | Filter object defining a match keyword | [optional] 
+**match_phrase** | **object** | Filter object defining a match phrase | [optional] 
+**match_all** | **object** | Filter object to select all documents | [optional] 
 
 ## Example
 

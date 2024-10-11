@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**percolate** | **object** |  | 
+**percolate** | **object** | Object representing the document to percolate | 
 
 ## Example
 

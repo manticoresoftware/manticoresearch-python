@@ -1,14 +1,14 @@
 # ResponseErrorDetails
 
-Detailed error information from error response
+Detailed error information returned in case of an error response
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **str** |  | 
-**reason** | **str** |  | [optional] 
-**index** | **str** |  | [optional] 
+**type** | **str** | Type or category of the error | 
+**reason** | **str** | Detailed explanation of why the error occurred | [optional] 
+**index** | **str** | The index related to the error, if applicable | [optional] 
 
 ## Example
 

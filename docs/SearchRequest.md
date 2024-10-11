@@ -6,21 +6,21 @@ Request object for search operation
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**index** | **str** |  | 
+**index** | **str** | The index to perform the search on | 
 **query** | [**SearchQuery**](SearchQuery.md) |  | [optional] 
-**join** | [**List[Join]**](Join.md) |  | [optional] 
+**join** | [**List[Join]**](Join.md) | Join clause to combine search data from multiple tables | [optional] 
 **highlight** | [**Highlight**](Highlight.md) |  | [optional] 
-**limit** | **int** |  | [optional] 
+**limit** | **int** | Maximum number of results to return | [optional] 
 **knn** | [**KnnQuery**](KnnQuery.md) |  | [optional] 
-**aggs** | [**Dict[str, Aggregation]**](Aggregation.md) |  | [optional] 
-**expressions** | **Dict[str, str]** |  | [optional] 
-**max_matches** | **int** |  | [optional] 
-**offset** | **int** |  | [optional] 
-**options** | **object** |  | [optional] 
-**profile** | **bool** |  | [optional] 
+**aggs** | [**Dict[str, Aggregation]**](Aggregation.md) | Defines aggregation settings for grouping results | [optional] 
+**expressions** | **Dict[str, str]** | Expressions to calculate additional values for the result | [optional] 
+**max_matches** | **int** | Maximum number of matches allowed in the result | [optional] 
+**offset** | **int** | Starting point for pagination of the result | [optional] 
+**options** | **object** | Additional search options | [optional] 
+**profile** | **bool** | Enable or disable profiling of the search request | [optional] 
 **sort** | **object** |  | [optional] 
 **source** | **object** |  | [optional] 
-**track_scores** | **bool** |  | [optional] 
+**track_scores** | **bool** | Enable or disable result weight calculation used for sorting | [optional] 
 
 ## Example
 

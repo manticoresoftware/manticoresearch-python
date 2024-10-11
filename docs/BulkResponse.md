@@ -1,14 +1,14 @@
 # BulkResponse
 
-Success bulk response
+Success response for bulk search requests
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**items** | **List[object]** |  | [optional] 
-**errors** | **bool** |  | [optional] 
-**error** | **str** |  | [optional] 
+**items** | **List[object]** | List of results | [optional] 
+**errors** | **bool** | Errors occurred during the bulk operation | [optional] 
+**error** | **str** | Error message describing an error if such occurred | [optional] 
 
 ## Example
 

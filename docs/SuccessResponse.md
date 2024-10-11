@@ -1,17 +1,17 @@
 # SuccessResponse
 
-Success response
+Response object indicating the success of an operation, such as inserting or updating a document
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**index** | **str** |  | [optional] 
-**id** | **int** |  | [optional] 
-**created** | **bool** |  | [optional] 
-**result** | **str** |  | [optional] 
-**found** | **bool** |  | [optional] 
-**status** | **int** |  | [optional] 
+**index** | **str** | Name of the document index | [optional] 
+**id** | **int** | ID of the document affected by the request operation | [optional] 
+**created** | **bool** | Indicates whether the document was created as a result of the operation | [optional] 
+**result** | **str** | Result of the operation, typically &#39;created&#39;, &#39;updated&#39;, or &#39;deleted&#39; | [optional] 
+**found** | **bool** | Indicates whether the document was found in the index | [optional] 
+**status** | **int** | HTTP status code representing the result of the operation | [optional] 
 
 ## Example
 
