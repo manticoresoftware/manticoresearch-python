@@ -3,7 +3,7 @@
 Сlient for Manticore Search.
 
 
-❗ WARNING: this is a development version of the client. The latest release's readme is https://github.com/manticoresoftware/manticoresearch-python/tree/5.0.0
+❗ WARNING: this is a development version of the client. The latest release's readme is https://github.com/manticoresoftware/manticoresearch-python/tree/4.0.0
 
 ## Requirements.
 
@@ -69,7 +69,8 @@ with manticoresearch.ApiClient(configuration) as api_client:
     indexApi = manticoresearch.IndexApi(api_client)
     searchApi = manticoresearch.SearchApi(api_client)
 
-    try:    
+    try:
+        # Perform insert and search operations    
         newDoc = {"title" : "Crossbody Bag with Tassel", "price": 19.85}
         insert_request = InsertDocumentRequest(index="products", doc=newDoc)
         indexApi.insert(insert_request)
