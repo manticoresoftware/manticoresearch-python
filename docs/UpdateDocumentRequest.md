@@ -1,15 +1,32 @@
 # UpdateDocumentRequest
 
-Payload for update document
+Payload for updating a document or multiple documents in an index
+
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**index** | **str** |  | 
-**doc** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}** | Index name | 
+**index** | **str** | Name of the document index | 
+**cluster** | **str** | Name of the document cluster | [optional] 
+**doc** | **object** | Object containing the document fields to update | 
 **id** | **int** | Document ID | [optional] 
-**query** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}, none_type** | Query tree object | [optional] 
+**query** | [**QueryFilter**](QueryFilter.md) |  | [optional] 
 
+## Example
 
+```python
+from manticoresearch.models.update_document_request import UpdateDocumentRequest
+
+# create an instance of UpdateDocumentRequest from a JSON string
+update_document_request_instance = UpdateDocumentRequest.from_json(json)
+# print the JSON string representation of the object
+print(UpdateDocumentRequest.to_json())
+
+# convert the object into a dict
+update_document_request_dict = update_document_request_instance.to_dict()
+# create an instance of UpdateDocumentRequest from a dict
+update_document_request_from_dict = UpdateDocumentRequest.from_dict(update_document_request_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 
