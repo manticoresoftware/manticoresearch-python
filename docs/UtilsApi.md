@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **sql**
-> List[object] sql(body, raw_response=raw_response, mode=mode)
+> List[object] sql(body, raw_response=raw_response)
 
 Perform SQL requests
 
@@ -35,11 +35,10 @@ with manticoresearch.ApiClient(configuration) as api_client:
     api_instance = manticoresearch.UtilsApi(api_client)
     body = SHOW TABLES # str | A query parameter string. 
     raw_response = True # bool | Optional parameter, defines a format of response. Can be set to `False` for Select only queries and set to `True` for any type of queries. Default value is 'True'.  (optional) (default to True)
-    mode = 'raw' # str | Optional parameter, defines a format of response. Can be set to empty for Select only queries and set to `raw` for any type of queries. Default value is 'raw'.  (optional) (default to 'raw')
 
     try:
         # Perform SQL requests
-        api_response = api_instance.sql(body, raw_response=raw_response, mode=mode)
+        api_response = api_instance.sql(body, raw_response=raw_response)
         print("The response of UtilsApi->sql:\n")
         pprint(api_response)
     except Exception as e:
@@ -55,7 +54,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | **str**| A query parameter string.  | 
  **raw_response** | **bool**| Optional parameter, defines a format of response. Can be set to &#x60;False&#x60; for Select only queries and set to &#x60;True&#x60; for any type of queries. Default value is &#39;True&#39;.  | [optional] [default to True]
- **mode** | **str**| Optional parameter, defines a format of response. Can be set to empty for Select only queries and set to &#x60;raw&#x60; for any type of queries. Default value is &#39;raw&#39;.  | [optional] [default to &#39;raw&#39;]
 
 ### Return type
 

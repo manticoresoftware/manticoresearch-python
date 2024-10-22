@@ -18,17 +18,29 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, StrictFloat, StrictInt, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 
-class PercolateRequestQuery(BaseModel):
+class Match(BaseModel):
     """
-    PercolateRequestQuery
+    Filter helper object defining a match keyword and match options
     """ # noqa: E501
-    percolate: Dict[str, Any] = Field(description="Object representing the document to percolate")
-    __properties: ClassVar[List[str]] = ["percolate"]
+    query: StrictStr
+    operator: Optional[StrictStr] = None
+    boost: Optional[Union[StrictFloat, StrictInt]] = None
+    __properties: ClassVar[List[str]] = ["query", "operator", "boost"]
+
+    @field_validator('operator')
+    def operator_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['or', 'and']):
+            raise ValueError("must be one of enum values ('or', 'and')")
+        return value
 
     #model_config = ConfigDict(
     #    populate_by_name=True,
@@ -48,7 +60,7 @@ class PercolateRequestQuery(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of PercolateRequestQuery from a JSON string"""
+        """Create an instance of Match from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,7 +85,7 @@ class PercolateRequestQuery(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of PercolateRequestQuery from a dict"""
+        """Create an instance of Match from a dict"""
         if obj is None:
             return None
 
@@ -81,7 +93,9 @@ class PercolateRequestQuery(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "percolate": obj.get("percolate")
+            "query": obj.get("query"),
+            "operator": obj.get("operator"),
+            "boost": obj.get("boost")
         })
         return _obj
 

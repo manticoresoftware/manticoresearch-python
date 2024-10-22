@@ -3,7 +3,7 @@
 Сlient for Manticore Search.
 
 
-❗ WARNING: this is a development version of the client. The latest release's readme is https://github.com/manticoresoftware/manticoresearch-python/tree/5.0.0
+❗ WARNING: this is a development version of the client. The latest release's readme is https://github.com/manticoresoftware/manticoresearch-python/tree/4.0.0
 
 ## Requirements.
 
@@ -119,6 +119,8 @@ Class | Method | HTTP request | Description
  - [JoinCond](docs/JoinCond.md)
  - [JoinOn](docs/JoinOn.md)
  - [KnnQuery](docs/KnnQuery.md)
+ - [Match](docs/Match.md)
+ - [MatchAll](docs/MatchAll.md)
  - [PercolateRequest](docs/PercolateRequest.md)
  - [PercolateRequestQuery](docs/PercolateRequestQuery.md)
  - [QueryFilter](docs/QueryFilter.md)

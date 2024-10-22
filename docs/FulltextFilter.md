@@ -7,7 +7,7 @@ Defines a type of filter for full-text search queries
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **query_string** | **str** | Filter object defining a query string | [optional] 
-**match** | **object** | Filter object defining a match keyword | [optional] 
+**match** | **object** | Filter object defining a match keyword. Keyword can be passed a string or in a Match object | [optional] 
 **match_phrase** | **object** | Filter object defining a match phrase | [optional] 
 **match_all** | **object** | Filter object to select all documents | [optional] 
 

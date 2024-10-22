@@ -44,7 +44,6 @@ class UtilsApi:
         self,
         body: Annotated[StrictStr, Field(description="A query parameter string. ")],
         raw_response: Annotated[Optional[StrictBool], Field(description="Optional parameter, defines a format of response. Can be set to `False` for Select only queries and set to `True` for any type of queries. Default value is 'True'. ")] = True,
-        mode: Annotated[Optional[StrictStr], Field(description="Optional parameter, defines a format of response. Can be set to empty for Select only queries and set to `raw` for any type of queries. Default value is 'raw'. ")] = 'raw',
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -66,8 +65,6 @@ class UtilsApi:
         :type body: str
         :param raw_response: Optional parameter, defines a format of response. Can be set to `False` for Select only queries and set to `True` for any type of queries. Default value is 'True'. 
         :type raw_response: bool
-        :param mode: Optional parameter, defines a format of response. Can be set to empty for Select only queries and set to `raw` for any type of queries. Default value is 'raw'. 
-        :type mode: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -93,7 +90,6 @@ class UtilsApi:
         _param = self._sql_serialize(
             body=body,
             raw_response=raw_response,
-            mode=mode,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -119,7 +115,6 @@ class UtilsApi:
         self,
         body: Annotated[StrictStr, Field(description="A query parameter string. ")],
         raw_response: Annotated[Optional[StrictBool], Field(description="Optional parameter, defines a format of response. Can be set to `False` for Select only queries and set to `True` for any type of queries. Default value is 'True'. ")] = None,
-        mode: Annotated[Optional[StrictStr], Field(description="Optional parameter, defines a format of response. Can be set to empty for Select only queries and set to `raw` for any type of queries. Default value is 'raw'. ")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -141,8 +136,6 @@ class UtilsApi:
         :type body: str
         :param raw_response: Optional parameter, defines a format of response. Can be set to `False` for Select only queries and set to `True` for any type of queries. Default value is 'True'. 
         :type raw_response: bool
-        :param mode: Optional parameter, defines a format of response. Can be set to empty for Select only queries and set to `raw` for any type of queries. Default value is 'raw'. 
-        :type mode: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -168,7 +161,6 @@ class UtilsApi:
         _param = self._sql_serialize(
             body=body,
             raw_response=raw_response,
-            mode=mode,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -194,7 +186,6 @@ class UtilsApi:
         self,
         body: Annotated[StrictStr, Field(description="A query parameter string. ")],
         raw_response: Annotated[Optional[StrictBool], Field(description="Optional parameter, defines a format of response. Can be set to `False` for Select only queries and set to `True` for any type of queries. Default value is 'True'. ")] = None,
-        mode: Annotated[Optional[StrictStr], Field(description="Optional parameter, defines a format of response. Can be set to empty for Select only queries and set to `raw` for any type of queries. Default value is 'raw'. ")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -216,8 +207,6 @@ class UtilsApi:
         :type body: str
         :param raw_response: Optional parameter, defines a format of response. Can be set to `False` for Select only queries and set to `True` for any type of queries. Default value is 'True'. 
         :type raw_response: bool
-        :param mode: Optional parameter, defines a format of response. Can be set to empty for Select only queries and set to `raw` for any type of queries. Default value is 'raw'. 
-        :type mode: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -243,7 +232,6 @@ class UtilsApi:
         _param = self._sql_serialize(
             body=body,
             raw_response=raw_response,
-            mode=mode,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -264,7 +252,6 @@ class UtilsApi:
         self,
         body,
         raw_response,
-        mode,
         _request_auth,
         _content_type,
         _headers,
@@ -288,10 +275,6 @@ class UtilsApi:
         if raw_response is not None:
             
             _query_params.append(('raw_response', raw_response))
-            
-        if mode is not None:
-            
-            _query_params.append(('mode', mode))
             
         # process the header parameters
         # process the form parameters

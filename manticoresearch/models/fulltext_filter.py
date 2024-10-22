@@ -28,7 +28,7 @@ class FulltextFilter(BaseModel):
     Defines a type of filter for full-text search queries
     """ # noqa: E501
     query_string: Optional[StrictStr] = Field(default=None, description="Filter object defining a query string")
-    match: Optional[Dict[str, Any]] = Field(default=None, description="Filter object defining a match keyword")
+    match: Optional[Dict[str, Any]] = Field(default=None, description="Filter object defining a match keyword. Keyword can be passed a string or in a Match object")
     match_phrase: Optional[Dict[str, Any]] = Field(default=None, description="Filter object defining a match phrase")
     match_all: Optional[Dict[str, Any]] = Field(default=None, description="Filter object to select all documents")
     __properties: ClassVar[List[str]] = ["query_string", "match", "match_phrase", "match_all"]

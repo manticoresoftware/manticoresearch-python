@@ -7,7 +7,7 @@ Defines a query structure for performing search operations
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **query_string** | **object** | Filter object defining a query string | [optional] 
-**match** | **object** | Filter object defining a match keyword | [optional] 
+**match** | **object** | Filter object defining a match keyword. Keyword can be passed a string or in a Match object | [optional] 
 **match_phrase** | **object** | Filter object defining a match phrase | [optional] 
 **match_all** | **object** | Filter object to select all documents | [optional] 
 **bool** | [**BoolFilter**](BoolFilter.md) |  | [optional] 

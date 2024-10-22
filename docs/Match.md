@@ -1,28 +1,29 @@
-# JoinOn
+# Match
 
+Filter helper object defining a match keyword and match options
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**right** | [**JoinCond**](JoinCond.md) |  | [optional] 
-**left** | [**JoinCond**](JoinCond.md) |  | [optional] 
+**query** | **str** |  | 
 **operator** | **str** |  | [optional] 
+**boost** | **float** |  | [optional] 
 
 ## Example
 
 ```python
-from manticoresearch.models.join_on import JoinOn
+from manticoresearch.models.match import Match
 
-# create an instance of JoinOn from a JSON string
-join_on_instance = JoinOn.from_json(json)
+# create an instance of Match from a JSON string
+match_instance = Match.from_json(json)
 # print the JSON string representation of the object
-print(JoinOn.to_json())
+print(Match.to_json())
 
 # convert the object into a dict
-join_on_dict = join_on_instance.to_dict()
-# create an instance of JoinOn from a dict
-join_on_from_dict = JoinOn.from_dict(join_on_dict)
+match_dict = match_instance.to_dict()
+# create an instance of Match from a dict
+match_from_dict = Match.from_dict(match_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

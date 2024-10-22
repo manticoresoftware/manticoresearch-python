@@ -18,17 +18,24 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
-class PercolateRequestQuery(BaseModel):
+class MatchAll(BaseModel):
     """
-    PercolateRequestQuery
+    Filter helper object defining the 'match all'' condition
     """ # noqa: E501
-    percolate: Dict[str, Any] = Field(description="Object representing the document to percolate")
-    __properties: ClassVar[List[str]] = ["percolate"]
+    all: StrictStr = Field(alias="_all")
+    __properties: ClassVar[List[str]] = ["_all"]
+
+    @field_validator('all')
+    def all_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['{}']):
+            raise ValueError("must be one of enum values ('{}')")
+        return value
 
     #model_config = ConfigDict(
     #    populate_by_name=True,
@@ -48,7 +55,7 @@ class PercolateRequestQuery(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of PercolateRequestQuery from a JSON string"""
+        """Create an instance of MatchAll from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,7 +80,7 @@ class PercolateRequestQuery(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of PercolateRequestQuery from a dict"""
+        """Create an instance of MatchAll from a dict"""
         if obj is None:
             return None
 
@@ -81,7 +88,7 @@ class PercolateRequestQuery(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "percolate": obj.get("percolate")
+            "_all": obj.get("_all")
         })
         return _obj
 

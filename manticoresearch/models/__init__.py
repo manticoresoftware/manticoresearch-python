@@ -35,6 +35,8 @@ from manticoresearch.models.join import Join
 from manticoresearch.models.join_cond import JoinCond
 from manticoresearch.models.join_on import JoinOn
 from manticoresearch.models.knn_query import KnnQuery
+from manticoresearch.models.match import Match
+from manticoresearch.models.match_all import MatchAll
 from manticoresearch.models.percolate_request import PercolateRequest
 from manticoresearch.models.percolate_request_query import PercolateRequestQuery
 from manticoresearch.models.query_filter import QueryFilter

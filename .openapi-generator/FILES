@@ -25,6 +25,8 @@ docs/Join.md
 docs/JoinCond.md
 docs/JoinOn.md
 docs/KnnQuery.md
+docs/Match.md
+docs/MatchAll.md
 docs/PercolateRequest.md
 docs/PercolateRequestQuery.md
 docs/QueryFilter.md
@@ -72,6 +74,8 @@ manticoresearch/models/join.py
 manticoresearch/models/join_cond.py
 manticoresearch/models/join_on.py
 manticoresearch/models/knn_query.py
+manticoresearch/models/match.py
+manticoresearch/models/match_all.py
 manticoresearch/models/percolate_request.py
 manticoresearch/models/percolate_request_query.py
 manticoresearch/models/query_filter.py
@@ -115,6 +119,8 @@ test/test_join.py
 test/test_join_cond.py
 test/test_join_on.py
 test/test_knn_query.py
+test/test_match.py
+test/test_match_all.py
 test/test_percolate_request.py
 test/test_percolate_request_query.py
 test/test_query_filter.py

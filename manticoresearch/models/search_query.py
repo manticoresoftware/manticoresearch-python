@@ -31,7 +31,7 @@ class SearchQuery(BaseModel):
     Defines a query structure for performing search operations
     """ # noqa: E501
     query_string: Optional[Any] = Field(default=None, description="Filter object defining a query string")
-    match: Optional[Any] = Field(default=None, description="Filter object defining a match keyword")
+    match: Optional[Any] = Field(default=None, description="Filter object defining a match keyword. Keyword can be passed a string or in a Match object")
     match_phrase: Optional[Any] = Field(default=None, description="Filter object defining a match phrase")
     match_all: Optional[Any] = Field(default=None, description="Filter object to select all documents")
     bool: Optional[BoolFilter] = None
