@@ -53,12 +53,12 @@ class TestManualApi(ParametrizedTestCase):
         searchQuery = SearchQuery(bool={"must": [ {"match": {"title":"4"}}] })
         search_request.query = searchQuery
 
-		res = searchApi.search(search_request)
+        res = searchApi.search(search_request)
         pprint(res)
-        
-		search_request = {"index":"movies","query":{"bool": {"must": [ {"match": {"title":"4"}}] }}}
+
+        search_request = {"index":"movies","query":{"bool": {"must": [ {"match": {"title":"4"}}] }}}
         pprint(search_request)
-        
+
         pprint("Tests finished")
         
 if __name__ == '__main__':
