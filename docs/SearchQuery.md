@@ -7,13 +7,13 @@ Defines a query structure for performing search operations
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **query_string** | **object** | Filter object defining a query string | [optional] 
-**match** | **object** | Filter object defining a match keyword. Keyword can be passed a string or in a Match object | [optional] 
+**match** | **object** | Filter object defining a match keyword passed as a string or in a Match object | [optional] 
 **match_phrase** | **object** | Filter object defining a match phrase | [optional] 
 **match_all** | **object** | Filter object to select all documents | [optional] 
 **bool** | [**BoolFilter**](BoolFilter.md) |  | [optional] 
 **equals** | **object** |  | [optional] 
 **var_in** | **object** | Filter to match a given set of attribute values. | [optional] 
-**range** | **object** | Filter to match a given range of attribute values. | [optional] 
+**range** | **object** | Filter to match a given range of attribute values passed in Range objects | [optional] 
 **geo_distance** | [**GeoDistance**](GeoDistance.md) |  | [optional] 
 **highlight** | [**Highlight**](Highlight.md) |  | [optional] 
 

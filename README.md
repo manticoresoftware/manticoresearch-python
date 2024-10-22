@@ -3,7 +3,7 @@
 Сlient for Manticore Search.
 
 
-❗ WARNING: this is a development version of the client. The latest release's readme is https://github.com/manticoresoftware/manticoresearch-python/tree/4.0.0
+❗ WARNING: this is a development version of the client. The latest release's readme is https://github.com/manticoresoftware/manticoresearch-python/tree/5.0.0
 
 ## Requirements.
 
@@ -124,6 +124,7 @@ Class | Method | HTTP request | Description
  - [PercolateRequest](docs/PercolateRequest.md)
  - [PercolateRequestQuery](docs/PercolateRequestQuery.md)
  - [QueryFilter](docs/QueryFilter.md)
+ - [Range](docs/Range.md)
  - [ReplaceDocumentRequest](docs/ReplaceDocumentRequest.md)
  - [ResponseError](docs/ResponseError.md)
  - [ResponseErrorDetails](docs/ResponseErrorDetails.md)

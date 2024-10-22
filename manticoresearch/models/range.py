@@ -18,20 +18,20 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field, StrictStr
+from pydantic import BaseModel
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class FulltextFilter(BaseModel):
+class Range(BaseModel):
     """
-    Defines a type of filter for full-text search queries
+    Filter helper object defining the 'range' condition
     """ # noqa: E501
-    query_string: Optional[StrictStr] = Field(default=None, description="Filter object defining a query string")
-    match: Optional[Dict[str, Any]] = Field(default=None, description="Filter object defining a match keyword passed as a string or in a Match object")
-    match_phrase: Optional[Dict[str, Any]] = Field(default=None, description="Filter object defining a match phrase")
-    match_all: Optional[Dict[str, Any]] = Field(default=None, description="Filter object to select all documents")
-    __properties: ClassVar[List[str]] = ["query_string", "match", "match_phrase", "match_all"]
+    lt: Optional[Any] = None
+    lte: Optional[Any] = None
+    gt: Optional[Any] = None
+    gte: Optional[Any] = None
+    __properties: ClassVar[List[str]] = ["lt", "lte", "gt", "gte"]
 
     #model_config = ConfigDict(
     #    populate_by_name=True,
@@ -51,7 +51,7 @@ class FulltextFilter(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of FulltextFilter from a JSON string"""
+        """Create an instance of Range from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -72,11 +72,31 @@ class FulltextFilter(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if lt (nullable) is None
+        # and model_fields_set contains the field
+        if self.lt is None and "lt" in self.model_fields_set:
+            _dict['lt'] = None
+
+        # set to None if lte (nullable) is None
+        # and model_fields_set contains the field
+        if self.lte is None and "lte" in self.model_fields_set:
+            _dict['lte'] = None
+
+        # set to None if gt (nullable) is None
+        # and model_fields_set contains the field
+        if self.gt is None and "gt" in self.model_fields_set:
+            _dict['gt'] = None
+
+        # set to None if gte (nullable) is None
+        # and model_fields_set contains the field
+        if self.gte is None and "gte" in self.model_fields_set:
+            _dict['gte'] = None
+
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of FulltextFilter from a dict"""
+        """Create an instance of Range from a dict"""
         if obj is None:
             return None
 
@@ -84,10 +104,10 @@ class FulltextFilter(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "query_string": obj.get("query_string"),
-            "match": obj.get("match"),
-            "match_phrase": obj.get("match_phrase"),
-            "match_all": obj.get("match_all")
+            "lt": obj.get("lt"),
+            "lte": obj.get("lte"),
+            "gt": obj.get("gt"),
+            "gte": obj.get("gte")
         })
         return _obj
 

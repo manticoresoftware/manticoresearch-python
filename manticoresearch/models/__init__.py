@@ -40,6 +40,7 @@ from manticoresearch.models.match_all import MatchAll
 from manticoresearch.models.percolate_request import PercolateRequest
 from manticoresearch.models.percolate_request_query import PercolateRequestQuery
 from manticoresearch.models.query_filter import QueryFilter
+from manticoresearch.models.range import Range
 from manticoresearch.models.replace_document_request import ReplaceDocumentRequest
 from manticoresearch.models.response_error import ResponseError
 from manticoresearch.models.response_error_details import ResponseErrorDetails

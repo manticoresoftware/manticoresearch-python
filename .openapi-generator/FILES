@@ -30,6 +30,7 @@ docs/MatchAll.md
 docs/PercolateRequest.md
 docs/PercolateRequestQuery.md
 docs/QueryFilter.md
+docs/Range.md
 docs/ReplaceDocumentRequest.md
 docs/ResponseError.md
 docs/ResponseErrorDetails.md
@@ -79,6 +80,7 @@ manticoresearch/models/match_all.py
 manticoresearch/models/percolate_request.py
 manticoresearch/models/percolate_request_query.py
 manticoresearch/models/query_filter.py
+manticoresearch/models/range.py
 manticoresearch/models/replace_document_request.py
 manticoresearch/models/response_error.py
 manticoresearch/models/response_error_details.py
@@ -124,6 +126,7 @@ test/test_match_all.py
 test/test_percolate_request.py
 test/test_percolate_request_query.py
 test/test_query_filter.py
+test/test_range.py
 test/test_replace_document_request.py
 test/test_response_error.py
 test/test_response_error_details.py

@@ -31,13 +31,13 @@ class SearchQuery(BaseModel):
     Defines a query structure for performing search operations
     """ # noqa: E501
     query_string: Optional[Any] = Field(default=None, description="Filter object defining a query string")
-    match: Optional[Any] = Field(default=None, description="Filter object defining a match keyword. Keyword can be passed a string or in a Match object")
+    match: Optional[Any] = Field(default=None, description="Filter object defining a match keyword passed as a string or in a Match object")
     match_phrase: Optional[Any] = Field(default=None, description="Filter object defining a match phrase")
     match_all: Optional[Any] = Field(default=None, description="Filter object to select all documents")
     bool: Optional[BoolFilter] = None
     equals: Optional[Any] = None
     var_in: Optional[Any] = Field(default=None, description="Filter to match a given set of attribute values.", alias="in")
-    range: Optional[Any] = Field(default=None, description="Filter to match a given range of attribute values.")
+    range: Optional[Any] = Field(default=None, description="Filter to match a given range of attribute values passed in Range objects")
     geo_distance: Optional[GeoDistance] = None
     highlight: Optional[Highlight] = None
     __properties: ClassVar[List[str]] = ["query_string", "match", "match_phrase", "match_all", "bool", "equals", "in", "range", "geo_distance", "highlight"]
