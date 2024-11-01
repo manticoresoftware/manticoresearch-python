@@ -50,7 +50,7 @@ import manticoresearch
 
 Please follow the [installation procedure](#installation--usage) and then run the following:
 
-	```python
+```python
 import manticoresearch
 from manticoresearch.rest import ApiException
 from pprint import pprint
