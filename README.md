@@ -68,11 +68,12 @@ configuration = manticoresearch.Configuration(
 with manticoresearch.ApiClient(configuration) as api_client:
     # Create an instance of the IndexApi API class
     api_instance = manticoresearch.IndexApi(api_client)
-    body = "["'{\"insert\": {\"index\": \"test\", \"id\": 1, \"doc\": {\"title\": \"Title 1\"}}},\\n{\"insert\": {\"index\": \"test\", \"id\": 2, \"doc\": {\"title\": \"Title 2\"}}}'"]" # str | 
 
     try:
-        # Bulk index operations
-        api_response = api_instance.bulk(body)
+        # Insert index operations
+        indexApi.insert({"index": "test", "id": 1, "doc" : {"title" : "Title 1"}})
+        indexApi.insert({"index": "test", "id": 2, "doc" : {"title" : "Title 2"}})
+        api_response = api_instance.insert(insert_request)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling IndexApi->bulk: %s\n" % e)
