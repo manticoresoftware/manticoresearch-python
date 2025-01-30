@@ -24,3 +24,10 @@ jobs:
         VERSION=`git log -1 --date=format:"%y%m%d%H" --format=%cd|head`
         echo "version $VERSION"
         sed -i -E "s/(VERSION = \")([0-9]\.[0-9]\.)(.*)(\")/\1\2$VERSION\4/1" setup.py
+    - name: Publish
+      run: |
+        echo $PYPIRC > ~/.pypirc
+        python -m pip install --user --upgrade wheel
+        python -m pip install --user --upgrade twine
+        python setup.py sdist bdist_wheel
+        python -m twine upload dist/* -u __token__ -p $PYPI_TOKEN
