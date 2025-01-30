@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **sql**
-> List[object] sql(body, raw_response=raw_response)
+> SqlResponse sql(body, raw_response=raw_response)
 
 Perform SQL requests
 
@@ -19,6 +19,7 @@ Run a query in SQL format. Expects a query string passed through `body` paramete
 
 ```python
 import manticoresearch
+from manticoresearch.models.sql_response import SqlResponse
 from manticoresearch.rest import ApiException
 from pprint import pprint
 
@@ -57,7 +58,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**SqlResponse**](SqlResponse.md)
 
 ### Authorization
 

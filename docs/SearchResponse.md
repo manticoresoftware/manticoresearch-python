@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **aggregations** | **object** | Aggregated search results grouped by the specified criteria | [optional] 
 **hits** | [**SearchResponseHits**](SearchResponseHits.md) |  | [optional] 
 **profile** | **object** | Profile information about the search execution, if profiling is enabled | [optional] 
+**scroll** | **str** | Scroll token to be used fo pagination | [optional] 
 **warning** | **object** | Warnings encountered during the search operation | [optional] 
 
 ## Example

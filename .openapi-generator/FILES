@@ -40,6 +40,7 @@ docs/SearchRequest.md
 docs/SearchResponse.md
 docs/SearchResponseHits.md
 docs/SourceRules.md
+docs/SqlResponse.md
 docs/SuccessResponse.md
 docs/UpdateDocumentRequest.md
 docs/UpdateResponse.md
@@ -89,6 +90,7 @@ manticoresearch/models/search_request.py
 manticoresearch/models/search_response.py
 manticoresearch/models/search_response_hits.py
 manticoresearch/models/source_rules.py
+manticoresearch/models/sql_response.py
 manticoresearch/models/success_response.py
 manticoresearch/models/update_document_request.py
 manticoresearch/models/update_response.py
@@ -136,6 +138,7 @@ test/test_search_request.py
 test/test_search_response.py
 test/test_search_response_hits.py
 test/test_source_rules.py
+test/test_sql_response.py
 test/test_success_response.py
 test/test_update_document_request.py
 test/test_update_response.py

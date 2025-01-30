@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field, StrictBool, StrictStr
+from pydantic import BaseModel, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -30,7 +30,9 @@ class BulkResponse(BaseModel):
     items: Optional[List[Dict[str, Any]]] = Field(default=None, description="List of results")
     errors: Optional[StrictBool] = Field(default=None, description="Errors occurred during the bulk operation")
     error: Optional[StrictStr] = Field(default=None, description="Error message describing an error if such occurred")
-    __properties: ClassVar[List[str]] = ["items", "errors", "error"]
+    current_line: Optional[StrictInt] = Field(default=None, description="Number of the row returned in the response")
+    skipped_lines: Optional[StrictInt] = Field(default=None, description="Number of rows skipped in the response")
+    __properties: ClassVar[List[str]] = ["items", "errors", "error", "current_line", "skipped_lines"]
 
     #model_config = ConfigDict(
     #    populate_by_name=True,
@@ -85,7 +87,9 @@ class BulkResponse(BaseModel):
         _obj = cls.model_validate({
             "items": obj.get("items"),
             "errors": obj.get("errors"),
-            "error": obj.get("error")
+            "error": obj.get("error"),
+            "current_line": obj.get("current_line"),
+            "skipped_lines": obj.get("skipped_lines")
         })
         return _obj
 

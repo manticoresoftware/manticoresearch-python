@@ -49,6 +49,7 @@ from manticoresearch.models.search_request import SearchRequest
 from manticoresearch.models.search_response import SearchResponse
 from manticoresearch.models.search_response_hits import SearchResponseHits
 from manticoresearch.models.source_rules import SourceRules
+from manticoresearch.models.sql_response import SqlResponse
 from manticoresearch.models.success_response import SuccessResponse
 from manticoresearch.models.update_document_request import UpdateDocumentRequest
 from manticoresearch.models.update_response import UpdateResponse

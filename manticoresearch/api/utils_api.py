@@ -20,6 +20,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
+from manticoresearch.models.sql_response import SqlResponse
 
 from manticoresearch.api_client import ApiClient, RequestSerialized
 from manticoresearch.api_response import ApiResponse
@@ -56,7 +57,7 @@ class UtilsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[object]:
+    ) -> SqlResponse:
         """Perform SQL requests
 
         Run a query in SQL format. Expects a query string passed through `body` parameter and optional `raw_response` parameter that defines a format of response. `raw_response` can be set to `False` for Select queries only, e.g., `SELECT * FROM myindex` The query string must stay as it is, no URL encoding is needed. The response object depends on the query executed. In select mode the response has same format as `/search` operation. 
@@ -97,7 +98,7 @@ class UtilsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[object]",
+            '200': "SqlResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -127,7 +128,7 @@ class UtilsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[SqlResponse]:
         """Perform SQL requests
 
         Run a query in SQL format. Expects a query string passed through `body` parameter and optional `raw_response` parameter that defines a format of response. `raw_response` can be set to `False` for Select queries only, e.g., `SELECT * FROM myindex` The query string must stay as it is, no URL encoding is needed. The response object depends on the query executed. In select mode the response has same format as `/search` operation. 
@@ -168,7 +169,7 @@ class UtilsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[object]",
+            '200': "SqlResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -239,7 +240,7 @@ class UtilsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[object]",
+            '200': "SqlResponse",
         }
         response_data = self.api_client.call_api(
             *_param,

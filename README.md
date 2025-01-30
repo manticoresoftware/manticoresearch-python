@@ -3,7 +3,7 @@
 Сlient for Manticore Search.
 
 
-❗ WARNING: this is a development version of the client. The latest release's readme is https://github.com/manticoresoftware/manticoresearch-python/tree/4.0.0
+❗ WARNING: this is a development version of the client. The latest release's readme is https://github.com/manticoresoftware/manticoresearch-python/tree/6.0.0
 
 ## Requirements.
 
@@ -68,12 +68,18 @@ with manticoresearch.ApiClient(configuration) as api_client:
     # Create instances of API classes
     indexApi = manticoresearch.IndexApi(api_client)
     searchApi = manticoresearch.SearchApi(api_client)
+    utilsApi = manticoresearch.UtilsApi(api_client)
 
     try:
         # Perform insert and search operations    
         newDoc = {"title" : "Crossbody Bag with Tassel", "price": 19.85}
         insert_request = InsertDocumentRequest(index="products", doc=newDoc)
         indexApi.insert(insert_request)
+        
+        # Check out the structure of the autocreated 'products' table
+        sql_response = utilsApi.sql('DESC products');
+        print("The response of UtilsApi->sql:\n")
+        pprint(sql_response) 
 
         newDoc = {"title" : "Pet Hair Remover Glove", "price": 7.99}
         insert_request = InsertDocumentRequest(index="products", doc=newDoc)
@@ -150,6 +156,7 @@ Class | Method | HTTP request | Description
  - [SearchResponse](docs/SearchResponse.md)
  - [SearchResponseHits](docs/SearchResponseHits.md)
  - [SourceRules](docs/SourceRules.md)
+ - [SqlResponse](docs/SqlResponse.md)
  - [SuccessResponse](docs/SuccessResponse.md)
  - [UpdateDocumentRequest](docs/UpdateDocumentRequest.md)
  - [UpdateResponse](docs/UpdateResponse.md)

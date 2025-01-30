@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field, StrictBool, StrictInt
+from pydantic import BaseModel, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from manticoresearch.models.search_response_hits import SearchResponseHits
 from typing import Optional, Set
@@ -33,8 +33,9 @@ class SearchResponse(BaseModel):
     aggregations: Optional[Dict[str, Any]] = Field(default=None, description="Aggregated search results grouped by the specified criteria")
     hits: Optional[SearchResponseHits] = None
     profile: Optional[Dict[str, Any]] = Field(default=None, description="Profile information about the search execution, if profiling is enabled")
+    scroll: Optional[StrictStr] = Field(default=None, description="Scroll token to be used fo pagination")
     warning: Optional[Dict[str, Any]] = Field(default=None, description="Warnings encountered during the search operation")
-    __properties: ClassVar[List[str]] = ["took", "timed_out", "aggregations", "hits", "profile", "warning"]
+    __properties: ClassVar[List[str]] = ["took", "timed_out", "aggregations", "hits", "profile", "scroll", "warning"]
 
     #model_config = ConfigDict(
     #    populate_by_name=True,
@@ -95,6 +96,7 @@ class SearchResponse(BaseModel):
             "aggregations": obj.get("aggregations"),
             "hits": SearchResponseHits.from_dict(obj["hits"]) if obj.get("hits") is not None else None,
             "profile": obj.get("profile"),
+            "scroll": obj.get("scroll"),
             "warning": obj.get("warning")
         })
         return _obj

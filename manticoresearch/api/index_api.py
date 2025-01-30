@@ -17,8 +17,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictFloat, StrictInt, StrictStr
-from typing import Union
+from pydantic import Field, StrictInt, StrictStr
 from typing_extensions import Annotated
 from manticoresearch.models.bulk_response import BulkResponse
 from manticoresearch.models.delete_document_request import DeleteDocumentRequest
@@ -864,7 +863,7 @@ class IndexApi:
     def partial_replace(
         self,
         index: Annotated[StrictStr, Field(description="Name of the percolate index")],
-        id: Annotated[Union[StrictFloat, StrictInt], Field(description="Id of the document to replace")],
+        id: Annotated[StrictInt, Field(description="Id of the document to replace")],
         replace_document_request: ReplaceDocumentRequest,
         _request_timeout: Union[
             None,
@@ -886,7 +885,7 @@ class IndexApi:
         :param index: Name of the percolate index (required)
         :type index: str
         :param id: Id of the document to replace (required)
-        :type id: float
+        :type id: int
         :param replace_document_request: (required)
         :type replace_document_request: ReplaceDocumentRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -939,7 +938,7 @@ class IndexApi:
     def partial_replace_with_http_info(
         self,
         index: Annotated[StrictStr, Field(description="Name of the percolate index")],
-        id: Annotated[Union[StrictFloat, StrictInt], Field(description="Id of the document to replace")],
+        id: Annotated[StrictInt, Field(description="Id of the document to replace")],
         replace_document_request: ReplaceDocumentRequest,
         _request_timeout: Union[
             None,
@@ -961,7 +960,7 @@ class IndexApi:
         :param index: Name of the percolate index (required)
         :type index: str
         :param id: Id of the document to replace (required)
-        :type id: float
+        :type id: int
         :param replace_document_request: (required)
         :type replace_document_request: ReplaceDocumentRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -1014,7 +1013,7 @@ class IndexApi:
     def partial_replace_without_preload_content(
         self,
         index: Annotated[StrictStr, Field(description="Name of the percolate index")],
-        id: Annotated[Union[StrictFloat, StrictInt], Field(description="Id of the document to replace")],
+        id: Annotated[StrictInt, Field(description="Id of the document to replace")],
         replace_document_request: ReplaceDocumentRequest,
         _request_timeout: Union[
             None,
@@ -1036,7 +1035,7 @@ class IndexApi:
         :param index: Name of the percolate index (required)
         :type index: str
         :param id: Id of the document to replace (required)
-        :type id: float
+        :type id: int
         :param replace_document_request: (required)
         :type replace_document_request: ReplaceDocumentRequest
         :param _request_timeout: timeout setting for this request. If one

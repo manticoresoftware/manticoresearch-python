@@ -250,7 +250,7 @@ with manticoresearch.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = manticoresearch.IndexApi(api_client)
     index = 'index_example' # str | Name of the percolate index
-    id = 3.4 # float | Id of the document to replace
+    id = 56 # int | Id of the document to replace
     replace_document_request = {"doc":{"price":20}} # ReplaceDocumentRequest | 
 
     try:
@@ -270,7 +270,7 @@ with manticoresearch.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **index** | **str**| Name of the percolate index | 
- **id** | **float**| Id of the document to replace | 
+ **id** | **int**| Id of the document to replace | 
  **replace_document_request** | [**ReplaceDocumentRequest**](ReplaceDocumentRequest.md)|  | 
 
 ### Return type
