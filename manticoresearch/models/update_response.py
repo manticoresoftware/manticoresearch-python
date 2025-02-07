@@ -27,11 +27,11 @@ class UpdateResponse(BaseModel):
     """
     Success response returned after updating one or more documents
     """ # noqa: E501
-    index: Optional[StrictStr] = Field(default=None, description="Name of the document index", alias="_index")
+    table: Optional[StrictStr] = Field(default=None, description="Name of the document table")
     updated: Optional[StrictInt] = Field(default=None, description="Number of documents updated")
     id: Optional[StrictInt] = Field(default=None, description="Document ID", alias="_id")
     result: Optional[StrictStr] = Field(default=None, description="Result of the update operation, typically 'updated'")
-    __properties: ClassVar[List[str]] = ["_index", "updated", "_id", "result"]
+    __properties: ClassVar[List[str]] = ["table", "updated", "_id", "result"]
 
     #model_config = ConfigDict(
     #    populate_by_name=True,
@@ -84,7 +84,7 @@ class UpdateResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "_index": obj.get("_index"),
+            "table": obj.get("table"),
             "updated": obj.get("updated"),
             "_id": obj.get("_id"),
             "result": obj.get("result")

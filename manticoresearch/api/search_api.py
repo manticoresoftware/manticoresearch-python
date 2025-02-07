@@ -44,7 +44,7 @@ class SearchApi:
     @validate_call
     def percolate(
         self,
-        index: Annotated[StrictStr, Field(description="Name of the percolate index")],
+        table: Annotated[StrictStr, Field(description="Name of the percolate table")],
         percolate_request: PercolateRequest,
         _request_timeout: Union[
             None,
@@ -59,12 +59,12 @@ class SearchApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> SearchResponse:
-        """Perform reverse search on a percolate index
+        """Perform reverse search on a percolate table
 
-        Performs a percolate search. <br><br> This method must be used only on percolate indexes. <br> Expects two parameters: the index name and an object with array of documents to be tested. <br> <br> An example of the documents object: <br>   { <br>   &nbsp;&nbsp;\"query\" {<br>   &nbsp;&nbsp;&nbsp;&nbsp;\"percolate\": {<br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\"document\": { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\"content\":\"sample content\" <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>   &nbsp;&nbsp;&nbsp;&nbsp;} <br>   &nbsp;&nbsp;} <br>   } <br> <br> Responds with an object with matched stored queries:  <br>   { <br>   &nbsp;&nbsp;'timed_out':false, <br>   &nbsp;&nbsp;'hits': { <br>   &nbsp;&nbsp;&nbsp;&nbsp;'total':2, <br>   &nbsp;&nbsp;&nbsp;&nbsp;'max_score':1, <br>   &nbsp;&nbsp;&nbsp;&nbsp;'hits': [ <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_index':'idx_pq_1', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_type':'doc', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_id':'2', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_score':'1', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_source': { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'query': { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'match':{'title':'some'} <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }, <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_index':'idx_pq_1', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_type':'doc', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_id':'5', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_score':'1', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_source': { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'query': { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'ql':'some | none' <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>   &nbsp;&nbsp;&nbsp;&nbsp; ] <br>   &nbsp;&nbsp; } <br>   } <br>   ``` 
+        Performs a percolate search. <br><br> This method must be used only on percolate tables. <br> Expects two parameters: the table name and an object with array of documents to be tested. <br> <br> An example of the documents object: <br>   { <br>   &nbsp;&nbsp;\"query\" {<br>   &nbsp;&nbsp;&nbsp;&nbsp;\"percolate\": {<br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\"document\": { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\"content\":\"sample content\" <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>   &nbsp;&nbsp;&nbsp;&nbsp;} <br>   &nbsp;&nbsp;} <br>   } <br> <br> Responds with an object with matched stored queries:  <br>   { <br>   &nbsp;&nbsp;'timed_out':false, <br>   &nbsp;&nbsp;'hits': { <br>   &nbsp;&nbsp;&nbsp;&nbsp;'total':2, <br>   &nbsp;&nbsp;&nbsp;&nbsp;'max_score':1, <br>   &nbsp;&nbsp;&nbsp;&nbsp;'hits': [ <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'table':'idx_pq_1', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_type':'doc', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_id':'2', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_score':'1', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_source': { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'query': { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'match':{'title':'some'} <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }, <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'table':'idx_pq_1', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_type':'doc', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_id':'5', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_score':'1', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_source': { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'query': { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'ql':'some | none' <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>   &nbsp;&nbsp;&nbsp;&nbsp; ] <br>   &nbsp;&nbsp; } <br>   } <br> 
 
-        :param index: Name of the percolate index (required)
-        :type index: str
+        :param table: Name of the percolate table (required)
+        :type table: str
         :param percolate_request: (required)
         :type percolate_request: PercolateRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -90,7 +90,7 @@ class SearchApi:
         """ # noqa: E501
 
         _param = self._percolate_serialize(
-            index=index,
+            table=table,
             percolate_request=percolate_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -115,7 +115,7 @@ class SearchApi:
     @validate_call
     def percolate_with_http_info(
         self,
-        index: Annotated[StrictStr, Field(description="Name of the percolate index")],
+        table: Annotated[StrictStr, Field(description="Name of the percolate table")],
         percolate_request: PercolateRequest,
         _request_timeout: Union[
             None,
@@ -130,12 +130,12 @@ class SearchApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[SearchResponse]:
-        """Perform reverse search on a percolate index
+        """Perform reverse search on a percolate table
 
-        Performs a percolate search. <br><br> This method must be used only on percolate indexes. <br> Expects two parameters: the index name and an object with array of documents to be tested. <br> <br> An example of the documents object: <br>   { <br>   &nbsp;&nbsp;\"query\" {<br>   &nbsp;&nbsp;&nbsp;&nbsp;\"percolate\": {<br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\"document\": { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\"content\":\"sample content\" <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>   &nbsp;&nbsp;&nbsp;&nbsp;} <br>   &nbsp;&nbsp;} <br>   } <br> <br> Responds with an object with matched stored queries:  <br>   { <br>   &nbsp;&nbsp;'timed_out':false, <br>   &nbsp;&nbsp;'hits': { <br>   &nbsp;&nbsp;&nbsp;&nbsp;'total':2, <br>   &nbsp;&nbsp;&nbsp;&nbsp;'max_score':1, <br>   &nbsp;&nbsp;&nbsp;&nbsp;'hits': [ <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_index':'idx_pq_1', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_type':'doc', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_id':'2', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_score':'1', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_source': { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'query': { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'match':{'title':'some'} <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }, <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_index':'idx_pq_1', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_type':'doc', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_id':'5', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_score':'1', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_source': { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'query': { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'ql':'some | none' <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>   &nbsp;&nbsp;&nbsp;&nbsp; ] <br>   &nbsp;&nbsp; } <br>   } <br>   ``` 
+        Performs a percolate search. <br><br> This method must be used only on percolate tables. <br> Expects two parameters: the table name and an object with array of documents to be tested. <br> <br> An example of the documents object: <br>   { <br>   &nbsp;&nbsp;\"query\" {<br>   &nbsp;&nbsp;&nbsp;&nbsp;\"percolate\": {<br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\"document\": { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\"content\":\"sample content\" <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>   &nbsp;&nbsp;&nbsp;&nbsp;} <br>   &nbsp;&nbsp;} <br>   } <br> <br> Responds with an object with matched stored queries:  <br>   { <br>   &nbsp;&nbsp;'timed_out':false, <br>   &nbsp;&nbsp;'hits': { <br>   &nbsp;&nbsp;&nbsp;&nbsp;'total':2, <br>   &nbsp;&nbsp;&nbsp;&nbsp;'max_score':1, <br>   &nbsp;&nbsp;&nbsp;&nbsp;'hits': [ <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'table':'idx_pq_1', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_type':'doc', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_id':'2', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_score':'1', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_source': { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'query': { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'match':{'title':'some'} <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }, <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'table':'idx_pq_1', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_type':'doc', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_id':'5', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_score':'1', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_source': { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'query': { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'ql':'some | none' <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>   &nbsp;&nbsp;&nbsp;&nbsp; ] <br>   &nbsp;&nbsp; } <br>   } <br> 
 
-        :param index: Name of the percolate index (required)
-        :type index: str
+        :param table: Name of the percolate table (required)
+        :type table: str
         :param percolate_request: (required)
         :type percolate_request: PercolateRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -161,7 +161,7 @@ class SearchApi:
         """ # noqa: E501
 
         _param = self._percolate_serialize(
-            index=index,
+            table=table,
             percolate_request=percolate_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -186,7 +186,7 @@ class SearchApi:
     @validate_call
     def percolate_without_preload_content(
         self,
-        index: Annotated[StrictStr, Field(description="Name of the percolate index")],
+        table: Annotated[StrictStr, Field(description="Name of the percolate table")],
         percolate_request: PercolateRequest,
         _request_timeout: Union[
             None,
@@ -201,12 +201,12 @@ class SearchApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Perform reverse search on a percolate index
+        """Perform reverse search on a percolate table
 
-        Performs a percolate search. <br><br> This method must be used only on percolate indexes. <br> Expects two parameters: the index name and an object with array of documents to be tested. <br> <br> An example of the documents object: <br>   { <br>   &nbsp;&nbsp;\"query\" {<br>   &nbsp;&nbsp;&nbsp;&nbsp;\"percolate\": {<br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\"document\": { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\"content\":\"sample content\" <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>   &nbsp;&nbsp;&nbsp;&nbsp;} <br>   &nbsp;&nbsp;} <br>   } <br> <br> Responds with an object with matched stored queries:  <br>   { <br>   &nbsp;&nbsp;'timed_out':false, <br>   &nbsp;&nbsp;'hits': { <br>   &nbsp;&nbsp;&nbsp;&nbsp;'total':2, <br>   &nbsp;&nbsp;&nbsp;&nbsp;'max_score':1, <br>   &nbsp;&nbsp;&nbsp;&nbsp;'hits': [ <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_index':'idx_pq_1', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_type':'doc', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_id':'2', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_score':'1', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_source': { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'query': { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'match':{'title':'some'} <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }, <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_index':'idx_pq_1', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_type':'doc', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_id':'5', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_score':'1', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_source': { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'query': { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'ql':'some | none' <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>   &nbsp;&nbsp;&nbsp;&nbsp; ] <br>   &nbsp;&nbsp; } <br>   } <br>   ``` 
+        Performs a percolate search. <br><br> This method must be used only on percolate tables. <br> Expects two parameters: the table name and an object with array of documents to be tested. <br> <br> An example of the documents object: <br>   { <br>   &nbsp;&nbsp;\"query\" {<br>   &nbsp;&nbsp;&nbsp;&nbsp;\"percolate\": {<br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\"document\": { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\"content\":\"sample content\" <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>   &nbsp;&nbsp;&nbsp;&nbsp;} <br>   &nbsp;&nbsp;} <br>   } <br> <br> Responds with an object with matched stored queries:  <br>   { <br>   &nbsp;&nbsp;'timed_out':false, <br>   &nbsp;&nbsp;'hits': { <br>   &nbsp;&nbsp;&nbsp;&nbsp;'total':2, <br>   &nbsp;&nbsp;&nbsp;&nbsp;'max_score':1, <br>   &nbsp;&nbsp;&nbsp;&nbsp;'hits': [ <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'table':'idx_pq_1', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_type':'doc', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_id':'2', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_score':'1', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_source': { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'query': { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'match':{'title':'some'} <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }, <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'table':'idx_pq_1', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_type':'doc', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_id':'5', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_score':'1', <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '_source': { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'query': { <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'ql':'some | none' <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>   &nbsp;&nbsp;&nbsp;&nbsp; ] <br>   &nbsp;&nbsp; } <br>   } <br> 
 
-        :param index: Name of the percolate index (required)
-        :type index: str
+        :param table: Name of the percolate table (required)
+        :type table: str
         :param percolate_request: (required)
         :type percolate_request: PercolateRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -232,7 +232,7 @@ class SearchApi:
         """ # noqa: E501
 
         _param = self._percolate_serialize(
-            index=index,
+            table=table,
             percolate_request=percolate_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -252,7 +252,7 @@ class SearchApi:
 
     def _percolate_serialize(
         self,
-        index,
+        table,
         percolate_request,
         _request_auth,
         _content_type,
@@ -273,8 +273,8 @@ class SearchApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if index is not None:
-            _path_params['index'] = index
+        if table is not None:
+            _path_params['table'] = table
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -311,7 +311,7 @@ class SearchApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/pq/{index}/search',
+            resource_path='/pq/{table}/search',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -344,9 +344,9 @@ class SearchApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> SearchResponse:
-        """Performs a search on an index
+        """Performs a search on a table
 
-         The method expects an object with the following mandatory properties: * the name of the index to search * the match query object For details, see the documentation on [**SearchRequest**](SearchRequest.md) The method returns an object with the following properties: - took: the time taken to execute the search query. - timed_out: a boolean indicating whether the query timed out. - hits: an object with the following properties:    - total: the total number of hits found.    - hits: an array of hit objects, where each hit object represents a matched document. Each hit object has the following properties:      - _id: the ID of the matched document.      - _score: the score of the matched document.      - _source: the source data of the matched document.  In addition, if profiling is enabled, the response will include an additional array with profiling information attached. Also, if pagination is enabled, the response will include an additional 'scroll' property with a scroll token to use for pagination Here is an example search response:    ```   {     'took':10,     'timed_out':false,     'hits':     {       'total':2,       'hits':       [         {'_id':'1','_score':1,'_source':{'gid':11}},         {'_id':'2','_score':1,'_source':{'gid':12}}       ]     }   }   ```  For more information about the match query syntax and additional parameters that can be added to request and response, please see the documentation [here](https://manual.manticoresearch.com/Searching/Full_text_matching/Basic_usage#HTTP-JSON). 
+         The method expects an object with the following mandatory properties: * the name of the table to search * the match query object For details, see the documentation on [**SearchRequest**](SearchRequest.md) The method returns an object with the following properties: - took: the time taken to execute the search query. - timed_out: a boolean indicating whether the query timed out. - hits: an object with the following properties:    - total: the total number of hits found.    - hits: an array of hit objects, where each hit object represents a matched document. Each hit object has the following properties:      - _id: the ID of the matched document.      - _score: the score of the matched document.      - _source: the source data of the matched document.  In addition, if profiling is enabled, the response will include an additional array with profiling information attached. Also, if pagination is enabled, the response will include an additional 'scroll' property with a scroll token to use for pagination Here is an example search response:    ```   {     'took':10,     'timed_out':false,     'hits':     {       'total':2,       'hits':       [         {'_id':'1','_score':1,'_source':{'gid':11}},         {'_id':'2','_score':1,'_source':{'gid':12}}       ]     }   }   ```  For more information about the match query syntax and additional parameters that can be added to request and response, please see the documentation [here](https://manual.manticoresearch.com/Searching/Full_text_matching/Basic_usage#HTTP-JSON). 
 
         :param search_request: (required)
         :type search_request: SearchRequest
@@ -411,9 +411,9 @@ class SearchApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[SearchResponse]:
-        """Performs a search on an index
+        """Performs a search on a table
 
-         The method expects an object with the following mandatory properties: * the name of the index to search * the match query object For details, see the documentation on [**SearchRequest**](SearchRequest.md) The method returns an object with the following properties: - took: the time taken to execute the search query. - timed_out: a boolean indicating whether the query timed out. - hits: an object with the following properties:    - total: the total number of hits found.    - hits: an array of hit objects, where each hit object represents a matched document. Each hit object has the following properties:      - _id: the ID of the matched document.      - _score: the score of the matched document.      - _source: the source data of the matched document.  In addition, if profiling is enabled, the response will include an additional array with profiling information attached. Also, if pagination is enabled, the response will include an additional 'scroll' property with a scroll token to use for pagination Here is an example search response:    ```   {     'took':10,     'timed_out':false,     'hits':     {       'total':2,       'hits':       [         {'_id':'1','_score':1,'_source':{'gid':11}},         {'_id':'2','_score':1,'_source':{'gid':12}}       ]     }   }   ```  For more information about the match query syntax and additional parameters that can be added to request and response, please see the documentation [here](https://manual.manticoresearch.com/Searching/Full_text_matching/Basic_usage#HTTP-JSON). 
+         The method expects an object with the following mandatory properties: * the name of the table to search * the match query object For details, see the documentation on [**SearchRequest**](SearchRequest.md) The method returns an object with the following properties: - took: the time taken to execute the search query. - timed_out: a boolean indicating whether the query timed out. - hits: an object with the following properties:    - total: the total number of hits found.    - hits: an array of hit objects, where each hit object represents a matched document. Each hit object has the following properties:      - _id: the ID of the matched document.      - _score: the score of the matched document.      - _source: the source data of the matched document.  In addition, if profiling is enabled, the response will include an additional array with profiling information attached. Also, if pagination is enabled, the response will include an additional 'scroll' property with a scroll token to use for pagination Here is an example search response:    ```   {     'took':10,     'timed_out':false,     'hits':     {       'total':2,       'hits':       [         {'_id':'1','_score':1,'_source':{'gid':11}},         {'_id':'2','_score':1,'_source':{'gid':12}}       ]     }   }   ```  For more information about the match query syntax and additional parameters that can be added to request and response, please see the documentation [here](https://manual.manticoresearch.com/Searching/Full_text_matching/Basic_usage#HTTP-JSON). 
 
         :param search_request: (required)
         :type search_request: SearchRequest
@@ -478,9 +478,9 @@ class SearchApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Performs a search on an index
+        """Performs a search on a table
 
-         The method expects an object with the following mandatory properties: * the name of the index to search * the match query object For details, see the documentation on [**SearchRequest**](SearchRequest.md) The method returns an object with the following properties: - took: the time taken to execute the search query. - timed_out: a boolean indicating whether the query timed out. - hits: an object with the following properties:    - total: the total number of hits found.    - hits: an array of hit objects, where each hit object represents a matched document. Each hit object has the following properties:      - _id: the ID of the matched document.      - _score: the score of the matched document.      - _source: the source data of the matched document.  In addition, if profiling is enabled, the response will include an additional array with profiling information attached. Also, if pagination is enabled, the response will include an additional 'scroll' property with a scroll token to use for pagination Here is an example search response:    ```   {     'took':10,     'timed_out':false,     'hits':     {       'total':2,       'hits':       [         {'_id':'1','_score':1,'_source':{'gid':11}},         {'_id':'2','_score':1,'_source':{'gid':12}}       ]     }   }   ```  For more information about the match query syntax and additional parameters that can be added to request and response, please see the documentation [here](https://manual.manticoresearch.com/Searching/Full_text_matching/Basic_usage#HTTP-JSON). 
+         The method expects an object with the following mandatory properties: * the name of the table to search * the match query object For details, see the documentation on [**SearchRequest**](SearchRequest.md) The method returns an object with the following properties: - took: the time taken to execute the search query. - timed_out: a boolean indicating whether the query timed out. - hits: an object with the following properties:    - total: the total number of hits found.    - hits: an array of hit objects, where each hit object represents a matched document. Each hit object has the following properties:      - _id: the ID of the matched document.      - _score: the score of the matched document.      - _source: the source data of the matched document.  In addition, if profiling is enabled, the response will include an additional array with profiling information attached. Also, if pagination is enabled, the response will include an additional 'scroll' property with a scroll token to use for pagination Here is an example search response:    ```   {     'took':10,     'timed_out':false,     'hits':     {       'total':2,       'hits':       [         {'_id':'1','_score':1,'_source':{'gid':11}},         {'_id':'2','_score':1,'_source':{'gid':12}}       ]     }   }   ```  For more information about the match query syntax and additional parameters that can be added to request and response, please see the documentation [here](https://manual.manticoresearch.com/Searching/Full_text_matching/Basic_usage#HTTP-JSON). 
 
         :param search_request: (required)
         :type search_request: SearchRequest

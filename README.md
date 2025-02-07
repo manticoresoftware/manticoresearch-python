@@ -2,9 +2,10 @@
 
 Сlient for Manticore Search.
 
-❗ WARNING: this is a development version of the client. The latest release's readme is https://github.com/manticoresoftware/manticoresearch-python/tree/6.0.0
 
-❗ WARNING: the current version has breaking changes compared to the previous release https://github.com/manticoresoftware/manticoresearch-python/tree/4.0.0
+❗ WARNING: this is a development version of the client. The latest release's readme is https://github.com/manticoresoftware/manticoresearch-python/tree/7.0.0
+
+❗ WARNING: the current version has breaking changes compared to the previous release https://github.com/manticoresoftware/manticoresearch-python/tree/6.0.0
 
 ## Requirements.
 
@@ -14,6 +15,7 @@ Minimum Manticore Search version is >= 2.5.1 with HTTP protocol enabled.
 | --------------------------- | ----------------------------------- | -------------- | ------------------------|
 | `manticoresearch-devel`     | `dev` (latest development version)  | 3.4 or newer   | ✅ Fully Compatible     |
 | 6.0.0 or newer              | 7.0.0 or newer                      | 3.4 or newer   | ✅ Fully Compatible     |
+| 3.3.1 to 7.0.0              | 7.0.0 or newer                      | 3.4 or newer   | ⚠️ Partially Compatible |
 | 3.3.1 to 6.0.0              | 7.0.0 or newer                      | 3.4 or newer   | ⚠️ Partially Compatible |
 | 3.3.1 to 6.0.0              | 6.2.1 to 7.0.0                      | 3.4 or newer   | ✅ Fully Compatible     |
 | 2.0.0 to 3.3.1              | 6.2.0 or newer                      | 3.4 or newer   | ⚠️ Partially Compatible |
@@ -21,7 +23,6 @@ Minimum Manticore Search version is >= 2.5.1 with HTTP protocol enabled.
 | 1.0.6 to 2.0.0              | 4.0.2 to 4.2.1                      | 3.4 or newer   | ✅ Fully Compatible     |
 | 1.0.5 to 1.0.6              | 4.0.2 to 4.2.1                      | 2.7 or newer   | ⚠️ Partially Compatible |
 | 1.0.5 to 1.0.6              | 2.5.1 to 4.0.2                      | 2.7 or newer   | ✅ Fully Compatible     |
-
 
 ## Installation & Usage
 ### pip install
@@ -115,14 +116,14 @@ All URIs are relative to *http://127.0.0.1:9308*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*IndexApi* | [**bulk**](docs/IndexApi.md#bulk) | **POST** /bulk | Bulk index operations
-*IndexApi* | [**delete**](docs/IndexApi.md#delete) | **POST** /delete | Delete a document in an index
-*IndexApi* | [**insert**](docs/IndexApi.md#insert) | **POST** /insert | Create a new document in an index
-*IndexApi* | [**partial_replace**](docs/IndexApi.md#partial_replace) | **POST** /{index}/_update/{id} | Partially replaces a document in an index
-*IndexApi* | [**replace**](docs/IndexApi.md#replace) | **POST** /replace | Replace new document in an index
-*IndexApi* | [**update**](docs/IndexApi.md#update) | **POST** /update | Update a document in an index
-*SearchApi* | [**percolate**](docs/SearchApi.md#percolate) | **POST** /pq/{index}/search | Perform reverse search on a percolate index
-*SearchApi* | [**search**](docs/SearchApi.md#search) | **POST** /search | Performs a search on an index
+*IndexApi* | [**bulk**](docs/IndexApi.md#bulk) | **POST** /bulk | Bulk table operations
+*IndexApi* | [**delete**](docs/IndexApi.md#delete) | **POST** /delete | Delete a document in a table
+*IndexApi* | [**insert**](docs/IndexApi.md#insert) | **POST** /insert | Create a new document in a table
+*IndexApi* | [**partial_replace**](docs/IndexApi.md#partial_replace) | **POST** /{table}/_update/{id} | Partially replaces a document in a table
+*IndexApi* | [**replace**](docs/IndexApi.md#replace) | **POST** /replace | Replace new document in a table
+*IndexApi* | [**update**](docs/IndexApi.md#update) | **POST** /update | Update a document in a table
+*SearchApi* | [**percolate**](docs/SearchApi.md#percolate) | **POST** /pq/{table}/search | Perform reverse search on a percolate table
+*SearchApi* | [**search**](docs/SearchApi.md#search) | **POST** /search | Performs a search on a table
 *UtilsApi* | [**sql**](docs/UtilsApi.md#sql) | **POST** /sql | Perform SQL requests
 
 

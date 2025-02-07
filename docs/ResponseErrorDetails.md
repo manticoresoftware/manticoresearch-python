@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **str** | Type or category of the error | 
 **reason** | **str** | Detailed explanation of why the error occurred | [optional] 
-**index** | **str** | The index related to the error, if applicable | [optional] 
+**table** | **str** | The table related to the error, if applicable | [optional] 
 
 ## Example
 

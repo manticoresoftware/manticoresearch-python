@@ -27,11 +27,11 @@ class DeleteDocumentRequest(BaseModel):
     """
     Payload for delete request. Documents can be deleted either one by one by specifying the document id or by providing a query object. For more information see  [Delete API](https://manual.manticoresearch.com/Deleting_documents) 
     """ # noqa: E501
-    index: StrictStr = Field(description="Index name")
+    table: StrictStr = Field(description="Table name")
     cluster: Optional[StrictStr] = Field(default=None, description="Cluster name")
     id: Optional[StrictInt] = Field(default=None, description="The ID of document for deletion")
     query: Optional[Dict[str, Any]] = Field(default=None, description="Defines the criteria to match documents for deletion")
-    __properties: ClassVar[List[str]] = ["index", "cluster", "id", "query"]
+    __properties: ClassVar[List[str]] = ["table", "cluster", "id", "query"]
 
     #model_config = ConfigDict(
     #    populate_by_name=True,
@@ -84,7 +84,7 @@ class DeleteDocumentRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "index": obj.get("index"),
+            "table": obj.get("table"),
             "cluster": obj.get("cluster"),
             "id": obj.get("id"),
             "query": obj.get("query")

@@ -29,8 +29,8 @@ class ResponseErrorDetails(BaseModel):
     """ # noqa: E501
     type: StrictStr = Field(description="Type or category of the error")
     reason: Optional[StrictStr] = Field(default=None, description="Detailed explanation of why the error occurred")
-    index: Optional[StrictStr] = Field(default=None, description="The index related to the error, if applicable")
-    __properties: ClassVar[List[str]] = ["type", "reason", "index"]
+    table: Optional[StrictStr] = Field(default=None, description="The table related to the error, if applicable")
+    __properties: ClassVar[List[str]] = ["type", "reason", "table"]
 
     #model_config = ConfigDict(
     #    populate_by_name=True,
@@ -76,10 +76,10 @@ class ResponseErrorDetails(BaseModel):
         if self.reason is None and "reason" in self.model_fields_set:
             _dict['reason'] = None
 
-        # set to None if index (nullable) is None
+        # set to None if table (nullable) is None
         # and model_fields_set contains the field
-        if self.index is None and "index" in self.model_fields_set:
-            _dict['index'] = None
+        if self.table is None and "table" in self.model_fields_set:
+            _dict['table'] = None
 
         return _dict
 
@@ -95,7 +95,7 @@ class ResponseErrorDetails(BaseModel):
         _obj = cls.model_validate({
             "type": obj.get("type"),
             "reason": obj.get("reason"),
-            "index": obj.get("index")
+            "table": obj.get("table")
         })
         return _obj
 

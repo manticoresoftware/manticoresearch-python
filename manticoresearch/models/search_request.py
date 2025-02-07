@@ -31,7 +31,7 @@ class SearchRequest(BaseModel):
     """
     Request object for search operation
     """ # noqa: E501
-    index: StrictStr = Field(description="The index to perform the search on")
+    table: StrictStr = Field(description="The table to perform the search on")
     query: Optional[SearchQuery] = None
     join: Optional[List[Join]] = Field(default=None, description="Join clause to combine search data from multiple tables")
     highlight: Optional[Highlight] = None
@@ -46,7 +46,7 @@ class SearchRequest(BaseModel):
     sort: Optional[Any] = None
     source: Optional[Any] = Field(default=None, alias="_source")
     track_scores: Optional[StrictBool] = Field(default=None, description="Enable or disable result weight calculation used for sorting")
-    __properties: ClassVar[List[str]] = ["index", "query", "join", "highlight", "limit", "knn", "aggs", "expressions", "max_matches", "offset", "options", "profile", "sort", "_source", "track_scores"]
+    __properties: ClassVar[List[str]] = ["table", "query", "join", "highlight", "limit", "knn", "aggs", "expressions", "max_matches", "offset", "options", "profile", "sort", "_source", "track_scores"]
 
     #model_config = ConfigDict(
     #    populate_by_name=True,
@@ -135,7 +135,7 @@ class SearchRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "index": obj.get("index"),
+            "table": obj.get("table"),
             "query": SearchQuery.from_dict(obj["query"]) if obj.get("query") is not None else None,
             "join": [Join.from_dict(_item) for _item in obj["join"]] if obj.get("join") is not None else None,
             "highlight": Highlight.from_dict(obj["highlight"]) if obj.get("highlight") is not None else None,

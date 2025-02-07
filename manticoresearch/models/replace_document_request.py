@@ -25,7 +25,7 @@ from typing_extensions import Self
 
 class ReplaceDocumentRequest(BaseModel):
     """
-    Object containing the document data for replacing an existing document in an index.
+    Object containing the document data for replacing an existing document in a table.
     """ # noqa: E501
     doc: Dict[str, Any] = Field(description="Object containing the new document data to replace the existing one.")
     __properties: ClassVar[List[str]] = ["doc"]

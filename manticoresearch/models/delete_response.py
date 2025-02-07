@@ -27,12 +27,12 @@ class DeleteResponse(BaseModel):
     """
     Response object for successful delete request
     """ # noqa: E501
-    index: Optional[StrictStr] = Field(default=None, description="The name of the index from which the document was deleted", alias="_index")
+    table: Optional[StrictStr] = Field(default=None, description="The name of the table from which the document was deleted")
     deleted: Optional[StrictInt] = Field(default=None, description="Number of documents deleted")
     id: Optional[StrictInt] = Field(default=None, description="The ID of the deleted document. If multiple documents are deleted, the ID of the first deleted document is returned", alias="_id")
     found: Optional[StrictBool] = Field(default=None, description="Indicates whether any documents to be deleted were found")
     result: Optional[StrictStr] = Field(default=None, description="Result of the delete operation, typically 'deleted'")
-    __properties: ClassVar[List[str]] = ["_index", "deleted", "_id", "found", "result"]
+    __properties: ClassVar[List[str]] = ["table", "deleted", "_id", "found", "result"]
 
     #model_config = ConfigDict(
     #    populate_by_name=True,
@@ -85,7 +85,7 @@ class DeleteResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "_index": obj.get("_index"),
+            "table": obj.get("table"),
             "deleted": obj.get("deleted"),
             "_id": obj.get("_id"),
             "found": obj.get("found"),

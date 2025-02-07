@@ -26,7 +26,7 @@ from typing_extensions import Self
 
 class PercolateRequest(BaseModel):
     """
-    Object containing the query for percolating documents against stored queries in a percolate index
+    Object containing the query for percolating documents against stored queries in a percolate table
     """ # noqa: E501
     query: PercolateRequestQuery
     __properties: ClassVar[List[str]] = ["query"]

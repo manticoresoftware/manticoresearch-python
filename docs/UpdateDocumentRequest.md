@@ -1,12 +1,12 @@
 # UpdateDocumentRequest
 
-Payload for updating a document or multiple documents in an index
+Payload for updating a document or multiple documents in a table
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**index** | **str** | Name of the document index | 
+**table** | **str** | Name of the document table | 
 **cluster** | **str** | Name of the document cluster | [optional] 
 **doc** | **object** | Object containing the document fields to update | 
 **id** | **int** | Document ID | [optional] 

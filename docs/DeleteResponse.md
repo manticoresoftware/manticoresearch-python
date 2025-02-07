@@ -6,7 +6,7 @@ Response object for successful delete request
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**index** | **str** | The name of the index from which the document was deleted | [optional] 
+**table** | **str** | The name of the table from which the document was deleted | [optional] 
 **deleted** | **int** | Number of documents deleted | [optional] 
 **id** | **int** | The ID of the deleted document. If multiple documents are deleted, the ID of the first deleted document is returned | [optional] 
 **found** | **bool** | Indicates whether any documents to be deleted were found | [optional] 

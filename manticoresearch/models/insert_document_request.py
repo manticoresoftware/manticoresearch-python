@@ -25,13 +25,13 @@ from typing_extensions import Self
 
 class InsertDocumentRequest(BaseModel):
     """
-    Object containing data for inserting a new document into the index 
+    Object containing data for inserting a new document into the table 
     """ # noqa: E501
-    index: StrictStr = Field(description="Name of the index to insert the document into")
+    table: StrictStr = Field(description="Name of the table to insert the document into")
     cluster: Optional[StrictStr] = Field(default=None, description="Name of the cluster to insert the document into")
     id: Optional[StrictInt] = Field(default=None, description="Document ID. If not provided, an ID will be auto-generated ")
     doc: Dict[str, Any] = Field(description="Object containing document data ")
-    __properties: ClassVar[List[str]] = ["index", "cluster", "id", "doc"]
+    __properties: ClassVar[List[str]] = ["table", "cluster", "id", "doc"]
 
     #model_config = ConfigDict(
     #    populate_by_name=True,
@@ -84,7 +84,7 @@ class InsertDocumentRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "index": obj.get("index"),
+            "table": obj.get("table"),
             "cluster": obj.get("cluster"),
             "id": obj.get("id"),
             "doc": obj.get("doc")

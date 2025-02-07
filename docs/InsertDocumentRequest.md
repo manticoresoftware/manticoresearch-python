@@ -1,12 +1,12 @@
 # InsertDocumentRequest
 
-Object containing data for inserting a new document into the index 
+Object containing data for inserting a new document into the table 
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**index** | **str** | Name of the index to insert the document into | 
+**table** | **str** | Name of the table to insert the document into | 
 **cluster** | **str** | Name of the cluster to insert the document into | [optional] 
 **id** | **int** | Document ID. If not provided, an ID will be auto-generated  | [optional] 
 **doc** | **object** | Object containing document data  | 

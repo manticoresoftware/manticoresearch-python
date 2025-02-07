@@ -26,14 +26,14 @@ from typing_extensions import Self
 
 class UpdateDocumentRequest(BaseModel):
     """
-    Payload for updating a document or multiple documents in an index
+    Payload for updating a document or multiple documents in a table
     """ # noqa: E501
-    index: StrictStr = Field(description="Name of the document index")
+    table: StrictStr = Field(description="Name of the document table")
     cluster: Optional[StrictStr] = Field(default=None, description="Name of the document cluster")
     doc: Dict[str, Any] = Field(description="Object containing the document fields to update")
     id: Optional[StrictInt] = Field(default=None, description="Document ID")
     query: Optional[QueryFilter] = None
-    __properties: ClassVar[List[str]] = ["index", "cluster", "doc", "id", "query"]
+    __properties: ClassVar[List[str]] = ["table", "cluster", "doc", "id", "query"]
 
     #model_config = ConfigDict(
     #    populate_by_name=True,
@@ -94,7 +94,7 @@ class UpdateDocumentRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "index": obj.get("index"),
+            "table": obj.get("table"),
             "cluster": obj.get("cluster"),
             "doc": obj.get("doc"),
             "id": obj.get("id"),
