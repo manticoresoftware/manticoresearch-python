@@ -32,7 +32,7 @@ class TestManualApi(ParametrizedTestCase):
         searchApi = manticoresearch.SearchApi(client)
         
         utilsApi.sql('query=DROP TABLE IF EXISTS movies')
-        res = utilsApi.sql('query=CREATE TABLE IF NOT EXISTS movies (title text, plot text, _year integer, rating float, code multi)')
+        res = utilsApi.sql("CREATE TABLE IF NOT EXISTS movies (title text, plot text, _year integer, rating float, code multi) min_infix_len='2'")
         
         docs = [ \
             {"insert": {"table" : "movies", "id" : 1, "doc" : {"title" : "Star Trek 2: Nemesis", "plot": "The Enterprise is diverted to the Romulan homeworld Romulus, supposedly because they want to negotiate a peace treaty. Captain Picard and his crew discover a serious threat to the Federation once Praetor Shinzon plans to attack Earth.", "_year": 2002, "rating": 6.4, "code": [1,2,3]}}}, \
