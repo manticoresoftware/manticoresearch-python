@@ -20,6 +20,7 @@ from manticoresearch.models.agg_composite_source import AggCompositeSource
 from manticoresearch.models.agg_composite_term import AggCompositeTerm
 from manticoresearch.models.agg_terms import AggTerms
 from manticoresearch.models.aggregation import Aggregation
+from manticoresearch.models.autocomplete_request import AutocompleteRequest
 from manticoresearch.models.bool_filter import BoolFilter
 from manticoresearch.models.bulk_response import BulkResponse
 from manticoresearch.models.delete_document_request import DeleteDocumentRequest

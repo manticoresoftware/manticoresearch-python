@@ -1179,7 +1179,7 @@ class IndexApi:
     ) -> SuccessResponse:
         """Replace new document in a table
 
-        Replace an existing document. Input has same format as `insert` operation. <br/> Responds with an object in format: <br/>    ```   {'table':'products','_id':1,'created':false,'result':'updated','status':200}   ``` 
+        Replace an existing document. Input has same format as `insert` operation. Responds with an object in format:    ```   {'table':'products','_id':1,'created':false,'result':'updated','status':200}   ``` 
 
         :param insert_document_request: (required)
         :type insert_document_request: InsertDocumentRequest
@@ -1246,7 +1246,7 @@ class IndexApi:
     ) -> ApiResponse[SuccessResponse]:
         """Replace new document in a table
 
-        Replace an existing document. Input has same format as `insert` operation. <br/> Responds with an object in format: <br/>    ```   {'table':'products','_id':1,'created':false,'result':'updated','status':200}   ``` 
+        Replace an existing document. Input has same format as `insert` operation. Responds with an object in format:    ```   {'table':'products','_id':1,'created':false,'result':'updated','status':200}   ``` 
 
         :param insert_document_request: (required)
         :type insert_document_request: InsertDocumentRequest
@@ -1313,7 +1313,7 @@ class IndexApi:
     ) -> RESTResponseType:
         """Replace new document in a table
 
-        Replace an existing document. Input has same format as `insert` operation. <br/> Responds with an object in format: <br/>    ```   {'table':'products','_id':1,'created':false,'result':'updated','status':200}   ``` 
+        Replace an existing document. Input has same format as `insert` operation. Responds with an object in format:    ```   {'table':'products','_id':1,'created':false,'result':'updated','status':200}   ``` 
 
         :param insert_document_request: (required)
         :type insert_document_request: InsertDocumentRequest

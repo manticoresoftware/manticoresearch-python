@@ -9,6 +9,7 @@ docs/AggCompositeSource.md
 docs/AggCompositeTerm.md
 docs/AggTerms.md
 docs/Aggregation.md
+docs/AutocompleteRequest.md
 docs/BoolFilter.md
 docs/BulkResponse.md
 docs/DeleteDocumentRequest.md
@@ -61,6 +62,7 @@ manticoresearch/models/agg_composite_source.py
 manticoresearch/models/agg_composite_term.py
 manticoresearch/models/agg_terms.py
 manticoresearch/models/aggregation.py
+manticoresearch/models/autocomplete_request.py
 manticoresearch/models/bool_filter.py
 manticoresearch/models/bulk_response.py
 manticoresearch/models/delete_document_request.py
@@ -107,6 +109,7 @@ test/test_agg_composite_source.py
 test/test_agg_composite_term.py
 test/test_agg_terms.py
 test/test_aggregation.py
+test/test_autocomplete_request.py
 test/test_bool_filter.py
 test/test_bulk_response.py
 test/test_delete_document_request.py
