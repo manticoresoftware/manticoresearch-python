@@ -3,7 +3,7 @@
 Сlient for Manticore Search.
 
 
-❗ WARNING: this is a development version of the client. The latest release's readme is https://github.com/manticoresoftware/manticoresearch-python/tree/7.0.0
+❗ WARNING: this is a development version of the client. The latest release's readme is https://github.com/manticoresoftware/manticoresearch-python/tree/8.0.0
 
 ## Requirements.
 
@@ -146,6 +146,7 @@ Class | Method | HTTP request | Description
  - [GeoDistanceLocationAnchor](docs/GeoDistanceLocationAnchor.md)
  - [Highlight](docs/Highlight.md)
  - [HighlightFieldOption](docs/HighlightFieldOption.md)
+ - [HitsHits](docs/HitsHits.md)
  - [InsertDocumentRequest](docs/InsertDocumentRequest.md)
  - [Join](docs/Join.md)
  - [JoinCond](docs/JoinCond.md)
@@ -165,6 +166,7 @@ Class | Method | HTTP request | Description
  - [SearchResponse](docs/SearchResponse.md)
  - [SearchResponseHits](docs/SearchResponseHits.md)
  - [SourceRules](docs/SourceRules.md)
+ - [SqlObjResponse](docs/SqlObjResponse.md)
  - [SqlResponse](docs/SqlResponse.md)
  - [SuccessResponse](docs/SuccessResponse.md)
  - [UpdateDocumentRequest](docs/UpdateDocumentRequest.md)

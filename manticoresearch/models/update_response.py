@@ -29,9 +29,9 @@ class UpdateResponse(BaseModel):
     """ # noqa: E501
     table: Optional[StrictStr] = Field(default=None, description="Name of the document table")
     updated: Optional[StrictInt] = Field(default=None, description="Number of documents updated")
-    id: Optional[StrictInt] = Field(default=None, description="Document ID", alias="_id")
+    id: Optional[StrictInt] = Field(default=None, description="Document ID")
     result: Optional[StrictStr] = Field(default=None, description="Result of the update operation, typically 'updated'")
-    __properties: ClassVar[List[str]] = ["table", "updated", "_id", "result"]
+    __properties: ClassVar[List[str]] = ["table", "updated", "id", "result"]
 
     #model_config = ConfigDict(
     #    populate_by_name=True,
@@ -86,7 +86,7 @@ class UpdateResponse(BaseModel):
         _obj = cls.model_validate({
             "table": obj.get("table"),
             "updated": obj.get("updated"),
-            "_id": obj.get("_id"),
+            "id": obj.get("id"),
             "result": obj.get("result")
         })
         return _obj

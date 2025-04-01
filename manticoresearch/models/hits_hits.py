@@ -18,21 +18,24 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from manticoresearch.models.hits_hits import HitsHits
+from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 
-class SearchResponseHits(BaseModel):
+class HitsHits(BaseModel):
     """
-    Object containing the search hits, which represent the documents that matched the query.
+    Search hit representing a matched document
     """ # noqa: E501
-    max_score: Optional[StrictInt] = Field(default=None, description="Maximum score among the matched documents")
-    total: Optional[StrictInt] = Field(default=None, description="Total number of matched documents")
-    total_relation: Optional[StrictStr] = Field(default=None, description="Indicates whether the total number of hits is accurate or an estimate")
-    hits: Optional[List[HitsHits]] = Field(default=None, description="Array of hit objects, each representing a matched document")
-    __properties: ClassVar[List[str]] = ["max_score", "total", "total_relation", "hits"]
+    id: Optional[StrictInt] = Field(default=None, description="The ID of the matched document", alias="_id")
+    score: Optional[StrictInt] = Field(default=None, description="The score of the matched document", alias="_score")
+    source: Optional[Dict[str, Any]] = Field(default=None, description="The source data of the matched document", alias="_source")
+    knn_dist: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The knn distance of the matched document returned for knn queries", alias="_knn_dist")
+    highlight: Optional[Dict[str, Any]] = Field(default=None, description="The highlighting-related data of the matched document")
+    table: Optional[StrictStr] = Field(default=None, description="The table name of the matched document returned for percolate queries")
+    type: Optional[StrictStr] = Field(default=None, description="The type of the matched document returned for percolate queries", alias="_type:")
+    fields: Optional[Dict[str, Any]] = Field(default=None, description="The percolate-related fields of the matched document returned for percolate queries")
+    __properties: ClassVar[List[str]] = ["_id", "_score", "_source", "_knn_dist", "highlight", "table", "_type:", "fields"]
 
     #model_config = ConfigDict(
     #    populate_by_name=True,
@@ -52,7 +55,7 @@ class SearchResponseHits(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of SearchResponseHits from a JSON string"""
+        """Create an instance of HitsHits from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,18 +76,11 @@ class SearchResponseHits(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in hits (list)
-        _items = []
-        if self.hits:
-            for _item_hits in self.hits:
-                if _item_hits:
-                    _items.append(_item_hits.to_dict())
-            _dict['hits'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of SearchResponseHits from a dict"""
+        """Create an instance of HitsHits from a dict"""
         if obj is None:
             return None
 
@@ -92,10 +88,14 @@ class SearchResponseHits(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "max_score": obj.get("max_score"),
-            "total": obj.get("total"),
-            "total_relation": obj.get("total_relation"),
-            "hits": [HitsHits.from_dict(_item) for _item in obj["hits"]] if obj.get("hits") is not None else None
+            "_id": obj.get("_id"),
+            "_score": obj.get("_score"),
+            "_source": obj.get("_source"),
+            "_knn_dist": obj.get("_knn_dist"),
+            "highlight": obj.get("highlight"),
+            "table": obj.get("table"),
+            "_type:": obj.get("_type:"),
+            "fields": obj.get("fields")
         })
         return _obj
 

@@ -6,6 +6,9 @@ List of responses from executed SQL queries
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**hits** | **object** |  | 
+**took** | **object** |  | [optional] 
+**timed_out** | **object** |  | [optional] 
 
 ## Example
 

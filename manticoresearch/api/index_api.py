@@ -65,7 +65,7 @@ class IndexApi:
     ) -> BulkResponse:
         """Bulk table operations
 
-        Sends multiple operatons like inserts, updates, replaces or deletes.  For each operation it's object must have same format as in their dedicated method.  The method expects a raw string as the batch in NDJSON.  Each operation object needs to be serialized to   JSON and separated by endline (\\n).      An example of raw input:      ```   {\"insert\": {\"table\": \"movies\", \"doc\": {\"plot\": \"A secret team goes to North Pole\", \"rating\": 9.5, \"language\": [2, 3], \"title\": \"This is an older movie\", \"lon\": 51.99, \"meta\": {\"keywords\":[\"travel\",\"ice\"],\"genre\":[\"adventure\"]}, \"year\": 1950, \"lat\": 60.4, \"advise\": \"PG-13\"}}}   \\n   {\"delete\": {\"table\": \"movies\",\"id\":700}}   ```      Responds with an object telling whenever any errors occured and an array with status for each operation:      ```   {     'items':     [       {         'update':{'table':'products','_id':1,'result':'updated'}       },       {         'update':{'table':'products','_id':2,'result':'updated'}       }     ],     'errors':false   }   ``` 
+        Sends multiple operatons like inserts, updates, replaces or deletes.  For each operation it's object must have same format as in their dedicated method.  The method expects a raw string as the batch in NDJSON.  Each operation object needs to be serialized to   JSON and separated by endline (\\n).      An example of raw input:      ```   {\"insert\": {\"table\": \"movies\", \"doc\": {\"plot\": \"A secret team goes to North Pole\", \"rating\": 9.5, \"language\": [2, 3], \"title\": \"This is an older movie\", \"lon\": 51.99, \"meta\": {\"keywords\":[\"travel\",\"ice\"],\"genre\":[\"adventure\"]}, \"year\": 1950, \"lat\": 60.4, \"advise\": \"PG-13\"}}}   \\n   {\"delete\": {\"table\": \"movies\",\"id\":700}}   ```      Responds with an object telling whenever any errors occured and an array with status for each operation:      ```   {     'items':     [       {         'update':{'table':'products','id':1,'result':'updated'}       },       {         'update':{'table':'products','id':2,'result':'updated'}       }     ],     'errors':false   }   ``` 
 
         :param body: (required)
         :type body: str
@@ -132,7 +132,7 @@ class IndexApi:
     ) -> ApiResponse[BulkResponse]:
         """Bulk table operations
 
-        Sends multiple operatons like inserts, updates, replaces or deletes.  For each operation it's object must have same format as in their dedicated method.  The method expects a raw string as the batch in NDJSON.  Each operation object needs to be serialized to   JSON and separated by endline (\\n).      An example of raw input:      ```   {\"insert\": {\"table\": \"movies\", \"doc\": {\"plot\": \"A secret team goes to North Pole\", \"rating\": 9.5, \"language\": [2, 3], \"title\": \"This is an older movie\", \"lon\": 51.99, \"meta\": {\"keywords\":[\"travel\",\"ice\"],\"genre\":[\"adventure\"]}, \"year\": 1950, \"lat\": 60.4, \"advise\": \"PG-13\"}}}   \\n   {\"delete\": {\"table\": \"movies\",\"id\":700}}   ```      Responds with an object telling whenever any errors occured and an array with status for each operation:      ```   {     'items':     [       {         'update':{'table':'products','_id':1,'result':'updated'}       },       {         'update':{'table':'products','_id':2,'result':'updated'}       }     ],     'errors':false   }   ``` 
+        Sends multiple operatons like inserts, updates, replaces or deletes.  For each operation it's object must have same format as in their dedicated method.  The method expects a raw string as the batch in NDJSON.  Each operation object needs to be serialized to   JSON and separated by endline (\\n).      An example of raw input:      ```   {\"insert\": {\"table\": \"movies\", \"doc\": {\"plot\": \"A secret team goes to North Pole\", \"rating\": 9.5, \"language\": [2, 3], \"title\": \"This is an older movie\", \"lon\": 51.99, \"meta\": {\"keywords\":[\"travel\",\"ice\"],\"genre\":[\"adventure\"]}, \"year\": 1950, \"lat\": 60.4, \"advise\": \"PG-13\"}}}   \\n   {\"delete\": {\"table\": \"movies\",\"id\":700}}   ```      Responds with an object telling whenever any errors occured and an array with status for each operation:      ```   {     'items':     [       {         'update':{'table':'products','id':1,'result':'updated'}       },       {         'update':{'table':'products','id':2,'result':'updated'}       }     ],     'errors':false   }   ``` 
 
         :param body: (required)
         :type body: str
@@ -199,7 +199,7 @@ class IndexApi:
     ) -> RESTResponseType:
         """Bulk table operations
 
-        Sends multiple operatons like inserts, updates, replaces or deletes.  For each operation it's object must have same format as in their dedicated method.  The method expects a raw string as the batch in NDJSON.  Each operation object needs to be serialized to   JSON and separated by endline (\\n).      An example of raw input:      ```   {\"insert\": {\"table\": \"movies\", \"doc\": {\"plot\": \"A secret team goes to North Pole\", \"rating\": 9.5, \"language\": [2, 3], \"title\": \"This is an older movie\", \"lon\": 51.99, \"meta\": {\"keywords\":[\"travel\",\"ice\"],\"genre\":[\"adventure\"]}, \"year\": 1950, \"lat\": 60.4, \"advise\": \"PG-13\"}}}   \\n   {\"delete\": {\"table\": \"movies\",\"id\":700}}   ```      Responds with an object telling whenever any errors occured and an array with status for each operation:      ```   {     'items':     [       {         'update':{'table':'products','_id':1,'result':'updated'}       },       {         'update':{'table':'products','_id':2,'result':'updated'}       }     ],     'errors':false   }   ``` 
+        Sends multiple operatons like inserts, updates, replaces or deletes.  For each operation it's object must have same format as in their dedicated method.  The method expects a raw string as the batch in NDJSON.  Each operation object needs to be serialized to   JSON and separated by endline (\\n).      An example of raw input:      ```   {\"insert\": {\"table\": \"movies\", \"doc\": {\"plot\": \"A secret team goes to North Pole\", \"rating\": 9.5, \"language\": [2, 3], \"title\": \"This is an older movie\", \"lon\": 51.99, \"meta\": {\"keywords\":[\"travel\",\"ice\"],\"genre\":[\"adventure\"]}, \"year\": 1950, \"lat\": 60.4, \"advise\": \"PG-13\"}}}   \\n   {\"delete\": {\"table\": \"movies\",\"id\":700}}   ```      Responds with an object telling whenever any errors occured and an array with status for each operation:      ```   {     'items':     [       {         'update':{'table':'products','id':1,'result':'updated'}       },       {         'update':{'table':'products','id':2,'result':'updated'}       }     ],     'errors':false   }   ``` 
 
         :param body: (required)
         :type body: str
@@ -607,7 +607,7 @@ class IndexApi:
     ) -> SuccessResponse:
         """Create a new document in a table
 
-        Insert a document.  Expects an object like:     ```   {     'table':'movies',     'id':701,     'doc':     {       'title':'This is an old movie',       'plot':'A secret team goes to North Pole',       'year':1950,       'rating':9.5,       'lat':60.4,       'lon':51.99,       'advise':'PG-13',       'meta':'{\"keywords\":{\"travel\",\"ice\"},\"genre\":{\"adventure\"}}',       'language':[2,3]     }   }   ```   The document id can also be missing, in which case an autogenerated one will be used:             ```   {     'table':'movies',     'doc':     {       'title':'This is a new movie',       'plot':'A secret team goes to North Pole',       'year':2020,       'rating':9.5,       'lat':60.4,       'lon':51.99,       'advise':'PG-13',       'meta':'{\"keywords\":{\"travel\",\"ice\"},\"genre\":{\"adventure\"}}',       'language':[2,3]     }   }   ```   It responds with an object in format:      ```   {'table':'products','_id':701,'created':true,'result':'created','status':201}   ``` 
+        Insert a document.  Expects an object like:     ```   {     'table':'movies',     'id':701,     'doc':     {       'title':'This is an old movie',       'plot':'A secret team goes to North Pole',       'year':1950,       'rating':9.5,       'lat':60.4,       'lon':51.99,       'advise':'PG-13',       'meta':'{\"keywords\":{\"travel\",\"ice\"},\"genre\":{\"adventure\"}}',       'language':[2,3]     }   }   ```   The document id can also be missing, in which case an autogenerated one will be used:             ```   {     'table':'movies',     'doc':     {       'title':'This is a new movie',       'plot':'A secret team goes to North Pole',       'year':2020,       'rating':9.5,       'lat':60.4,       'lon':51.99,       'advise':'PG-13',       'meta':'{\"keywords\":{\"travel\",\"ice\"},\"genre\":{\"adventure\"}}',       'language':[2,3]     }   }   ```   It responds with an object in format:      ```   {'table':'products','id':701,'created':true,'result':'created','status':201}   ``` 
 
         :param insert_document_request: (required)
         :type insert_document_request: InsertDocumentRequest
@@ -674,7 +674,7 @@ class IndexApi:
     ) -> ApiResponse[SuccessResponse]:
         """Create a new document in a table
 
-        Insert a document.  Expects an object like:     ```   {     'table':'movies',     'id':701,     'doc':     {       'title':'This is an old movie',       'plot':'A secret team goes to North Pole',       'year':1950,       'rating':9.5,       'lat':60.4,       'lon':51.99,       'advise':'PG-13',       'meta':'{\"keywords\":{\"travel\",\"ice\"},\"genre\":{\"adventure\"}}',       'language':[2,3]     }   }   ```   The document id can also be missing, in which case an autogenerated one will be used:             ```   {     'table':'movies',     'doc':     {       'title':'This is a new movie',       'plot':'A secret team goes to North Pole',       'year':2020,       'rating':9.5,       'lat':60.4,       'lon':51.99,       'advise':'PG-13',       'meta':'{\"keywords\":{\"travel\",\"ice\"},\"genre\":{\"adventure\"}}',       'language':[2,3]     }   }   ```   It responds with an object in format:      ```   {'table':'products','_id':701,'created':true,'result':'created','status':201}   ``` 
+        Insert a document.  Expects an object like:     ```   {     'table':'movies',     'id':701,     'doc':     {       'title':'This is an old movie',       'plot':'A secret team goes to North Pole',       'year':1950,       'rating':9.5,       'lat':60.4,       'lon':51.99,       'advise':'PG-13',       'meta':'{\"keywords\":{\"travel\",\"ice\"},\"genre\":{\"adventure\"}}',       'language':[2,3]     }   }   ```   The document id can also be missing, in which case an autogenerated one will be used:             ```   {     'table':'movies',     'doc':     {       'title':'This is a new movie',       'plot':'A secret team goes to North Pole',       'year':2020,       'rating':9.5,       'lat':60.4,       'lon':51.99,       'advise':'PG-13',       'meta':'{\"keywords\":{\"travel\",\"ice\"},\"genre\":{\"adventure\"}}',       'language':[2,3]     }   }   ```   It responds with an object in format:      ```   {'table':'products','id':701,'created':true,'result':'created','status':201}   ``` 
 
         :param insert_document_request: (required)
         :type insert_document_request: InsertDocumentRequest
@@ -741,7 +741,7 @@ class IndexApi:
     ) -> RESTResponseType:
         """Create a new document in a table
 
-        Insert a document.  Expects an object like:     ```   {     'table':'movies',     'id':701,     'doc':     {       'title':'This is an old movie',       'plot':'A secret team goes to North Pole',       'year':1950,       'rating':9.5,       'lat':60.4,       'lon':51.99,       'advise':'PG-13',       'meta':'{\"keywords\":{\"travel\",\"ice\"},\"genre\":{\"adventure\"}}',       'language':[2,3]     }   }   ```   The document id can also be missing, in which case an autogenerated one will be used:             ```   {     'table':'movies',     'doc':     {       'title':'This is a new movie',       'plot':'A secret team goes to North Pole',       'year':2020,       'rating':9.5,       'lat':60.4,       'lon':51.99,       'advise':'PG-13',       'meta':'{\"keywords\":{\"travel\",\"ice\"},\"genre\":{\"adventure\"}}',       'language':[2,3]     }   }   ```   It responds with an object in format:      ```   {'table':'products','_id':701,'created':true,'result':'created','status':201}   ``` 
+        Insert a document.  Expects an object like:     ```   {     'table':'movies',     'id':701,     'doc':     {       'title':'This is an old movie',       'plot':'A secret team goes to North Pole',       'year':1950,       'rating':9.5,       'lat':60.4,       'lon':51.99,       'advise':'PG-13',       'meta':'{\"keywords\":{\"travel\",\"ice\"},\"genre\":{\"adventure\"}}',       'language':[2,3]     }   }   ```   The document id can also be missing, in which case an autogenerated one will be used:             ```   {     'table':'movies',     'doc':     {       'title':'This is a new movie',       'plot':'A secret team goes to North Pole',       'year':2020,       'rating':9.5,       'lat':60.4,       'lon':51.99,       'advise':'PG-13',       'meta':'{\"keywords\":{\"travel\",\"ice\"},\"genre\":{\"adventure\"}}',       'language':[2,3]     }   }   ```   It responds with an object in format:      ```   {'table':'products','id':701,'created':true,'result':'created','status':201}   ``` 
 
         :param insert_document_request: (required)
         :type insert_document_request: InsertDocumentRequest
@@ -1179,7 +1179,7 @@ class IndexApi:
     ) -> SuccessResponse:
         """Replace new document in a table
 
-        Replace an existing document. Input has same format as `insert` operation. Responds with an object in format:    ```   {'table':'products','_id':1,'created':false,'result':'updated','status':200}   ``` 
+        Replace an existing document. Input has same format as `insert` operation. Responds with an object in format:    ```   {'table':'products','id':1,'created':false,'result':'updated','status':200}   ``` 
 
         :param insert_document_request: (required)
         :type insert_document_request: InsertDocumentRequest
@@ -1246,7 +1246,7 @@ class IndexApi:
     ) -> ApiResponse[SuccessResponse]:
         """Replace new document in a table
 
-        Replace an existing document. Input has same format as `insert` operation. Responds with an object in format:    ```   {'table':'products','_id':1,'created':false,'result':'updated','status':200}   ``` 
+        Replace an existing document. Input has same format as `insert` operation. Responds with an object in format:    ```   {'table':'products','id':1,'created':false,'result':'updated','status':200}   ``` 
 
         :param insert_document_request: (required)
         :type insert_document_request: InsertDocumentRequest
@@ -1313,7 +1313,7 @@ class IndexApi:
     ) -> RESTResponseType:
         """Replace new document in a table
 
-        Replace an existing document. Input has same format as `insert` operation. Responds with an object in format:    ```   {'table':'products','_id':1,'created':false,'result':'updated','status':200}   ``` 
+        Replace an existing document. Input has same format as `insert` operation. Responds with an object in format:    ```   {'table':'products','id':1,'created':false,'result':'updated','status':200}   ``` 
 
         :param insert_document_request: (required)
         :type insert_document_request: InsertDocumentRequest

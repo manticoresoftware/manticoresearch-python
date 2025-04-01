@@ -20,6 +20,7 @@ docs/GeoDistance.md
 docs/GeoDistanceLocationAnchor.md
 docs/Highlight.md
 docs/HighlightFieldOption.md
+docs/HitsHits.md
 docs/IndexApi.md
 docs/InsertDocumentRequest.md
 docs/Join.md
@@ -41,6 +42,7 @@ docs/SearchRequest.md
 docs/SearchResponse.md
 docs/SearchResponseHits.md
 docs/SourceRules.md
+docs/SqlObjResponse.md
 docs/SqlResponse.md
 docs/SuccessResponse.md
 docs/UpdateDocumentRequest.md
@@ -73,6 +75,7 @@ manticoresearch/models/geo_distance.py
 manticoresearch/models/geo_distance_location_anchor.py
 manticoresearch/models/highlight.py
 manticoresearch/models/highlight_field_option.py
+manticoresearch/models/hits_hits.py
 manticoresearch/models/insert_document_request.py
 manticoresearch/models/join.py
 manticoresearch/models/join_cond.py
@@ -92,6 +95,7 @@ manticoresearch/models/search_request.py
 manticoresearch/models/search_response.py
 manticoresearch/models/search_response_hits.py
 manticoresearch/models/source_rules.py
+manticoresearch/models/sql_obj_response.py
 manticoresearch/models/sql_response.py
 manticoresearch/models/success_response.py
 manticoresearch/models/update_document_request.py
@@ -120,6 +124,7 @@ test/test_geo_distance.py
 test/test_geo_distance_location_anchor.py
 test/test_highlight.py
 test/test_highlight_field_option.py
+test/test_hits_hits.py
 test/test_index_api.py
 test/test_insert_document_request.py
 test/test_join.py
@@ -141,6 +146,7 @@ test/test_search_request.py
 test/test_search_response.py
 test/test_search_response_hits.py
 test/test_source_rules.py
+test/test_sql_obj_response.py
 test/test_sql_response.py
 test/test_success_response.py
 test/test_update_document_request.py

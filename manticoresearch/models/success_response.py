@@ -28,12 +28,12 @@ class SuccessResponse(BaseModel):
     Response object indicating the success of an operation, such as inserting or updating a document
     """ # noqa: E501
     table: Optional[StrictStr] = Field(default=None, description="Name of the document table")
-    id: Optional[StrictInt] = Field(default=None, description="ID of the document affected by the request operation", alias="_id")
+    id: Optional[StrictInt] = Field(default=None, description="ID of the document affected by the request operation")
     created: Optional[StrictBool] = Field(default=None, description="Indicates whether the document was created as a result of the operation")
     result: Optional[StrictStr] = Field(default=None, description="Result of the operation, typically 'created', 'updated', or 'deleted'")
     found: Optional[StrictBool] = Field(default=None, description="Indicates whether the document was found in the table")
     status: Optional[StrictInt] = Field(default=None, description="HTTP status code representing the result of the operation")
-    __properties: ClassVar[List[str]] = ["table", "_id", "created", "result", "found", "status"]
+    __properties: ClassVar[List[str]] = ["table", "id", "created", "result", "found", "status"]
 
     #model_config = ConfigDict(
     #    populate_by_name=True,
@@ -87,7 +87,7 @@ class SuccessResponse(BaseModel):
 
         _obj = cls.model_validate({
             "table": obj.get("table"),
-            "_id": obj.get("_id"),
+            "id": obj.get("id"),
             "created": obj.get("created"),
             "result": obj.get("result"),
             "found": obj.get("found"),

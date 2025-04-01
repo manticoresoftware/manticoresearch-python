@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "7.0.0"
+__version__ = "8.0.0"
 
 # import apis into sdk package
 from manticoresearch.api.index_api import IndexApi
@@ -50,6 +50,7 @@ from manticoresearch.models.geo_distance import GeoDistance
 from manticoresearch.models.geo_distance_location_anchor import GeoDistanceLocationAnchor
 from manticoresearch.models.highlight import Highlight
 from manticoresearch.models.highlight_field_option import HighlightFieldOption
+from manticoresearch.models.hits_hits import HitsHits
 from manticoresearch.models.insert_document_request import InsertDocumentRequest
 from manticoresearch.models.join import Join
 from manticoresearch.models.join_cond import JoinCond
@@ -69,6 +70,7 @@ from manticoresearch.models.search_request import SearchRequest
 from manticoresearch.models.search_response import SearchResponse
 from manticoresearch.models.search_response_hits import SearchResponseHits
 from manticoresearch.models.source_rules import SourceRules
+from manticoresearch.models.sql_obj_response import SqlObjResponse
 from manticoresearch.models.sql_response import SqlResponse
 from manticoresearch.models.success_response import SuccessResponse
 from manticoresearch.models.update_document_request import UpdateDocumentRequest
