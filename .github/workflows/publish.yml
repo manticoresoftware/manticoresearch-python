@@ -29,5 +29,5 @@ jobs:
         echo $PYPIRC > ~/.pypirc
         python -m pip install --user --upgrade wheel
         python -m pip install --user --upgrade twine
-        python setup.py sdist bdist_wheel
+        python -m build
         python -m twine upload dist/* -u __token__ -p $PYPI_TOKEN
