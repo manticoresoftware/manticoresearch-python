@@ -29,5 +29,6 @@ jobs:
         echo $PYPIRC > ~/.pypirc
         python -m pip install --user --upgrade wheel
         python -m pip install --user --upgrade twine
+        python -m pip install --user --upgrade build
         python -m build
         python -m twine upload dist/* -u __token__ -p $PYPI_TOKEN
