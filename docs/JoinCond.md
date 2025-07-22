@@ -6,7 +6,7 @@ Object representing the conditions used to perform the join operation
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**field** | **str** | Field to join on | 
+**var_field** | **str** | Field to join on | 
 **table** | **str** | Joined table | 
 **type** | **object** |  | [optional] 
 

@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List
 from manticoresearch.models.agg_composite_term import AggCompositeTerm
 from typing import Optional, Set

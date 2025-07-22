@@ -7,6 +7,8 @@ README.md
 docs/AggComposite.md
 docs/AggCompositeSource.md
 docs/AggCompositeTerm.md
+docs/AggDateHistogram.md
+docs/AggHistogram.md
 docs/AggTerms.md
 docs/Aggregation.md
 docs/AutocompleteRequest.md
@@ -20,6 +22,7 @@ docs/GeoDistance.md
 docs/GeoDistanceLocationAnchor.md
 docs/Highlight.md
 docs/HighlightFieldOption.md
+docs/HighlightFields.md
 docs/HitsHits.md
 docs/IndexApi.md
 docs/InsertDocumentRequest.md
@@ -62,6 +65,8 @@ manticoresearch/models/__init__.py
 manticoresearch/models/agg_composite.py
 manticoresearch/models/agg_composite_source.py
 manticoresearch/models/agg_composite_term.py
+manticoresearch/models/agg_date_histogram.py
+manticoresearch/models/agg_histogram.py
 manticoresearch/models/agg_terms.py
 manticoresearch/models/aggregation.py
 manticoresearch/models/autocomplete_request.py
@@ -75,6 +80,7 @@ manticoresearch/models/geo_distance.py
 manticoresearch/models/geo_distance_location_anchor.py
 manticoresearch/models/highlight.py
 manticoresearch/models/highlight_field_option.py
+manticoresearch/models/highlight_fields.py
 manticoresearch/models/hits_hits.py
 manticoresearch/models/insert_document_request.py
 manticoresearch/models/join.py
@@ -111,6 +117,8 @@ test/__init__.py
 test/test_agg_composite.py
 test/test_agg_composite_source.py
 test/test_agg_composite_term.py
+test/test_agg_date_histogram.py
+test/test_agg_histogram.py
 test/test_agg_terms.py
 test/test_aggregation.py
 test/test_autocomplete_request.py
@@ -124,6 +132,7 @@ test/test_geo_distance.py
 test/test_geo_distance_location_anchor.py
 test/test_highlight.py
 test/test_highlight_field_option.py
+test/test_highlight_fields.py
 test/test_hits_hits.py
 test/test_index_api.py
 test/test_insert_document_request.py

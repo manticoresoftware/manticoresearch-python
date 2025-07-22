@@ -21,8 +21,8 @@ from setuptools import setup, find_packages  # noqa: H301
 #
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
-NAME = "manticoresearch-devel"
-VERSION = "8.0.0-dev"
+NAME = "manticoresearch"
+VERSION = "8.0.0"
 PYTHON_REQUIRES = ">=3.7"
 REQUIRES = [
     "urllib3 >= 1.25.3, < 3",

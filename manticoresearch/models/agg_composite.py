@@ -18,8 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
+from manticoresearch.models.agg_composite_source import AggCompositeSource
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +29,7 @@ class AggComposite(BaseModel):
     Object to perform composite aggregation, i.e., grouping search results by multiple fields
     """ # noqa: E501
     size: Optional[StrictInt] = Field(default=None, description="Maximum number of composite buckets in the result")
-    sources: Optional[List[Any]] = None
+    sources: Optional[List[Dict[str, AggCompositeSource]]] = None
     __properties: ClassVar[List[str]] = ["size", "sources"]
 
     #model_config = ConfigDict(

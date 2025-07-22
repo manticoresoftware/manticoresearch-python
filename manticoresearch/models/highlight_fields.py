@@ -17,24 +17,23 @@ from __future__ import annotations
 import json
 import pprint
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
-from typing import Any, List, Optional
-from manticoresearch.models.response_error_details import ResponseErrorDetails
+from typing import Any, Dict, List, Optional
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-RESPONSEERROR_ONE_OF_SCHEMAS = ["ResponseErrorDetails", "str"]
+HIGHLIGHTFIELDS_ONE_OF_SCHEMAS = ["List[str]", "object"]
 
-class ResponseError(BaseModel):
+class HighlightFields(BaseModel):
     """
-    ResponseError
+    List of fields available for highlighting
     """
-    # data type: ResponseErrorDetails
-    oneof_schema_1_validator: Optional[ResponseErrorDetails] = None
-    # data type: str
-    oneof_schema_2_validator: Optional[StrictStr] = Field(default=None, description="Error message text returned in case of an error")
-    actual_instance: Optional[Union[ResponseErrorDetails, str]] = None
-    one_of_schemas: Set[str] = { "ResponseErrorDetails", "str" }
+    # data type: List[str]
+    oneof_schema_1_validator: Optional[List[StrictStr]] = None
+    # data type: object
+    oneof_schema_2_validator: Optional[Dict[str, Any]] = None
+    actual_instance: Optional[Union[List[str], object]] = None
+    one_of_schemas: Set[str] = { "List[str]", "object" }
 
     #model_config = ConfigDict(
     #    validate_assignment=True,
@@ -54,15 +53,16 @@ class ResponseError(BaseModel):
 
     @field_validator('actual_instance')
     def actual_instance_must_validate_oneof(cls, v):
-        instance = ResponseError.model_construct()
+        instance = HighlightFields.model_construct()
         error_messages = []
         match = 0
-        # validate data type: ResponseErrorDetails
-        if not isinstance(v, ResponseErrorDetails):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ResponseErrorDetails`")
-        else:
+        # validate data type: List[str]
+        try:
+            instance.oneof_schema_1_validator = v
             match += 1
-        # validate data type: str
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+        # validate data type: object
         try:
             instance.oneof_schema_2_validator = v
             match += 1
@@ -70,10 +70,10 @@ class ResponseError(BaseModel):
             error_messages.append(str(e))
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in ResponseError with oneOf schemas: ResponseErrorDetails, str. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in HighlightFields with oneOf schemas: List[str], object. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in ResponseError with oneOf schemas: ResponseErrorDetails, str. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in HighlightFields with oneOf schemas: List[str], object. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -88,13 +88,16 @@ class ResponseError(BaseModel):
         error_messages = []
         match = 0
 
-        # deserialize data into ResponseErrorDetails
+        # deserialize data into List[str]
         try:
-            instance.actual_instance = ResponseErrorDetails.from_json(json_str)
+            # validation
+            instance.oneof_schema_1_validator = json.loads(json_str)
+            # assign value to actual_instance
+            instance.actual_instance = instance.oneof_schema_1_validator
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into str
+        # deserialize data into object
         try:
             # validation
             instance.oneof_schema_2_validator = json.loads(json_str)
@@ -106,10 +109,10 @@ class ResponseError(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into ResponseError with oneOf schemas: ResponseErrorDetails, str. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into HighlightFields with oneOf schemas: List[str], object. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into ResponseError with oneOf schemas: ResponseErrorDetails, str. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into HighlightFields with oneOf schemas: List[str], object. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -123,7 +126,7 @@ class ResponseError(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], ResponseErrorDetails, str]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], List[str], object]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

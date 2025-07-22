@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,7 +27,7 @@ class JoinCond(BaseModel):
     """
     Object representing the conditions used to perform the join operation
     """ # noqa: E501
-    field: StrictStr = Field(description="Field to join on")
+    var_field: StrictStr = Field(description="Field to join on", alias="field")
     table: StrictStr = Field(description="Joined table")
     type: Optional[Any] = None
     __properties: ClassVar[List[str]] = ["field", "table", "type"]

@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **object** | Type or category of the error | 
-**reason** | **object** | Detailed explanation of why the error occurred | [optional] 
-**table** | **object** | The table related to the error, if applicable | [optional] 
+**type** | **str** | Type or category of the error | 
+**reason** | **str** | Detailed explanation of why the error occurred | [optional] 
+**table** | **str** | The table related to the error, if applicable | [optional] 
 
 ## Example
 

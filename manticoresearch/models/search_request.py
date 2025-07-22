@@ -18,8 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from manticoresearch.models.aggregation import Aggregation
 from manticoresearch.models.highlight import Highlight
 from manticoresearch.models.join import Join
 from manticoresearch.models.knn_query import KnnQuery
@@ -37,8 +38,8 @@ class SearchRequest(BaseModel):
     highlight: Optional[Highlight] = None
     limit: Optional[StrictInt] = Field(default=None, description="Maximum number of results to return")
     knn: Optional[KnnQuery] = None
-    aggs: Optional[Any] = Field(default=None, description="Defines aggregation settings for grouping results")
-    expressions: Optional[Any] = Field(default=None, description="Expressions to calculate additional values for the result")
+    aggs: Optional[Dict[str, Aggregation]] = Field(default=None, description="Defines aggregation settings for grouping results")
+    expressions: Optional[Dict[str, StrictStr]] = Field(default=None, description="Expressions to calculate additional values for the result")
     max_matches: Optional[StrictInt] = Field(default=None, description="Maximum number of matches allowed in the result")
     offset: Optional[StrictInt] = Field(default=None, description="Starting point for pagination of the result")
     options: Optional[Dict[str, Any]] = Field(default=None, description="Additional search options")
@@ -103,16 +104,13 @@ class SearchRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of knn
         if self.knn:
             _dict['knn'] = self.knn.to_dict()
-        # set to None if aggs (nullable) is None
-        # and model_fields_set contains the field
-        if self.aggs is None and "aggs" in self.model_fields_set:
-            _dict['aggs'] = None
-
-        # set to None if expressions (nullable) is None
-        # and model_fields_set contains the field
-        if self.expressions is None and "expressions" in self.model_fields_set:
-            _dict['expressions'] = None
-
+        # override the default output from pydantic by calling `to_dict()` of each value in aggs (dict)
+        _field_dict = {}
+        if self.aggs:
+            for _key_aggs in self.aggs:
+                if self.aggs[_key_aggs]:
+                    _field_dict[_key_aggs] = self.aggs[_key_aggs].to_dict()
+            _dict['aggs'] = _field_dict
         # set to None if sort (nullable) is None
         # and model_fields_set contains the field
         if self.sort is None and "sort" in self.model_fields_set:
@@ -141,6 +139,13 @@ class SearchRequest(BaseModel):
             "highlight": Highlight.from_dict(obj["highlight"]) if obj.get("highlight") is not None else None,
             "limit": obj.get("limit"),
             "knn": KnnQuery.from_dict(obj["knn"]) if obj.get("knn") is not None else None,
+            "aggs": dict(
+                (_k, Aggregation.from_dict(_v))
+                for _k, _v in obj["aggs"].items()
+            )
+            if obj.get("aggs") is not None
+            else None,
+            "expressions": obj.get("expressions"),
             "max_matches": obj.get("max_matches"),
             "offset": obj.get("offset"),
             "options": obj.get("options"),

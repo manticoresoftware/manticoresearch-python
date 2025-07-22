@@ -6,7 +6,7 @@ Object containing term fields to aggregate on
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**field** | **str** | Name of attribute to aggregate by | 
+**var_field** | **str** | Name of attribute to aggregate by | 
 **size** | **int** | Maximum number of buckets in the result | [optional] 
 
 ## Example

@@ -6,7 +6,7 @@ Object representing a k-nearest neighbor search query
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**field** | **str** | Field to perform the k-nearest neighbor search on | 
+**var_field** | **str** | Field to perform the k-nearest neighbor search on | 
 **k** | **int** | The number of nearest neighbors to return | 
 **query_vector** | **List[float]** | The vector used as input for the KNN search | [optional] 
 **doc_id** | **int** | The docuemnt ID used as input for the KNN search | [optional] 

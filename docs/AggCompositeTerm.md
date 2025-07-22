@@ -6,7 +6,7 @@ Object representing a term to be used in composite aggregation.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**field** | **str** | Name of field to operate with | 
+**var_field** | **str** | Name of field to operate with | 
 
 ## Example
 
