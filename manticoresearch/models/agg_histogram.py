@@ -18,18 +18,20 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class AggTerms(BaseModel):
+class AggHistogram(BaseModel):
     """
-    Object containing term fields to aggregate on
+    Object to use histograms in aggregation, i.e., grouping search results by histogram values
     """ # noqa: E501
-    var_field: StrictStr = Field(description="Name of attribute to aggregate by", alias="field")
-    size: Optional[StrictInt] = Field(default=None, description="Maximum number of buckets in the result")
-    __properties: ClassVar[List[str]] = ["field", "size"]
+    var_field: StrictStr = Field(description="Field to group by", alias="field")
+    interval: StrictInt = Field(description="Interval of the histogram values")
+    offset: Optional[StrictInt] = Field(default=None, description="Offset of the histogram values. Default value is 0.")
+    keyed: Optional[StrictBool] = Field(default=None, description="Flag that defines if a search response will be a dictionary with the bucket keys. Default value is false.")
+    __properties: ClassVar[List[str]] = ["field", "interval", "offset", "keyed"]
 
     #model_config = ConfigDict(
     #    populate_by_name=True,
@@ -49,7 +51,7 @@ class AggTerms(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of AggTerms from a JSON string"""
+        """Create an instance of AggHistogram from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -74,7 +76,7 @@ class AggTerms(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of AggTerms from a dict"""
+        """Create an instance of AggHistogram from a dict"""
         if obj is None:
             return None
 
@@ -83,7 +85,9 @@ class AggTerms(BaseModel):
 
         _obj = cls.model_validate({
             "field": obj.get("field"),
-            "size": obj.get("size")
+            "interval": obj.get("interval"),
+            "offset": obj.get("offset"),
+            "keyed": obj.get("keyed")
         })
         return _obj
 

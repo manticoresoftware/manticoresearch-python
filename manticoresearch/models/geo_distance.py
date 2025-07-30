@@ -18,8 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from manticoresearch.models.geo_distance_location_anchor import GeoDistanceLocationAnchor
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,9 +30,9 @@ class GeoDistance(BaseModel):
     Object to perform geo-distance based filtering on queries
     """ # noqa: E501
     location_anchor: Optional[GeoDistanceLocationAnchor] = None
-    location_source: Optional[Any] = Field(default=None, description="Field name in the document that contains location data")
-    distance_type: Optional[Any] = Field(default=None, description="Algorithm used to calculate the distance")
-    distance: Optional[Any] = Field(default=None, description="The distance from the anchor point to filter results by")
+    location_source: Optional[StrictStr] = Field(default=None, description="Field name in the document that contains location data")
+    distance_type: Optional[StrictStr] = Field(default=None, description="Algorithm used to calculate the distance")
+    distance: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The distance from the anchor point to filter results by")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["location_anchor", "location_source", "distance_type", "distance"]
 
@@ -103,21 +104,6 @@ class GeoDistance(BaseModel):
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
-
-        # set to None if location_source (nullable) is None
-        # and model_fields_set contains the field
-        if self.location_source is None and "location_source" in self.model_fields_set:
-            _dict['location_source'] = None
-
-        # set to None if distance_type (nullable) is None
-        # and model_fields_set contains the field
-        if self.distance_type is None and "distance_type" in self.model_fields_set:
-            _dict['distance_type'] = None
-
-        # set to None if distance (nullable) is None
-        # and model_fields_set contains the field
-        if self.distance is None and "distance" in self.model_fields_set:
-            _dict['distance'] = None
 
         return _dict
 

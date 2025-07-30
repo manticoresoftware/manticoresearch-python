@@ -7,9 +7,9 @@ Object to perform geo-distance based filtering on queries
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **location_anchor** | [**GeoDistanceLocationAnchor**](GeoDistanceLocationAnchor.md) |  | [optional] 
-**location_source** | **object** | Field name in the document that contains location data | [optional] 
-**distance_type** | **object** | Algorithm used to calculate the distance | [optional] 
-**distance** | **object** | The distance from the anchor point to filter results by | [optional] 
+**location_source** | **str** | Field name in the document that contains location data | [optional] 
+**distance_type** | **str** | Algorithm used to calculate the distance | [optional] 
+**distance** | **str** | The distance from the anchor point to filter results by | [optional] 
 
 ## Example
 

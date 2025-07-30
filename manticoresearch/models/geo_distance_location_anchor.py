@@ -18,8 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,8 +27,8 @@ class GeoDistanceLocationAnchor(BaseModel):
     """
     Specifies the location of the pin point used for search
     """ # noqa: E501
-    lat: Optional[Any] = Field(default=None, description="Latitude of the anchor point")
-    lon: Optional[Any] = Field(default=None, description="Longitude of the anchor point")
+    lat: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Latitude of the anchor point")
+    lon: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Longitude of the anchor point")
     __properties: ClassVar[List[str]] = ["lat", "lon"]
 
     #model_config = ConfigDict(
@@ -70,16 +70,6 @@ class GeoDistanceLocationAnchor(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if lat (nullable) is None
-        # and model_fields_set contains the field
-        if self.lat is None and "lat" in self.model_fields_set:
-            _dict['lat'] = None
-
-        # set to None if lon (nullable) is None
-        # and model_fields_set contains the field
-        if self.lon is None and "lon" in self.model_fields_set:
-            _dict['lon'] = None
-
         return _dict
 
     @classmethod

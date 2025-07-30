@@ -6,7 +6,7 @@ Object used to apply various conditions, such as full-text matching or attribute
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**query_string** | **object** | Filter object defining a query string | [optional] 
+**query_string** | **str** | Filter object defining a query string | [optional] 
 **match** | **object** | Filter object defining a match keyword passed as a string or in a Match object | [optional] 
 **match_phrase** | **object** | Filter object defining a match phrase | [optional] 
 **match_all** | **object** | Filter object to select all documents | [optional] 

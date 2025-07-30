@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from manticoresearch.models.query_filter import QueryFilter
 from typing import Optional, Set
@@ -28,7 +28,7 @@ class KnnQuery(BaseModel):
     """
     Object representing a k-nearest neighbor search query
     """ # noqa: E501
-    field: StrictStr = Field(description="Field to perform the k-nearest neighbor search on")
+    var_field: StrictStr = Field(description="Field to perform the k-nearest neighbor search on", alias="field")
     k: StrictInt = Field(description="The number of nearest neighbors to return")
     query_vector: Optional[List[Union[StrictFloat, StrictInt]]] = Field(default=None, description="The vector used as input for the KNN search")
     doc_id: Optional[StrictInt] = Field(default=None, description="The docuemnt ID used as input for the KNN search")

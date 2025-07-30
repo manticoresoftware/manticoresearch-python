@@ -18,9 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from manticoresearch.models.bool_filter import BoolFilter
 from manticoresearch.models.geo_distance import GeoDistance
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,10 +28,10 @@ class QueryFilter(BaseModel):
     """
     Object used to apply various conditions, such as full-text matching or attribute filtering, to a search query
     """ # noqa: E501
-    query_string: Optional[Any] = Field(default=None, description="Filter object defining a query string")
-    match: Optional[Any] = Field(default=None, description="Filter object defining a match keyword passed as a string or in a Match object")
-    match_phrase: Optional[Any] = Field(default=None, description="Filter object defining a match phrase")
-    match_all: Optional[Any] = Field(default=None, description="Filter object to select all documents")
+    query_string: Optional[StrictStr] = Field(default=None, description="Filter object defining a query string")
+    match: Optional[Dict[str, Any]] = Field(default=None, description="Filter object defining a match keyword passed as a string or in a Match object")
+    match_phrase: Optional[Dict[str, Any]] = Field(default=None, description="Filter object defining a match phrase")
+    match_all: Optional[Dict[str, Any]] = Field(default=None, description="Filter object to select all documents")
     bool: Optional[BoolFilter] = None
     equals: Optional[Any] = None
     var_in: Optional[Dict[str, Any]] = Field(default=None, description="Filter to match a given set of attribute values.", alias="in")
@@ -85,26 +84,6 @@ class QueryFilter(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of geo_distance
         if self.geo_distance:
             _dict['geo_distance'] = self.geo_distance.to_dict()
-        # set to None if query_string (nullable) is None
-        # and model_fields_set contains the field
-        if self.query_string is None and "query_string" in self.model_fields_set:
-            _dict['query_string'] = None
-
-        # set to None if match (nullable) is None
-        # and model_fields_set contains the field
-        if self.match is None and "match" in self.model_fields_set:
-            _dict['match'] = None
-
-        # set to None if match_phrase (nullable) is None
-        # and model_fields_set contains the field
-        if self.match_phrase is None and "match_phrase" in self.model_fields_set:
-            _dict['match_phrase'] = None
-
-        # set to None if match_all (nullable) is None
-        # and model_fields_set contains the field
-        if self.match_all is None and "match_all" in self.model_fields_set:
-            _dict['match_all'] = None
-
         # set to None if equals (nullable) is None
         # and model_fields_set contains the field
         if self.equals is None and "equals" in self.model_fields_set:

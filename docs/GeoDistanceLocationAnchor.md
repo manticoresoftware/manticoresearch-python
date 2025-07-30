@@ -6,8 +6,8 @@ Specifies the location of the pin point used for search
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**lat** | **object** | Latitude of the anchor point | [optional] 
-**lon** | **object** | Longitude of the anchor point | [optional] 
+**lat** | **float** | Latitude of the anchor point | [optional] 
+**lon** | **float** | Longitude of the anchor point | [optional] 
 
 ## Example
 

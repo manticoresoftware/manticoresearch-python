@@ -18,9 +18,10 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
 from manticoresearch.models.agg_composite import AggComposite
+from manticoresearch.models.agg_histogram import AggHistogram
 from manticoresearch.models.agg_terms import AggTerms
 from typing import Optional, Set
 from typing_extensions import Self
@@ -32,7 +33,8 @@ class Aggregation(BaseModel):
     terms: Optional[AggTerms] = None
     sort: Optional[List[Any]] = None
     composite: Optional[AggComposite] = None
-    __properties: ClassVar[List[str]] = ["terms", "sort", "composite"]
+    histogram: Optional[AggHistogram] = None
+    __properties: ClassVar[List[str]] = ["terms", "sort", "composite", "histogram"]
 
     #model_config = ConfigDict(
     #    populate_by_name=True,
@@ -79,6 +81,9 @@ class Aggregation(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of composite
         if self.composite:
             _dict['composite'] = self.composite.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of histogram
+        if self.histogram:
+            _dict['histogram'] = self.histogram.to_dict()
         return _dict
 
     @classmethod
@@ -93,7 +98,8 @@ class Aggregation(BaseModel):
         _obj = cls.model_validate({
             "terms": AggTerms.from_dict(obj["terms"]) if obj.get("terms") is not None else None,
             "sort": obj.get("sort"),
-            "composite": AggComposite.from_dict(obj["composite"]) if obj.get("composite") is not None else None
+            "composite": AggComposite.from_dict(obj["composite"]) if obj.get("composite") is not None else None,
+            "histogram": AggHistogram.from_dict(obj["histogram"]) if obj.get("histogram") is not None else None
         })
         return _obj
 

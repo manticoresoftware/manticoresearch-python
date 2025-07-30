@@ -18,8 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from manticoresearch.models.fulltext_filter import FulltextFilter
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,10 +28,11 @@ class JoinCond(BaseModel):
     """
     Object representing the conditions used to perform the join operation
     """ # noqa: E501
-    field: StrictStr = Field(description="Field to join on")
+    var_field: StrictStr = Field(description="Field to join on", alias="field")
     table: StrictStr = Field(description="Joined table")
+    query: Optional[FulltextFilter] = None
     type: Optional[Any] = None
-    __properties: ClassVar[List[str]] = ["field", "table", "type"]
+    __properties: ClassVar[List[str]] = ["field", "table", "query", "type"]
 
     #model_config = ConfigDict(
     #    populate_by_name=True,
@@ -71,6 +73,9 @@ class JoinCond(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of query
+        if self.query:
+            _dict['query'] = self.query.to_dict()
         # set to None if type (nullable) is None
         # and model_fields_set contains the field
         if self.type is None and "type" in self.model_fields_set:
@@ -90,6 +95,7 @@ class JoinCond(BaseModel):
         _obj = cls.model_validate({
             "field": obj.get("field"),
             "table": obj.get("table"),
+            "query": FulltextFilter.from_dict(obj["query"]) if obj.get("query") is not None else None,
             "type": obj.get("type")
         })
         return _obj

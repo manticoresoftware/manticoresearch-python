@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,8 +27,8 @@ class SourceRules(BaseModel):
     """
     Defines which fields to include or exclude in the response for a search query
     """ # noqa: E501
-    includes: Optional[Any] = Field(default=None, description="List of fields to include in the response")
-    excludes: Optional[Any] = Field(default=None, description="List of fields to exclude from the response")
+    includes: Optional[List[StrictStr]] = Field(default=None, description="List of fields to include in the response")
+    excludes: Optional[List[StrictStr]] = Field(default=None, description="List of fields to exclude from the response")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["includes", "excludes"]
 
@@ -77,16 +77,6 @@ class SourceRules(BaseModel):
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
-
-        # set to None if includes (nullable) is None
-        # and model_fields_set contains the field
-        if self.includes is None and "includes" in self.model_fields_set:
-            _dict['includes'] = None
-
-        # set to None if excludes (nullable) is None
-        # and model_fields_set contains the field
-        if self.excludes is None and "excludes" in self.model_fields_set:
-            _dict['excludes'] = None
 
         return _dict
 
