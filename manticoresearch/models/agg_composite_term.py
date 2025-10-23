@@ -30,11 +30,11 @@ class AggCompositeTerm(BaseModel):
     var_field: StrictStr = Field(description="Name of field to operate with", alias="field")
     __properties: ClassVar[List[str]] = ["field"]
 
-    #model_config = ConfigDict(
-    #    populate_by_name=True,
-    #    validate_assignment=True,
-    #    protected_namespaces=(),
-    #)
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:

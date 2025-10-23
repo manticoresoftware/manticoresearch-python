@@ -31,11 +31,11 @@ class AggTerms(BaseModel):
     size: Optional[StrictInt] = Field(default=None, description="Maximum number of buckets in the result")
     __properties: ClassVar[List[str]] = ["field", "size"]
 
-    #model_config = ConfigDict(
-    #    populate_by_name=True,
-    #    validate_assignment=True,
-    #    protected_namespaces=(),
-    #)
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:

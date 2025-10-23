@@ -13,6 +13,8 @@ Name | Type | Description | Notes
 ```python
 from manticoresearch.models.match_all import MatchAll
 
+# TODO update the JSON string below
+json = "{}"
 # create an instance of MatchAll from a JSON string
 match_all_instance = MatchAll.from_json(json)
 # print the JSON string representation of the object

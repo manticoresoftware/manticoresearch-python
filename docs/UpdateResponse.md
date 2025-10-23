@@ -16,6 +16,8 @@ Name | Type | Description | Notes
 ```python
 from manticoresearch.models.update_response import UpdateResponse
 
+# TODO update the JSON string below
+json = "{}"
 # create an instance of UpdateResponse from a JSON string
 update_response_instance = UpdateResponse.from_json(json)
 # print the JSON string representation of the object

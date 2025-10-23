@@ -32,11 +32,11 @@ class BoolFilter(BaseModel):
     should: Optional[List[Optional[QueryFilter]]] = Field(default=None, description="Query clauses that should be matched, but are not required")
     __properties: ClassVar[List[str]] = ["must", "must_not", "should"]
 
-    #model_config = ConfigDict(
-    #    populate_by_name=True,
-    #    validate_assignment=True,
-    #    protected_namespaces=(),
-    #)
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:

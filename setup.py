@@ -12,7 +12,6 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from setuptools import setup, find_packages  # noqa: H301
 
 # To install the library, run the following
@@ -21,8 +20,8 @@ from setuptools import setup, find_packages  # noqa: H301
 #
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
-NAME = "manticoresearch"
-VERSION = "9.1.0"
+NAME = "manticoresearch-devel"
+VERSION = "10.0.0"
 PYTHON_REQUIRES = ">=3.7"
 REQUIRES = [
     "urllib3 >= 1.25.3, < 3",

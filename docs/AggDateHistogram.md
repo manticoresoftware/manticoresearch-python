@@ -16,6 +16,8 @@ Name | Type | Description | Notes
 ```python
 from manticoresearch.models.agg_date_histogram import AggDateHistogram
 
+# TODO update the JSON string below
+json = "{}"
 # create an instance of AggDateHistogram from a JSON string
 agg_date_histogram_instance = AggDateHistogram.from_json(json)
 # print the JSON string representation of the object

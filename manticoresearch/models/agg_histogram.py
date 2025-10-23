@@ -33,11 +33,11 @@ class AggHistogram(BaseModel):
     keyed: Optional[StrictBool] = Field(default=None, description="Flag that defines if a search response will be a dictionary with the bucket keys. Default value is false.")
     __properties: ClassVar[List[str]] = ["field", "interval", "offset", "keyed"]
 
-    #model_config = ConfigDict(
-    #    populate_by_name=True,
-    #    validate_assignment=True,
-    #    protected_namespaces=(),
-    #)
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:

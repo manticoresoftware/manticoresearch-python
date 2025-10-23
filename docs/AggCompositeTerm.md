@@ -13,6 +13,8 @@ Name | Type | Description | Notes
 ```python
 from manticoresearch.models.agg_composite_term import AggCompositeTerm
 
+# TODO update the JSON string below
+json = "{}"
 # create an instance of AggCompositeTerm from a JSON string
 agg_composite_term_instance = AggCompositeTerm.from_json(json)
 # print the JSON string representation of the object

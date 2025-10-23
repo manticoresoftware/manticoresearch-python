@@ -35,11 +35,11 @@ class SuccessResponse(BaseModel):
     status: Optional[StrictInt] = Field(default=None, description="HTTP status code representing the result of the operation")
     __properties: ClassVar[List[str]] = ["table", "id", "created", "result", "found", "status"]
 
-    #model_config = ConfigDict(
-    #    populate_by_name=True,
-    #    validate_assignment=True,
-    #    protected_namespaces=(),
-    #)
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:

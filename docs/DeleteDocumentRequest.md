@@ -16,6 +16,8 @@ Name | Type | Description | Notes
 ```python
 from manticoresearch.models.delete_document_request import DeleteDocumentRequest
 
+# TODO update the JSON string below
+json = "{}"
 # create an instance of DeleteDocumentRequest from a JSON string
 delete_document_request_instance = DeleteDocumentRequest.from_json(json)
 # print the JSON string representation of the object

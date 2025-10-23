@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 ```python
 from manticoresearch.models.error_response import ErrorResponse
 
+# TODO update the JSON string below
+json = "{}"
 # create an instance of ErrorResponse from a JSON string
 error_response_instance = ErrorResponse.from_json(json)
 # print the JSON string representation of the object

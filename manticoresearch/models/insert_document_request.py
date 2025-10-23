@@ -33,11 +33,11 @@ class InsertDocumentRequest(BaseModel):
     doc: Dict[str, Any] = Field(description="Object containing document data ")
     __properties: ClassVar[List[str]] = ["table", "cluster", "id", "doc"]
 
-    #model_config = ConfigDict(
-    #    populate_by_name=True,
-    #    validate_assignment=True,
-    #    protected_namespaces=(),
-    #)
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:

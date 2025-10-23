@@ -176,7 +176,7 @@ class RESTClientObject:
                 content_type = headers.get('Content-Type')
                 if (
                     not content_type
-                    or re.search('json', content_type, re.IGNORECASE)
+                    or headers['Content-Type'] == 'application/json'
                 ):
                     request_body = None
                     if body is not None:

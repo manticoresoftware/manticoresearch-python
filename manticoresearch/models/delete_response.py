@@ -34,11 +34,11 @@ class DeleteResponse(BaseModel):
     result: Optional[StrictStr] = Field(default=None, description="Result of the delete operation, typically 'deleted'")
     __properties: ClassVar[List[str]] = ["table", "deleted", "id", "found", "result"]
 
-    #model_config = ConfigDict(
-    #    populate_by_name=True,
-    #    validate_assignment=True,
-    #    protected_namespaces=(),
-    #)
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:

@@ -31,11 +31,11 @@ class PercolateRequest(BaseModel):
     query: PercolateRequestQuery
     __properties: ClassVar[List[str]] = ["query"]
 
-    #model_config = ConfigDict(
-    #    populate_by_name=True,
-    #    validate_assignment=True,
-    #    protected_namespaces=(),
-    #)
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:

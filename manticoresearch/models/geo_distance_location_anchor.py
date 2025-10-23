@@ -31,11 +31,11 @@ class GeoDistanceLocationAnchor(BaseModel):
     lon: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Longitude of the anchor point")
     __properties: ClassVar[List[str]] = ["lat", "lon"]
 
-    #model_config = ConfigDict(
-    #    populate_by_name=True,
-    #    validate_assignment=True,
-    #    protected_namespaces=(),
-    #)
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:

@@ -30,11 +30,11 @@ class ReplaceDocumentRequest(BaseModel):
     doc: Dict[str, Any] = Field(description="Object containing the new document data to replace the existing one.")
     __properties: ClassVar[List[str]] = ["doc"]
 
-    #model_config = ConfigDict(
-    #    populate_by_name=True,
-    #    validate_assignment=True,
-    #    protected_namespaces=(),
-    #)
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:

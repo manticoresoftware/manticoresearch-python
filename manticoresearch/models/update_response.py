@@ -33,11 +33,11 @@ class UpdateResponse(BaseModel):
     result: Optional[StrictStr] = Field(default=None, description="Result of the update operation, typically 'updated'")
     __properties: ClassVar[List[str]] = ["table", "updated", "id", "result"]
 
-    #model_config = ConfigDict(
-    #    populate_by_name=True,
-    #    validate_assignment=True,
-    #    protected_namespaces=(),
-    #)
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:

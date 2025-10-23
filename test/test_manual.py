@@ -54,17 +54,19 @@ class TestManualApi(ParametrizedTestCase):
         search_request.query = searchQuery
 
         res = searchApi.search(search_request)
-        pprint(res)
+        self.assertEqual(res.hits.hits[0].id, 4)
 
         search_request = {"table":"movies","query":{"bool": {"must": [ {"match": {"title":"4"}}] }}}
 
         res = searchApi.search(search_request)
-        pprint(res)
+        self.assertEqual(res.hits.hits[0].id, 4)
 
         autocomplete_request = {"table":"movies","query": "Romul","options": {"fuzziness": 0, "layouts": "us,uk"} }
 
         res = searchApi.autocomplete(autocomplete_request)
-        pprint(res)
+        self.assertEqual(res[0]['total'], 2)
+        self.assertEqual(res[0]['data'][0]['query'], 'romulan')
+        self.assertEqual(res[0]['data'][1]['query'], 'romulus')
 
         pprint("Tests finished")
         

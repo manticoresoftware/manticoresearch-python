@@ -32,11 +32,11 @@ class SqlObjResponse(BaseModel):
     timed_out: Optional[StrictBool] = None
     __properties: ClassVar[List[str]] = ["hits", "took", "timed_out"]
 
-    #model_config = ConfigDict(
-    #    populate_by_name=True,
-    #    validate_assignment=True,
-    #    protected_namespaces=(),
-    #)
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:

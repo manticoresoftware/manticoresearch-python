@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 ```python
 from manticoresearch.models.agg_composite import AggComposite
 
+# TODO update the JSON string below
+json = "{}"
 # create an instance of AggComposite from a JSON string
 agg_composite_instance = AggComposite.from_json(json)
 # print the JSON string representation of the object

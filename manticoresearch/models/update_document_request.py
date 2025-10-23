@@ -35,11 +35,11 @@ class UpdateDocumentRequest(BaseModel):
     query: Optional[QueryFilter] = None
     __properties: ClassVar[List[str]] = ["table", "cluster", "doc", "id", "query"]
 
-    #model_config = ConfigDict(
-    #    populate_by_name=True,
-    #    validate_assignment=True,
-    #    protected_namespaces=(),
-    #)
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:

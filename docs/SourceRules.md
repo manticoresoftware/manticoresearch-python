@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 ```python
 from manticoresearch.models.source_rules import SourceRules
 
+# TODO update the JSON string below
+json = "{}"
 # create an instance of SourceRules from a JSON string
 source_rules_instance = SourceRules.from_json(json)
 # print the JSON string representation of the object

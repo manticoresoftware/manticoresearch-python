@@ -39,11 +39,11 @@ class QueryFilter(BaseModel):
     geo_distance: Optional[GeoDistance] = None
     __properties: ClassVar[List[str]] = ["query_string", "match", "match_phrase", "match_all", "bool", "equals", "in", "range", "geo_distance"]
 
-    #model_config = ConfigDict(
-    #    populate_by_name=True,
-    #    validate_assignment=True,
-    #    protected_namespaces=(),
-    #)
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:

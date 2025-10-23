@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 ```python
 from manticoresearch.models.sql_obj_response import SqlObjResponse
 
+# TODO update the JSON string below
+json = "{}"
 # create an instance of SqlObjResponse from a JSON string
 sql_obj_response_instance = SqlObjResponse.from_json(json)
 # print the JSON string representation of the object

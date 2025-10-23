@@ -37,11 +37,11 @@ class HitsHits(BaseModel):
     fields: Optional[Dict[str, Any]] = Field(default=None, description="The percolate-related fields of the matched document returned for percolate queries")
     __properties: ClassVar[List[str]] = ["_id", "_score", "_source", "_knn_dist", "highlight", "table", "_type:", "fields"]
 
-    #model_config = ConfigDict(
-    #    populate_by_name=True,
-    #    validate_assignment=True,
-    #    protected_namespaces=(),
-    #)
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:

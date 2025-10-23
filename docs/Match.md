@@ -15,6 +15,8 @@ Name | Type | Description | Notes
 ```python
 from manticoresearch.models.match import Match
 
+# TODO update the JSON string below
+json = "{}"
 # create an instance of Match from a JSON string
 match_instance = Match.from_json(json)
 # print the JSON string representation of the object

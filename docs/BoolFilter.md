@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 ```python
 from manticoresearch.models.bool_filter import BoolFilter
 
+# TODO update the JSON string below
+json = "{}"
 # create an instance of BoolFilter from a JSON string
 bool_filter_instance = BoolFilter.from_json(json)
 # print the JSON string representation of the object

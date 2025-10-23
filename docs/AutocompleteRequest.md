@@ -15,6 +15,8 @@ Name | Type | Description | Notes
 ```python
 from manticoresearch.models.autocomplete_request import AutocompleteRequest
 
+# TODO update the JSON string below
+json = "{}"
 # create an instance of AutocompleteRequest from a JSON string
 autocomplete_request_instance = AutocompleteRequest.from_json(json)
 # print the JSON string representation of the object

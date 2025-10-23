@@ -16,6 +16,8 @@ Name | Type | Description | Notes
 ```python
 from manticoresearch.models.geo_distance import GeoDistance
 
+# TODO update the JSON string below
+json = "{}"
 # create an instance of GeoDistance from a JSON string
 geo_distance_instance = GeoDistance.from_json(json)
 # print the JSON string representation of the object

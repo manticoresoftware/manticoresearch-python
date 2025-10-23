@@ -17,6 +17,8 @@ Name | Type | Description | Notes
 ```python
 from manticoresearch.models.update_document_request import UpdateDocumentRequest
 
+# TODO update the JSON string below
+json = "{}"
 # create an instance of UpdateDocumentRequest from a JSON string
 update_document_request_instance = UpdateDocumentRequest.from_json(json)
 # print the JSON string representation of the object

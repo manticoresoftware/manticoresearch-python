@@ -15,66 +15,129 @@
 """  # noqa: E501
 
 
-__version__ = "9.1.0"
+__version__ = "10.0.0"
+
+# Define package exports
+__all__ = [
+    "IndexApi",
+    "SearchApi",
+    "UtilsApi",
+    "ApiResponse",
+    "ApiClient",
+    "Configuration",
+    "OpenApiException",
+    "ApiTypeError",
+    "ApiValueError",
+    "ApiKeyError",
+    "ApiAttributeError",
+    "ApiException",
+    "AggComposite",
+    "AggCompositeSource",
+    "AggCompositeTerm",
+    "AggDateHistogram",
+    "AggHistogram",
+    "AggTerms",
+    "Aggregation",
+    "AutocompleteRequest",
+    "BoolFilter",
+    "BulkResponse",
+    "DeleteDocumentRequest",
+    "DeleteResponse",
+    "ErrorResponse",
+    "FulltextFilter",
+    "GeoDistance",
+    "GeoDistanceLocationAnchor",
+    "Highlight",
+    "HighlightFieldOption",
+    "HighlightFields",
+    "HitsHits",
+    "InsertDocumentRequest",
+    "Join",
+    "JoinCond",
+    "JoinOn",
+    "Knn",
+    "KnnQuery",
+    "Match",
+    "MatchAll",
+    "PercolateRequest",
+    "PercolateRequestQuery",
+    "QueryFilter",
+    "Range",
+    "ReplaceDocumentRequest",
+    "ResponseError",
+    "ResponseErrorDetails",
+    "SearchQuery",
+    "SearchRequest",
+    "SearchResponse",
+    "SearchResponseHits",
+    "SourceRules",
+    "SqlObjResponse",
+    "SqlResponse",
+    "SuccessResponse",
+    "UpdateDocumentRequest",
+    "UpdateResponse",
+]
 
 # import apis into sdk package
-from manticoresearch.api.index_api import IndexApi
-from manticoresearch.api.search_api import SearchApi
-from manticoresearch.api.utils_api import UtilsApi
+from manticoresearch.api.index_api import IndexApi as IndexApi
+from manticoresearch.api.search_api import SearchApi as SearchApi
+from manticoresearch.api.utils_api import UtilsApi as UtilsApi
 
 # import ApiClient
-from manticoresearch.api_response import ApiResponse
-from manticoresearch.api_client import ApiClient
-from manticoresearch.configuration import Configuration
-from manticoresearch.exceptions import OpenApiException
-from manticoresearch.exceptions import ApiTypeError
-from manticoresearch.exceptions import ApiValueError
-from manticoresearch.exceptions import ApiKeyError
-from manticoresearch.exceptions import ApiAttributeError
-from manticoresearch.exceptions import ApiException
+from manticoresearch.api_response import ApiResponse as ApiResponse
+from manticoresearch.api_client import ApiClient as ApiClient
+from manticoresearch.configuration import Configuration as Configuration
+from manticoresearch.exceptions import OpenApiException as OpenApiException
+from manticoresearch.exceptions import ApiTypeError as ApiTypeError
+from manticoresearch.exceptions import ApiValueError as ApiValueError
+from manticoresearch.exceptions import ApiKeyError as ApiKeyError
+from manticoresearch.exceptions import ApiAttributeError as ApiAttributeError
+from manticoresearch.exceptions import ApiException as ApiException
 
 # import models into sdk package
-from manticoresearch.models.agg_composite import AggComposite
-from manticoresearch.models.agg_composite_source import AggCompositeSource
-from manticoresearch.models.agg_composite_term import AggCompositeTerm
-from manticoresearch.models.agg_date_histogram import AggDateHistogram
-from manticoresearch.models.agg_histogram import AggHistogram
-from manticoresearch.models.agg_terms import AggTerms
-from manticoresearch.models.aggregation import Aggregation
-from manticoresearch.models.autocomplete_request import AutocompleteRequest
-from manticoresearch.models.bool_filter import BoolFilter
-from manticoresearch.models.bulk_response import BulkResponse
-from manticoresearch.models.delete_document_request import DeleteDocumentRequest
-from manticoresearch.models.delete_response import DeleteResponse
-from manticoresearch.models.error_response import ErrorResponse
-from manticoresearch.models.fulltext_filter import FulltextFilter
-from manticoresearch.models.geo_distance import GeoDistance
-from manticoresearch.models.geo_distance_location_anchor import GeoDistanceLocationAnchor
-from manticoresearch.models.highlight import Highlight
-from manticoresearch.models.highlight_field_option import HighlightFieldOption
-from manticoresearch.models.highlight_fields import HighlightFields
-from manticoresearch.models.hits_hits import HitsHits
-from manticoresearch.models.insert_document_request import InsertDocumentRequest
-from manticoresearch.models.join import Join
-from manticoresearch.models.join_cond import JoinCond
-from manticoresearch.models.join_on import JoinOn
-from manticoresearch.models.knn_query import KnnQuery
-from manticoresearch.models.match import Match
-from manticoresearch.models.match_all import MatchAll
-from manticoresearch.models.percolate_request import PercolateRequest
-from manticoresearch.models.percolate_request_query import PercolateRequestQuery
-from manticoresearch.models.query_filter import QueryFilter
-from manticoresearch.models.range import Range
-from manticoresearch.models.replace_document_request import ReplaceDocumentRequest
-from manticoresearch.models.response_error import ResponseError
-from manticoresearch.models.response_error_details import ResponseErrorDetails
-from manticoresearch.models.search_query import SearchQuery
-from manticoresearch.models.search_request import SearchRequest
-from manticoresearch.models.search_response import SearchResponse
-from manticoresearch.models.search_response_hits import SearchResponseHits
-from manticoresearch.models.source_rules import SourceRules
-from manticoresearch.models.sql_obj_response import SqlObjResponse
-from manticoresearch.models.sql_response import SqlResponse
-from manticoresearch.models.success_response import SuccessResponse
-from manticoresearch.models.update_document_request import UpdateDocumentRequest
-from manticoresearch.models.update_response import UpdateResponse
+from manticoresearch.models.agg_composite import AggComposite as AggComposite
+from manticoresearch.models.agg_composite_source import AggCompositeSource as AggCompositeSource
+from manticoresearch.models.agg_composite_term import AggCompositeTerm as AggCompositeTerm
+from manticoresearch.models.agg_date_histogram import AggDateHistogram as AggDateHistogram
+from manticoresearch.models.agg_histogram import AggHistogram as AggHistogram
+from manticoresearch.models.agg_terms import AggTerms as AggTerms
+from manticoresearch.models.aggregation import Aggregation as Aggregation
+from manticoresearch.models.autocomplete_request import AutocompleteRequest as AutocompleteRequest
+from manticoresearch.models.bool_filter import BoolFilter as BoolFilter
+from manticoresearch.models.bulk_response import BulkResponse as BulkResponse
+from manticoresearch.models.delete_document_request import DeleteDocumentRequest as DeleteDocumentRequest
+from manticoresearch.models.delete_response import DeleteResponse as DeleteResponse
+from manticoresearch.models.error_response import ErrorResponse as ErrorResponse
+from manticoresearch.models.fulltext_filter import FulltextFilter as FulltextFilter
+from manticoresearch.models.geo_distance import GeoDistance as GeoDistance
+from manticoresearch.models.geo_distance_location_anchor import GeoDistanceLocationAnchor as GeoDistanceLocationAnchor
+from manticoresearch.models.highlight import Highlight as Highlight
+from manticoresearch.models.highlight_field_option import HighlightFieldOption as HighlightFieldOption
+from manticoresearch.models.highlight_fields import HighlightFields as HighlightFields
+from manticoresearch.models.hits_hits import HitsHits as HitsHits
+from manticoresearch.models.insert_document_request import InsertDocumentRequest as InsertDocumentRequest
+from manticoresearch.models.join import Join as Join
+from manticoresearch.models.join_cond import JoinCond as JoinCond
+from manticoresearch.models.join_on import JoinOn as JoinOn
+from manticoresearch.models.knn import Knn as Knn
+from manticoresearch.models.knn_query import KnnQuery as KnnQuery
+from manticoresearch.models.match import Match as Match
+from manticoresearch.models.match_all import MatchAll as MatchAll
+from manticoresearch.models.percolate_request import PercolateRequest as PercolateRequest
+from manticoresearch.models.percolate_request_query import PercolateRequestQuery as PercolateRequestQuery
+from manticoresearch.models.query_filter import QueryFilter as QueryFilter
+from manticoresearch.models.range import Range as Range
+from manticoresearch.models.replace_document_request import ReplaceDocumentRequest as ReplaceDocumentRequest
+from manticoresearch.models.response_error import ResponseError as ResponseError
+from manticoresearch.models.response_error_details import ResponseErrorDetails as ResponseErrorDetails
+from manticoresearch.models.search_query import SearchQuery as SearchQuery
+from manticoresearch.models.search_request import SearchRequest as SearchRequest
+from manticoresearch.models.search_response import SearchResponse as SearchResponse
+from manticoresearch.models.search_response_hits import SearchResponseHits as SearchResponseHits
+from manticoresearch.models.source_rules import SourceRules as SourceRules
+from manticoresearch.models.sql_obj_response import SqlObjResponse as SqlObjResponse
+from manticoresearch.models.sql_response import SqlResponse as SqlResponse
+from manticoresearch.models.success_response import SuccessResponse as SuccessResponse
+from manticoresearch.models.update_document_request import UpdateDocumentRequest as UpdateDocumentRequest
+from manticoresearch.models.update_response import UpdateResponse as UpdateResponse
+

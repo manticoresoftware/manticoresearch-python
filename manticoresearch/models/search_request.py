@@ -23,7 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from manticoresearch.models.aggregation import Aggregation
 from manticoresearch.models.highlight import Highlight
 from manticoresearch.models.join import Join
-from manticoresearch.models.knn_query import KnnQuery
+from manticoresearch.models.knn import Knn
 from manticoresearch.models.search_query import SearchQuery
 from typing import Optional, Set
 from typing_extensions import Self
@@ -37,7 +37,7 @@ class SearchRequest(BaseModel):
     join: Optional[List[Join]] = Field(default=None, description="Join clause to combine search data from multiple tables")
     highlight: Optional[Highlight] = None
     limit: Optional[StrictInt] = Field(default=None, description="Maximum number of results to return")
-    knn: Optional[KnnQuery] = None
+    knn: Optional[Knn] = None
     aggs: Optional[Dict[str, Aggregation]] = Field(default=None, description="Defines aggregation settings for grouping results")
     expressions: Optional[Dict[str, StrictStr]] = Field(default=None, description="Expressions to calculate additional values for the result")
     max_matches: Optional[StrictInt] = Field(default=None, description="Maximum number of matches allowed in the result")
@@ -49,11 +49,11 @@ class SearchRequest(BaseModel):
     track_scores: Optional[StrictBool] = Field(default=None, description="Enable or disable result weight calculation used for sorting")
     __properties: ClassVar[List[str]] = ["table", "query", "join", "highlight", "limit", "knn", "aggs", "expressions", "max_matches", "offset", "options", "profile", "sort", "_source", "track_scores"]
 
-    #model_config = ConfigDict(
-    #    populate_by_name=True,
-    #    validate_assignment=True,
-    #    protected_namespaces=(),
-    #)
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:
@@ -138,7 +138,7 @@ class SearchRequest(BaseModel):
             "join": [Join.from_dict(_item) for _item in obj["join"]] if obj.get("join") is not None else None,
             "highlight": Highlight.from_dict(obj["highlight"]) if obj.get("highlight") is not None else None,
             "limit": obj.get("limit"),
-            "knn": KnnQuery.from_dict(obj["knn"]) if obj.get("knn") is not None else None,
+            "knn": Knn.from_dict(obj["knn"]) if obj.get("knn") is not None else None,
             "aggs": dict(
                 (_k, Aggregation.from_dict(_v))
                 for _k, _v in obj["aggs"].items()

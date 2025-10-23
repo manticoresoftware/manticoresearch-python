@@ -33,11 +33,11 @@ class DeleteDocumentRequest(BaseModel):
     query: Optional[Dict[str, Any]] = Field(default=None, description="Defines the criteria to match documents for deletion")
     __properties: ClassVar[List[str]] = ["table", "cluster", "id", "query"]
 
-    #model_config = ConfigDict(
-    #    populate_by_name=True,
-    #    validate_assignment=True,
-    #    protected_namespaces=(),
-    #)
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:

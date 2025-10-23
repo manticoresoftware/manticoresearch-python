@@ -12,6 +12,8 @@ Name | Type | Description | Notes
 ```python
 from manticoresearch.models.highlight_fields import HighlightFields
 
+# TODO update the JSON string below
+json = "{}"
 # create an instance of HighlightFields from a JSON string
 highlight_fields_instance = HighlightFields.from_json(json)
 # print the JSON string representation of the object

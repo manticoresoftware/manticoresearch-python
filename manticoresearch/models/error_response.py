@@ -32,11 +32,11 @@ class ErrorResponse(BaseModel):
     status: Optional[StrictInt] = Field(default=500, description="HTTP status code of the error response")
     __properties: ClassVar[List[str]] = ["error", "status"]
 
-    #model_config = ConfigDict(
-    #    populate_by_name=True,
-    #    validate_assignment=True,
-    #    protected_namespaces=(),
-    #)
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:

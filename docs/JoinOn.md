@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 ```python
 from manticoresearch.models.join_on import JoinOn
 
+# TODO update the JSON string below
+json = "{}"
 # create an instance of JoinOn from a JSON string
 join_on_instance = JoinOn.from_json(json)
 # print the JSON string representation of the object

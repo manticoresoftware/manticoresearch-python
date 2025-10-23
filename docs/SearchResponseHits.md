@@ -16,6 +16,8 @@ Name | Type | Description | Notes
 ```python
 from manticoresearch.models.search_response_hits import SearchResponseHits
 
+# TODO update the JSON string below
+json = "{}"
 # create an instance of SearchResponseHits from a JSON string
 search_response_hits_instance = SearchResponseHits.from_json(json)
 # print the JSON string representation of the object

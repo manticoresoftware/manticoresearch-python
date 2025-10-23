@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 ```python
 from manticoresearch.models.agg_terms import AggTerms
 
+# TODO update the JSON string below
+json = "{}"
 # create an instance of AggTerms from a JSON string
 agg_terms_instance = AggTerms.from_json(json)
 # print the JSON string representation of the object

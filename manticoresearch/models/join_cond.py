@@ -34,11 +34,11 @@ class JoinCond(BaseModel):
     type: Optional[Any] = None
     __properties: ClassVar[List[str]] = ["field", "table", "query", "type"]
 
-    #model_config = ConfigDict(
-    #    populate_by_name=True,
-    #    validate_assignment=True,
-    #    protected_namespaces=(),
-    #)
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:

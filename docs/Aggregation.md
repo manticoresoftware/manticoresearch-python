@@ -15,6 +15,8 @@ Name | Type | Description | Notes
 ```python
 from manticoresearch.models.aggregation import Aggregation
 
+# TODO update the JSON string below
+json = "{}"
 # create an instance of Aggregation from a JSON string
 aggregation_instance = Aggregation.from_json(json)
 # print the JSON string representation of the object

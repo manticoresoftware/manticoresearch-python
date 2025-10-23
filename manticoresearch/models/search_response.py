@@ -37,11 +37,11 @@ class SearchResponse(BaseModel):
     warning: Optional[Dict[str, Any]] = Field(default=None, description="Warnings encountered during the search operation")
     __properties: ClassVar[List[str]] = ["took", "timed_out", "aggregations", "hits", "profile", "scroll", "warning"]
 
-    #model_config = ConfigDict(
-    #    populate_by_name=True,
-    #    validate_assignment=True,
-    #    protected_namespaces=(),
-    #)
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:

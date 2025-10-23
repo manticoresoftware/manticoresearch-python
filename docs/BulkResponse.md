@@ -17,6 +17,8 @@ Name | Type | Description | Notes
 ```python
 from manticoresearch.models.bulk_response import BulkResponse
 
+# TODO update the JSON string below
+json = "{}"
 # create an instance of BulkResponse from a JSON string
 bulk_response_instance = BulkResponse.from_json(json)
 # print the JSON string representation of the object

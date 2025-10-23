@@ -34,11 +34,11 @@ class SearchResponseHits(BaseModel):
     hits: Optional[List[HitsHits]] = Field(default=None, description="Array of hit objects, each representing a matched document")
     __properties: ClassVar[List[str]] = ["max_score", "total", "total_relation", "hits"]
 
-    #model_config = ConfigDict(
-    #    populate_by_name=True,
-    #    validate_assignment=True,
-    #    protected_namespaces=(),
-    #)
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:

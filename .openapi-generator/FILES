@@ -29,6 +29,7 @@ docs/InsertDocumentRequest.md
 docs/Join.md
 docs/JoinCond.md
 docs/JoinOn.md
+docs/Knn.md
 docs/KnnQuery.md
 docs/Match.md
 docs/MatchAll.md
@@ -86,6 +87,7 @@ manticoresearch/models/insert_document_request.py
 manticoresearch/models/join.py
 manticoresearch/models/join_cond.py
 manticoresearch/models/join_on.py
+manticoresearch/models/knn.py
 manticoresearch/models/knn_query.py
 manticoresearch/models/match.py
 manticoresearch/models/match_all.py
@@ -139,6 +141,7 @@ test/test_insert_document_request.py
 test/test_join.py
 test/test_join_cond.py
 test/test_join_on.py
+test/test_knn.py
 test/test_knn_query.py
 test/test_match.py
 test/test_match_all.py

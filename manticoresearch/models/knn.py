@@ -18,21 +18,25 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
+from manticoresearch.models.knn_query import KnnQuery
+from manticoresearch.models.query_filter import QueryFilter
 from typing import Optional, Set
 from typing_extensions import Self
 
-class BulkResponse(BaseModel):
+class Knn(BaseModel):
     """
-    Success response for bulk search requests
+    Object representing a k-nearest neighbor search query
     """ # noqa: E501
-    items: Optional[List[Dict[str, Any]]] = Field(default=None, description="List of results")
-    errors: Optional[StrictBool] = Field(default=None, description="Errors occurred during the bulk operation")
-    error: Optional[StrictStr] = Field(default=None, description="Error message describing an error if such occurred")
-    current_line: Optional[StrictInt] = Field(default=None, description="Number of the row returned in the response")
-    skipped_lines: Optional[StrictInt] = Field(default=None, description="Number of rows skipped in the response")
-    __properties: ClassVar[List[str]] = ["items", "errors", "error", "current_line", "skipped_lines"]
+    var_field: StrictStr = Field(description="Field to perform the k-nearest neighbor search on", alias="field")
+    k: StrictInt = Field(description="The number of nearest neighbors to return")
+    query: Optional[KnnQuery] = None
+    query_vector: Optional[List[Union[StrictFloat, StrictInt]]] = Field(default=None, description="The vector used as input for the KNN search")
+    doc_id: Optional[StrictInt] = Field(default=None, description="The docuemnt ID used as input for the KNN search")
+    ef: Optional[StrictInt] = Field(default=None, description="Optional parameter controlling the accuracy of the search")
+    filter: Optional[QueryFilter] = None
+    __properties: ClassVar[List[str]] = ["field", "k", "query", "query_vector", "doc_id", "ef", "filter"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -52,7 +56,7 @@ class BulkResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of BulkResponse from a JSON string"""
+        """Create an instance of Knn from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,11 +77,17 @@ class BulkResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of query
+        if self.query:
+            _dict['query'] = self.query.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of filter
+        if self.filter:
+            _dict['filter'] = self.filter.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of BulkResponse from a dict"""
+        """Create an instance of Knn from a dict"""
         if obj is None:
             return None
 
@@ -85,11 +95,13 @@ class BulkResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "items": obj.get("items"),
-            "errors": obj.get("errors"),
-            "error": obj.get("error"),
-            "current_line": obj.get("current_line"),
-            "skipped_lines": obj.get("skipped_lines")
+            "field": obj.get("field"),
+            "k": obj.get("k"),
+            "query": KnnQuery.from_dict(obj["query"]) if obj.get("query") is not None else None,
+            "query_vector": obj.get("query_vector"),
+            "doc_id": obj.get("doc_id"),
+            "ef": obj.get("ef"),
+            "filter": QueryFilter.from_dict(obj["filter"]) if obj.get("filter") is not None else None
         })
         return _obj
 

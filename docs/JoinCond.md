@@ -16,6 +16,8 @@ Name | Type | Description | Notes
 ```python
 from manticoresearch.models.join_cond import JoinCond
 
+# TODO update the JSON string below
+json = "{}"
 # create an instance of JoinCond from a JSON string
 join_cond_instance = JoinCond.from_json(json)
 # print the JSON string representation of the object

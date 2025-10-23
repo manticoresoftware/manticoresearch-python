@@ -20,6 +20,8 @@ Name | Type | Description | Notes
 ```python
 from manticoresearch.models.hits_hits import HitsHits
 
+# TODO update the JSON string below
+json = "{}"
 # create an instance of HitsHits from a JSON string
 hits_hits_instance = HitsHits.from_json(json)
 # print the JSON string representation of the object

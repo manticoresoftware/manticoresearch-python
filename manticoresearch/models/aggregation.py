@@ -36,11 +36,11 @@ class Aggregation(BaseModel):
     histogram: Optional[AggHistogram] = None
     __properties: ClassVar[List[str]] = ["terms", "sort", "composite", "histogram"]
 
-    #model_config = ConfigDict(
-    #    populate_by_name=True,
-    #    validate_assignment=True,
-    #    protected_namespaces=(),
-    #)
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:
