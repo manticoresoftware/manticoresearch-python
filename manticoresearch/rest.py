@@ -73,6 +73,7 @@ class RESTClientObject:
             cert_reqs = ssl.CERT_NONE
 
         pool_args = {
+            "num_pools": 1,
             "cert_reqs": cert_reqs,
             "ca_certs": configuration.ssl_ca_cert,
             "cert_file": configuration.cert_file,
