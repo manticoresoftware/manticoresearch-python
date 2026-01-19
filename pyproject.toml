@@ -1,6 +1,6 @@
 [project]
 name = "manticoresearch"
-version = "10.0.1"
+version = "10.0.2"
 description = "Manticore Search Client"
 authors = [
   {name = "Manticore Software Ltd.",email = "info@manticoresearch.com"},
