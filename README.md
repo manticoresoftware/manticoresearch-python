@@ -3,7 +3,7 @@
 Сlient for Manticore Search.
 
 
-❗ WARNING: this is a development version of the client. The latest release's readme is https://github.com/manticoresoftware/manticoresearch-python/tree/9.1.0
+❗ WARNING: this is a development version of the client. The latest release's readme is https://github.com/manticoresoftware/manticoresearch-python/tree/11.0.0
 
 ## Requirements.
 
@@ -12,7 +12,10 @@ Minimum Manticore Search version is >= 2.5.1 with HTTP protocol enabled.
 | **manticoresearch-python*   | **Manticore Search**                | **Python**     | **Compatibility**       |
 | --------------------------- | ----------------------------------- | -------------- | ------------------------|
 | `manticoresearch-devel`     | `dev` (latest development version)  | 3.4 or newer   | ✅ Fully Compatible     |
-| 8.0.0 or newer              | 9.2.14 or newer                     | 3.4 or newer   | ✅ Fully Compatible     |
+| 11.0.0 or newer             | 15.1.0 or newer                     | 3.4 or newer   | ✅ Fully Compatible     |
+| 11.0.0 or newer             | 9.2.14 to 15.1.0                    | 3.4 or newer   | ⚠️ Partially Compatible |
+| 8.0.0 or newer              | 15.1.0 or newer                     | 3.4 or newer   | ⚠️ Partially Compatible |
+| 8.0.0 or newer              | 9.2.14 to 15.1.0                    | 3.4 or newer   | ✅ Fully Compatible     |
 | 6.0.0 to 8.0.0              | 9.2.14 or newer                     | 3.4 or newer   | ⚠️ Partially Compatible |
 | 6.0.0 to 8.0.0              | 7.0.0 to 9.2.14                     | 3.4 or newer   | ✅ Fully Compatible     |
 | 6.0.0 or newer              | 6.2.1 to 7.0.0                      | 3.4 or newer   | ⚠️ Partially Compatible |

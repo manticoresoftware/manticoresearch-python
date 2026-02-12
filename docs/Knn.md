@@ -12,6 +12,8 @@ Name | Type | Description | Notes
 **query_vector** | **List[float]** | The vector used as input for the KNN search | [optional] 
 **doc_id** | **int** | The docuemnt ID used as input for the KNN search | [optional] 
 **ef** | **int** | Optional parameter controlling the accuracy of the search | [optional] 
+**rescore** | **bool** | Optional parameter enabling KNN rescoring (disabled by default) | [optional] 
+**oversampling** | **float** | Optional parameter setting a factor by which k is multiplied when executing the KNN search | [optional] 
 **filter** | [**QueryFilter**](QueryFilter.md) |  | [optional] 
 
 ## Example

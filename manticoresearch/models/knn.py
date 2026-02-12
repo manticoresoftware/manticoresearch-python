@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from manticoresearch.models.knn_query import KnnQuery
 from manticoresearch.models.query_filter import QueryFilter
@@ -35,8 +35,10 @@ class Knn(BaseModel):
     query_vector: Optional[List[Union[StrictFloat, StrictInt]]] = Field(default=None, description="The vector used as input for the KNN search")
     doc_id: Optional[StrictInt] = Field(default=None, description="The docuemnt ID used as input for the KNN search")
     ef: Optional[StrictInt] = Field(default=None, description="Optional parameter controlling the accuracy of the search")
+    rescore: Optional[StrictBool] = Field(default=None, description="Optional parameter enabling KNN rescoring (disabled by default)")
+    oversampling: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Optional parameter setting a factor by which k is multiplied when executing the KNN search")
     filter: Optional[QueryFilter] = None
-    __properties: ClassVar[List[str]] = ["field", "k", "query", "query_vector", "doc_id", "ef", "filter"]
+    __properties: ClassVar[List[str]] = ["field", "k", "query", "query_vector", "doc_id", "ef", "rescore", "oversampling", "filter"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -101,6 +103,8 @@ class Knn(BaseModel):
             "query_vector": obj.get("query_vector"),
             "doc_id": obj.get("doc_id"),
             "ef": obj.get("ef"),
+            "rescore": obj.get("rescore"),
+            "oversampling": obj.get("oversampling"),
             "filter": QueryFilter.from_dict(obj["filter"]) if obj.get("filter") is not None else None
         })
         return _obj
