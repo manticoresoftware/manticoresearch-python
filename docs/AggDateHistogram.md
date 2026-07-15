@@ -7,7 +7,7 @@ Object to use histograms in aggregation, i.e., grouping search results by histog
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **var_field** | **str** | Field to group by | 
-**interval** | **int** | Interval of the histogram values | 
+**calendar_interval** | **int** | Interval of the histogram values | 
 **offset** | **int** | Offset of the histogram values. Default value is 0. | [optional] 
 **keyed** | **bool** | Flag that defines if a search response will be a dictionary with the bucket keys. Default value is false. | [optional] 
 

@@ -5,6 +5,7 @@ All URIs are relative to *http://127.0.0.1:9308*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**sql**](UtilsApi.md#sql) | **POST** /sql | Perform SQL requests
+[**token**](UtilsApi.md#token) | **POST** /token | Create or rotate a bearer token
 
 
 # **sql**
@@ -21,6 +22,8 @@ The response object depends on the query executed. In select mode the response h
 
 ### Example
 
+* Basic Authentication (basicAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import manticoresearch
@@ -34,6 +37,21 @@ configuration = manticoresearch.Configuration(
     host = "http://127.0.0.1:9308"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: basicAuth
+configuration = manticoresearch.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+# Configure Bearer authorization: bearerAuth
+configuration = manticoresearch.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with manticoresearch.ApiClient(configuration) as api_client:
@@ -67,7 +85,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[basicAuth](../README.md#basicAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -79,6 +97,93 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | In case of SELECT-only in mode none the response schema is the same as of &#x60;search&#x60;. In case of &#x60;mode&#x3D;raw&#x60; or &#x60;raw_response&#x3D;true&#x60; the response depends on the query executed.  |  -  |
+**0** | error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **token**
+> str token(body)
+
+Create or rotate a bearer token
+
+Create or rotate a bearer token for the authenticated HTTP user.
+Requires HTTP Basic authentication with a Manticore user name and password. The endpoint returns the raw token.
+Example:
+
+  ```
+  curl -u admin:password -X POST http://127.0.0.1:9308/token -d "{}"
+  ```
+
+
+### Example
+
+* Basic Authentication (basicAuth):
+
+```python
+import manticoresearch
+from manticoresearch.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://127.0.0.1:9308
+# See configuration.py for a list of all supported configuration parameters.
+configuration = manticoresearch.Configuration(
+    host = "http://127.0.0.1:9308"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: basicAuth
+configuration = manticoresearch.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+# Enter a context with an instance of the API client
+with manticoresearch.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = manticoresearch.UtilsApi(api_client)
+    body = {} # object | 
+
+    try:
+        # Create or rotate a bearer token
+        api_response = api_instance.token(body)
+        print("The response of UtilsApi->token:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling UtilsApi->token: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | **object**|  | 
+
+### Return type
+
+**str**
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, text/plain
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Bearer token created or rotated successfully |  -  |
+**401** | Missing or invalid credentials |  -  |
 **0** | error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

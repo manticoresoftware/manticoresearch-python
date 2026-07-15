@@ -1,19 +1,23 @@
 # SearchRequest
 
-Request object for search operation
+Request object for search operation. Either `table` (regular search) or `chat` (conversational search) must be provided. 
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**table** | **str** | The table to perform the search on | 
+**table** | **str** | The table to perform the search on | [optional] 
+**chat** | [**Chat**](Chat.md) |  | [optional] 
 **query** | [**SearchQuery**](SearchQuery.md) |  | [optional] 
 **join** | [**List[Join]**](Join.md) | Join clause to combine search data from multiple tables | [optional] 
 **highlight** | [**Highlight**](Highlight.md) |  | [optional] 
 **limit** | **int** | Maximum number of results to return | [optional] 
-**knn** | [**Knn**](Knn.md) |  | [optional] 
+**knn** | [**Knn**](Knn.md) | K-nearest neighbor search settings. Pass a single &#x60;knn&#x60; object or an array of objects for multi-vector search.  | [optional] 
+**hybrid** | [**Hybrid**](Hybrid.md) |  | [optional] 
+**facet_filter_mode** | [**FacetFilterMode**](FacetFilterMode.md) |  | [optional] 
 **aggs** | [**Dict[str, Aggregation]**](Aggregation.md) | Defines aggregation settings for grouping results | [optional] 
-**expressions** | **Dict[str, str]** | Expressions to calculate additional values for the result | [optional] 
+**expressions** | **Dict[str, str]** | Expressions to calculate additional values for the result. Simpler alternative to &#x60;script_fields&#x60;; expression names must be lowercase.  | [optional] 
+**script_fields** | [**Dict[str, ScriptField]**](ScriptField.md) | Named expressions computed at search time. Each value defines an inline script whose result is stored under the field name. For more information see [Expressions](https://manual.manticoresearch.com/Searching/Expressions#script_fields)  | [optional] 
 **max_matches** | **int** | Maximum number of matches allowed in the result | [optional] 
 **offset** | **int** | Starting point for pagination of the result | [optional] 
 **options** | **object** | Additional search options | [optional] 

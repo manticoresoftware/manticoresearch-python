@@ -18,20 +18,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 class Range(BaseModel):
     """
-    Filter helper object defining the 'range' condition
+    An aggregation range. 
     """ # noqa: E501
-    lt: Optional[Any] = None
-    lte: Optional[Any] = None
-    gt: Optional[Any] = None
-    gte: Optional[Any] = None
-    __properties: ClassVar[List[str]] = ["lt", "lte", "gt", "gte"]
+    var_from: Optional[Any] = Field(default=None, alias="from")
+    to: Optional[Any] = None
+    __properties: ClassVar[List[str]] = ["from", "to"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -72,25 +70,15 @@ class Range(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if lt (nullable) is None
+        # set to None if var_from (nullable) is None
         # and model_fields_set contains the field
-        if self.lt is None and "lt" in self.model_fields_set:
-            _dict['lt'] = None
+        if self.var_from is None and "var_from" in self.model_fields_set:
+            _dict['from'] = None
 
-        # set to None if lte (nullable) is None
+        # set to None if to (nullable) is None
         # and model_fields_set contains the field
-        if self.lte is None and "lte" in self.model_fields_set:
-            _dict['lte'] = None
-
-        # set to None if gt (nullable) is None
-        # and model_fields_set contains the field
-        if self.gt is None and "gt" in self.model_fields_set:
-            _dict['gt'] = None
-
-        # set to None if gte (nullable) is None
-        # and model_fields_set contains the field
-        if self.gte is None and "gte" in self.model_fields_set:
-            _dict['gte'] = None
+        if self.to is None and "to" in self.model_fields_set:
+            _dict['to'] = None
 
         return _dict
 
@@ -104,10 +92,8 @@ class Range(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "lt": obj.get("lt"),
-            "lte": obj.get("lte"),
-            "gt": obj.get("gt"),
-            "gte": obj.get("gte")
+            "from": obj.get("from"),
+            "to": obj.get("to")
         })
         return _obj
 

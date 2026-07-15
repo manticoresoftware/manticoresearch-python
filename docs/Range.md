@@ -1,15 +1,13 @@
 # Range
 
-Filter helper object defining the 'range' condition
+An aggregation range. 
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**lt** | **object** |  | [optional] 
-**lte** | **object** |  | [optional] 
-**gt** | **object** |  | [optional] 
-**gte** | **object** |  | [optional] 
+**var_from** | **object** |  | [optional] 
+**to** | **object** |  | [optional] 
 
 ## Example
 

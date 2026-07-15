@@ -299,6 +299,8 @@ class IndexApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'basicAuth', 
+            'bearerAuth'
         ]
 
         return self.api_client.param_serialize(
@@ -572,6 +574,8 @@ class IndexApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'basicAuth', 
+            'bearerAuth'
         ]
 
         return self.api_client.param_serialize(
@@ -845,6 +849,8 @@ class IndexApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'basicAuth', 
+            'bearerAuth'
         ]
 
         return self.api_client.param_serialize(
@@ -1148,6 +1154,8 @@ class IndexApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'basicAuth', 
+            'bearerAuth'
         ]
 
         return self.api_client.param_serialize(
@@ -1421,6 +1429,8 @@ class IndexApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'basicAuth', 
+            'bearerAuth'
         ]
 
         return self.api_client.param_serialize(
@@ -1694,6 +1704,8 @@ class IndexApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'basicAuth', 
+            'bearerAuth'
         ]
 
         return self.api_client.param_serialize(

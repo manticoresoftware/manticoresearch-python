@@ -21,7 +21,13 @@ import json
 from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
 from manticoresearch.models.agg_composite import AggComposite
+from manticoresearch.models.agg_date_histogram import AggDateHistogram
 from manticoresearch.models.agg_histogram import AggHistogram
+from manticoresearch.models.agg_median_absolute_deviation import AggMedianAbsoluteDeviation
+from manticoresearch.models.agg_metric import AggMetric
+from manticoresearch.models.agg_percentile_ranks import AggPercentileRanks
+from manticoresearch.models.agg_percentiles import AggPercentiles
+from manticoresearch.models.agg_range import AggRange
 from manticoresearch.models.agg_terms import AggTerms
 from typing import Optional, Set
 from typing_extensions import Self
@@ -34,7 +40,17 @@ class Aggregation(BaseModel):
     sort: Optional[List[Any]] = None
     composite: Optional[AggComposite] = None
     histogram: Optional[AggHistogram] = None
-    __properties: ClassVar[List[str]] = ["terms", "sort", "composite", "histogram"]
+    date_histogram: Optional[AggDateHistogram] = None
+    range: Optional[AggRange] = None
+    date_range: Optional[AggRange] = None
+    percentiles: Optional[AggPercentiles] = None
+    percentile_ranks: Optional[AggPercentileRanks] = None
+    median_absolute_deviation: Optional[AggMedianAbsoluteDeviation] = None
+    min: Optional[AggMetric] = None
+    max: Optional[AggMetric] = None
+    sum: Optional[AggMetric] = None
+    avg: Optional[AggMetric] = None
+    __properties: ClassVar[List[str]] = ["terms", "sort", "composite", "histogram", "date_histogram", "range", "date_range", "percentiles", "percentile_ranks", "median_absolute_deviation", "min", "max", "sum", "avg"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -84,6 +100,36 @@ class Aggregation(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of histogram
         if self.histogram:
             _dict['histogram'] = self.histogram.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of date_histogram
+        if self.date_histogram:
+            _dict['date_histogram'] = self.date_histogram.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of range
+        if self.range:
+            _dict['range'] = self.range.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of date_range
+        if self.date_range:
+            _dict['date_range'] = self.date_range.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of percentiles
+        if self.percentiles:
+            _dict['percentiles'] = self.percentiles.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of percentile_ranks
+        if self.percentile_ranks:
+            _dict['percentile_ranks'] = self.percentile_ranks.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of median_absolute_deviation
+        if self.median_absolute_deviation:
+            _dict['median_absolute_deviation'] = self.median_absolute_deviation.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of min
+        if self.min:
+            _dict['min'] = self.min.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of max
+        if self.max:
+            _dict['max'] = self.max.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of sum
+        if self.sum:
+            _dict['sum'] = self.sum.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of avg
+        if self.avg:
+            _dict['avg'] = self.avg.to_dict()
         return _dict
 
     @classmethod
@@ -99,7 +145,17 @@ class Aggregation(BaseModel):
             "terms": AggTerms.from_dict(obj["terms"]) if obj.get("terms") is not None else None,
             "sort": obj.get("sort"),
             "composite": AggComposite.from_dict(obj["composite"]) if obj.get("composite") is not None else None,
-            "histogram": AggHistogram.from_dict(obj["histogram"]) if obj.get("histogram") is not None else None
+            "histogram": AggHistogram.from_dict(obj["histogram"]) if obj.get("histogram") is not None else None,
+            "date_histogram": AggDateHistogram.from_dict(obj["date_histogram"]) if obj.get("date_histogram") is not None else None,
+            "range": AggRange.from_dict(obj["range"]) if obj.get("range") is not None else None,
+            "date_range": AggRange.from_dict(obj["date_range"]) if obj.get("date_range") is not None else None,
+            "percentiles": AggPercentiles.from_dict(obj["percentiles"]) if obj.get("percentiles") is not None else None,
+            "percentile_ranks": AggPercentileRanks.from_dict(obj["percentile_ranks"]) if obj.get("percentile_ranks") is not None else None,
+            "median_absolute_deviation": AggMedianAbsoluteDeviation.from_dict(obj["median_absolute_deviation"]) if obj.get("median_absolute_deviation") is not None else None,
+            "min": AggMetric.from_dict(obj["min"]) if obj.get("min") is not None else None,
+            "max": AggMetric.from_dict(obj["max"]) if obj.get("max") is not None else None,
+            "sum": AggMetric.from_dict(obj["sum"]) if obj.get("sum") is not None else None,
+            "avg": AggMetric.from_dict(obj["avg"]) if obj.get("avg") is not None else None
         })
         return _obj
 

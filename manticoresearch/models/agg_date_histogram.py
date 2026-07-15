@@ -28,10 +28,10 @@ class AggDateHistogram(BaseModel):
     Object to use histograms in aggregation, i.e., grouping search results by histogram values
     """ # noqa: E501
     var_field: StrictStr = Field(description="Field to group by", alias="field")
-    interval: StrictInt = Field(description="Interval of the histogram values")
+    calendar_interval: StrictInt = Field(description="Interval of the histogram values")
     offset: Optional[StrictInt] = Field(default=None, description="Offset of the histogram values. Default value is 0.")
     keyed: Optional[StrictBool] = Field(default=None, description="Flag that defines if a search response will be a dictionary with the bucket keys. Default value is false.")
-    __properties: ClassVar[List[str]] = ["field", "interval", "offset", "keyed"]
+    __properties: ClassVar[List[str]] = ["field", "calendar_interval", "offset", "keyed"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,7 +85,7 @@ class AggDateHistogram(BaseModel):
 
         _obj = cls.model_validate({
             "field": obj.get("field"),
-            "interval": obj.get("interval"),
+            "calendar_interval": obj.get("calendar_interval"),
             "offset": obj.get("offset"),
             "keyed": obj.get("keyed")
         })

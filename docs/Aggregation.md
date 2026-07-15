@@ -9,6 +9,16 @@ Name | Type | Description | Notes
 **sort** | **List[object]** |  | [optional] 
 **composite** | [**AggComposite**](AggComposite.md) |  | [optional] 
 **histogram** | [**AggHistogram**](AggHistogram.md) |  | [optional] 
+**date_histogram** | [**AggDateHistogram**](AggDateHistogram.md) |  | [optional] 
+**range** | [**AggRange**](AggRange.md) |  | [optional] 
+**date_range** | [**AggRange**](AggRange.md) |  | [optional] 
+**percentiles** | [**AggPercentiles**](AggPercentiles.md) |  | [optional] 
+**percentile_ranks** | [**AggPercentileRanks**](AggPercentileRanks.md) |  | [optional] 
+**median_absolute_deviation** | [**AggMedianAbsoluteDeviation**](AggMedianAbsoluteDeviation.md) |  | [optional] 
+**min** | [**AggMetric**](AggMetric.md) |  | [optional] 
+**max** | [**AggMetric**](AggMetric.md) |  | [optional] 
+**sum** | [**AggMetric**](AggMetric.md) |  | [optional] 
+**avg** | [**AggMetric**](AggMetric.md) |  | [optional] 
 
 ## Example
 

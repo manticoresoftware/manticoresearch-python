@@ -20,22 +20,28 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from manticoresearch.models.agg_buckets_result import AggBucketsResult
 from manticoresearch.models.search_response_hits import SearchResponseHits
 from typing import Optional, Set
 from typing_extensions import Self
 
 class SearchResponse(BaseModel):
     """
-    Response object containing the results of a search request
+    Response object containing search results. For conversational search requests that include a `chat` object, the optional chat fields below are also populated. For conversational search response fields see [Conversational search](https://manual.manticoresearch.com/Searching/Conversational_search#Response) 
     """ # noqa: E501
     took: Optional[StrictInt] = Field(default=None, description="Time taken to execute the search")
     timed_out: Optional[StrictBool] = Field(default=None, description="Indicates whether the search operation timed out")
-    aggregations: Optional[Dict[str, Any]] = Field(default=None, description="Aggregated search results grouped by the specified criteria")
+    aggregations: Optional[Dict[str, AggBucketsResult]] = Field(default=None, description="Aggregated search results grouped by the specified criteria. Each named aggregation typically contains a `buckets` array (or keyed map) of bucket objects with `key`, `doc_count`, and optional `status`. ")
     hits: Optional[SearchResponseHits] = None
     profile: Optional[Dict[str, Any]] = Field(default=None, description="Profile information about the search execution, if profiling is enabled")
     scroll: Optional[StrictStr] = Field(default=None, description="Scroll token to be used fo pagination")
     warning: Optional[Dict[str, Any]] = Field(default=None, description="Warnings encountered during the search operation")
-    __properties: ClassVar[List[str]] = ["took", "timed_out", "aggregations", "hits", "profile", "scroll", "warning"]
+    conversation_uuid: Optional[StrictStr] = Field(default=None, description="Existing or generated conversation id (conversational search)")
+    user_query: Optional[StrictStr] = Field(default=None, description="Original user query (conversational search)")
+    search_query: Optional[StrictStr] = Field(default=None, description="Standalone search query used for KNN retrieval (conversational search)")
+    response: Optional[StrictStr] = Field(default=None, description="LLM answer as generated (conversational search)")
+    sources: Optional[StrictStr] = Field(default=None, description="JSON string containing retrieved source rows used as LLM context (conversational search). ")
+    __properties: ClassVar[List[str]] = ["took", "timed_out", "aggregations", "hits", "profile", "scroll", "warning", "conversation_uuid", "user_query", "search_query", "response", "sources"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -76,6 +82,13 @@ class SearchResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each value in aggregations (dict)
+        _field_dict = {}
+        if self.aggregations:
+            for _key_aggregations in self.aggregations:
+                if self.aggregations[_key_aggregations]:
+                    _field_dict[_key_aggregations] = self.aggregations[_key_aggregations].to_dict()
+            _dict['aggregations'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of hits
         if self.hits:
             _dict['hits'] = self.hits.to_dict()
@@ -93,11 +106,21 @@ class SearchResponse(BaseModel):
         _obj = cls.model_validate({
             "took": obj.get("took"),
             "timed_out": obj.get("timed_out"),
-            "aggregations": obj.get("aggregations"),
+            "aggregations": dict(
+                (_k, AggBucketsResult.from_dict(_v))
+                for _k, _v in obj["aggregations"].items()
+            )
+            if obj.get("aggregations") is not None
+            else None,
             "hits": SearchResponseHits.from_dict(obj["hits"]) if obj.get("hits") is not None else None,
             "profile": obj.get("profile"),
             "scroll": obj.get("scroll"),
-            "warning": obj.get("warning")
+            "warning": obj.get("warning"),
+            "conversation_uuid": obj.get("conversation_uuid"),
+            "user_query": obj.get("user_query"),
+            "search_query": obj.get("search_query"),
+            "response": obj.get("response"),
+            "sources": obj.get("sources")
         })
         return _obj
 

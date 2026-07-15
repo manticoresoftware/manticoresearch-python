@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "11.0.0"
+__version__ = "11.1.0"
 
 # Define package exports
 __all__ = [
@@ -31,19 +31,30 @@ __all__ = [
     "ApiKeyError",
     "ApiAttributeError",
     "ApiException",
+    "AggBucket",
+    "AggBucketsResult",
     "AggComposite",
     "AggCompositeSource",
     "AggCompositeTerm",
     "AggDateHistogram",
     "AggHistogram",
+    "AggMedianAbsoluteDeviation",
+    "AggMetric",
+    "AggPercentileRanks",
+    "AggPercentiles",
+    "AggRange",
+    "AggTDigest",
     "AggTerms",
     "Aggregation",
     "AutocompleteRequest",
     "BoolFilter",
     "BulkResponse",
+    "Chat",
     "DeleteDocumentRequest",
     "DeleteResponse",
     "ErrorResponse",
+    "FacetBucketStatus",
+    "FacetFilterMode",
     "FulltextFilter",
     "GeoDistance",
     "GeoDistanceLocationAnchor",
@@ -51,6 +62,7 @@ __all__ = [
     "HighlightFieldOption",
     "HighlightFields",
     "HitsHits",
+    "Hybrid",
     "InsertDocumentRequest",
     "Join",
     "JoinCond",
@@ -63,9 +75,12 @@ __all__ = [
     "PercolateRequestQuery",
     "QueryFilter",
     "Range",
+    "RangeFilter",
     "ReplaceDocumentRequest",
     "ResponseError",
     "ResponseErrorDetails",
+    "ScriptField",
+    "ScriptFieldScript",
     "SearchQuery",
     "SearchRequest",
     "SearchResponse",
@@ -95,19 +110,30 @@ from manticoresearch.exceptions import ApiAttributeError as ApiAttributeError
 from manticoresearch.exceptions import ApiException as ApiException
 
 # import models into sdk package
+from manticoresearch.models.agg_bucket import AggBucket as AggBucket
+from manticoresearch.models.agg_buckets_result import AggBucketsResult as AggBucketsResult
 from manticoresearch.models.agg_composite import AggComposite as AggComposite
 from manticoresearch.models.agg_composite_source import AggCompositeSource as AggCompositeSource
 from manticoresearch.models.agg_composite_term import AggCompositeTerm as AggCompositeTerm
 from manticoresearch.models.agg_date_histogram import AggDateHistogram as AggDateHistogram
 from manticoresearch.models.agg_histogram import AggHistogram as AggHistogram
+from manticoresearch.models.agg_median_absolute_deviation import AggMedianAbsoluteDeviation as AggMedianAbsoluteDeviation
+from manticoresearch.models.agg_metric import AggMetric as AggMetric
+from manticoresearch.models.agg_percentile_ranks import AggPercentileRanks as AggPercentileRanks
+from manticoresearch.models.agg_percentiles import AggPercentiles as AggPercentiles
+from manticoresearch.models.agg_range import AggRange as AggRange
+from manticoresearch.models.agg_t_digest import AggTDigest as AggTDigest
 from manticoresearch.models.agg_terms import AggTerms as AggTerms
 from manticoresearch.models.aggregation import Aggregation as Aggregation
 from manticoresearch.models.autocomplete_request import AutocompleteRequest as AutocompleteRequest
 from manticoresearch.models.bool_filter import BoolFilter as BoolFilter
 from manticoresearch.models.bulk_response import BulkResponse as BulkResponse
+from manticoresearch.models.chat import Chat as Chat
 from manticoresearch.models.delete_document_request import DeleteDocumentRequest as DeleteDocumentRequest
 from manticoresearch.models.delete_response import DeleteResponse as DeleteResponse
 from manticoresearch.models.error_response import ErrorResponse as ErrorResponse
+from manticoresearch.models.facet_bucket_status import FacetBucketStatus as FacetBucketStatus
+from manticoresearch.models.facet_filter_mode import FacetFilterMode as FacetFilterMode
 from manticoresearch.models.fulltext_filter import FulltextFilter as FulltextFilter
 from manticoresearch.models.geo_distance import GeoDistance as GeoDistance
 from manticoresearch.models.geo_distance_location_anchor import GeoDistanceLocationAnchor as GeoDistanceLocationAnchor
@@ -115,6 +141,7 @@ from manticoresearch.models.highlight import Highlight as Highlight
 from manticoresearch.models.highlight_field_option import HighlightFieldOption as HighlightFieldOption
 from manticoresearch.models.highlight_fields import HighlightFields as HighlightFields
 from manticoresearch.models.hits_hits import HitsHits as HitsHits
+from manticoresearch.models.hybrid import Hybrid as Hybrid
 from manticoresearch.models.insert_document_request import InsertDocumentRequest as InsertDocumentRequest
 from manticoresearch.models.join import Join as Join
 from manticoresearch.models.join_cond import JoinCond as JoinCond
@@ -127,9 +154,12 @@ from manticoresearch.models.percolate_request import PercolateRequest as Percola
 from manticoresearch.models.percolate_request_query import PercolateRequestQuery as PercolateRequestQuery
 from manticoresearch.models.query_filter import QueryFilter as QueryFilter
 from manticoresearch.models.range import Range as Range
+from manticoresearch.models.range_filter import RangeFilter as RangeFilter
 from manticoresearch.models.replace_document_request import ReplaceDocumentRequest as ReplaceDocumentRequest
 from manticoresearch.models.response_error import ResponseError as ResponseError
 from manticoresearch.models.response_error_details import ResponseErrorDetails as ResponseErrorDetails
+from manticoresearch.models.script_field import ScriptField as ScriptField
+from manticoresearch.models.script_field_script import ScriptFieldScript as ScriptFieldScript
 from manticoresearch.models.search_query import SearchQuery as SearchQuery
 from manticoresearch.models.search_request import SearchRequest as SearchRequest
 from manticoresearch.models.search_response import SearchResponse as SearchResponse

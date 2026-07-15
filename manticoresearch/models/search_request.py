@@ -21,25 +21,33 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from manticoresearch.models.aggregation import Aggregation
+from manticoresearch.models.chat import Chat
+from manticoresearch.models.facet_filter_mode import FacetFilterMode
 from manticoresearch.models.highlight import Highlight
+from manticoresearch.models.hybrid import Hybrid
 from manticoresearch.models.join import Join
 from manticoresearch.models.knn import Knn
+from manticoresearch.models.script_field import ScriptField
 from manticoresearch.models.search_query import SearchQuery
 from typing import Optional, Set
 from typing_extensions import Self
 
 class SearchRequest(BaseModel):
     """
-    Request object for search operation
+    Request object for search operation. Either `table` (regular search) or `chat` (conversational search) must be provided. 
     """ # noqa: E501
-    table: StrictStr = Field(description="The table to perform the search on")
+    table: Optional[StrictStr] = Field(default=None, description="The table to perform the search on")
+    chat: Optional[Chat] = None
     query: Optional[SearchQuery] = None
     join: Optional[List[Join]] = Field(default=None, description="Join clause to combine search data from multiple tables")
     highlight: Optional[Highlight] = None
     limit: Optional[StrictInt] = Field(default=None, description="Maximum number of results to return")
-    knn: Optional[Knn] = None
+    knn: Optional[Knn] = Field(default=None, description="K-nearest neighbor search settings. Pass a single `knn` object or an array of objects for multi-vector search. ")
+    hybrid: Optional[Hybrid] = None
+    facet_filter_mode: Optional[FacetFilterMode] = None
     aggs: Optional[Dict[str, Aggregation]] = Field(default=None, description="Defines aggregation settings for grouping results")
-    expressions: Optional[Dict[str, StrictStr]] = Field(default=None, description="Expressions to calculate additional values for the result")
+    expressions: Optional[Dict[str, StrictStr]] = Field(default=None, description="Expressions to calculate additional values for the result. Simpler alternative to `script_fields`; expression names must be lowercase. ")
+    script_fields: Optional[Dict[str, ScriptField]] = Field(default=None, description="Named expressions computed at search time. Each value defines an inline script whose result is stored under the field name. For more information see [Expressions](https://manual.manticoresearch.com/Searching/Expressions#script_fields) ")
     max_matches: Optional[StrictInt] = Field(default=None, description="Maximum number of matches allowed in the result")
     offset: Optional[StrictInt] = Field(default=None, description="Starting point for pagination of the result")
     options: Optional[Dict[str, Any]] = Field(default=None, description="Additional search options")
@@ -47,7 +55,7 @@ class SearchRequest(BaseModel):
     sort: Optional[Any] = None
     source: Optional[Any] = Field(default=None, alias="_source")
     track_scores: Optional[StrictBool] = Field(default=None, description="Enable or disable result weight calculation used for sorting")
-    __properties: ClassVar[List[str]] = ["table", "query", "join", "highlight", "limit", "knn", "aggs", "expressions", "max_matches", "offset", "options", "profile", "sort", "_source", "track_scores"]
+    __properties: ClassVar[List[str]] = ["table", "chat", "query", "join", "highlight", "limit", "knn", "hybrid", "facet_filter_mode", "aggs", "expressions", "script_fields", "max_matches", "offset", "options", "profile", "sort", "_source", "track_scores"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -88,6 +96,9 @@ class SearchRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of chat
+        if self.chat:
+            _dict['chat'] = self.chat.to_dict()
         # override the default output from pydantic by calling `to_dict()` of query
         if self.query:
             _dict['query'] = self.query.to_dict()
@@ -104,6 +115,9 @@ class SearchRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of knn
         if self.knn:
             _dict['knn'] = self.knn.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of hybrid
+        if self.hybrid:
+            _dict['hybrid'] = self.hybrid.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each value in aggs (dict)
         _field_dict = {}
         if self.aggs:
@@ -111,6 +125,13 @@ class SearchRequest(BaseModel):
                 if self.aggs[_key_aggs]:
                     _field_dict[_key_aggs] = self.aggs[_key_aggs].to_dict()
             _dict['aggs'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of each value in script_fields (dict)
+        _field_dict = {}
+        if self.script_fields:
+            for _key_script_fields in self.script_fields:
+                if self.script_fields[_key_script_fields]:
+                    _field_dict[_key_script_fields] = self.script_fields[_key_script_fields].to_dict()
+            _dict['script_fields'] = _field_dict
         # set to None if sort (nullable) is None
         # and model_fields_set contains the field
         if self.sort is None and "sort" in self.model_fields_set:
@@ -134,11 +155,14 @@ class SearchRequest(BaseModel):
 
         _obj = cls.model_validate({
             "table": obj.get("table"),
+            "chat": Chat.from_dict(obj["chat"]) if obj.get("chat") is not None else None,
             "query": SearchQuery.from_dict(obj["query"]) if obj.get("query") is not None else None,
             "join": [Join.from_dict(_item) for _item in obj["join"]] if obj.get("join") is not None else None,
             "highlight": Highlight.from_dict(obj["highlight"]) if obj.get("highlight") is not None else None,
             "limit": obj.get("limit"),
             "knn": Knn.from_dict(obj["knn"]) if obj.get("knn") is not None else None,
+            "hybrid": Hybrid.from_dict(obj["hybrid"]) if obj.get("hybrid") is not None else None,
+            "facet_filter_mode": obj.get("facet_filter_mode"),
             "aggs": dict(
                 (_k, Aggregation.from_dict(_v))
                 for _k, _v in obj["aggs"].items()
@@ -146,6 +170,12 @@ class SearchRequest(BaseModel):
             if obj.get("aggs") is not None
             else None,
             "expressions": obj.get("expressions"),
+            "script_fields": dict(
+                (_k, ScriptField.from_dict(_v))
+                for _k, _v in obj["script_fields"].items()
+            )
+            if obj.get("script_fields") is not None
+            else None,
             "max_matches": obj.get("max_matches"),
             "offset": obj.get("offset"),
             "options": obj.get("options"),

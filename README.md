@@ -3,7 +3,7 @@
 Сlient for Manticore Search.
 
 
-❗ WARNING: this is a development version of the client. The latest release's readme is https://github.com/manticoresoftware/manticoresearch-python/tree/11.0.0
+❗ WARNING: this is a development version of the client. The latest release's readme is https://github.com/manticoresoftware/manticoresearch-python/tree/11.1.0
 
 ## Requirements.
 
@@ -12,13 +12,15 @@ Minimum Manticore Search version is >= 2.5.1 with HTTP protocol enabled.
 | **manticoresearch-python*   | **Manticore Search**                | **Python**     | **Compatibility**       |
 | --------------------------- | ----------------------------------- | -------------- | ------------------------|
 | `manticoresearch-devel`     | `dev` (latest development version)  | 3.4 or newer   | ✅ Fully Compatible     |
-| 11.0.0 or newer             | 17.5.1 or newer                     | 3.4 or newer   | ✅ Fully Compatible     |
-| 11.0.0 or newer             | 9.2.14 to 17.5.1                    | 3.4 or newer   | ⚠️ Partially Compatible |
-| 8.0.0 or newer              | 17.5.1 or newer                     | 3.4 or newer   | ⚠️ Partially Compatible |
-| 8.0.0 or newer              | 9.2.14 to 17.5.1                    | 3.4 or newer   | ✅ Fully Compatible     |
+| 11.1.0 or newer             | 28.4.4 or newer                     | 3.4 or newer   | ✅ Fully Compatible     |
+| 11.0.0 to 11.1.0            | 28.4.4 or newer                     | 3.4 or newer   | ⚠️ Partially  Compatible     |
+| 11.0.0 to 11.1.0            | 17.5.1 to 28.4.4                    | 3.4 or newer   | ✅ Fully Compatible     |
+| 11.0.0 to 11.1.0            | 9.2.14 to 17.5.1                    | 3.4 or newer   | ⚠️ Partially Compatible |
+| 8.0.0 to 11.0.0             | 17.5.1 or newer                     | 3.4 or newer   | ⚠️ Partially Compatible |
+| 8.0.0 to 11.0.0             | 9.2.14 to 17.5.1                    | 3.4 or newer   | ✅ Fully Compatible     |
 | 6.0.0 to 8.0.0              | 9.2.14 or newer                     | 3.4 or newer   | ⚠️ Partially Compatible |
 | 6.0.0 to 8.0.0              | 7.0.0 to 9.2.14                     | 3.4 or newer   | ✅ Fully Compatible     |
-| 6.0.0 or newer              | 6.2.1 to 7.0.0                      | 3.4 or newer   | ⚠️ Partially Compatible |
+| 6.0.0 to 8.0.0              | 6.2.1 to 7.0.0                      | 3.4 or newer   | ⚠️ Partially Compatible |
 | 3.3.1 to 6.0.0              | 7.0.0 or newer                      | 3.4 or newer   | ⚠️ Partially Compatible |
 | 3.3.1 to 6.0.0              | 6.2.1 to 7.0.0                      | 3.4 or newer   | ✅ Fully Compatible     |
 | 2.0.0 to 3.3.1              | 6.2.0 or newer                      | 3.4 or newer   | ⚠️ Partially Compatible |
@@ -129,23 +131,35 @@ Class | Method | HTTP request | Description
 *SearchApi* | [**percolate**](docs/SearchApi.md#percolate) | **POST** /pq/{table}/search | Perform reverse search on a percolate table
 *SearchApi* | [**search**](docs/SearchApi.md#search) | **POST** /search | Performs a search on a table
 *UtilsApi* | [**sql**](docs/UtilsApi.md#sql) | **POST** /sql | Perform SQL requests
+*UtilsApi* | [**token**](docs/UtilsApi.md#token) | **POST** /token | Create or rotate a bearer token
 
 
 ## Documentation For Models
 
+ - [AggBucket](docs/AggBucket.md)
+ - [AggBucketsResult](docs/AggBucketsResult.md)
  - [AggComposite](docs/AggComposite.md)
  - [AggCompositeSource](docs/AggCompositeSource.md)
  - [AggCompositeTerm](docs/AggCompositeTerm.md)
  - [AggDateHistogram](docs/AggDateHistogram.md)
  - [AggHistogram](docs/AggHistogram.md)
+ - [AggMedianAbsoluteDeviation](docs/AggMedianAbsoluteDeviation.md)
+ - [AggMetric](docs/AggMetric.md)
+ - [AggPercentileRanks](docs/AggPercentileRanks.md)
+ - [AggPercentiles](docs/AggPercentiles.md)
+ - [AggRange](docs/AggRange.md)
+ - [AggTDigest](docs/AggTDigest.md)
  - [AggTerms](docs/AggTerms.md)
  - [Aggregation](docs/Aggregation.md)
  - [AutocompleteRequest](docs/AutocompleteRequest.md)
  - [BoolFilter](docs/BoolFilter.md)
  - [BulkResponse](docs/BulkResponse.md)
+ - [Chat](docs/Chat.md)
  - [DeleteDocumentRequest](docs/DeleteDocumentRequest.md)
  - [DeleteResponse](docs/DeleteResponse.md)
  - [ErrorResponse](docs/ErrorResponse.md)
+ - [FacetBucketStatus](docs/FacetBucketStatus.md)
+ - [FacetFilterMode](docs/FacetFilterMode.md)
  - [FulltextFilter](docs/FulltextFilter.md)
  - [GeoDistance](docs/GeoDistance.md)
  - [GeoDistanceLocationAnchor](docs/GeoDistanceLocationAnchor.md)
@@ -153,6 +167,7 @@ Class | Method | HTTP request | Description
  - [HighlightFieldOption](docs/HighlightFieldOption.md)
  - [HighlightFields](docs/HighlightFields.md)
  - [HitsHits](docs/HitsHits.md)
+ - [Hybrid](docs/Hybrid.md)
  - [InsertDocumentRequest](docs/InsertDocumentRequest.md)
  - [Join](docs/Join.md)
  - [JoinCond](docs/JoinCond.md)
@@ -165,9 +180,12 @@ Class | Method | HTTP request | Description
  - [PercolateRequestQuery](docs/PercolateRequestQuery.md)
  - [QueryFilter](docs/QueryFilter.md)
  - [Range](docs/Range.md)
+ - [RangeFilter](docs/RangeFilter.md)
  - [ReplaceDocumentRequest](docs/ReplaceDocumentRequest.md)
  - [ResponseError](docs/ResponseError.md)
  - [ResponseErrorDetails](docs/ResponseErrorDetails.md)
+ - [ScriptField](docs/ScriptField.md)
+ - [ScriptFieldScript](docs/ScriptFieldScript.md)
  - [SearchQuery](docs/SearchQuery.md)
  - [SearchRequest](docs/SearchRequest.md)
  - [SearchResponse](docs/SearchResponse.md)
@@ -183,7 +201,17 @@ Class | Method | HTTP request | Description
 <a id="documentation-for-authorization"></a>
 ## Documentation For Authorization
 
-Endpoints do not require authorization.
+
+Authentication schemes defined for the API:
+<a id="basicAuth"></a>
+### basicAuth
+
+- **Type**: HTTP basic authentication
+
+<a id="bearerAuth"></a>
+### bearerAuth
+
+- **Type**: Bearer authentication
 
 
 ## Author
