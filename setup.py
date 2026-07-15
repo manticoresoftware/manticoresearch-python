@@ -20,7 +20,7 @@ from setuptools import setup, find_packages  # noqa: H301
 #
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
-NAME = "manticoresearch-devel"
+NAME = "manticoresearch"
 VERSION = "11.1.0"
 PYTHON_REQUIRES = ">=3.7"
 REQUIRES = [
