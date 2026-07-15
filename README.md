@@ -12,10 +12,10 @@ Minimum Manticore Search version is >= 2.5.1 with HTTP protocol enabled.
 | **manticoresearch-python*   | **Manticore Search**                | **Python**     | **Compatibility**       |
 | --------------------------- | ----------------------------------- | -------------- | ------------------------|
 | `manticoresearch-devel`     | `dev` (latest development version)  | 3.4 or newer   | ✅ Fully Compatible     |
-| 11.1.0 or newer             | 28.4.4 or newer                     | 3.4 or newer   | ✅ Fully Compatible     |
-| 11.0.0 to 11.1.0            | 28.4.4 or newer                     | 3.4 or newer   | ⚠️ Partially  Compatible     |
-| 11.0.0 to 11.1.0            | 17.5.1 to 28.4.4                    | 3.4 or newer   | ✅ Fully Compatible     |
-| 11.0.0 to 11.1.0            | 9.2.14 to 17.5.1                    | 3.4 or newer   | ⚠️ Partially Compatible |
+| 11.1.1 or newer             | 28.4.4 or newer                     | 3.4 or newer   | ✅ Fully Compatible     |
+| 11.0.0 to 11.1.1            | 28.4.4 or newer                     | 3.4 or newer   | ⚠️ Partially  Compatible     |
+| 11.0.0 to 11.1.1            | 17.5.1 to 28.4.4                    | 3.4 or newer   | ✅ Fully Compatible     |
+| 11.0.0 to 11.1.1            | 9.2.14 to 17.5.1                    | 3.4 or newer   | ⚠️ Partially Compatible |
 | 8.0.0 to 11.0.0             | 17.5.1 or newer                     | 3.4 or newer   | ⚠️ Partially Compatible |
 | 8.0.0 to 11.0.0             | 9.2.14 to 17.5.1                    | 3.4 or newer   | ✅ Fully Compatible     |
 | 6.0.0 to 8.0.0              | 9.2.14 or newer                     | 3.4 or newer   | ⚠️ Partially Compatible |
