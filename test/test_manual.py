@@ -32,13 +32,16 @@ class TestManualApi(ParametrizedTestCase):
         searchApi = manticoresearch.SearchApi(client)
         
         utilsApi.sql('query=DROP TABLE IF EXISTS movies')
+        utilsApi.sql('DROP TABLE IF EXISTS movies_uuid')
         res = utilsApi.sql("CREATE TABLE IF NOT EXISTS movies (title text, plot text, _year integer, rating float, code multi) min_infix_len='2'")
+        utilsApi.sql("CREATE TABLE IF NOT EXISTS movies_uuid (id uuid, title text)")
         
         docs = [ \
             {"insert": {"table" : "movies", "id" : 1, "doc" : {"title" : "Star Trek 2: Nemesis", "plot": "The Enterprise is diverted to the Romulan homeworld Romulus, supposedly because they want to negotiate a peace treaty. Captain Picard and his crew discover a serious threat to the Federation once Praetor Shinzon plans to attack Earth.", "_year": 2002, "rating": 6.4, "code": [1,2,3]}}}, \
             {"insert": {"table" : "movies", "id" : 2, "doc" : {"title" : "Star Trek 1: Nemesis", "plot": "The Enterprise is diverted to the Romulan homeworld Romulus, supposedly because they want to negotiate a peace treaty. Captain Picard and his crew discover a serious threat to the Federation once Praetor Shinzon plans to attack Earth.", "_year": 2001, "rating": 6.5, "code": [1,12,3]}}},
             {"insert": {"table" : "movies", "id" : 3, "doc" : {"title" : "Star Trek 3: Nemesis", "plot": "The Enterprise is diverted to the Romulan homeworld Romulus, supposedly because they want to negotiate a peace treaty. Captain Picard and his crew discover a serious threat to the Federation once Praetor Shinzon plans to attack Earth.", "_year": 2003, "rating": 6.6, "code": [11,2,3]}}}, \
             {"insert": {"table" : "movies", "id" : 4, "doc" : {"title" : "Star Trek 4: Nemesis", "plot": "The Enterprise is diverted to the Romulan homeworld Romulus, supposedly because they want to negotiate a peace treaty. Captain Picard and his crew discover a serious threat to the Federation once Praetor Shinzon plans to attack Earth.", "_year": 2003, "rating": 6.5, "code": [1,2,4]}}},
+            {"insert": {"table" : "movies_uuid", "id" : "550e8400-e29b-41d4-a716-446655440000", "doc" : {"title" : "uuid doc"}}},
         ]
         indexApi.bulk('\n'.join(map(json.dumps,docs)))
         
@@ -55,11 +58,17 @@ class TestManualApi(ParametrizedTestCase):
 
         res = searchApi.search(search_request)
         self.assertEqual(res.hits.hits[0].id, 4)
+        self.assertIsNone(res.hits.hits[0].uuid)
 
         search_request = {"table":"movies","query":{"bool": {"must": [ {"match": {"title":"4"}}] }}}
 
         res = searchApi.search(search_request)
         self.assertEqual(res.hits.hits[0].id, 4)
+        self.assertIsNone(res.hits.hits[0].uuid)
+
+        res = searchApi.search({"table": "movies_uuid", "query": {"match_all": {}}})
+        self.assertIsNone(res.hits.hits[0].id)
+        self.assertEqual(res.hits.hits[0].uuid, "550e8400-e29b-41d4-a716-446655440000")
 
         autocomplete_request = {"table":"movies","query": "Romul","options": {"fuzziness": 0, "layouts": "us,uk"} }
 

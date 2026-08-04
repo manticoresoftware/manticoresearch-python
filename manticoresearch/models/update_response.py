@@ -22,6 +22,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
+from manticoresearch.document_id_util import assign_wire_id, split_document_id
 
 class UpdateResponse(BaseModel):
     """
@@ -30,6 +31,7 @@ class UpdateResponse(BaseModel):
     table: Optional[StrictStr] = Field(default=None, description="Name of the document table")
     updated: Optional[StrictInt] = Field(default=None, description="Number of documents updated")
     id: Optional[StrictInt] = Field(default=None, description="Document ID")
+    uuid: Optional[StrictStr] = Field(default=None, description="UUID document id when the wire id field is a string; numeric id is null in that case")
     result: Optional[StrictStr] = Field(default=None, description="Result of the update operation, typically 'updated'")
     __properties: ClassVar[List[str]] = ["table", "updated", "id", "result"]
 
@@ -65,6 +67,7 @@ class UpdateResponse(BaseModel):
           are ignored.
         """
         excluded_fields: Set[str] = set([
+            "uuid",
         ])
 
         _dict = self.model_dump(
@@ -72,6 +75,8 @@ class UpdateResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        _dict.pop('id', None)
+        assign_wire_id(_dict, 'id', self.id, self.uuid)
         return _dict
 
     @classmethod
@@ -83,10 +88,13 @@ class UpdateResponse(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
+        _num_id, _uuid = split_document_id(obj.get("id"))
+
         _obj = cls.model_validate({
             "table": obj.get("table"),
             "updated": obj.get("updated"),
-            "id": obj.get("id"),
+            "id": _num_id,
+            "uuid": _uuid,
             "result": obj.get("result")
         })
         return _obj

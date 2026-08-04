@@ -24,16 +24,18 @@ from manticoresearch.models.knn_query import KnnQuery
 from manticoresearch.models.query_filter import QueryFilter
 from typing import Optional, Set
 from typing_extensions import Self
+from manticoresearch.document_id_util import assign_wire_id, split_document_id
 
 class Knn(BaseModel):
     """
     Object representing a k-nearest neighbor search query
     """ # noqa: E501
     var_field: StrictStr = Field(description="Field to perform the k-nearest neighbor search on", alias="field")
-    k: StrictInt = Field(description="The number of nearest neighbors to return")
+    k: Optional[StrictInt] = Field(default=None, description="Deprecated. Use the top-level `limit` parameter instead.")
     query: Optional[KnnQuery] = None
     query_vector: Optional[List[Union[StrictFloat, StrictInt]]] = Field(default=None, description="The vector used as input for the KNN search")
-    doc_id: Optional[StrictInt] = Field(default=None, description="The docuemnt ID used as input for the KNN search")
+    doc_id: Optional[StrictInt] = Field(default=None, description="The document ID used as input for the KNN search")
+    uuid: Optional[StrictStr] = Field(default=None, description="UUID document id when the wire id field is a string; numeric id is null in that case")
     ef: Optional[StrictInt] = Field(default=None, description="Optional parameter controlling the accuracy of the search")
     rescore: Optional[StrictBool] = Field(default=None, description="Optional parameter enabling KNN rescoring (disabled by default)")
     oversampling: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Optional parameter setting a factor by which k is multiplied when executing the KNN search")
@@ -72,6 +74,7 @@ class Knn(BaseModel):
           are ignored.
         """
         excluded_fields: Set[str] = set([
+            "uuid",
         ])
 
         _dict = self.model_dump(
@@ -85,6 +88,8 @@ class Knn(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of filter
         if self.filter:
             _dict['filter'] = self.filter.to_dict()
+        _dict.pop('doc_id', None)
+        assign_wire_id(_dict, 'doc_id', self.doc_id, self.uuid)
         return _dict
 
     @classmethod
@@ -96,12 +101,15 @@ class Knn(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
+        _num_id, _uuid = split_document_id(obj.get("doc_id"))
+
         _obj = cls.model_validate({
             "field": obj.get("field"),
             "k": obj.get("k"),
             "query": KnnQuery.from_dict(obj["query"]) if obj.get("query") is not None else None,
             "query_vector": obj.get("query_vector"),
-            "doc_id": obj.get("doc_id"),
+            "doc_id": _num_id,
+            "uuid": _uuid,
             "ef": obj.get("ef"),
             "rescore": obj.get("rescore"),
             "oversampling": obj.get("oversampling"),

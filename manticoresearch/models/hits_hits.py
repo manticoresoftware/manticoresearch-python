@@ -22,12 +22,14 @@ from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, Stric
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
+from manticoresearch.document_id_util import assign_wire_id, split_document_id
 
 class HitsHits(BaseModel):
     """
     Search hit representing a matched document
     """ # noqa: E501
     id: Optional[StrictInt] = Field(default=None, description="The ID of the matched document", alias="_id")
+    uuid: Optional[StrictStr] = Field(default=None, description="UUID document id when the wire id field is a string; numeric id is null in that case")
     score: Optional[StrictInt] = Field(default=None, description="The score of the matched document", alias="_score")
     source: Optional[Dict[str, Any]] = Field(default=None, description="The source data of the matched document", alias="_source")
     knn_dist: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The knn distance of the matched document returned for knn queries", alias="_knn_dist")
@@ -69,6 +71,7 @@ class HitsHits(BaseModel):
           are ignored.
         """
         excluded_fields: Set[str] = set([
+            "uuid",
         ])
 
         _dict = self.model_dump(
@@ -76,6 +79,8 @@ class HitsHits(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        _dict.pop('_id', None)
+        assign_wire_id(_dict, '_id', self.id, self.uuid)
         return _dict
 
     @classmethod
@@ -87,8 +92,11 @@ class HitsHits(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
+        _num_id, _uuid = split_document_id(obj.get("_id"))
+
         _obj = cls.model_validate({
-            "_id": obj.get("_id"),
+            "_id": _num_id,
+            "uuid": _uuid,
             "_score": obj.get("_score"),
             "_source": obj.get("_source"),
             "_knn_dist": obj.get("_knn_dist"),

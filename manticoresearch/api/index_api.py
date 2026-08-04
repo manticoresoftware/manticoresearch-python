@@ -17,7 +17,8 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
+from pydantic import Field, StrictStr
+from typing import Any
 from typing_extensions import Annotated
 from manticoresearch.models.bulk_response import BulkResponse
 from manticoresearch.models.delete_document_request import DeleteDocumentRequest
@@ -871,11 +872,56 @@ class IndexApi:
 
 
 
+
+    @validate_call
+    def partial_replace_uuid(
+        self,
+        table: Annotated[StrictStr, Field(description="Name of the percolate table")],
+        uuid: Annotated[StrictStr, Field(description="UUID of the document to replace")],
+        replace_document_request: ReplaceDocumentRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> UpdateResponse:
+        """Partially replaces a document in a table by UUID string id."""
+        _param = self._partial_replace_serialize(
+            table=table,
+            id=uuid,
+            replace_document_request=replace_document_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UpdateResponse",
+            '400': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
     @validate_call
     def partial_replace(
         self,
         table: Annotated[StrictStr, Field(description="Name of the percolate table")],
-        id: Annotated[StrictInt, Field(description="Id of the document to replace")],
+        id: Annotated[Any, Field(description="Id of the document to replace")],
         replace_document_request: ReplaceDocumentRequest,
         _request_timeout: Union[
             None,
@@ -950,7 +996,7 @@ class IndexApi:
     def partial_replace_with_http_info(
         self,
         table: Annotated[StrictStr, Field(description="Name of the percolate table")],
-        id: Annotated[StrictInt, Field(description="Id of the document to replace")],
+        id: Annotated[Any, Field(description="Id of the document to replace")],
         replace_document_request: ReplaceDocumentRequest,
         _request_timeout: Union[
             None,
@@ -1025,7 +1071,7 @@ class IndexApi:
     def partial_replace_without_preload_content(
         self,
         table: Annotated[StrictStr, Field(description="Name of the percolate table")],
-        id: Annotated[StrictInt, Field(description="Id of the document to replace")],
+        id: Annotated[Any, Field(description="Id of the document to replace")],
         replace_document_request: ReplaceDocumentRequest,
         _request_timeout: Union[
             None,

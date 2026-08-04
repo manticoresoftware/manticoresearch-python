@@ -7,10 +7,10 @@ Object representing a k-nearest neighbor search query
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **var_field** | **str** | Field to perform the k-nearest neighbor search on | 
-**k** | **int** | The number of nearest neighbors to return | 
+**k** | **int** | Deprecated. Use the top-level &#x60;limit&#x60; parameter instead. | [optional] 
 **query** | [**KnnQuery**](KnnQuery.md) |  | [optional] 
 **query_vector** | **List[float]** | The vector used as input for the KNN search | [optional] 
-**doc_id** | **int** | The docuemnt ID used as input for the KNN search | [optional] 
+**doc_id** | **int** | The document ID used as input for the KNN search | [optional] 
 **ef** | **int** | Optional parameter controlling the accuracy of the search | [optional] 
 **rescore** | **bool** | Optional parameter enabling KNN rescoring (disabled by default) | [optional] 
 **oversampling** | **float** | Optional parameter setting a factor by which k is multiplied when executing the KNN search | [optional] 

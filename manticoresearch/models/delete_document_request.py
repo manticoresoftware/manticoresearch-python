@@ -22,6 +22,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
+from manticoresearch.document_id_util import assign_wire_id, split_document_id
 
 class DeleteDocumentRequest(BaseModel):
     """
@@ -30,6 +31,7 @@ class DeleteDocumentRequest(BaseModel):
     table: StrictStr = Field(description="Table name")
     cluster: Optional[StrictStr] = Field(default=None, description="Cluster name")
     id: Optional[StrictInt] = Field(default=None, description="The ID of document for deletion")
+    uuid: Optional[StrictStr] = Field(default=None, description="UUID document id when the wire id field is a string; numeric id is null in that case")
     query: Optional[Dict[str, Any]] = Field(default=None, description="Defines the criteria to match documents for deletion")
     __properties: ClassVar[List[str]] = ["table", "cluster", "id", "query"]
 
@@ -65,6 +67,7 @@ class DeleteDocumentRequest(BaseModel):
           are ignored.
         """
         excluded_fields: Set[str] = set([
+            "uuid",
         ])
 
         _dict = self.model_dump(
@@ -72,6 +75,8 @@ class DeleteDocumentRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        _dict.pop('id', None)
+        assign_wire_id(_dict, 'id', self.id, self.uuid)
         return _dict
 
     @classmethod
@@ -83,10 +88,13 @@ class DeleteDocumentRequest(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
+        _num_id, _uuid = split_document_id(obj.get("id"))
+
         _obj = cls.model_validate({
             "table": obj.get("table"),
             "cluster": obj.get("cluster"),
-            "id": obj.get("id"),
+            "id": _num_id,
+            "uuid": _uuid,
             "query": obj.get("query")
         })
         return _obj

@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**delete**](IndexApi.md#delete) | **POST** /delete | Delete a document in a table
 [**insert**](IndexApi.md#insert) | **POST** /insert | Create a new document in a table
 [**partial_replace**](IndexApi.md#partial_replace) | **POST** /{table}/_update/{id} | Partially replaces a document in a table
+[**partial_replace_uuid**](IndexApi.md#partial_replace_uuid) | **POST** /{table}/_update/{id} | Partially replaces a document in a table by UUID
 [**replace**](IndexApi.md#replace) | **POST** /replace | Replace new document in a table
 [**update**](IndexApi.md#update) | **POST** /update | Update a document in a table
 
@@ -271,6 +272,67 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **table** | **str**| Name of the percolate table | 
  **id** | **int**| Id of the document to replace | 
+ **replace_document_request** | [**ReplaceDocumentRequest**](ReplaceDocumentRequest.md)|  | 
+
+### Return type
+
+[**UpdateResponse**](UpdateResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | item updated |  -  |
+**0** | error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **partial_replace_uuid**
+> UpdateResponse partial_replace_uuid(table, uuid, replace_document_request)
+
+Partially replaces a document in a table by UUID string id
+
+Same endpoint as `partial_replace`, but the path `{id}` is a UUID string (for tables created with `id uuid`). Prefer this helper instead of passing a UUID into the numeric `partial_replace` API.
+
+### Example
+
+
+```python
+import manticoresearch
+from manticoresearch.models.replace_document_request import ReplaceDocumentRequest
+from pprint import pprint
+
+configuration = manticoresearch.Configuration(host="http://127.0.0.1:9308")
+with manticoresearch.ApiClient(configuration) as api_client:
+    api_instance = manticoresearch.IndexApi(api_client)
+    table = "movies_uuid"
+    uuid = "550e8400-e29b-41d4-a716-446655440000"
+    replace_document_request = {"doc": {"title": "updated"}}
+    try:
+        api_response = api_instance.partial_replace_uuid(table, uuid, replace_document_request)
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling IndexApi->partial_replace_uuid: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **table** | **str**| Name of the table | 
+ **uuid** | **str**| UUID of the document to replace | 
  **replace_document_request** | [**ReplaceDocumentRequest**](ReplaceDocumentRequest.md)|  | 
 
 ### Return type

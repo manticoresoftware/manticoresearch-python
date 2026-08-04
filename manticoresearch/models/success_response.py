@@ -22,6 +22,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, Strict
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
+from manticoresearch.document_id_util import assign_wire_id, split_document_id
 
 class SuccessResponse(BaseModel):
     """
@@ -29,6 +30,7 @@ class SuccessResponse(BaseModel):
     """ # noqa: E501
     table: Optional[StrictStr] = Field(default=None, description="Name of the document table")
     id: Optional[StrictInt] = Field(default=None, description="ID of the document affected by the request operation")
+    uuid: Optional[StrictStr] = Field(default=None, description="UUID document id when the wire id field is a string; numeric id is null in that case")
     created: Optional[StrictBool] = Field(default=None, description="Indicates whether the document was created as a result of the operation")
     result: Optional[StrictStr] = Field(default=None, description="Result of the operation, typically 'created', 'updated', or 'deleted'")
     found: Optional[StrictBool] = Field(default=None, description="Indicates whether the document was found in the table")
@@ -67,6 +69,7 @@ class SuccessResponse(BaseModel):
           are ignored.
         """
         excluded_fields: Set[str] = set([
+            "uuid",
         ])
 
         _dict = self.model_dump(
@@ -74,6 +77,8 @@ class SuccessResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        _dict.pop('id', None)
+        assign_wire_id(_dict, 'id', self.id, self.uuid)
         return _dict
 
     @classmethod
@@ -85,9 +90,12 @@ class SuccessResponse(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
+        _num_id, _uuid = split_document_id(obj.get("id"))
+
         _obj = cls.model_validate({
             "table": obj.get("table"),
-            "id": obj.get("id"),
+            "id": _num_id,
+            "uuid": _uuid,
             "created": obj.get("created"),
             "result": obj.get("result"),
             "found": obj.get("found"),

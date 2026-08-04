@@ -535,7 +535,7 @@ conf = manticoresearch.Configuration(
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
                "Version of the API: 5.0.0\n"\
-               "SDK Package Version: 11.1.0".\
+               "SDK Package Version: 11.2.0".\
                format(env=sys.platform, pyversion=sys.version)
 
     def get_host_settings(self) -> List[HostSetting]:

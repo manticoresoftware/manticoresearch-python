@@ -23,6 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from manticoresearch.models.query_filter import QueryFilter
 from typing import Optional, Set
 from typing_extensions import Self
+from manticoresearch.document_id_util import assign_wire_id, split_document_id
 
 class UpdateDocumentRequest(BaseModel):
     """
@@ -32,6 +33,7 @@ class UpdateDocumentRequest(BaseModel):
     cluster: Optional[StrictStr] = Field(default=None, description="Name of the document cluster")
     doc: Dict[str, Any] = Field(description="Object containing the document fields to update")
     id: Optional[StrictInt] = Field(default=None, description="Document ID")
+    uuid: Optional[StrictStr] = Field(default=None, description="UUID document id when the wire id field is a string; numeric id is null in that case")
     query: Optional[QueryFilter] = None
     __properties: ClassVar[List[str]] = ["table", "cluster", "doc", "id", "query"]
 
@@ -67,6 +69,7 @@ class UpdateDocumentRequest(BaseModel):
           are ignored.
         """
         excluded_fields: Set[str] = set([
+            "uuid",
         ])
 
         _dict = self.model_dump(
@@ -82,6 +85,8 @@ class UpdateDocumentRequest(BaseModel):
         if self.query is None and "query" in self.model_fields_set:
             _dict['query'] = None
 
+        _dict.pop('id', None)
+        assign_wire_id(_dict, 'id', self.id, self.uuid)
         return _dict
 
     @classmethod
@@ -93,11 +98,14 @@ class UpdateDocumentRequest(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
+        _num_id, _uuid = split_document_id(obj.get("id"))
+
         _obj = cls.model_validate({
             "table": obj.get("table"),
             "cluster": obj.get("cluster"),
             "doc": obj.get("doc"),
-            "id": obj.get("id"),
+            "id": _num_id,
+            "uuid": _uuid,
             "query": QueryFilter.from_dict(obj["query"]) if obj.get("query") is not None else None
         })
         return _obj

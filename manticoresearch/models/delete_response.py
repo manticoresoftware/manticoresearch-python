@@ -22,6 +22,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, Strict
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
+from manticoresearch.document_id_util import assign_wire_id, split_document_id
 
 class DeleteResponse(BaseModel):
     """
@@ -29,7 +30,8 @@ class DeleteResponse(BaseModel):
     """ # noqa: E501
     table: Optional[StrictStr] = Field(default=None, description="The name of the table from which the document was deleted")
     deleted: Optional[StrictInt] = Field(default=None, description="Number of documents deleted")
-    id: Optional[StrictInt] = Field(default=None, description="The ID of the deleted document. If multiple documents are deleted, the ID of the first deleted document is returned")
+    id: Optional[StrictInt] = Field(default=None, description="The ID of the deleted document. If multiple documents are deleted, the ID of the first deleted document is returned ")
+    uuid: Optional[StrictStr] = Field(default=None, description="UUID document id when the wire id field is a string; numeric id is null in that case")
     found: Optional[StrictBool] = Field(default=None, description="Indicates whether any documents to be deleted were found")
     result: Optional[StrictStr] = Field(default=None, description="Result of the delete operation, typically 'deleted'")
     __properties: ClassVar[List[str]] = ["table", "deleted", "id", "found", "result"]
@@ -66,6 +68,7 @@ class DeleteResponse(BaseModel):
           are ignored.
         """
         excluded_fields: Set[str] = set([
+            "uuid",
         ])
 
         _dict = self.model_dump(
@@ -73,6 +76,8 @@ class DeleteResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        _dict.pop('id', None)
+        assign_wire_id(_dict, 'id', self.id, self.uuid)
         return _dict
 
     @classmethod
@@ -84,10 +89,13 @@ class DeleteResponse(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
+        _num_id, _uuid = split_document_id(obj.get("id"))
+
         _obj = cls.model_validate({
             "table": obj.get("table"),
             "deleted": obj.get("deleted"),
-            "id": obj.get("id"),
+            "id": _num_id,
+            "uuid": _uuid,
             "found": obj.get("found"),
             "result": obj.get("result")
         })
