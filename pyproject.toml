@@ -1,5 +1,5 @@
 [project]
-name = "manticoresearch-devel"
+name = "manticoresearch"
 version = "11.2.0"
 description = "Manticore Search Client"
 authors = [
