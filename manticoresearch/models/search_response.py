@@ -31,7 +31,7 @@ class SearchResponse(BaseModel):
     """ # noqa: E501
     took: Optional[StrictInt] = Field(default=None, description="Time taken to execute the search")
     timed_out: Optional[StrictBool] = Field(default=None, description="Indicates whether the search operation timed out")
-    aggregations: Optional[Dict[str, AggBucketsResult]] = Field(default=None, description="Aggregated search results grouped by the specified criteria. Each named aggregation typically contains a `buckets` array (or keyed map) of bucket objects with `key`, `doc_count`, and optional `status`. ")
+    aggregations: Optional[Dict[str, AggBucketsResult]] = Field(default=None, description="Aggregated search results, keyed by aggregation name. A bucket aggregation contributes a `buckets` array (or keyed map) of bucket objects; a metric aggregation contributes a `value` or `values` instead. See `aggBucketsResult`. ")
     hits: Optional[SearchResponseHits] = None
     profile: Optional[Dict[str, Any]] = Field(default=None, description="Profile information about the search execution, if profiling is enabled")
     scroll: Optional[StrictStr] = Field(default=None, description="Scroll token to be used fo pagination")

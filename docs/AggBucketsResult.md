@@ -1,6 +1,6 @@
 # AggBucketsResult
 
-Aggregation group returned under `aggregations`
+One aggregation result. It is either BUCKET-shaped or METRIC-shaped, never both: which one depends on the aggregation that was requested. 
 
 ## Properties
 
@@ -8,6 +8,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **buckets** | **object** |  | [optional] 
 **after_key** | **object** | Pagination cursor returned by composite aggregations | [optional] 
+**value** | **object** |  | [optional] 
+**value_as_string** | **str** | String rendering of &#x60;value&#x60;, returned alongside it by &#x60;median_absolute_deviation&#x60;.  | [optional] 
+**values** | **object** |  | [optional] 
 
 ## Example
 

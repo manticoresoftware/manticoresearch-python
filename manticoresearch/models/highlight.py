@@ -94,6 +94,13 @@ class Highlight(BaseModel):
             raise ValueError("must be one of enum values ('asc', 'desc', 'score')")
         return value
 
+    @field_validator('fields', mode='before')
+    @classmethod
+    def normalize_fields(cls, value):
+        if isinstance(value, (dict, list)):
+            return HighlightFields(value)
+        return value
+
     model_config = ConfigDict(
         populate_by_name=True,
         validate_assignment=True,

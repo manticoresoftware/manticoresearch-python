@@ -18,19 +18,22 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 class AggBucketsResult(BaseModel):
     """
-    Aggregation group returned under `aggregations`
+    One aggregation result. It is either BUCKET-shaped or METRIC-shaped, never both: which one depends on the aggregation that was requested. 
     """ # noqa: E501
     buckets: Optional[Any] = None
     after_key: Optional[Dict[str, Any]] = Field(default=None, description="Pagination cursor returned by composite aggregations")
+    value: Optional[Any] = None
+    value_as_string: Optional[StrictStr] = Field(default=None, description="String rendering of `value`, returned alongside it by `median_absolute_deviation`. ")
+    values: Optional[Any] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["buckets", "after_key"]
+    __properties: ClassVar[List[str]] = ["buckets", "after_key", "value", "value_as_string", "values"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,6 +86,16 @@ class AggBucketsResult(BaseModel):
         if self.buckets is None and "buckets" in self.model_fields_set:
             _dict['buckets'] = None
 
+        # set to None if value (nullable) is None
+        # and model_fields_set contains the field
+        if self.value is None and "value" in self.model_fields_set:
+            _dict['value'] = None
+
+        # set to None if values (nullable) is None
+        # and model_fields_set contains the field
+        if self.values is None and "values" in self.model_fields_set:
+            _dict['values'] = None
+
         return _dict
 
     @classmethod
@@ -96,7 +109,10 @@ class AggBucketsResult(BaseModel):
 
         _obj = cls.model_validate({
             "buckets": obj.get("buckets"),
-            "after_key": obj.get("after_key")
+            "after_key": obj.get("after_key"),
+            "value": obj.get("value"),
+            "value_as_string": obj.get("value_as_string"),
+            "values": obj.get("values")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

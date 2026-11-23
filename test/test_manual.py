@@ -25,6 +25,30 @@ class TestManualApi(ParametrizedTestCase):
     def tearDown(self):
         pass
         
+
+    def test_highlight_fields(self):
+        for fields in ({"title": {}}, {"title": {"limit": 100}}, ["title"], {}, []):
+            with self.subTest(fields=fields):
+                direct = Highlight(fields=fields)
+                assigned = Highlight()
+                assigned.fields = fields
+                for highlight in (direct, assigned):
+                    self.assertEqual(highlight.to_dict()["fields"], fields)
+                    request = SearchRequest(table="movies", highlight=highlight)
+                    self.assertEqual(request.to_dict()["highlight"]["fields"], fields)
+                self.assertEqual(Highlight.from_dict({"fields": fields}).to_dict()["fields"], fields)
+
+        self.assertEqual(
+            Highlight(fields=HighlightFields({"title": {}})).to_dict()["fields"],
+            {"title": {}},
+        )
+        self.assertNotIn("fields", Highlight().to_dict())
+        with self.assertRaises(ValueError):
+            Highlight(fields=123)
+        with self.assertRaises(ValueError):
+            highlight = Highlight()
+            highlight.fields = 123
+
     def test_manual(self):
         client = self.client
         indexApi = manticoresearch.IndexApi(client)
@@ -59,6 +83,14 @@ class TestManualApi(ParametrizedTestCase):
         res = searchApi.search(search_request)
         self.assertEqual(res.hits.hits[0].id, 4)
         self.assertIsNone(res.hits.hits[0].uuid)
+
+        highlighted = searchApi.search(SearchRequest(
+            table="movies",
+            query={"match": {"title": "Nemesis"}},
+            highlight=Highlight(fields={"title": {}}),
+        ))
+        self.assertTrue(highlighted.hits.hits)
+        self.assertIn("title", highlighted.hits.hits[0].highlight)
 
         search_request = {"table":"movies","query":{"bool": {"must": [ {"match": {"title":"4"}}] }}}
 

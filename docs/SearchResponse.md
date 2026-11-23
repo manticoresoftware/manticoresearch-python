@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **took** | **int** | Time taken to execute the search | [optional] 
 **timed_out** | **bool** | Indicates whether the search operation timed out | [optional] 
-**aggregations** | [**Dict[str, AggBucketsResult]**](AggBucketsResult.md) | Aggregated search results grouped by the specified criteria. Each named aggregation typically contains a &#x60;buckets&#x60; array (or keyed map) of bucket objects with &#x60;key&#x60;, &#x60;doc_count&#x60;, and optional &#x60;status&#x60;.  | [optional] 
+**aggregations** | [**Dict[str, AggBucketsResult]**](AggBucketsResult.md) | Aggregated search results, keyed by aggregation name. A bucket aggregation contributes a &#x60;buckets&#x60; array (or keyed map) of bucket objects; a metric aggregation contributes a &#x60;value&#x60; or &#x60;values&#x60; instead. See &#x60;aggBucketsResult&#x60;.  | [optional] 
 **hits** | [**SearchResponseHits**](SearchResponseHits.md) |  | [optional] 
 **profile** | **object** | Profile information about the search execution, if profiling is enabled | [optional] 
 **scroll** | **str** | Scroll token to be used fo pagination | [optional] 
